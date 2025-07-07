@@ -1,4 +1,5 @@
 //github.com --> settings --> integration-applications --> render.com configure
+//environment variable BASE_URL 0.0.0.0
 //npm init
 //npm install pg
 //npm install express

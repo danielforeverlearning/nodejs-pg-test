@@ -1,3 +1,11 @@
+//github.com --> settings --> integration-applications --> render.com configure
+//npm init
+//npm install pg
+//npm install express
+//npm install path
+//npm install https
+
+
 const pg           = require('pg');
 const express      = require('express')
 const path         = require('path')

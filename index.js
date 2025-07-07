@@ -26,6 +26,7 @@ express()
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/home'))
   .get('/tableinsert', (req, res) => res.render('pages/tableinsert'))
+  .get('/tabledelete', (req, res) => res.render('pages/tabledelete'))
   .get('/dbcreatetable', (req, res) => {
           const { Client } = require('pg');
 

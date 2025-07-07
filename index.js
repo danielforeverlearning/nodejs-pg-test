@@ -25,7 +25,7 @@ express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/home'))
-
+  .get('/tableinsert', (req, res) => res.render('pages/tableinsert'))
   .get('/dbcreatetable', (req, res) => {
           const { Client } = require('pg');
 

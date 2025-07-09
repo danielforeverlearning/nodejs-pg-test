@@ -82,7 +82,7 @@ express()
         }
         else
         {
-          res.send("fields = " + fields);
+          res.send("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
         }
     })
     

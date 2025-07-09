@@ -16,6 +16,13 @@ const formidable   = require('formidable')
 const PORT         = process.env.PORT || 5000
 
 const { Client }   = require('pg');
+const client       = new Client({
+                                    user: 'max', // e.g., 'postgres'
+                                    host: 'dpg-d1kvb83e5dus73f28aig-a',
+                                    database: 'tpjj', // The database you created
+                                    password: 'vSuU5pRACdyJvEJmmW8EQxjnaKg5v003',
+                                    port: 5432,
+                        });
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
@@ -26,13 +33,6 @@ express()
   
   .get('/tableread', (req,res) => {
             async function connectAndRead() {  
-                        const client = new Client({
-                                    user: 'max', // e.g., 'postgres'
-                                    host: 'dpg-d1kvb83e5dus73f28aig-a',
-                                    database: 'tpjj', // The database you created
-                                    password: 'vSuU5pRACdyJvEJmmW8EQxjnaKg5v003',
-                                    port: 5432,
-                        });
                         try {
                           await client.connect();
                           console.log('tableread Connected to PostgreSQL!');
@@ -58,13 +58,6 @@ express()
       var model;
       var year;
       async function connectAndInsert() {    
-                        const client = new Client({
-                                    user: 'max', // e.g., 'postgres'
-                                    host: 'dpg-d1kvb83e5dus73f28aig-a',
-                                    database: 'tpjj', // The database you created
-                                    password: 'vSuU5pRACdyJvEJmmW8EQxjnaKg5v003',
-                                    port: 5432,
-                        });
                         try {
                           await client.connect();
                           console.log('INSERT INTO cars Connected to PostgreSQL!');
@@ -109,13 +102,6 @@ express()
   .post('/tabledeletesubmit', (req, res) => {
       var primarykeyID;
       async function connectAndDelete() {    
-                        const client = new Client({
-                                    user: 'max', // e.g., 'postgres'
-                                    host: 'dpg-d1kvb83e5dus73f28aig-a',
-                                    database: 'tpjj', // The database you created
-                                    password: 'vSuU5pRACdyJvEJmmW8EQxjnaKg5v003',
-                                    port: 5432,
-                        });
                         try {
                           await client.connect();
                           const deleteRes = await client.query("DELETE FROM cars WHERE ID = " + primarykeyID + ";");
@@ -149,13 +135,6 @@ express()
   
   .get('/dbcreatetable', (req, res) => {
           async function connectAndCreate() {
-                      const client = new Client({
-                                    user: 'max', // e.g., 'postgres'
-                                    host: 'dpg-d1kvb83e5dus73f28aig-a',
-                                    database: 'tpjj', // The database you created
-                                    password: 'vSuU5pRACdyJvEJmmW8EQxjnaKg5v003',
-                                    port: 5432,
-                      });
                       try {
                           await client.connect();
                           console.log('Connected to PostgreSQL!');
@@ -180,13 +159,6 @@ express()
 
   .get('/dbdroptable', (req, res) => {
           async function connectAndDrop() {
-                      const client = new Client({
-                                    user: 'max', // e.g., 'postgres'
-                                    host: 'dpg-d1kvb83e5dus73f28aig-a',
-                                    database: 'tpjj', // The database you created
-                                    password: 'vSuU5pRACdyJvEJmmW8EQxjnaKg5v003',
-                                    port: 5432,
-                      });
                       try {
                           await client.connect();
                           console.log('Connected to PostgreSQL!');

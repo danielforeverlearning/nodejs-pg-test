@@ -108,7 +108,7 @@ express()
   .get('/tabledelete', (req, res) => res.render('pages/tabledelete'))
   .post('/tabledeletesubmit', (req, res) => {
       var primarykeyID;
-      async function connectAndInsert() {    
+      async function connectAndDelete() {    
                         const client = new Client({
                                     user: 'max', // e.g., 'postgres'
                                     host: 'dpg-d1kvb83e5dus73f28aig-a',
@@ -140,10 +140,8 @@ express()
           else
           {
              console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
-             brand = fields.brand_name;
-             model = fields.model_name;
-             year = fields.year_name;
-             connectAndInsert(); 
+             primarykeyID = fields.primarykey_name;
+             connectAndDelete(); 
           }
       })
     

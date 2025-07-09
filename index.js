@@ -45,7 +45,7 @@ express()
 
             // Example: create table
             const createRes = await client.query(
-                'CREATE TABLE cars (brand VARCHAR(255),model VARCHAR(255),year INT);'
+                'CREATE TABLE cars (ID SERIAL PRIMARY KEY, BRAND VARCHAR(255),MODEL VARCHAR(255),YEAR INT);'
             );
             var result = 'createRes = ' + JSON.stringify(createRes);
             res.send(result);

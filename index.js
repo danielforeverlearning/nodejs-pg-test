@@ -104,7 +104,7 @@ express()
         })
         .on('end', function() {
             console.log('tableinsertsubmit end');
-            connectAndInsert();
+            //connectAndInsert();
         });
   })
 

@@ -69,9 +69,9 @@ express()
                           console.log('INSERT INTO cars Connected to PostgreSQL!');
                           var insertstmt = "INSERT INTO cars (BRAND, MODEL, YEAR) VALUES ('" + brand + "', '" + model + "', " + year + ");";
                           console.log(insertstmt);
-                          //const insertRes = await client.query(insertstmt);
-                          //var result = 'insertRes = ' + JSON.stringify(insertRes);
-                          res.send(insertstmt);
+                          const insertRes = await client.query(insertstmt);
+                          var result = 'insertRes = ' + JSON.stringify(insertRes);
+                          res.send(result);
                         } catch (err) {
                             var result = 'INSERT INTO cars ERROR = ' + err;
                             res.send(result);

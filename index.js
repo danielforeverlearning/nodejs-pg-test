@@ -106,6 +106,49 @@ express()
 
   
   .get('/tabledelete', (req, res) => res.render('pages/tabledelete'))
+  .post('/tabledeletesubmit', (req, res) => {
+      var primarykeyID;
+      async function connectAndInsert() {    
+                        const client = new Client({
+                                    user: 'max', // e.g., 'postgres'
+                                    host: 'dpg-d1kvb83e5dus73f28aig-a',
+                                    database: 'tpjj', // The database you created
+                                    password: 'vSuU5pRACdyJvEJmmW8EQxjnaKg5v003',
+                                    port: 5432,
+                        });
+                        try {
+                          await client.connect();
+                          const deleteRes = await client.query("DELETE FROM cars WHERE ID = " + primarykeyID + ";");
+                          var result = 'deleteRes = ' + JSON.stringify(deleteRes);
+                          res.send(result);
+                        } catch (err) {
+                            var result = 'DELETE FROM cars ERROR = ' + err;
+                            res.send(result);
+                        } finally {
+                            await client.end();
+                            console.log('DELETE FROM cars Disconnected from PostgreSQL.');
+                        }
+      }
+    
+      var form = new formidable.IncomingForm();
+      form.parse(req, function (err, fields, files) {
+  
+          if (err)
+          {
+             res.send("tabledeletesubmit err = " + err);
+          }
+          else
+          {
+             console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
+             brand = fields.brand_name;
+             model = fields.model_name;
+             year = fields.year_name;
+             connectAndInsert(); 
+          }
+      })
+    
+  })
+  
   .get('/dbcreatetable', (req, res) => {
           async function connectAndCreate() {
                       const client = new Client({

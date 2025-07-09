@@ -58,18 +58,20 @@ express()
       var year;
     
       var form = new formidable.IncomingForm();
-      form.parse(req, function (err, fields, files) {
-          if (err) {
-              console.error('tableinsertsubmit Error parsing form:', err);
-              res.send('tableinsertsubmit Error parsing form:' + err);
-          }
-          else {
-              console.log("tableinsertsubmit fields = " + JSON.stringify(fields));
-              console.log("tableinsertsubmit files = " + JSON.stringify(files));
-          }
-      });
-
-      res.send('good2');
+      form.parse(req)
+          .on('file', function(name, file) {
+              console.log('Got file:', name);
+          })
+          .on('field', function(name, field) {
+              console.log('Got a field:', name);
+          })
+          .on('error', function(err) {
+              console.log('Got error:' err);
+          })
+          .on('end', function() {
+              res.send("good3");
+              
+          });
     
   })
 

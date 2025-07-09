@@ -16,13 +16,6 @@ const formidable   = require('formidable')
 const PORT         = process.env.PORT || 5000
 
 const { Client }   = require('pg');
-const client = new Client({
-            user: 'max', // e.g., 'postgres'
-            host: 'dpg-d1kvb83e5dus73f28aig-a',
-            database: 'tpjj', // The database you created
-            password: 'vSuU5pRACdyJvEJmmW8EQxjnaKg5v003',
-            port: 5432,
-});
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
@@ -34,6 +27,13 @@ express()
   .get('/tableread', (req,res) => {
             async function connectAndRead() {  
                         try {
+                          const client = new Client({
+                                    user: 'max', // e.g., 'postgres'
+                                    host: 'dpg-d1kvb83e5dus73f28aig-a',
+                                    database: 'tpjj', // The database you created
+                                    password: 'vSuU5pRACdyJvEJmmW8EQxjnaKg5v003',
+                                    port: 5432,
+                          });
                           await client.connect();
                           console.log('tableread Connected to PostgreSQL!');
                           const result = await client.query('SELECT * FROM cars');
@@ -82,6 +82,13 @@ express()
             console.log('tableinsertsubmit end');
             async function connectAndInsert() {      
                         try {
+                          const client = new Client({
+                                    user: 'max', // e.g., 'postgres'
+                                    host: 'dpg-d1kvb83e5dus73f28aig-a',
+                                    database: 'tpjj', // The database you created
+                                    password: 'vSuU5pRACdyJvEJmmW8EQxjnaKg5v003',
+                                    port: 5432,
+                          });
                           await client.connect();
                           console.log('INSERT INTO cars Connected to PostgreSQL!');
                           var insertstmt = "INSERT INTO cars (BRAND, MODEL, YEAR) VALUES ('" + brand + "', '" + model + "', " + year + ");";
@@ -105,51 +112,62 @@ express()
   .get('/tabledelete', (req, res) => res.render('pages/tabledelete'))
   .get('/dbcreatetable', (req, res) => {
           async function connectAndCreate() {
-            
-          try {
-              await client.connect();
-              console.log('Connected to PostgreSQL!');
-  
-              // Example: create table
-              const createRes = await client.query(
-                  'CREATE TABLE cars (ID SERIAL PRIMARY KEY, BRAND VARCHAR(255),MODEL VARCHAR(255),YEAR INT);'
-              );
-              var result = 'createRes = ' + JSON.stringify(createRes);
-              res.send(result);
-          } catch (err) {
-              var result = 'Error connecting or creating table = ' + err;
-              res.send(result);
-          } finally {
-              await client.end();
-              console.log('Disconnected from PostgreSQL.');
+                      try {
+                          const client = new Client({
+                                    user: 'max', // e.g., 'postgres'
+                                    host: 'dpg-d1kvb83e5dus73f28aig-a',
+                                    database: 'tpjj', // The database you created
+                                    password: 'vSuU5pRACdyJvEJmmW8EQxjnaKg5v003',
+                                    port: 5432,
+                          });
+                          await client.connect();
+                          console.log('Connected to PostgreSQL!');
+              
+                          // Example: create table
+                          const createRes = await client.query(
+                              'CREATE TABLE cars (ID SERIAL PRIMARY KEY, BRAND VARCHAR(255),MODEL VARCHAR(255),YEAR INT);'
+                          );
+                          var result = 'createRes = ' + JSON.stringify(createRes);
+                          res.send(result);
+                      } catch (err) {
+                          var result = 'Error connecting or creating table = ' + err;
+                          res.send(result);
+                      } finally {
+                          await client.end();
+                          console.log('Disconnected from PostgreSQL.');
+                      }
           }
-    }
-
-    connectAndCreate();
+          connectAndCreate();
   })
 
 
   .get('/dbdroptable', (req, res) => {
           async function connectAndDrop() {
-          try {
-              await client.connect();
-              console.log('Connected to PostgreSQL!');
-  
-              // Example: drop table
-              const dropRes = await client.query(
-                  'DROP TABLE cars;'
-              );
-              var result = 'dropRes = ' + JSON.stringify(dropRes);
-              res.send(result);
-          } catch (err) {
-              var result = 'Error connecting or dropping table = ' + err;
-              res.send(result);
-          } finally {
-              await client.end();
-              console.log('Disconnected from PostgreSQL.');
+                      try {
+                          const client = new Client({
+                                    user: 'max', // e.g., 'postgres'
+                                    host: 'dpg-d1kvb83e5dus73f28aig-a',
+                                    database: 'tpjj', // The database you created
+                                    password: 'vSuU5pRACdyJvEJmmW8EQxjnaKg5v003',
+                                    port: 5432,
+                          });
+                          await client.connect();
+                          console.log('Connected to PostgreSQL!');
+              
+                          // Example: drop table
+                          const dropRes = await client.query(
+                              'DROP TABLE cars;'
+                          );
+                          var result = 'dropRes = ' + JSON.stringify(dropRes);
+                          res.send(result);
+                      } catch (err) {
+                          var result = 'Error connecting or dropping table = ' + err;
+                          res.send(result);
+                      } finally {
+                          await client.end();
+                          console.log('Disconnected from PostgreSQL.');
+                      }
           }
-    }
-
-    connectAndDrop();
+          connectAndDrop();
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))

@@ -53,6 +53,9 @@ express()
   
   .get('/tableinsert', (req, res) => res.render('pages/tableinsert'))
   .post('/tableinsertsubmit', (req, res) => {
+      var brand;
+      var model;
+      var year;
       async function connectAndInsert() {    
                         const client = new Client({
                                     user: 'max', // e.g., 'postgres'
@@ -77,11 +80,8 @@ express()
                             console.log('INSERT INTO cars Disconnected from PostgreSQL.');
                         }
       }
+    
       var form = new formidable.IncomingForm();
-      var brand;
-      var model;
-      var year;
-
       //***** do not get confused these console.log are server-side *****
       form.parse(req)
         .on('field', function(name,field) {

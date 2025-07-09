@@ -32,15 +32,20 @@ express()
   .get('/', (req, res) => res.render('pages/home'))
   
   .get('/tableread', (req,res) => {
-      pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-          client.query('SELECT * FROM cars', function(err,result) {
-              done();
-              if (err)
-              { console.error(err); res.send("Error " + err); }
-              else
-              { res.render('pages/tableread', {results: result.rows} ); }
-          });
-      });
+              
+            try {
+              await client.connect();
+              console.log('tableread Connected to PostgreSQL!');
+              const result = await client.query('SELECT * FROM cars');
+              res.render('pages/tableread', {results: result.rows} );
+            } catch (err) {
+                var result = 'tableread ERROR = ' + err;
+                res.send(result);
+            } finally {
+                await client.end();
+                console.log('tableread Disconnected from PostgreSQL.');
+            }
+              
   })
 
 

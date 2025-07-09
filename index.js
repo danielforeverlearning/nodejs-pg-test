@@ -66,8 +66,8 @@ express()
                           var insertstmt = "INSERT INTO cars (BRAND, MODEL, YEAR) VALUES ('" + brand + "', '" + model + "', " + year + ");";
                           console.log(insertstmt);
                           const insertRes = await client.query(insertstmt);
-                          var result = 'insertRes = ' + JSON.stringify(insertRes);
-                          res.send(result);
+                          var resultstr = 'insertRes = ' + JSON.stringify(insertRes);
+                          res.render('pages/result', {myresults: resultstr} );
                         } catch (err) {
                             var result = 'INSERT INTO cars ERROR = ' + err;
                             res.send(result);

@@ -32,20 +32,21 @@ express()
   .get('/', (req, res) => res.render('pages/home'))
   
   .get('/tableread', (req,res) => {
-              
-            try {
-              await client.connect();
-              console.log('tableread Connected to PostgreSQL!');
-              const result = await client.query('SELECT * FROM cars');
-              res.render('pages/tableread', {results: result.rows} );
-            } catch (err) {
-                var result = 'tableread ERROR = ' + err;
-                res.send(result);
-            } finally {
-                await client.end();
-                console.log('tableread Disconnected from PostgreSQL.');
+            async function connectAndRead() {  
+                        try {
+                          await client.connect();
+                          console.log('tableread Connected to PostgreSQL!');
+                          const result = await client.query('SELECT * FROM cars');
+                          res.render('pages/tableread', {results: result.rows} );
+                        } catch (err) {
+                            var result = 'tableread ERROR = ' + err;
+                            res.send(result);
+                        } finally {
+                            await client.end();
+                            console.log('tableread Disconnected from PostgreSQL.');
+                        }
             }
-              
+            connectAndRead(); 
   })
 
 

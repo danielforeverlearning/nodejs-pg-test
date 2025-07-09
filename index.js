@@ -6,6 +6,7 @@
 //npm install path
 //npm install https
 //npm install ejs
+//npm install formidable
 
 const pg           = require('pg');
 const express      = require('express')

@@ -53,6 +53,30 @@ express()
   
   .get('/tableinsert', (req, res) => res.render('pages/tableinsert'))
   .post('/tableinsertsubmit', (req, res) => {
+      async function connectAndInsert() {    
+                        const client = new Client({
+                                    user: 'max', // e.g., 'postgres'
+                                    host: 'dpg-d1kvb83e5dus73f28aig-a',
+                                    database: 'tpjj', // The database you created
+                                    password: 'vSuU5pRACdyJvEJmmW8EQxjnaKg5v003',
+                                    port: 5432,
+                        });
+                        try {
+                          await client.connect();
+                          console.log('INSERT INTO cars Connected to PostgreSQL!');
+                          var insertstmt = "INSERT INTO cars (BRAND, MODEL, YEAR) VALUES ('" + brand + "', '" + model + "', " + year + ");";
+                          console.log(insertstmt);
+                          //const insertRes = await client.query(insertstmt);
+                          //var result = 'insertRes = ' + JSON.stringify(insertRes);
+                          res.send(insertstmt);
+                        } catch (err) {
+                            var result = 'INSERT INTO cars ERROR = ' + err;
+                            res.send(result);
+                        } finally {
+                            await client.end();
+                            console.log('INSERT INTO cars Disconnected from PostgreSQL.');
+                        }
+      }
       var form = new formidable.IncomingForm();
       var brand;
       var model;
@@ -80,32 +104,8 @@ express()
         })
         .on('end', function() {
             console.log('tableinsertsubmit end');
+            connectAndInsert();
         });
-      async function connectAndInsert() {    
-                        const client = new Client({
-                                    user: 'max', // e.g., 'postgres'
-                                    host: 'dpg-d1kvb83e5dus73f28aig-a',
-                                    database: 'tpjj', // The database you created
-                                    password: 'vSuU5pRACdyJvEJmmW8EQxjnaKg5v003',
-                                    port: 5432,
-                        });
-                        try {
-                          await client.connect();
-                          console.log('INSERT INTO cars Connected to PostgreSQL!');
-                          var insertstmt = "INSERT INTO cars (BRAND, MODEL, YEAR) VALUES ('" + brand + "', '" + model + "', " + year + ");";
-                          console.log(insertstmt);
-                          //const insertRes = await client.query(insertstmt);
-                          //var result = 'insertRes = ' + JSON.stringify(insertRes);
-                          res.send(insertstmt);
-                        } catch (err) {
-                            var result = 'INSERT INTO cars ERROR = ' + err;
-                            res.send(result);
-                        } finally {
-                            await client.end();
-                            console.log('INSERT INTO cars Disconnected from PostgreSQL.');
-                        }
-      }
-      connectAndInsert();
   })
 
 

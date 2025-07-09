@@ -26,14 +26,14 @@ express()
   
   .get('/tableread', (req,res) => {
             async function connectAndRead() {  
-                        try {
-                          const client = new Client({
+                        const client = new Client({
                                     user: 'max', // e.g., 'postgres'
                                     host: 'dpg-d1kvb83e5dus73f28aig-a',
                                     database: 'tpjj', // The database you created
                                     password: 'vSuU5pRACdyJvEJmmW8EQxjnaKg5v003',
                                     port: 5432,
-                          });
+                        });
+                        try {
                           await client.connect();
                           console.log('tableread Connected to PostgreSQL!');
                           const result = await client.query('SELECT * FROM cars');
@@ -80,15 +80,15 @@ express()
         })
         .on('end', function() {
             console.log('tableinsertsubmit end');
-            async function connectAndInsert() {      
-                        try {
-                          const client = new Client({
+            async function connectAndInsert() {    
+                        const client = new Client({
                                     user: 'max', // e.g., 'postgres'
                                     host: 'dpg-d1kvb83e5dus73f28aig-a',
                                     database: 'tpjj', // The database you created
                                     password: 'vSuU5pRACdyJvEJmmW8EQxjnaKg5v003',
                                     port: 5432,
-                          });
+                        });
+                        try {
                           await client.connect();
                           console.log('INSERT INTO cars Connected to PostgreSQL!');
                           var insertstmt = "INSERT INTO cars (BRAND, MODEL, YEAR) VALUES ('" + brand + "', '" + model + "', " + year + ");";
@@ -112,14 +112,14 @@ express()
   .get('/tabledelete', (req, res) => res.render('pages/tabledelete'))
   .get('/dbcreatetable', (req, res) => {
           async function connectAndCreate() {
-                      try {
-                          const client = new Client({
+                      const client = new Client({
                                     user: 'max', // e.g., 'postgres'
                                     host: 'dpg-d1kvb83e5dus73f28aig-a',
                                     database: 'tpjj', // The database you created
                                     password: 'vSuU5pRACdyJvEJmmW8EQxjnaKg5v003',
                                     port: 5432,
-                          });
+                      });
+                      try {
                           await client.connect();
                           console.log('Connected to PostgreSQL!');
               
@@ -143,14 +143,14 @@ express()
 
   .get('/dbdroptable', (req, res) => {
           async function connectAndDrop() {
-                      try {
-                          const client = new Client({
+                      const client = new Client({
                                     user: 'max', // e.g., 'postgres'
                                     host: 'dpg-d1kvb83e5dus73f28aig-a',
                                     database: 'tpjj', // The database you created
                                     password: 'vSuU5pRACdyJvEJmmW8EQxjnaKg5v003',
                                     port: 5432,
-                          });
+                      });
+                      try {
                           await client.connect();
                           console.log('Connected to PostgreSQL!');
               

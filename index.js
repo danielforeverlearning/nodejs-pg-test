@@ -80,7 +80,8 @@ express()
         })
         .on('end', function() {
             console.log('tableinsertsubmit end');
-            async function connectAndInsert() {    
+        });
+      async function connectAndInsert() {    
                         const client = new Client({
                                     user: 'max', // e.g., 'postgres'
                                     host: 'dpg-d1kvb83e5dus73f28aig-a',
@@ -103,9 +104,8 @@ express()
                             await client.end();
                             console.log('INSERT INTO cars Disconnected from PostgreSQL.');
                         }
-            }
-            connectAndInsert();
-        });
+      }
+      connectAndInsert();
   })
 
 

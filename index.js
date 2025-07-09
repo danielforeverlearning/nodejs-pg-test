@@ -11,15 +11,10 @@
 const pg           = require('pg');
 const express      = require('express')
 const path         = require('path')
+var   https        = require('https');
+const formidable   = require('formidable')
 
 const PORT         = process.env.PORT || 5000
-
-var   https        = require('https');
-
-
-
-
-
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
@@ -27,6 +22,30 @@ express()
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/home'))
   .get('/tableinsert', (req, res) => res.render('pages/tableinsert'))
+  .post('/tableinsertsubmit', (req, res) => {
+      var form = new formidable.IncomingForm();
+
+      //***** do not get confused these console.log are server-side *****
+      form.parse(req)
+        .on('field', function(name,field) {
+            console.log('tableinsertsubmit field:', name, ' = ', field);
+
+            //res.write('<p>field name: ' + name + '</p>');
+            //res.write('<p>field: ' + field + '</p>');
+        })
+        .on('error', function(err) {
+            console.log('tableinsertsubmit error: ');
+            console.log(err);
+            res.write('<p>got an error check console log</p>');
+            res.end();
+        })
+        .on('end', function() {
+            console.log('tableinsertsubmit end');
+        });
+  })
+
+
+  
   .get('/tabledelete', (req, res) => res.render('pages/tabledelete'))
   .get('/dbcreatetable', (req, res) => {
           const { Client } = require('pg');

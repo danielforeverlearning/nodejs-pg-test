@@ -5,11 +5,16 @@
 <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 <body>
+
+<div class="container">
 <h2>TABLE cars</h2>
+
 <ul>
-     results.forEach(function(r) { 
-        <li>r.ID - r.BRAND - r.MODEL - r.YEAR</li>
-     }); 
+    <% results.forEach(function(r) { %>
+        <li><%= r.id %> - <%= r.name %></li>
+    <% }); %>
 </ul>
+
+</div>
 </body>
 </html

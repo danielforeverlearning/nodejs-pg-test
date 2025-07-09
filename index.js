@@ -51,7 +51,7 @@ express()
 
 
   
-  .get('/tableinsert', (req, res) => res.render('pages/tableinsert'))
+  .get('/tableinsert', (req, res) => res.render('/tableinsert'))
   .post('/tableinsertsubmit', (req, res) => {
       var brand;
       var model;

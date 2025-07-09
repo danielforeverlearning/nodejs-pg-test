@@ -80,20 +80,23 @@ express()
         })
         .on('end', function() {
             console.log('tableinsertsubmit end');
-            try {
-              await client.connect();
-              console.log('Connected to PostgreSQL!');
-              var insertstmt = "INSERT INTO cars (BRAND, MODEL, YEAR) VALUES ('" + brand + "', '" + model + "', " + year + ");";
-              const insertRes = await client.query(insertstmt);
-              var result = 'insertRes = ' + JSON.stringify(insertRes);
-              res.send(result);
-            } catch (err) {
-                var result = 'INSERT INTO cars ERROR = ' + err;
-                res.send(result);
-            } finally {
-                await client.end();
-                console.log('INSERT INTO cars Disconnected from PostgreSQL.');
+            async function connectAndInsert() {      
+                        try {
+                          await client.connect();
+                          console.log('INSERT INTO cars Connected to PostgreSQL!');
+                          var insertstmt = "INSERT INTO cars (BRAND, MODEL, YEAR) VALUES ('" + brand + "', '" + model + "', " + year + ");";
+                          const insertRes = await client.query(insertstmt);
+                          var result = 'insertRes = ' + JSON.stringify(insertRes);
+                          res.send(result);
+                        } catch (err) {
+                            var result = 'INSERT INTO cars ERROR = ' + err;
+                            res.send(result);
+                        } finally {
+                            await client.end();
+                            console.log('INSERT INTO cars Disconnected from PostgreSQL.');
+                        }
             }
+            connectAndInsert();
         });
   })
 

@@ -58,6 +58,7 @@ express()
       var year;
     
       var form = new formidable.IncomingForm();
+      /***
       form.parse(req)
           .on('file', function(name, file) {
               console.log('Got file:', name);
@@ -72,6 +73,18 @@ express()
               res.send("good3");
               
           });
+          *******/
+    form.parse(req, function (err, fields, files) {
+
+        if (err)
+        {
+          res.send("err = " + err);
+        }
+        else
+        {
+          res.send("fields = " + fields);
+        }
+    })
     
   })
 

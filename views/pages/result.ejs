@@ -10,11 +10,9 @@
 <div class="container">
 <h2>RESULT</h2>
 
-<ul>
-    <% results.forEach(function(r) { %>
-        <li><%= r.id %> - <%= r.brand %> - <%= r.model %> - <%= r.year %></li>
-    <% }); %>
-</ul>
+<p>
+    <%= myresults %>
+</p>
 <input type="button" onclick="window.location.href='./'" value="HOME">
 </div>
 </body>

@@ -56,8 +56,12 @@ express()
       var brand;
       var model;
       var year;
+
+      res.write('<p>good</p>');
+      res.end();
+    
+    /*****
       var form = new formidable.IncomingForm();
-      //***** do not get confused these console.log are server-side *****
       form.parse(req)
         .on('field', function(name,field) {
             console.log('tableinsertsubmit field:', name, ' = ', field);
@@ -81,6 +85,7 @@ express()
             console.log('tableinsertsubmit end');
             //connectAndInsert();
         });
+        *****/
   })
 
 

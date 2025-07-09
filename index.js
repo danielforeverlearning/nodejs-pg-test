@@ -37,6 +37,7 @@ express()
                           await client.connect();
                           console.log('tableread Connected to PostgreSQL!');
                           const result = await client.query('SELECT * FROM cars');
+                          console.log("result = " + JSON.stringify(result));
                           res.render('pages/tableread', {results: result.rows} );
                         } catch (err) {
                             var result = 'tableread ERROR = ' + err;

@@ -91,9 +91,9 @@ express()
           else
           {
              console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
-             brand = fields[brand_name];
-             model = fields[model_name];
-             year = fields[year_name];
+             brand = fields.brand_name;
+             model = fields.model_name;
+             year = fields.year_name;
              connectAndInsert(); 
           }
       })

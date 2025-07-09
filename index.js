@@ -69,8 +69,8 @@ express()
                           var resultstr = 'insertRes = ' + JSON.stringify(insertRes);
                           res.render('pages/result', {myresults: resultstr} );
                         } catch (err) {
-                            var result = 'INSERT INTO cars ERROR = ' + err;
-                            res.send(result);
+                            var badstr = 'INSERT INTO cars ERROR = ' + err;
+                            res.render('pages/result', {myresults: badstr} );
                         } finally {
                             await client.end();
                             console.log('INSERT INTO cars Disconnected from PostgreSQL.');
@@ -108,11 +108,11 @@ express()
                         try {
                           await client.connect();
                           const deleteRes = await client.query("DELETE FROM cars WHERE ID = " + primarykeyID + ";");
-                          var result = 'deleteRes = ' + JSON.stringify(deleteRes);
-                          res.send(result);
+                          var resultstr = 'deleteRes = ' + JSON.stringify(deleteRes);
+                          res.render('pages/result', {myresults: resultstr} );
                         } catch (err) {
-                            var result = 'DELETE FROM cars ERROR = ' + err;
-                            res.send(result);
+                            var badstr = 'DELETE FROM cars ERROR = ' + err;
+                            res.render('pages/result', {myresults: badstr} );
                         } finally {
                             await client.end();
                             console.log('DELETE FROM cars Disconnected from PostgreSQL.');

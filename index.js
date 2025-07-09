@@ -56,21 +56,20 @@ express()
       var brand;
       var model;
       var year;
-
-      res.write('<p>good</p>');
-      res.end();
     
-    /*****
       var form = new formidable.IncomingForm();
       form.parse(req)
         .on('field', function(name,field) {
             console.log('tableinsertsubmit field:', name, ' = ', field);
+
+            /***********
             if (name == 'BRAND')
               brand = field;
             else if (name == 'MODEL')
               model = field;
             else if (name == 'YEAR')
               year = field;
+              **********************/
           
             //res.write('<p>field name: ' + name + '</p>');
             //res.write('<p>field: ' + field + '</p>');
@@ -85,7 +84,6 @@ express()
             console.log('tableinsertsubmit end');
             //connectAndInsert();
         });
-        *****/
   })
 
 

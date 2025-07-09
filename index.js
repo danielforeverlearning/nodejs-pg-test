@@ -23,14 +23,14 @@ express()
   
   .get('/', (req, res) => res.render('pages/home'))
   
-  .get('/db', (req,res) => {
+  .get('/tableread', (req,res) => {
       pg.connect(process.env.DATABASE_URL, function(err, client, done) {
           client.query('SELECT * FROM cars', function(err,result) {
               done();
               if (err)
               { console.error(err); res.send("Error " + err); }
               else
-              { res.render('pages/db', {results: result.rows} ); }
+              { res.render('pages/tableread', {results: result.rows} ); }
           });
       });
   })
@@ -57,6 +57,22 @@ express()
         })
         .on('end', function() {
             console.log('tableinsertsubmit end');
+            pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+                var insertstmt = "INSERT INTO cars (BRAND, MODEL, YEAR) VALUES ('" + brand + "', '" + model + "', " + year + ");";
+                client.query(insertstmt, function(err,result) {
+                  done();
+                  if (err)
+                  { 
+                     console.error(err); 
+                     res.send("INSERT INTO cars Error = " + err); 
+                  }
+                  else
+                  { 
+                     console.log("INSERT INTO cars Success");
+                     //res.render('pages/tableread', {results: result.rows} ); 
+                  }
+                });
+            });
         });
   })
 

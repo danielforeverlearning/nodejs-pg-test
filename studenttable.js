@@ -95,17 +95,18 @@ module.exports = {
              }
              else 
              {
-                 console.log("email = " + email);
-                 console.log(typeof email);
-                 const myArr = email.match(/@/g);
-                 console.log(myArr.length + " " + myArr);
-                 res.send("testing");
-                 /******
-                 var first_at = email.indexOf("@");
-                 var last_at = email.lastIndexOf("@");
-                 console.log("email = " + email);
+                 console.log("typeof email = " + typeof email);
+                 var emailstr = JSON.stringify(email);
+                 console.log("emailstr = " + emailstr);
+               
+                 var first_at = emailstr.indexOf("@");
+                 var last_at = emailstr.lastIndexOf("@");
+               
                  console.log("first_at = " + first_at);
                  console.log("last_at = " + last_at);
+
+                 res.send("testing);
+                 /***********************
                  if (first_at == -1)
                  {
                       var badstr = 'Sorry email must have 1 @ character, for example darthvader@gmail.com';

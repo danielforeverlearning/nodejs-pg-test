@@ -97,6 +97,8 @@ module.exports = {
              {
                  var first_at = email.indexOf("@");
                  var last_at = email.lastIndexOf("@");
+                 console.log("first_at = " + first_at);
+                 console.log("last_at = " + last_at);
                  if (first_at == -1)
                  {
                       var badstr = 'Sorry email must have 1 @ character, for example darthvader@gmail.com';

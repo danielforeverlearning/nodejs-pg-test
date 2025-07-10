@@ -79,7 +79,7 @@ module.exports = {
              res.send("studenttableinsertfunc err = " + err);
           }
           else
-          {
+          { //good
              console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
              firstname = fields.firstname_name;
              lastname = fields.lastname_name;
@@ -88,20 +88,30 @@ module.exports = {
              phonenumber = fields.phonenumber_name;
 
              //validation checking
-             var first_at = email.indexOf("@");
-             var last_at = email.lastIndexOf("@");
-             /*****
-             if (first_at == -1)
+             if (phoneareacode < 0 || phoneareacode > 999)
              {
-               
+                  var badstr = 'Sorry phone area code must be between 000 and 999';
+                  res.render('pages/result', {myresults: badstr} );
              }
-             if (first_at == last_at && first_at != -1)
-            
-             connectAndInsert(); 
-             *****/
-          }
-      })
-    
+             else 
+             {
+                 var first_at = email.indexOf("@");
+                 var last_at = email.lastIndexOf("@");
+                 if (first_at == -1)
+                 {
+                      var badstr = 'Sorry email must have 1 @ character, for example darthvader@gmail.com';
+                      res.render('pages/result', {myresults: badstr} );
+                 }
+                 else if (first_at != last_at)
+                 {
+                      var badstr = 'Sorry email must have only 1 @ character, for example darthvader@gmail.com but you put more than 1 @ character';
+                      res.render('pages/result', {myresults: badstr} );
+                 }
+                 else
+                      connectAndInsert(); 
+             }
+          }//good
+      })//form.parse
   },
 
   studenttablecreatefunc: function(req, res) {

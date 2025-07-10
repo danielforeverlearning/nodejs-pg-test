@@ -246,27 +246,28 @@ module.exports = {
   },
 
   studenttableupdate3func: function(req, res) {
+      var primarykeyID;
       var firstname;
       var lastname;
       var email;
       var phoneareacode;
       var phonenumber;
-      async function connectAndInsert() {    
+      async function connectAndUpdate() {    
                         const client       = new Client(connectobj);
                         try {
                           await client.connect();
-                          console.log('INSERT INTO student Connected to PostgreSQL!');
-                          var insertstmt = "INSERT INTO student (FIRSTNAME, LASTNAME, EMAIL, PHONEAREACODE, PHONENUMBER) VALUES ('" + firstname + "', '" + lastname + "', '" + email + "', " + phoneareacode + ", " + phonenumber + ");";
-                          console.log(insertstmt);
-                          const insertRes = await client.query(insertstmt);
-                          var resultstr = 'insertRes = ' + JSON.stringify(insertRes);
+                          console.log('studenttableupdate3func Connected to PostgreSQL!');
+                          var stmt = "UPDATE student SET FIRSTNAME = '" + firstname + "', LASTNAME = '" + lastname + "', EMAIL = '" + email + "', PHONEAREACODE = " + phoneareacode + ", PHONENUMBER = " + phonenumber + " WHERE ID = " + primarykeyID + ";";
+                          console.log(stmt);
+                          const updateRes = await client.query(stmt);
+                          var resultstr = 'updateRes = ' + JSON.stringify(updateRes);
                           res.render('pages/result', {myresults: resultstr} );
                         } catch (err) {
-                            var badstr = 'INSERT INTO student ERROR = ' + err;
+                            var badstr = 'UPDATE student ID = ' + primarykeyID + ', err = ' + err;
                             res.render('pages/result', {myresults: badstr} );
                         } finally {
                             await client.end();
-                            console.log('INSERT INTO student Disconnected from PostgreSQL.');
+                            console.log('studenttableupdate3func Disconnected from PostgreSQL.');
                         }
       }
     
@@ -275,7 +276,7 @@ module.exports = {
   
           if (err)
           {
-             res.send("studenttableinsertfunc err = " + err);
+             res.send("studenttableupdate3func err = " + err);
           }
           else
           { //good
@@ -315,7 +316,7 @@ module.exports = {
                       res.render('pages/result', {myresults: badstr} );
                  }
                  else
-                      connectAndInsert(); 
+                      connectAndUpdate(); 
              }
           }//good
       })//form.parse

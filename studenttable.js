@@ -50,13 +50,14 @@ module.exports = {
       var firstname;
       var lastname;
       var email;
+      var phoneareacode;
       var phonenumber;
       async function connectAndInsert() {    
                         const client       = new Client(connectobj);
                         try {
                           await client.connect();
                           console.log('INSERT INTO student Connected to PostgreSQL!');
-                          var insertstmt = "INSERT INTO student (FIRSTNAME, LASTNAME, EMAIL, PHONENUMBER) VALUES ('" + firstname + "', '" + lastname + "', '" + email + "', " + phonenumber + ");";
+                          var insertstmt = "INSERT INTO student (FIRSTNAME, LASTNAME, EMAIL, PHONEAREACODE, PHONENUMBER) VALUES ('" + firstname + "', '" + lastname + "', '" + email + "', " + phoneareacode + ", " + phonenumber + ");";
                           console.log(insertstmt);
                           const insertRes = await client.query(insertstmt);
                           var resultstr = 'insertRes = ' + JSON.stringify(insertRes);
@@ -83,6 +84,7 @@ module.exports = {
              firstname = fields.firstname_name;
              lastname = fields.lastname_name;
              email = fields.email_name;
+             phoneareacode = fields.phoneareacode_name;
              phonenumber = fields.phonenumber_name;
              connectAndInsert(); 
           }
@@ -99,7 +101,7 @@ module.exports = {
               
                           // Example: create table
                           const createRes = await client.query(
-                              'CREATE TABLE student (ID SERIAL PRIMARY KEY, FIRSTNAME VARCHAR(255), LASTNAME VARCHAR(255), EMAIL VARCHAR(255), PHONENUMBER INT);'
+                              'CREATE TABLE student (ID SERIAL PRIMARY KEY, FIRSTNAME VARCHAR(255), LASTNAME VARCHAR(255), EMAIL VARCHAR(255), PHONEAREACODE INT, PHONENUMBER INT);'
                           );
                           var result = 'createRes = ' + JSON.stringify(createRes);
                           res.send(result);

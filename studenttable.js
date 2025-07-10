@@ -212,13 +212,20 @@ module.exports = {
                           await client.connect();
                           const selectIDres = await client.query("SELECT * FROM student WHERE ID = " + primarykeyID + ";");
                           console.log("selectIDres = " + JSON.stringify(selectIDres));
-                          res.render('pages/selecttableupdate2', {existingval: selectIDres} );
+                          console.log("selectIDres.rows.length = " + selectIDres.rows.length);
+                          if (selectIDres.rows.length  != 1)
+                          {
+                              var badstr = 'Sorry there is no row in table student with ID = ' + primarykeyID + ', if you want to update a row the ID must be good.';
+                              res.render('pages/result', {myresults: badstr} );
+                          }
+                          else
+                              res.render('pages/studenttableupdate2', {existingval: selectIDres.rows[0]} );
                         } catch (err) {
-                            var badstr = 'studenttableupdateIDfunc ID = ' + primarykeyID + ', ERROR = ' + err;
-                            res.render('pages/result', {myresults: badstr} );
+                              var badstr = 'studenttableupdateIDfunc ID = ' + primarykeyID + ', ERROR = ' + err;
+                              res.render('pages/result', {myresults: badstr} );
                         } finally {
-                            await client.end();
-                            console.log('studenttableupdateIDfunc ID = ' + primarykeyID + ', Disconnected from PostgreSQL.');
+                              await client.end();
+                              console.log('studenttableupdateIDfunc ID = ' + primarykeyID + ', Disconnected from PostgreSQL.');
                         }
       }
     

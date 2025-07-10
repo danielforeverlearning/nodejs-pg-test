@@ -148,7 +148,7 @@ express()
     
   })
 
-  .get('/dbcreatestudenttable', (req, res) ==> studenttable.studenttablecreatefunc(req,res);
+  .get('/dbcreatestudenttable', studenttable.studenttablecreatefunc(req, res))
   .get('/dbcreatetable', (req, res) => {
           async function connectAndCreate() {
                       const client       = new Client(connectobj);

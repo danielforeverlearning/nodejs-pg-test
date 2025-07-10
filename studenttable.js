@@ -210,14 +210,15 @@ module.exports = {
                         const client       = new Client(connectobj);
                         try {
                           await client.connect();
-                          const selectIDres = await client.query("SELECT FROM student WHERE ID = " + primarykeyID + ";");
+                          const selectIDres = await client.query("SELECT * FROM student WHERE ID = " + primarykeyID + ";");
+                          console.log("selectIDres = " + JSON.stringify(selectIDres));
                           res.render('pages/selecttableupdate2', {existingval: selectIDres} );
                         } catch (err) {
-                            var badstr = 'SELECT FROM students WHERE ID = ' + primarykeyID + ' ERROR = ' + err;
+                            var badstr = 'studenttableupdate1 ID = ' + primarykeyID + ', ERROR = ' + err;
                             res.render('pages/result', {myresults: badstr} );
                         } finally {
                             await client.end();
-                            console.log('SELECT FROM students WHERE ID = ' + primarykeyID + ' Disconnected from PostgreSQL.');
+                            console.log('studenttableupdate1 ID = ' + primarykeyID + ', Disconnected from PostgreSQL.');
                         }
       }
     
@@ -226,7 +227,7 @@ module.exports = {
   
           if (err)
           {
-             res.send("studenttableupdate1 err = " + err);
+             res.send("studenttableupdate1 form parse err = " + err);
           }
           else
           {
@@ -238,5 +239,6 @@ module.exports = {
   },
 
   studenttableupdate2: function(req, res) {
+      res.send("testing 1 first");
   }
 };

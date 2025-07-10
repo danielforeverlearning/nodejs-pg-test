@@ -95,6 +95,10 @@ module.exports = {
              }
              else 
              {
+                 console.log("email = " + email);
+                 const myArr = text.match(/@/g);
+                 console.log(myArr.length + " " + myArr);
+                 /******
                  var first_at = email.indexOf("@");
                  var last_at = email.lastIndexOf("@");
                  console.log("email = " + email);
@@ -112,6 +116,7 @@ module.exports = {
                  }
                  else
                       connectAndInsert(); 
+                      ********/
              }
           }//good
       })//form.parse

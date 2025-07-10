@@ -97,6 +97,7 @@ module.exports = {
              {
                  var first_at = email.indexOf("@");
                  var last_at = email.lastIndexOf("@");
+                 console.log("email = " + email);
                  console.log("first_at = " + first_at);
                  console.log("last_at = " + last_at);
                  if (first_at == -1)

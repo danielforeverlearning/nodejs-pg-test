@@ -25,6 +25,7 @@ const connectobj   = {
                      };
 
 
+module.exports = {
   function studenttablereadfunc(req,res)  {
             async function connectAndRead() {  
                         const client       = new Client(connectobj);
@@ -114,3 +115,4 @@ const connectobj   = {
           }
           connectAndCreate();
   }
+};

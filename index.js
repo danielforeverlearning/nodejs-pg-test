@@ -65,7 +65,7 @@ express()
   })
 
 
-  
+  .get('/studenttableinsert', (req res) => res.render('pages/studenttableinsert'))
   .get('/tableinsert', (req, res) => res.render('pages/tableinsert'))
   .post('/tableinsertsubmit', (req, res) => {
       var brand;

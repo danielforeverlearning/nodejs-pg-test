@@ -26,7 +26,7 @@ const connectobj   = {
 
 
 module.exports = {
-  function studenttablereadfunc(req,res)  {
+  studenttablereadfunc: function(req,res)  {
             async function connectAndRead() {  
                         const client       = new Client(connectobj);
                         try {
@@ -44,9 +44,9 @@ module.exports = {
                         }
             }
             connectAndRead(); 
-  }
+  },
 
-  function studenttableinsertfunc(req, res)  {
+  studenttableinsertfunc: function(req, res)  {
       var firstname;
       var lastname;
       var email;
@@ -88,11 +88,9 @@ module.exports = {
           }
       })
     
-  }
+  },
 
-   
-  
-  function studenttablecreatefunc(req, res) {
+  studenttablecreatefunc: function(req, res) {
           async function connectAndCreate() {
                       const client       = new Client(connectobj);
                       try {

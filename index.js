@@ -16,11 +16,21 @@ const formidable   = require('formidable')
 const PORT         = process.env.PORT || 5000
 
 const { Client }   = require('pg');
+
+/*****************************
 const connectobj   = {
                                     user: 'max', // e.g., 'postgres'
                                     host: 'dpg-d1kvb83e5dus73f28aig-a',
                                     database: 'tpjj', // The database you created
                                     password: 'vSuU5pRACdyJvEJmmW8EQxjnaKg5v003',
+                                    port: 5432,
+                     };
+*****************************/
+const connectobj   = {
+                                    user: 'dbadmin', // e.g., 'postgres'
+                                    host: 'dpg-d1nhturipnbc73am7180-a',
+                                    database: 'garagedb_cwyn', // The database you created
+                                    password: 'cH8a1Ifb1iYBZt2ckpOowoclf5nrfjid',
                                     port: 5432,
                      };
 

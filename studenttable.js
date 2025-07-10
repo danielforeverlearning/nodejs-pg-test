@@ -204,7 +204,7 @@ module.exports = {
           connectAndDrop();
   },
 
-  studenttableupdate2func: function(req, res) {
+  studenttableupdateIDfunc: function(req, res) {
       var primarykeyID;
       async function connectAndSelectByID() {  
                         const client       = new Client(connectobj);
@@ -214,11 +214,11 @@ module.exports = {
                           console.log("selectIDres = " + JSON.stringify(selectIDres));
                           res.render('pages/selecttableupdate2', {existingval: selectIDres} );
                         } catch (err) {
-                            var badstr = 'studenttableupdate2func ID = ' + primarykeyID + ', ERROR = ' + err;
+                            var badstr = 'studenttableupdateIDfunc ID = ' + primarykeyID + ', ERROR = ' + err;
                             res.render('pages/result', {myresults: badstr} );
                         } finally {
                             await client.end();
-                            console.log('studenttableupdate2func ID = ' + primarykeyID + ', Disconnected from PostgreSQL.');
+                            console.log('studenttableupdateIDfunc ID = ' + primarykeyID + ', Disconnected from PostgreSQL.');
                         }
       }
     
@@ -227,7 +227,7 @@ module.exports = {
   
           if (err)
           {
-             res.send("studenttableupdate2func form parse err = " + err);
+             res.send("studenttableupdateIDfunc form parse err = " + err);
           }
           else
           {

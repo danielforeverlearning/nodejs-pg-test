@@ -86,6 +86,16 @@ module.exports = {
              email = fields.email_name;
              phoneareacode = fields.phoneareacode_name;
              phonenumber = fields.phonenumber_name;
+
+             //validation checking
+             var first_at = email.indexOf("@");
+             var last_at = email.lastIndexOf("@");
+             if (first_at == -1)
+             {
+               
+             }
+             if (first_at == last_at && first_at != -1)
+            
              connectAndInsert(); 
           }
       })

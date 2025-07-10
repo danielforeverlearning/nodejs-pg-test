@@ -175,7 +175,7 @@ express()
           connectAndCreate();
   })
 
-  .get('/dbdropstudenttable', (req, res) => { studenttable.studenttabledropfunc(req, res); });
+  .get('/dbdropstudenttable', (req, res) => { studenttable.studenttabledropfunc(req, res); })
   .get('/dbdroptable', (req, res) => {
           const client       = new Client(connectobj);
           async function connectAndDrop() {

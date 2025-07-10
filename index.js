@@ -43,6 +43,8 @@ express()
   
   .get('/', (req, res) => res.render('pages/home'))
 
+  .get('/exampledialog', (req, res) => res.render('pages/exampledialog'))
+
   .get('/studenttableread', (req,res) => { studenttable.studenttablereadfunc(req,res); })
   .get('/tableread', (req,res) => {
             async function connectAndRead() {  

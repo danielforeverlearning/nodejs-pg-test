@@ -122,6 +122,40 @@ module.exports = {
       })//form.parse
   },
 
+  studenttabledeletefunc: function(req, res) {
+      var primarykeyID;
+      async function connectAndDelete() {  
+                        const client       = new Client(connectobj);
+                        try {
+                          await client.connect();
+                          const deleteRes = await client.query("DELETE FROM student WHERE ID = " + primarykeyID + ";");
+                          var resultstr = 'deleteRes = ' + JSON.stringify(deleteRes);
+                          res.render('pages/result', {myresults: resultstr} );
+                        } catch (err) {
+                            var badstr = 'DELETE FROM students ERROR = ' + err;
+                            res.render('pages/result', {myresults: badstr} );
+                        } finally {
+                            await client.end();
+                            console.log('DELETE FROM students Disconnected from PostgreSQL.');
+                        }
+      }
+    
+      var form = new formidable.IncomingForm();
+      form.parse(req, function (err, fields, files) {
+  
+          if (err)
+          {
+             res.send("tabledeletesubmit err = " + err);
+          }
+          else
+          {
+             console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
+             primarykeyID = fields.primarykey_name;
+             connectAndDelete(); 
+          }
+      })
+  },
+
   studenttablecreatefunc: function(req, res) {
           async function connectAndCreate() {
                       const client       = new Client(connectobj);

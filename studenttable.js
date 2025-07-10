@@ -1,4 +1,4 @@
-const express      = require('express')
+mailconst express      = require('express')
 const path         = require('path')
 var   https        = require('https');
 const formidable   = require('formidable')
@@ -96,8 +96,9 @@ module.exports = {
              else 
              {
                  console.log("email = " + email);
-                 const myArr = text.match(/@/g);
+                 const myArr = email.match(/@/g);
                  console.log(myArr.length + " " + myArr);
+                 res.send("testing");
                  /******
                  var first_at = email.indexOf("@");
                  var last_at = email.lastIndexOf("@");

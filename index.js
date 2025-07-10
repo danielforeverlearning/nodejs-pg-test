@@ -43,6 +43,9 @@ express()
   
   .get('/', (req, res) => res.render('pages/home'))
 
+  .get('/studenttableupdate', (req,res) => { studenttable.studenttableupdate1(req,res); })
+  .post('/studenttableupdatesubmit', (req,res) => { studenttable.studenttableupdate2(req,res); })
+  
   .get('/studenttableread', (req,res) => { studenttable.studenttablereadfunc(req,res); })
   .get('/tableread', (req,res) => {
             async function connectAndRead() {  

@@ -202,6 +202,11 @@ module.exports = {
                       }
           }
           connectAndDrop();
-  }
+  },
 
+  studenttableupdate1: function(req, res) {
+  },
+
+  studenttableupdate2: function(req, res) {
+  }
 };

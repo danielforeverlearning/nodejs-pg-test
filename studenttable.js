@@ -96,6 +96,7 @@ module.exports = {
              else 
              {
                  console.log("email = " + email);
+                 console.log(typeof email);
                  const myArr = email.match(/@/g);
                  console.log(myArr.length + " " + myArr);
                  res.send("testing");

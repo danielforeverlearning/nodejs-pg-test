@@ -9,8 +9,10 @@
 <body>
   <div class="container">
   <h2>STUDENT TABLE UPDATE</h2>
-  <h2>ID = <%= existingval.firstname %></h2>
   <form action="studenttableupdatesubmit" method="post" enctype="multipart/form-data">
+     <label for="primarykey_id">ID: </label>
+     <input type="text" name="primarykey_name" id="primarykey_id" value=<%= existingval.id %> readonly>
+     <br />
      <label for="firstname_id">FIRST NAME: </label>
      <input type="text" name="firstname_name" id="firstname_id" value=<%= existingval.firstname %> >
      <br />

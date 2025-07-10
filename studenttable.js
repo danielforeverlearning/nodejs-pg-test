@@ -281,6 +281,7 @@ module.exports = {
           else
           { //good
              console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
+             primarykeyID = fields.primarykey_name;
              firstname = fields.firstname_name;
              lastname = fields.lastname_name;
              email = fields.email_name;

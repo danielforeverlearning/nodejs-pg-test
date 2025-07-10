@@ -105,8 +105,6 @@ module.exports = {
                  console.log("first_at = " + first_at);
                  console.log("last_at = " + last_at);
 
-                 res.send("testing");
-                 /***********************
                  if (first_at == -1)
                  {
                       var badstr = 'Sorry email must have 1 @ character, for example darthvader@gmail.com';
@@ -119,7 +117,6 @@ module.exports = {
                  }
                  else
                       connectAndInsert(); 
-                      ********/
              }
           }//good
       })//form.parse

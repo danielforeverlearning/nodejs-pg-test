@@ -205,6 +205,36 @@ module.exports = {
   },
 
   studenttableupdate1: function(req, res) {
+      var primarykeyID;
+      async function connectAndSelectByID() {  
+                        const client       = new Client(connectobj);
+                        try {
+                          await client.connect();
+                          const selectIDres = await client.query("SELECT FROM student WHERE ID = " + primarykeyID + ";");
+                          res.render('pages/selecttableupdate2', {existingval: selectIDres} );
+                        } catch (err) {
+                            var badstr = 'SELECT FROM students WHERE ID = ' + primarykeyID + ' ERROR = ' + err;
+                            res.render('pages/result', {myresults: badstr} );
+                        } finally {
+                            await client.end();
+                            console.log('SELECT FROM students WHERE ID = ' + primarykeyID + ' Disconnected from PostgreSQL.');
+                        }
+      }
+    
+      var form = new formidable.IncomingForm();
+      form.parse(req, function (err, fields, files) {
+  
+          if (err)
+          {
+             res.send("studenttableupdate1 err = " + err);
+          }
+          else
+          {
+             console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
+             primarykeyID = fields.primarykey_name;
+             connectAndSelectByID(); 
+          }
+      })
   },
 
   studenttableupdate2: function(req, res) {

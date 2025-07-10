@@ -43,7 +43,7 @@ express()
   
   .get('/', (req, res) => res.render('pages/home'))
 
-  .get('/exampledialog', (req, res) => res.render('pages/exampledialog'))
+  .get('/exampledialog', (req, res) => { res.sendFile(path.join(__dirname, 'public', 'exampledialog.html')); })
 
   .get('/studenttableread', (req,res) => { studenttable.studenttablereadfunc(req,res); })
   .get('/tableread', (req,res) => {

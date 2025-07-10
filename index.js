@@ -34,6 +34,8 @@ const connectobj   = {
                                     port: 5432,
                      };
 
+var studenttable = require('./studenttable');
+
 express()
   .use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))

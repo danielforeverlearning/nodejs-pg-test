@@ -42,7 +42,8 @@ express()
   .set('view engine', 'ejs')
   
   .get('/', (req, res) => res.render('pages/home'))
-  
+
+  .get('/studenttableread', (req,res) => { studenttable.studenttablereadfunc(req,res); })
   .get('/tableread', (req,res) => {
             async function connectAndRead() {  
                         const client       = new Client(connectobj);

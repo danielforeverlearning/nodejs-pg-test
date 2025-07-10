@@ -240,5 +240,9 @@ module.exports = {
 
   studenttableupdate2: function(req, res) {
       res.send("testing 1 first");
+  },
+
+  studenttableupdate3: function(req, res) {
+      res.send("not that far");
   }
 };

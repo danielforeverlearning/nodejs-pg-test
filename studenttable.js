@@ -90,6 +90,7 @@ module.exports = {
              //validation checking
              var first_at = email.indexOf("@");
              var last_at = email.lastIndexOf("@");
+             /*****
              if (first_at == -1)
              {
                
@@ -97,6 +98,7 @@ module.exports = {
              if (first_at == last_at && first_at != -1)
             
              connectAndInsert(); 
+             *****/
           }
       })
     

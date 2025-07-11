@@ -39,25 +39,26 @@ module.exports = {
   },
 
   subscriptiontableinsertsubmitfunc: function(req,res) {
-      var brand;
-      var model;
-      var year;
+      var studentID;
+      var active;
+      var lastmonthpaid;
+      var lastyearpaid;
       async function connectAndInsert() {    
                         const client       = new Client(connectobj);
                         try {
                           await client.connect();
-                          console.log('INSERT INTO cars Connected to PostgreSQL!');
-                          var insertstmt = "INSERT INTO cars (BRAND, MODEL, YEAR) VALUES ('" + brand + "', '" + model + "', " + year + ");";
+                          console.log('INSERT INTO subscription Connected to PostgreSQL!');
+                          var insertstmt = "INSERT INTO subscription (STUDENTID, ACTIVE, LASTMONTHPAID, LASTYEARPAID) VALUES (" + studentID + ", " + active + ", " + lastpaidmonth + ", " + lastpaidyear + ");";
                           console.log(insertstmt);
                           const insertRes = await client.query(insertstmt);
                           var resultstr = 'insertRes = ' + JSON.stringify(insertRes);
                           res.render('pages/result', {myresults: resultstr} );
                         } catch (err) {
-                            var badstr = 'INSERT INTO cars ERROR = ' + err;
+                            var badstr = 'INSERT INTO subscription ERROR = ' + err;
                             res.render('pages/result', {myresults: badstr} );
                         } finally {
                             await client.end();
-                            console.log('INSERT INTO cars Disconnected from PostgreSQL.');
+                            console.log('INSERT INTO subscription Disconnected from PostgreSQL.');
                         }
       }
     
@@ -66,15 +67,18 @@ module.exports = {
   
           if (err)
           {
-             res.send("tableinsertsubmit err = " + err);
+             res.send("subscriptiontableinsertsubmitfunc err = " + err);
           }
           else
           {
              console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
-             brand = fields.brand_name;
-             model = fields.model_name;
-             year = fields.year_name;
+             /*****
+             studentID = fields.studentid_name;
+             active = fields.active_name;
+             lastpaidmonth = fields.lastpaidmonth_name;
+             lastpaidyear = fields.lastpaidyear_name;
              connectAndInsert(); 
+             *****/
           }
       })
   }//subscriptiontableinsertsubmitfunc

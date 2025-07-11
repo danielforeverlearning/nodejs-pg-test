@@ -71,6 +71,8 @@ module.exports = {
           else
           {
              console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
+             res.send("test2");
+             /***** 
              if ('active_yes_name' in fields)
                  active = true;
              else
@@ -79,6 +81,7 @@ module.exports = {
              lastpaidmonth = fields.lastpaidmonth_name;
              lastpaidyear = fields.lastpaidyear_name;
              connectAndInsert();
+             ***/
           }
       })
   }, //subscriptiontableinsertsubmitfunc

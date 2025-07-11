@@ -35,6 +35,7 @@ const connectobj   = {
                      };
 
 var studenttable = require('./studenttable');
+var subscriptiontable = require('./subscriptiontable');
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
@@ -48,25 +49,7 @@ express()
   .post('/studenttableupdatesubmit', (req,res) => { studenttable.studenttableupdate3func(req,res); })
   
   .get('/studenttableread', (req,res) => { studenttable.studenttablereadfunc(req,res); })
-  .get('/tableread', (req,res) => {
-            async function connectAndRead() {  
-                        const client       = new Client(connectobj);
-                        try {
-                          await client.connect();
-                          console.log('tableread Connected to PostgreSQL!');
-                          const result = await client.query('SELECT * FROM cars');
-                          console.log("result = " + JSON.stringify(result));
-                          res.render('pages/tableread', {results: result.rows} );
-                        } catch (err) {
-                            var result = 'tableread ERROR = ' + err;
-                            res.send(result);
-                        } finally {
-                            await client.end();
-                            console.log('tableread Disconnected from PostgreSQL.');
-                        }
-            }
-            connectAndRead(); 
-  })
+  .get('/subscriptiontableread', (req,res) => { subscriptiontable.subscriptiontablereadfunc(req,res); })
 
 
   .get('/studenttableinsert', (req, res) => res.render('pages/studenttableinsert'))

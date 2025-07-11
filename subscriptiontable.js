@@ -91,7 +91,7 @@ module.exports = {
                         const client       = new Client(connectobj);
                         try {
                           await client.connect();
-                          const deleteRes = await client.query("DELETE FROM subscription WHERE ID = " + primarykeyID + ";");
+                          const deleteRes = await client.query("DELETE FROM subscription WHERE STUDENTID = " + primarykeyID + ";");
                           var resultstr = 'deleteRes = ' + JSON.stringify(deleteRes);
                           res.render('pages/result', {myresults: resultstr} );
                         } catch (err) {
@@ -130,7 +130,7 @@ module.exports = {
               
                           // Example: create table
                           const createRes = await client.query(
-                              'CREATE TABLE subscription (ID SERIAL PRIMARY KEY, STUDENTID INTEGER, ACTIVE BOOLEAN, LASTPAIDMONTH INT, LASTPAIDYEAR INT, CONSTRAINT mysubscriptiontablefkconstraint FOREIGN KEY (STUDENTID) REFERENCES student(ID));'
+                              'CREATE TABLE subscription (STUDENTID INTEGER PRIMARY KEY, ACTIVE BOOLEAN, LASTPAIDMONTH INT, LASTPAIDYEAR INT, CONSTRAINT mysubscriptiontablefkconstraint FOREIGN KEY (STUDENTID) REFERENCES student(ID));'
                           );
                           var result = 'createRes = ' + JSON.stringify(createRes);
                           res.send(result);

@@ -71,14 +71,14 @@ module.exports = {
           else
           {
              console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
-            res.send("testing" );
-             /*****
+             if ('active_yes_name' in fields)
+                 active = true;
+             else
+                 active = false;
              studentID = fields.studentid_name;
-             active = fields.active_name;
              lastpaidmonth = fields.lastpaidmonth_name;
              lastpaidyear = fields.lastpaidyear_name;
-             connectAndInsert(); 
-             *****/
+             connectAndInsert();
           }
       })
   }, //subscriptiontableinsertsubmitfunc

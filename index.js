@@ -15,9 +15,10 @@ const formidable   = require('formidable')
 
 const PORT         = process.env.PORT || 5000
 
-const { Client }   = require('pg');
 
 /*****************************
+const { Client }   = require('pg');
+
 const connectobj   = {
                                     user: 'max', // e.g., 'postgres'
                                     host: 'dpg-d1kvb83e5dus73f28aig-a',
@@ -25,7 +26,7 @@ const connectobj   = {
                                     password: 'vSuU5pRACdyJvEJmmW8EQxjnaKg5v003',
                                     port: 5432,
                      };
-*****************************/
+                     
 const connectobj   = {
                                     user: 'dbadmin', // e.g., 'postgres'
                                     host: 'dpg-d1nhturipnbc73am7180-a',
@@ -33,6 +34,7 @@ const connectobj   = {
                                     password: 'cH8a1Ifb1iYBZt2ckpOowoclf5nrfjid',
                                     port: 5432,
                      };
+*************************/
 
 var studenttable = require('./studenttable');
 var subscriptiontable = require('./subscriptiontable');
@@ -60,6 +62,8 @@ express()
 
   .get('/studenttabledelete', (req, res) => res.render('pages/studenttabledelete'))
   .post('/studenttabledeletesubmit', (req, res) => { studenttable.studenttabledeletefunc(req,res); })
+
+  /*****
   .get('/tabledelete', (req, res) => res.render('pages/tabledelete'))
   .post('/tabledeletesubmit', (req, res) => {
       var primarykeyID;
@@ -95,11 +99,14 @@ express()
       })
     
   })
-
+***********/
+  
   .get('/dbcreatestudenttable', (req, res) => { studenttable.studenttablecreatefunc(req, res); })
   .get('/dbcreatesubscriptiontable', (req, res) => { subscriptiontable.subscriptiontablecreatefunc(req, res); })
 
   .get('/dbdropstudenttable', (req, res) => { studenttable.studenttabledropfunc(req, res); })
+
+  /**********
   .get('/dbdroptable', (req, res) => {
           const client       = new Client(connectobj);
           async function connectAndDrop() {
@@ -123,4 +130,5 @@ express()
           }
           connectAndDrop();
   })
+  ****************/
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))

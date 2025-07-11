@@ -8,11 +8,11 @@
 <body>
 
 <div class="container">
-<h2>TABLE cars</h2>
+<h2>TABLE subscription</h2>
 
 <ul>
     <% results.forEach(function(r) { %>
-        <li><%= r.id %> - <%= r.brand %> - <%= r.model %> - <%= r.year %></li>
+        <li><%= r.studentid %> - <%= r.active %> - <%= r.lastpaidmonth %> - <%= r.lastpaidyear %></li>
     <% }); %>
 </ul>
 <input type="button" onclick="window.location.href='./'" value="HOME">

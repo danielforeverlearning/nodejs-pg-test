@@ -93,7 +93,7 @@ module.exports = {
               
                           // Example: create table
                           const createRes = await client.query(
-                              'CREATE TABLE subscription (ID SERIAL PRIMARY KEY, BRAND VARCHAR(255),MODEL VARCHAR(255),YEAR INT);'
+                              'CREATE TABLE subscription (ID SERIAL PRIMARY KEY, STUDENTID INTEGER, ACTIVE BOOLEAN, LASTPAIDMONTH INT, LASTPAIDYEAR INT, CONSTRAINT mysubscriptiontablefkconstraint FOREIGN KEY (STUDENTID) REFERENCES student(ID));'
                           );
                           var result = 'createRes = ' + JSON.stringify(createRes);
                           res.send(result);

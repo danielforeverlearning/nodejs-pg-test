@@ -54,7 +54,7 @@ express()
 
   .get('/studenttableinsert', (req, res) => res.render('pages/studenttableinsert'))
   .post('/studenttableinsertsubmit', (req, res) => { studenttable.studenttableinsertfunc(req,res); })
-  .get('/tableinsert', (req, res) => res.render('pages/tableinsert'))
+  .get('/subscriptiontableinsert', (req, res) => res.render('pages/subscriptiontableinsert'))
   .post('/tableinsertsubmit', (req, res) => {
       var brand;
       var model;

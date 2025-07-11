@@ -143,6 +143,30 @@ module.exports = {
                       }
           }
           connectAndCreate();
+  },
+
+  subscriptiontabledropfunc: function(req,res) {
+          const client       = new Client(connectobj);
+          async function connectAndDrop() {
+                      try {
+                          await client.connect();
+                          console.log('Connected to PostgreSQL!');
+              
+                          // Example: drop table
+                          const dropRes = await client.query(
+                              'DROP TABLE subscription;'
+                          );
+                          var result = 'dropRes = ' + JSON.stringify(dropRes);
+                          res.send(result);
+                      } catch (err) {
+                          var result = 'Error connecting or dropping table = ' + err;
+                          res.send(result);
+                      } finally {
+                          await client.end();
+                          console.log('Disconnected from PostgreSQL.');
+                      }
+          }
+          connectAndDrop();
   }
 
 };

@@ -85,6 +85,42 @@ module.exports = {
       })
   }, //subscriptiontableinsertsubmitfunc
 
+  subscriptiontabledeletesubmitfunc: function(req,res)  {
+      var primarykeyID;
+      async function connectAndDelete() {  
+                        const client       = new Client(connectobj);
+                        try {
+                          await client.connect();
+                          const deleteRes = await client.query("DELETE FROM subscription WHERE ID = " + primarykeyID + ";");
+                          var resultstr = 'deleteRes = ' + JSON.stringify(deleteRes);
+                          res.render('pages/result', {myresults: resultstr} );
+                        } catch (err) {
+                            var badstr = 'DELETE FROM subscription ERROR = ' + err;
+                            res.render('pages/result', {myresults: badstr} );
+                        } finally {
+                            await client.end();
+                            console.log('DELETE FROM subscription Disconnected from PostgreSQL.');
+                        }
+      }
+    
+      var form = new formidable.IncomingForm();
+      form.parse(req, function (err, fields, files) {
+  
+          if (err)
+          {
+             var badstr = "subscriptiontabledeletesubmitfunc err = " + err;
+             res.render('pages/result', {myresults: badstr} );
+          }
+          else
+          {
+             console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
+             primarykeyID = fields.primarykey_name;
+             connectAndDelete(); 
+          }
+      })
+    
+  }, //subscriptiontabledeletesubmitfunc
+
   subscriptiontablecreatefunc: function(req,res) {
           async function connectAndCreate() {
                       const client       = new Client(connectobj);

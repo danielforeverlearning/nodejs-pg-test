@@ -80,8 +80,7 @@ module.exports = {
              lastpaidmonth = fields.lastpaidmonth_name;
              lastpaidyear = fields.lastpaidyear_name;
 
-             res.send("test3");
-             //connectAndInsert();
+             connectAndInsert();
           }
       })
   }, //subscriptiontableinsertsubmitfunc

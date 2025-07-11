@@ -63,8 +63,9 @@ express()
   .get('/studenttabledelete', (req, res) => res.render('pages/studenttabledelete'))
   .post('/studenttabledeletesubmit', (req, res) => { studenttable.studenttabledeletefunc(req,res); })
 
-  /*****
-  .get('/tabledelete', (req, res) => res.render('pages/tabledelete'))
+  .get('/subscriptiontabledelete', (req, res) => res.render('pages/subscriptiontabledelete'))
+
+  /******
   .post('/tabledeletesubmit', (req, res) => {
       var primarykeyID;
       async function connectAndDelete() {  

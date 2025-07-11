@@ -72,6 +72,7 @@ module.exports = {
           else
           {
              console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
+            res.send("testing" );
              /*****
              studentID = fields.studentid_name;
              active = fields.active_name;

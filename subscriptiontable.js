@@ -40,14 +40,14 @@ module.exports = {
   subscriptiontableinsertsubmitfunc: function(req,res) {
       var studentID;
       var active;
-      var lastmonthpaid;
-      var lastyearpaid;
+      var lastpaidmonth;
+      var lastpaidyear;
       async function connectAndInsert() {    
                         const client       = new Client(connectobj);
                         try {
                           await client.connect();
                           console.log('INSERT INTO subscription Connected to PostgreSQL!');
-                          var insertstmt = "INSERT INTO subscription (STUDENTID, ACTIVE, LASTMONTHPAID, LASTYEARPAID) VALUES (" + studentID + ", " + active + ", " + lastpaidmonth + ", " + lastpaidyear + ");";
+                          var insertstmt = "INSERT INTO subscription (STUDENTID, ACTIVE, LASTPAIDMONTH, LASTPAIDYEAR) VALUES (" + studentID + ", " + active + ", " + lastpaidmonth + ", " + lastpaidyear + ");";
                           console.log(insertstmt);
                           const insertRes = await client.query(insertstmt);
                           var resultstr = 'insertRes = ' + JSON.stringify(insertRes);

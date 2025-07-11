@@ -70,30 +70,6 @@ express()
   .get('/dbcreatesubscriptiontable', (req, res) => { subscriptiontable.subscriptiontablecreatefunc(req, res); })
 
   .get('/dbdropstudenttable', (req, res) => { studenttable.studenttabledropfunc(req, res); })
-
-  /**********
-  .get('/dbdroptable', (req, res) => {
-          const client       = new Client(connectobj);
-          async function connectAndDrop() {
-                      try {
-                          await client.connect();
-                          console.log('Connected to PostgreSQL!');
-              
-                          // Example: drop table
-                          const dropRes = await client.query(
-                              'DROP TABLE cars;'
-                          );
-                          var result = 'dropRes = ' + JSON.stringify(dropRes);
-                          res.send(result);
-                      } catch (err) {
-                          var result = 'Error connecting or dropping table = ' + err;
-                          res.send(result);
-                      } finally {
-                          await client.end();
-                          console.log('Disconnected from PostgreSQL.');
-                      }
-          }
-          connectAndDrop();
-  })
-  ****************/
+  .get('/dbdropsubscriptiontable', (req, res) => { subscriptiontable.subscriptiontabledropfunc(req,res); }) 
+    
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))

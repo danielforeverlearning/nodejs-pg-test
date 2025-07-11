@@ -10,11 +10,24 @@
 <div class="container">
 <h2>TABLE subscription</h2>
 
-<ul>
+<table>
+    <tr>
+    <th>ID</th>
+    <th>STUDENTID</th>
+    <th>ACTIVE</th>
+    <th>LAST PAID MONTH</th>
+    <th>LAST PAID YEAR</th>
+    </tr>
     <% results.forEach(function(r) { %>
-        <li><%= r.studentid %> - <%= r.active %> - <%= r.lastpaidmonth %> - <%= r.lastpaidyear %></li>
+        <tr>
+        <td><%= r.id %></td>
+        <td><%= r.studentid %></td>
+        <td><%= r.active %></td>
+        <td><%= r.lastpaidmonth %></td>
+        <td><%= r.lastpaidyear %></td>
+        </tr>
     <% }); %>
-</ul>
+</table>
 <input type="button" onclick="window.location.href='./'" value="HOME">
 </div>
 </body>

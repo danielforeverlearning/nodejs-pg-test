@@ -19,11 +19,9 @@ th, td {
         <p>rowcount is 0</p>
     <% } else if (rowcount == 1) { %>
         <p>STUDENTID = <%= existingrow.studentid %></p>
-        <p>FIRST NAME = <%= existingrow.firstname %></p>
-        <p>LAST NAME = <%= existingrow.lastname %></p>
-        <p>EMAIL = <%= existingrow.email %></p>
-        <p><%= existingrow.phoneareacode %></p>
-        <p><%= existingrow.phonenumber %></p>
+        <p>ACTIVE = <%= existingrow.active %></p>
+        <p>LASTPAIDMONTH = <%= existingrow.lastpaidmonth %></p>
+        <p>LASTPAIDYEAR = <%= existingrow.lastpaidyear %></p>
     <% } else { %>
         <p>multiple rows, rowcount is <% rowcount %>, this should be impossible due to foreign key rule, you should never see this</p>
     <% } %>

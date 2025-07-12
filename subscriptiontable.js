@@ -217,7 +217,54 @@ module.exports = {
                               await client.end();
                         }
       }
+
       myasyncfunc();
+  },
+
+  updatefuncpost: function(req, res, studentID) {
+
+       var studentID;
+       var active;
+       var lastpaidmonth;
+       var lastpaidyear;
+    
+       async function myasyncfunc() {  
+                        const client       = new Client(connectobj);
+                        try {
+                          await client.connect();
+
+                          var stmt = "UPDATE subscription SET ACTIVE = " + activeSQLok + ", LASTPAIDMONTH = " + lastpaidmonthSQLok + ", LASTPAIDYEAR = " + lastpaidyearSQLok + " WHERE STUDENTID = " + studentIDSQLok + ";";
+                          console.log(stmt);
+                          
+                          const selectIDres = await client.query("UPDATE subscription WHERE STUDENTID = " + studentID + ";");
+                          console.log("subscriptiontable updatefunc = " + JSON.stringify(selectIDres));
+                          res.render('pages/subscriptionviewupdate', {existingrow: selectIDres.rows[0]} );
+                        } catch (err) {
+                              var badstr = 'subscriptiontable updatefunc ID = ' + studentID + ', ERROR = ' + err;
+                              res.render('pages/result', {myresults: badstr} );
+                        } finally {
+                              await client.end();
+                        }
+      }
+
+      var form = new formidable.IncomingForm();
+      form.parse(req, function (err, fields, files) {
+  
+          if (err)
+          {
+             var badstr = "subscriptiontable updatefuncpost err = " + err;
+             res.render('pages/result', {myresults: badstr} );
+          }
+          else
+          {
+             console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
+             studentID = fields.studentid_name;
+             active = fields.active_name;
+             lastpaidmonth = fields.lastpaidmonth_name;
+             lastpaidyear = fields.lastpaidyear_name;
+             myasyncfunc(); 
+          }
+      })
   }
 
 };

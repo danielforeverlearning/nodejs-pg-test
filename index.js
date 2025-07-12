@@ -29,7 +29,8 @@ express()
   .post('/studenttableupdateID', (req,res) => { studenttable.studenttableupdateIDfunc(req,res); })
   .post('/studenttableupdatesubmit', (req,res) => { studenttable.studenttableupdate3func(req,res); })
   
-  .get('/studenttableread', (req,res) => {  var returnobj = studenttable.studenttablereadfunc(); 
+  .get('/studenttableread', (req,res) => {  var returnobj = {};
+                                            studenttable.studenttablereadfunc(returnobj); 
                                             if (returnobj.success)
                                                 res.render('pages/studenttableread', {results: returnobj.results} );
                                             else

@@ -174,6 +174,26 @@ module.exports = {
       })
   },
 
+
+  deletefunc: function(req, res, studentID) {
+      async function connectAndDelete() {  
+                        const client       = new Client(connectobj);
+                        try {
+                          await client.connect();
+                          const deleteRes = await client.query("DELETE FROM student WHERE ID = " + studentID + ";");
+                          var resultstr = 'deleteRes = ' + JSON.stringify(deleteRes);
+                          res.render('pages/result', {myresults: resultstr} );
+                        } catch (err) {
+                            var badstr = 'DELETE FROM students ERROR = ' + err;
+                            res.render('pages/result', {myresults: badstr} );
+                        } finally {
+                            await client.end();
+                        }
+      }
+      connectAndDelete(); 
+  },
+
+
   studenttablecreatefunc: function(req, res) {
           async function connectAndCreate() {
                       const client       = new Client(connectobj);

@@ -44,7 +44,7 @@ express()
   .get('/studentdelete/:id', (req, res) => {  
                                               const studentID = req.params.id;
                                               studenttable.deletefunc(req,res,studentID);
-                                           });
+                                           })
   .get('/studenttabledelete', (req, res) => res.render('pages/studenttabledelete'))
   .post('/studenttabledeletesubmit', (req, res) => { studenttable.studenttabledeletefunc(req,res); })
 

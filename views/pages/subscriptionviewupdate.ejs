@@ -11,16 +11,16 @@
   <h2>MONTHLY SUBSCRIPTION UPDATE</h2>
   <form action="/subscripupdatepost" method="post" enctype="multipart/form-data">
      <label for="studentid_id">STUDENTID: </label>
-     <input type="text" name="studentid_name" id="studentid_id" value=<%= existingval.studentid %> readonly>
+     <input type="text" name="studentid_name" id="studentid_id" value=<%= existingrow.studentid %> readonly>
      <br />
      <label for="active_id">ACTIVE: </label>
-     <input type="text" name="active_name" id="active_id" value=<%= existingval.active %> >
+     <input type="text" name="active_name" id="active_id" value=<%= existingrow.active %> >
      <br />
      <label for="lastpaidmonth_id">LAST PAID MONTH: </label>
-     <input type="text" name="lastpaidmonth_name" id="lastpaidmonth_id" value=<%= existingval.lastpaidmonth %> >
+     <input type="text" name="lastpaidmonth_name" id="lastpaidmonth_id" value=<%= existingrow.lastpaidmonth %> >
      <br />
      <label for="lastpaidyear_id">LAST PAID YEAR: </label>
-     <input type="text" name="lastpaidyear_name" id="lastpaidyear_id" value=<%= existingval.lastpaidyear %> >
+     <input type="text" name="lastpaidyear_name" id="lastpaidyear_id" value=<%= existingrow.lastpaidyear %> >
      
      <input type="submit" value="SAVE">
      <input type="button" onclick="window.location.href='/'" value="CANCEL">

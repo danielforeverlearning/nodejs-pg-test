@@ -30,10 +30,10 @@ express()
   .post('/studenttableupdatesubmit', (req,res) => { studenttable.studenttableupdate3func(req,res); })
   
   .get('/studenttableread', (req,res) => {  var returnobj = studenttable.studenttablereadfunc(); 
-                                            if (readobj.success)
-                                                res.render('pages/studenttableread', {results: readobj.results} );
+                                            if (returnobj.success)
+                                                res.render('pages/studenttableread', {results: returnobj.results} );
                                             else
-                                                res.render('pages/result', {myresults: readobj.results} );
+                                                res.render('pages/result', {myresults: returnobj.results} );
                                          })
   .get('/subscriptiontableread', (req,res) => { subscriptiontable.subscriptiontablereadfunc(req,res); })
 

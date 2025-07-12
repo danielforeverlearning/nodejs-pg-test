@@ -59,8 +59,10 @@ express()
                                               const studentID = req.params.id;
                                               subscriptiontable.updatefunc(req,res,studentID);
                                             })
-  .post('/subscripupdatepost', (req,res) => { subscriptiontable.updatepostfunc(req,res); })
-
+  .post('/subscripupdatepost/:id', (req,res) => { 
+                                                    const studentID = req.params.id;
+                                                    subscriptiontable.updatepostfunc(req,res,studentID); })
+                                                })
   .get('/subscriptiontabledelete', (req, res) => res.render('pages/subscriptiontabledelete'))
   .post('/subscriptiontabledeletesubmit', (req, res) => { subscriptiontable.subscriptiontabledeletesubmitfunc(req,res); })
   

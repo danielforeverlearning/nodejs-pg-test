@@ -240,6 +240,34 @@ module.exports = {
           connectAndDrop();
   },
 
+  updatefunc: function(req, res, studentID) {
+    
+      async function connectAndSelectByID() {  
+                        const client       = new Client(connectobj);
+                        try {
+                          await client.connect();
+                          const selectIDres = await client.query("SELECT * FROM student WHERE ID = " + studentID + ";");
+                          console.log("selectIDres = " + JSON.stringify(selectIDres));
+                          console.log("selectIDres.rows.length = " + selectIDres.rows.length);
+                          if (selectIDres.rows.length  != 1)
+                          {
+                              var badstr = 'Sorry there is no row in table student with ID = ' + studentID + ', if you want to update a row the ID must be good.';
+                              res.render('pages/result', {myresults: badstr} );
+                          }
+                          else
+                              res.render('pages/studenttableupdate2', {existingval: selectIDres.rows[0]} );
+                        } catch (err) {
+                              var badstr = 'updatefunc ID = ' + studentID + ', ERROR = ' + err;
+                              res.render('pages/result', {myresults: badstr} );
+                        } finally {
+                              await client.end();
+                              console.log('studenttableupdateIDfunc ID = ' + studentID + ', Disconnected from PostgreSQL.');
+                        }
+      }
+  },
+
+  
+
   studenttableupdateIDfunc: function(req, res) {
       var primarykeyID;
       async function connectAndSelectByID() {  

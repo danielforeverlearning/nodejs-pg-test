@@ -28,7 +28,10 @@ express()
   .get('/studenttableupdate', (req,res) => res.render('pages/studenttableupdate1'))
   .post('/studenttableupdateID', (req,res) => { studenttable.studenttableupdateIDfunc(req,res); })
   .post('/studenttableupdatesubmit', (req,res) => { studenttable.studenttableupdate3func(req,res); })
-
+  .get('/studentupdate/:id', (req, res) => {  
+                                              const studentID = req.params.id;
+                                              studenttable.updatefunc(req,res,studentID);
+                                           })
 
   .get('/student', (req,res) => { studenttable.studentviewfunc(req,res); })
   

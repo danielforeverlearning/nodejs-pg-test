@@ -18,12 +18,12 @@ th, td {
     <% if (rowcount == 0) { %>
         <p>rowcount is 0</p>
     <% } else if (rowcount == 1) { %>
-        <p>STUDENTID = <%= r.studentid %></p>
-        <p>FIRST NAME = <%= r.firstname %></p>
-        <p>LAST NAME = <%= r.lastname %></p>
-        <p>EMAIL = <%= r.email %></p>
-        <p><%= r.phoneareacode %></p>
-        <p><%= r.phonenumber %></p>
+        <p>STUDENTID = <%= existingrow.studentid %></p>
+        <p>FIRST NAME = <%= existingrow.firstname %></p>
+        <p>LAST NAME = <%= existingrow.lastname %></p>
+        <p>EMAIL = <%= existingrow.email %></p>
+        <p><%= existingrow.phoneareacode %></p>
+        <p><%= existingrow.phonenumber %></p>
     <% } else { %>
         <p>multiple rows, rowcount is <% rowcount %>, this should be impossible due to foreign key rule, you should never see this</p>
     <% } %>

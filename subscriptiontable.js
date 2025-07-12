@@ -9,9 +9,9 @@ const { Client }   = require('pg');
 
 const connectobj   = {
                                     user: 'dbadmin', // e.g., 'postgres'
-                                    host: 'dpg-d1p2kbs9c44c7385q2ug-a',
-                                    database: 'garagedb_eh4k', // The database you created
-                                    password: 'fBF3gFAHewZJAkCicA9IFxt2hIYVZZjt',
+                                    host: 'dpg-d1p3n83ipnbc73fk1qk0-a',
+                                    database: 'garagedb_i5vo', // The database you created
+                                    password: 'TTMNPyqcxBv2Gf3WwmBhAlnsLx3M40ek',
                                     port: 5432,
                      };
 

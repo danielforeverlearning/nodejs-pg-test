@@ -223,22 +223,21 @@ module.exports = {
 
   updatefuncpost: function(req, res, studentID) {
 
-       var studentID;
-       var active;
-       var lastpaidmonth;
-       var lastpaidyear;
+       var activeSQLok;
+       var lastpaidmonthSQLok;
+       var lastpaidyearSQLok;
     
        async function myasyncfunc() {  
                         const client       = new Client(connectobj);
                         try {
                           await client.connect();
 
-                          var stmt = "UPDATE subscription SET ACTIVE = " + activeSQLok + ", LASTPAIDMONTH = " + lastpaidmonthSQLok + ", LASTPAIDYEAR = " + lastpaidyearSQLok + " WHERE STUDENTID = " + studentIDSQLok + ";";
+                          var stmt = "UPDATE subscription SET ACTIVE = " + activeSQLok + ", LASTPAIDMONTH = " + lastpaidmonthSQLok + ", LASTPAIDYEAR = " + lastpaidyearSQLok + " WHERE STUDENTID = " + studentID + ";";
                           console.log(stmt);
                           
-                          const selectIDres = await client.query("UPDATE subscription WHERE STUDENTID = " + studentID + ";");
-                          console.log("subscriptiontable updatefunc = " + JSON.stringify(selectIDres));
-                          res.render('pages/subscriptionviewupdate', {existingrow: selectIDres.rows[0]} );
+                          const selectIDres = await client.query(stmt);
+                          console.log("subscriptiontable updatefuncpost = " + JSON.stringify(selectIDres));
+                          res.render('pages/result', {myresults: "STUDENTID " + studentID + "successfully updated"} );
                         } catch (err) {
                               var badstr = 'subscriptiontable updatefunc ID = ' + studentID + ', ERROR = ' + err;
                               res.render('pages/result', {myresults: badstr} );
@@ -258,10 +257,13 @@ module.exports = {
           else
           {
              console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
-             studentID = fields.studentid_name;
-             active = fields.active_name;
-             lastpaidmonth = fields.lastpaidmonth_name;
-             lastpaidyear = fields.lastpaidyear_name;
+             
+             if (fields.active_name.indexOf(";") == -1)
+                 activeSQLok = fields.active_name;
+             if (fields.lastpaidmonth_name.indexOf(";") == -1)
+                 lastpaidmonthSQLok = fields.lastpaidmonth_name;
+             if (fields.lastpaidyear_name.indexOf(";") == -1)
+                 lastpaidyearSQLok = fields.lastpaidyear_name;
              myasyncfunc(); 
           }
       })

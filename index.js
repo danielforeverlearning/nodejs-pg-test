@@ -38,6 +38,10 @@ express()
   .get('/studenttableread', (req,res) => { studenttable.studenttablereadfunc(req,res); })
   .get('/subscriptiontableread', (req,res) => { subscriptiontable.subscriptiontablereadfunc(req,res); })
 
+  .get('/studentmonthlysubscription/:id', (req,res) => {  
+                                                            const studentID = req.params.id; 
+                                                            subscriptiontable.read2func(req,res,studentID);
+                                                       })
 
   .get('/studenttableinsert', (req, res) => res.render('pages/studenttableinsert'))
   .post('/studenttableinsertsubmit', (req, res) => { studenttable.studenttableinsertfunc(req,res); })

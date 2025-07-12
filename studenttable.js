@@ -29,6 +29,7 @@ module.exports = {
                           console.log("studenttablereadfunc result = " + JSON.stringify(result));
                           returnobj = {success: true, results: result.rows};
                         } catch (err) {
+                            console.log("studenttablereadfunc err = " + err);
                             returnobj = {success: false, results: err};
                         } finally {
                             await client.end();

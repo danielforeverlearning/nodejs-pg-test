@@ -18,7 +18,7 @@ const connectobj   = {
 
 
 module.exports = {
-  studenttablereadfunc: function(req,res)  {
+  studenttablereadfunc: function()  {
             async function connectAndRead() {  
                         var returnobj;
                         const client       = new Client(connectobj);

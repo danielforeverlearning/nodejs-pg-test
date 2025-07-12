@@ -258,15 +258,30 @@ module.exports = {
           {
              console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
              
-             if (fields.active_name.indexOf(";") == -1)
-                 activeSQLok = fields.active_name;
+             if (fields.active_name == "NO")
+                 activeSQLok = false;
+             else
+                 activeSQLok = true;
+               
              if (fields.lastpaidmonth_name.indexOf(";") == -1)
                  lastpaidmonthSQLok = fields.lastpaidmonth_name;
+             else
+             {
+                 var badstr = "subscriptiontable updatefuncpost: Suspected SQL-injection attack in LAST PAID MONTH, not doing anything";
+                 res.render('pages/result', {myresults: badstr} );
+             }
+            
              if (fields.lastpaidyear_name.indexOf(";") == -1)
                  lastpaidyearSQLok = fields.lastpaidyear_name;
+             else
+             {
+                 var badstr = "subscriptiontable updatefuncpost: Suspected SQL-injection attack in LAST PAID YEAR, not doing anything";
+                 res.render('pages/result', {myresults: badstr} );
+             }
+            
              myasyncfunc(); 
           }
-      })
-  }
+      })//form.parse
+  }//updatepostfunc
 
-};
+}; //module.exports

@@ -201,4 +201,23 @@ module.exports = {
       connectAndSelectByID();
   },
 
+  updatefunc: function(req, res, studentID) {
+    
+       async function myasyncfunc() {  
+                        const client       = new Client(connectobj);
+                        try {
+                          await client.connect();
+                          const selectIDres = await client.query("SELECT * FROM subscription WHERE STUDENTID = " + studentID + ";");
+                          console.log("subscriptiontable updatefunc = " + JSON.stringify(selectIDres));
+                          res.render('pages/subscriptionviewupdate', {existingrow: selectIDres.rows[0]} );
+                        } catch (err) {
+                              var badstr = 'subscriptiontable updatefunc ID = ' + studentID + ', ERROR = ' + err;
+                              res.render('pages/result', {myresults: badstr} );
+                        } finally {
+                              await client.end();
+                        }
+      }
+      myasyncfunc();
+  }
+
 };

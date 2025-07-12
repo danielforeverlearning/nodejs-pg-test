@@ -32,8 +32,6 @@ module.exports = {
                             res.render('pages/result', {myresults: errormsg} );
                         } finally {
                             await client.end();
-                            console.log(' Disconnected from PostgreSQL.');
-                            return returnobj;
                         }
             }
             connectAndRead(); 

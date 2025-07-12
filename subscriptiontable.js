@@ -175,7 +175,7 @@ module.exports = {
                         const client       = new Client(connectobj);
                         try {
                               await client.connect();
-                              const selectIDres = await client.query("SELECT * FROM subscription WHERE ID = " + studentID + ";");
+                              const selectIDres = await client.query("SELECT * FROM subscription WHERE STUDENTID = " + studentID + ";");
                               console.log("read1IDfunc = " + JSON.stringify(selectIDres));
                               console.log("selectIDres.rows.length = " + selectIDres.rows.length);
                               if (selectIDres.rows.length == 0)
@@ -192,7 +192,7 @@ module.exports = {
                                   res.render('pages/subscriptionview', {rowcount:selectIDres.rows.length, rows: selectIDres.rows} );
                               }
                         } catch (err) {
-                              var badstr = 'updatefunc ID = ' + studentID + ', ERROR = ' + err;
+                              var badstr = 'read1IDfunc ID = ' + studentID + ', ERROR = ' + err;
                               res.render('pages/result', {myresults: badstr} );
                         } finally {
                               await client.end();

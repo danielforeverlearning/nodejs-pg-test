@@ -29,13 +29,7 @@ express()
   .post('/studenttableupdateID', (req,res) => { studenttable.studenttableupdateIDfunc(req,res); })
   .post('/studenttableupdatesubmit', (req,res) => { studenttable.studenttableupdate3func(req,res); })
   
-  .get('/studenttableread', (req,res) => {  var returnobj = { success: false, results: {}, errormsg: "" };
-                                            studenttable.studenttablereadfunc(returnobj); 
-                                            if (returnobj.success)
-                                                res.render('pages/studenttableread', {results: returnobj.results} );
-                                            else
-                                                res.render('pages/result', {myresults: returnobj.errormsg} );
-                                         })
+  .get('/studenttableread', (req,res) => { studenttable.studenttablereadfunc(req,res); })
   .get('/subscriptiontableread', (req,res) => { subscriptiontable.subscriptiontablereadfunc(req,res); })
 
 

@@ -17,6 +17,7 @@
     <th>EMAIL</th>
     <th>PHONE AREA CODE</th>
     <th>PHONE NUMBER</th>
+    <th></th>
 </tr>
     <% results.forEach(function(r) { %>
         <tr>
@@ -26,6 +27,7 @@
         <td><%= r.email %></td>
         <td><%= r.phoneareacode %></td>
         <td><%= r.phonenumber %></td>
+        <td><input type="button" onclick="window.location.href='./studentdelete/<%= r.id %>'" value="DELETE"></td>
         </tr>
     <% }); %>
 </table>

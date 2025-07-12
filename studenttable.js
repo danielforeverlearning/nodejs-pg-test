@@ -138,6 +138,8 @@ module.exports = {
       })//form.parse
   },
 
+  
+
   studenttabledeletefunc: function(req, res) {
       var primarykeyID;
       async function connectAndDelete() {  

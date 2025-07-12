@@ -167,6 +167,38 @@ module.exports = {
                       }
           }
           connectAndDrop();
-  }
+  },
+
+  read1IDfunc: function(req, res, studentID) {
+    
+      async function connectAndSelectByID() {  
+                        const client       = new Client(connectobj);
+                        try {
+                              await client.connect();
+                              const selectIDres = await client.query("SELECT * FROM subscription WHERE ID = " + studentID + ";");
+                              console.log("read1IDfunc = " + JSON.stringify(selectIDres));
+                              console.log("selectIDres.rows.length = " + selectIDres.rows.length);
+                              if (selectIDres.rows.length == 0)
+                              {
+                                  //var badstr = 'Sorry there is no row in table student with ID = ' + studentID + ', if you want to update a row the ID must be good.';
+                                  //res.render('pages/result', {myresults: badstr} );
+                                  res.render('pages/subscriptionview', {rowcount:0} );
+                              }
+                              else if (selectIDres.rows.length == 1)
+                                  res.render('pages/subscriptionview', {rowcount:1, existingrow: selectIDres.rows[0]} );
+                              else {
+                                  console.log("read1IDfunc: rowcount = " + selectIDres.rows.length);
+                                  console.log("rows = " + JSON.stringify(selectIDres.rows));
+                                  res.render('pages/subscriptionview', {rowcount:selectIDres.rows.length, rows: selectIDres.rows} );
+                              }
+                        } catch (err) {
+                              var badstr = 'updatefunc ID = ' + studentID + ', ERROR = ' + err;
+                              res.render('pages/result', {myresults: badstr} );
+                        } finally {
+                              await client.end();
+                        }
+      }
+      connectAndSelectByID();
+  },
 
 };

@@ -24,6 +24,7 @@ th, td {
     <th>PHONE AREA CODE</th>
     <th>PHONE NUMBER</th>
     <th></th>
+    <th></th>
 </tr>
     <% results.forEach(function(r) { %>
         <tr>
@@ -34,6 +35,7 @@ th, td {
         <td><%= r.phoneareacode %></td>
         <td><%= r.phonenumber %></td>
         <td><input type="button" onclick="window.location.href='./studentdelete/<%= r.id %>'" value="DELETE"></td>
+        <td><input type="button" onclick="window.location.href='./studentupdate/<%= r.id %>'" value="UPDATE"></td>
         </tr>
     <% }); %>
 </table>

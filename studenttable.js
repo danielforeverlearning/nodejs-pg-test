@@ -18,7 +18,7 @@ const connectobj   = {
 
 
 module.exports = {
-  studenttablereadfunc: function(returnobj)  {
+  studenttablereadfunc: function(req,res)  {
             async function connectAndRead() {  
                         const client       = new Client(connectobj);
                         try {
@@ -26,12 +26,11 @@ module.exports = {
                           console.log('studenttablereadfunc Connected to PostgreSQL!');
                           const result = await client.query('SELECT * FROM student');
                           console.log("studenttablereadfunc result = " + JSON.stringify(result));
-                          returnobj.success = true;
-                          returnobj.results = result.rows;
+                          res.render('pages/studenttableread', {results: result.rows} );
                         } catch (err) {
-                            console.log("studenttablereadfunc err = " + err);
-                            returnobj.success = false;
-                            returnobj.errormsg = err;
+                            var errormsg = "studenttablereadfunc err = " + err;
+                            console.log(errormsg);
+                            res.render('pages/result', {myresults: errormsg} );
                         } finally {
                             await client.end();
                             console.log('studenttablereadfunc Disconnected from PostgreSQL.');

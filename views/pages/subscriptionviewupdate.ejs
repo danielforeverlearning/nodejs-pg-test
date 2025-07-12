@@ -13,9 +13,18 @@
      <label for="studentid_id">STUDENTID: </label>
      <input type="text" name="studentid_name" id="studentid_id" value=<%= existingrow.studentid %> readonly>
      <br />
+
+
      <label for="active_id">ACTIVE: </label>
-     <input type="text" name="active_name" id="active_id" value=<%= existingrow.active %> >
+     <%= if (existingrow.active) { %>
+         <input type="radio" name="active_name" id="active_yes_id" value="YES" checked /><label for="active_yes">YES</label>
+         <input type="radio" name="active_name" id="active_no_id" value="NO" /><label for="active_no">NO</label>
+     <%= } else { %>
+         <input type="radio" name="active_name" id="active_yes_id" value="YES" /><label for="active_yes">YES</label>
+         <input type="radio" name="active_name" id="active_no_id" value="NO" checked /><label for="active_no">NO</label>
+     <%= } %>
      <br />
+
      <label for="lastpaidmonth_id">LAST PAID MONTH: </label>
      <input type="text" name="lastpaidmonth_name" id="lastpaidmonth_id" value=<%= existingrow.lastpaidmonth %> >
      <br />

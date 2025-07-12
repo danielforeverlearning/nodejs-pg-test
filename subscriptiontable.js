@@ -237,7 +237,7 @@ module.exports = {
                           
                           const selectIDres = await client.query(stmt);
                           console.log("subscriptiontable updatefuncpost = " + JSON.stringify(selectIDres));
-                          res.render('pages/result', {myresults: "STUDENTID " + studentID + "successfully updated"} );
+                          res.render('pages/result', {myresults: "STUDENTID " + studentID + " successfully updated"} );
                         } catch (err) {
                               var badstr = 'subscriptiontable updatefunc ID = ' + studentID + ', ERROR = ' + err;
                               res.render('pages/result', {myresults: badstr} );

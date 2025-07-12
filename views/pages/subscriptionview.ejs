@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+<style>
+th, td {
+  border: 1px solid black;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h2>MONTHLY SUBSCRIPTION</h2>
+    <% if (rowcount == 0) { %>
+        <p>rowcount is 0</p>
+    <% } else if (rowcount == 1) { %>
+        <p>rowcount is 1</p>
+    <% } else { %>
+        <p>multiple rows, rowcount is <% rowcount %></p>
+    <% } %>
+
+    <!--
+    <% results.forEach(function(r) { %>
+        <tr>
+        <td><%= r.id %></td>
+        <td><%= r.firstname %></td>
+        <td><%= r.lastname %></td>
+        <td><%= r.email %></td>
+        <td><%= r.phoneareacode %></td>
+        <td><%= r.phonenumber %></td>
+        <td><input type="button" onclick="window.location.href='./studentdelete/<%= r.id %>'" value="DELETE"></td>
+        <td><input type="button" onclick="window.location.href='./studentupdate/<%= r.id %>'" value="UPDATE"></td>
+        <td><input type="button" onclick="window.location.href='./studentmonthlysubscription/<%= r.id %>'" value="MONTHLY SUBSCRIPTION"></td>
+        </tr>
+    <% }); %>
+    -->
+</table>
+<input type="button" onclick="window.location.href='/'" value="HOME">
+</div>
+</body>
+</html>

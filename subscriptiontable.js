@@ -221,7 +221,7 @@ module.exports = {
       myasyncfunc();
   },
 
-  updatefuncpost: function(req, res, studentID) {
+  updatepostfunc: function(req, res, studentID) {
 
        var activeSQLok;
        var lastpaidmonthSQLok;

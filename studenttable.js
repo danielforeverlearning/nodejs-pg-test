@@ -31,7 +31,7 @@ module.exports = {
                         } catch (err) {
                             console.log("studenttablereadfunc err = " + err);
                             returnobj.success = false;
-                            returnobj.results = err;
+                            returnobj.errormsg = err;
                         } finally {
                             await client.end();
                             console.log('studenttablereadfunc Disconnected from PostgreSQL.');

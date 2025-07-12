@@ -19,7 +19,14 @@
     <th>PHONE NUMBER</th>
 </tr>
     <% results.forEach(function(r) { %>
-        <li><%= r.id %> - <%= r.firstname %> - <%= r.lastname %> - <%= r.email %> - <%= r.phoneareacode %> - <%= r.phonenumber %></li>
+        <tr>
+        <td><%= r.id %></td>
+        <td><%= r.firstname %></td>
+        <td><%= r.lastname %></td>
+        <td><%= r.email %></td>
+        <td><%= r.phoneareacode %></td>
+        <td><%= r.phonenumber %></td>
+        </tr>
     <% }); %>
 </table>
 <input type="button" onclick="window.location.href='./'" value="HOME">

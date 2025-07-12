@@ -30,7 +30,7 @@ express()
   .post('/studenttableupdatesubmit', (req,res) => { studenttable.studenttableupdate3func(req,res); })
 
 
-  .get('/student', (req,res) => { studenttable.1pageviewfunc(req,res); })
+  .get('/student', (req,res) => { studenttable.studentviewfunc(req,res); })
   
   .get('/studenttableread', (req,res) => { studenttable.studenttablereadfunc(req,res); })
   .get('/subscriptiontableread', (req,res) => { subscriptiontable.subscriptiontablereadfunc(req,res); })

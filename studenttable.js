@@ -28,7 +28,6 @@ module.exports = {
                           const result = await client.query('SELECT * FROM student');
                           console.log("studenttablereadfunc result = " + JSON.stringify(result));
                           returnobj = {success: true, results: result.rows};
-                          //res.render('pages/studenttableread', {results: result.rows} );
                         } catch (err) {
                             returnobj = {success: false, results: err};
                         } finally {

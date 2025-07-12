@@ -38,7 +38,7 @@ th, td {
         <td><%= r.phonenumber %></td>
         <td><input type="button" onclick="window.location.href='./studentdelete/<%= r.id %>'" value="DELETE"></td>
         <td><input type="button" onclick="window.location.href='./studentupdate/<%= r.id %>'" value="UPDATE"></td>
-        <td><input type="button" onclick="window.location.href='./studentsubscription/<%= r.id %>'" value="MONTHLY SUBSCRIPTION"></td>
+        <td><input type="button" onclick="window.location.href='./studentmonthlysubscription/<%= r.id %>'" value="MONTHLY SUBSCRIPTION"></td>
         </tr>
     <% }); %>
 </table>

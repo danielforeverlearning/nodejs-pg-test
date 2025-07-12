@@ -22,23 +22,6 @@ th, td {
     <% } else { %>
         <p>multiple rows, rowcount is <% rowcount %></p>
     <% } %>
-
-    <!--
-    <% results.forEach(function(r) { %>
-        <tr>
-        <td><%= r.id %></td>
-        <td><%= r.firstname %></td>
-        <td><%= r.lastname %></td>
-        <td><%= r.email %></td>
-        <td><%= r.phoneareacode %></td>
-        <td><%= r.phonenumber %></td>
-        <td><input type="button" onclick="window.location.href='./studentdelete/<%= r.id %>'" value="DELETE"></td>
-        <td><input type="button" onclick="window.location.href='./studentupdate/<%= r.id %>'" value="UPDATE"></td>
-        <td><input type="button" onclick="window.location.href='./studentmonthlysubscription/<%= r.id %>'" value="MONTHLY SUBSCRIPTION"></td>
-        </tr>
-    <% }); %>
-    -->
-</table>
 <input type="button" onclick="window.location.href='/'" value="HOME">
 </div>
 </body>

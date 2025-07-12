@@ -30,7 +30,7 @@ express()
   .post('/studenttableupdatesubmit', (req,res) => { studenttable.studenttableupdate3func(req,res); })
 
   .get('/readtest', (req,res) => { 
-                                   var returnobj = studenttable.readtest(returnobj); 
+                                   var returnobj = studenttable.readtest(); 
                                    if (returnobj.success)
                                        res.render('pages/studenttableread', {results: returnobj.rows} );
                                    else

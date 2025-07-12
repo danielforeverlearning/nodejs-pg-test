@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+<h2>TABLE student</h2>
+<table>
+<tr>
+    <th>ID</th>
+    <th>FIRST NAME</th>
+    <th>LAST NAME</th>
+    <th>EMAIL</th>
+    <th>PHONE AREA CODE</th>
+    <th>PHONE NUMBER</th>
+</tr>
+    <% results.forEach(function(r) { %>
+        <li><%= r.id %> - <%= r.firstname %> - <%= r.lastname %> - <%= r.email %> - <%= r.phoneareacode %> - <%= r.phonenumber %></li>
+    <% }); %>
+</table>
+<input type="button" onclick="window.location.href='./'" value="HOME">
+</div>
+</body>
+</html>

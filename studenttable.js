@@ -18,7 +18,8 @@ const connectobj   = {
 
 
 module.exports = {
-  readtest: function(returnobj)  {
+  readtest: function()  {
+            var returnobj = {};
             async function connectAndRead() {  
                         const client       = new Client(connectobj);
                         try {
@@ -38,6 +39,7 @@ module.exports = {
                         } finally {
                             await client.end();
                             console.log(' Disconnected from PostgreSQL.');
+                            return returnobj;
                         }
             }
             connectAndRead(); 

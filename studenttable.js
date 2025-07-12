@@ -264,6 +264,7 @@ module.exports = {
                               console.log('studenttableupdateIDfunc ID = ' + studentID + ', Disconnected from PostgreSQL.');
                         }
       }
+      connectAndSelectByID();
   },
 
   

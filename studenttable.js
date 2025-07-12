@@ -52,6 +52,7 @@ module.exports = {
                             var errormsg = "studenttablereadfunc err = " + err;
                             console.log(errormsg);
                             console.log("typeof err = " + typeof err);
+                            console.log("err = " + JSON.stringify(err));
                             res.render('pages/result', {myresults: errormsg} );
                         } finally {
                             await client.end();

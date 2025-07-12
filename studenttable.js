@@ -18,7 +18,7 @@ const connectobj   = {
 
 
 module.exports = {
-  1pageviewfunc: function(req,res)  {
+  studentviewfunc: function(req,res)  {
             async function connectAndRead() {  
                         const client       = new Client(connectobj);
                         try {

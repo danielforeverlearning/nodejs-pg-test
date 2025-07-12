@@ -40,7 +40,7 @@ express()
 
   .get('/studentmonthlysubscription/:id', (req,res) => {  
                                                             const studentID = req.params.id; 
-                                                            subscriptiontable.read2func(req,res,studentID);
+                                                            subscriptiontable.read1IDfunc(req,res,studentID);
                                                        })
 
   .get('/studenttableinsert', (req, res) => res.render('pages/studenttableinsert'))

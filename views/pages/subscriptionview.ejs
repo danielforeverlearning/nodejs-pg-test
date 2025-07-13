@@ -16,7 +16,7 @@ th, td {
 <div class="container">
 <h2>MONTHLY SUBSCRIPTION</h2>
     <% if (rowcount == 0) { %>
-        <p>No monthly subscription data has been created yet for <%= norowyetfirstname %> <%= norowyetfirstname %>, please click the INSERT button below</p>
+        <p>No monthly subscription data has been created yet for <%= norowyetfirstname %> <%= norowyetlastname %>, please click the INSERT button below</p>
     <% } else if (rowcount == 1) { %>
         <p>STUDENTID = <%= existingrow.studentid %></p>
         <p>ACTIVE = <%= existingrow.active %></p>

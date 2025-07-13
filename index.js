@@ -17,6 +17,7 @@ const PORT         = process.env.PORT || 5000
 
 var studenttable = require('./studenttable');
 var subscriptiontable = require('./subscriptiontable');
+var admin_subscription = require('./admin_subscription');
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
@@ -63,13 +64,16 @@ express()
                                                     const studentID = req.params.id;
                                                     subscriptiontable.updatepostfunc(req,res,studentID);
                                                 })
-  .get('/subscriptiontabledelete', (req, res) => res.render('pages/subscriptiontabledelete'))
-  .post('/subscriptiontabledeletesubmit', (req, res) => { subscriptiontable.subscriptiontabledeletesubmitfunc(req,res); })
   
   .get('/dbcreatestudenttable', (req, res) => { studenttable.studenttablecreatefunc(req, res); })
-  .get('/dbcreatesubscriptiontable', (req, res) => { subscriptiontable.subscriptiontablecreatefunc(req, res); })
-
+  
   .get('/dbdropstudenttable', (req, res) => { studenttable.studenttabledropfunc(req, res); })
-  .get('/dbdropsubscriptiontable', (req, res) => { subscriptiontable.subscriptiontabledropfunc(req,res); }) 
+  
+
+  .get('/dbcreatesubscriptiontable', (req, res) => { admin_subscription.subscriptiontablecreatefunc(req, res); })
+  .get('/dbdropsubscriptiontable', (req, res) => { admin_subscription.subscriptiontabledropfunc(req,res); }) 
+  .get('/subscriptiontabledelete', (req, res) => res.render('admin_pages/subscriptiontabledelete'))
+  .post('/subscriptiontabledeletesubmit', (req, res) => { admin_subscription.subscriptiontabledeletesubmitfunc(req,res); })
+  
     
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))

@@ -7,6 +7,8 @@
 
 <script>
 function openDeleteConfirm(studentID) {
+    console.log("openDeleteConfirm " + studentID);
+
     document.getElementById('deleteconfirmmsgID').innerHTML = "asdfasdf" + studentID + "?"; 
     document.getElementById('deleteYESbuttonID').addEventListener("click", {
                         document.getElementById('deleteconfirmID').close();

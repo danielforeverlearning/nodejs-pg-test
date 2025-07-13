@@ -59,9 +59,11 @@ express()
 
   .get('/subscripinsert/:id/:firstname/:lastname', (req, res) => res.render('pages/subscriptiontableinsert', {studentID: req.params.id, firstname: req.params.firstname, lastname: req.params.lastname }))
   .post('/subscriptiontableinsertsubmit', (req, res) => { subscriptiontable.subscriptiontableinsertsubmitfunc(req,res); })
-  .get('/subscripupdate/:id', (req, res) => {  
+  .get('/subscripupdate/:id/:firstname/:lastname', (req, res) => {  
                                               const studentID = req.params.id;
-                                              subscriptiontable.updatefunc(req,res,studentID);
+                                              const firstname = req.params.firstname;
+                                              const lastname  = req.params.lastname;
+                                              subscriptiontable.updatefunc(req,res,studentID,firstname,lastname);
                                             })
   .post('/subscripupdatepost/:id', (req,res) => { 
                                                     const studentID = req.params.id;

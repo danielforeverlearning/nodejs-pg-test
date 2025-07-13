@@ -64,9 +64,11 @@ express()
                                               const lastname  = req.params.lastname;
                                               subscriptiontable.updatefunc(req,res,studentID,firstname,lastname);
                                             })
-  .post('/subscripupdatepost/:id', (req,res) => { 
+  .post('/subscripupdatepost/:id/:firstname/:lastname', (req,res) => { 
                                                     const studentID = req.params.id;
-                                                    subscriptiontable.updatepostfunc(req,res,studentID);
+                                                    const firstname = req.params.firstname;
+                                                    const lastname  = req.params.lastname;
+                                                    subscriptiontable.updatepostfunc(req,res,studentID,firstname,lastname);
                                                 })
   
   .get('/dbcreatestudenttable', (req, res) => { admin_student.studenttablecreatefunc(req, res); })

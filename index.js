@@ -46,8 +46,7 @@ express()
 
   .get('/studenttableinsert', (req, res) => res.render('pages/studenttableinsert'))
   .post('/studenttableinsertsubmit', (req, res) => { studenttable.studenttableinsertfunc(req,res); })
-  .get('/subscriptiontableinsert', (req, res) => res.render('pages/subscriptiontableinsert'))
-  .post('/subscriptiontableinsertsubmit', (req, res) => { subscriptiontable.subscriptiontableinsertsubmitfunc(req,res); })
+ 
   
   .get('/studentdelete/:id', (req, res) => {  
                                               const studentID = req.params.id;
@@ -56,6 +55,8 @@ express()
   .get('/studenttabledelete', (req, res) => res.render('pages/studenttabledelete'))
   .post('/studenttabledeletesubmit', (req, res) => { studenttable.studenttabledeletefunc(req,res); })
 
+  .get('/subscripinsert/:id', (req, res) => res.render('pages/subscriptiontableinsert'))
+  .post('/subscriptiontableinsertsubmit', (req, res) => { subscriptiontable.subscriptiontableinsertsubmitfunc(req,res); })
   .get('/subscripupdate/:id', (req, res) => {  
                                               const studentID = req.params.id;
                                               subscriptiontable.updatefunc(req,res,studentID);

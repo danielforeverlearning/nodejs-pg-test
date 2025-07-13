@@ -16,7 +16,7 @@ th, td {
 <div class="container">
 <h2>MONTHLY SUBSCRIPTION</h2>
     <% if (rowcount == 0) { %>
-        <p>rowcount is 0</p>
+        <p>No monthly subscription data has been created yet for this student please click the INSERT button below</p>
     <% } else if (rowcount == 1) { %>
         <p>STUDENTID = <%= existingrow.studentid %></p>
         <p>ACTIVE = <%= existingrow.active %></p>
@@ -28,6 +28,8 @@ th, td {
 
     <% if (rowcount == 1) { %>
     <input type="button" onclick="window.location.href='/subscripupdate/<%= existingrow.studentid %>'" value="UPDATE">
+    <% } else if (rowcount == 0) { %>
+    <input type="button" onclick="window.location.href='/subscriptiontableinsert'" value="INSERT">
     <% } %>
     <input type="button" onclick="window.location.href='/'" value="HOME">
 </div>

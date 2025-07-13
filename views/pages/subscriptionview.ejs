@@ -25,8 +25,11 @@ th, td {
     <% } else { %>
         <p>multiple rows, rowcount is <% rowcount %>, this should be impossible due to foreign key rule, you should never see this</p>
     <% } %>
-<input type="button" onclick="window.location.href='/subscripupdate/<%= existingrow.studentid %>'" value="UPDATE">
-<input type="button" onclick="window.location.href='/'" value="HOME">
+
+    <% if (rowcount == 1) { %>
+    <input type="button" onclick="window.location.href='/subscripupdate/<%= existingrow.studentid %>'" value="UPDATE">
+    <% } %>
+    <input type="button" onclick="window.location.href='/'" value="HOME">
 </div>
 </body>
 </html>

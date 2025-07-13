@@ -9,6 +9,7 @@
 <body>
   <div class="container">
   <h2>MONTHLY SUBSCRIPTION UPDATE</h2>
+  <h2><%= myfirstname %> <%= mylastname %></h2>
   <form action="/subscripupdatepost/<%= existingrow.studentid %>" method="post" enctype="multipart/form-data">
      <label for="studentid_id">STUDENTID: </label>
      <input type="text" name="studentid_name" id="studentid_id" value=<%= existingrow.studentid %> readonly>

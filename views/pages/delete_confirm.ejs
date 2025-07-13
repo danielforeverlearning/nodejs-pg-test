@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+  <h2>DELETE CONFIRM</h2>
+  <p id="deleteconfirmmsgID">Are you sure you want to delete STUDENTID = <%= studentID %> <%= firstname %> <%= lastname %> ?</p>
+  <input type="button" onclick="window.location.href='/studentdelete/<%= studentID %>'" value="YES">
+  <input type="button" onclick="window.location.href='/'"                               value="NO">
+</div>
+</body>
+</html>

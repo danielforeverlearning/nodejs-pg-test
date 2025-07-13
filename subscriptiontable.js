@@ -84,7 +84,7 @@ module.exports = {
                                   res.render('pages/subscriptionview', {rowcount:0, norowyetstudentID: studentID, norowyetfirstname: firstname, norowyetlastname: lastname} );
                               }
                               else if (selectIDres.rows.length == 1)
-                                  res.render('pages/subscriptionview', {rowcount:1, existingrow: selectIDres.rows[0]} );
+                                  res.render('pages/subscriptionview', {rowcount:1, foreigntablefirstname: firstname, foreigntablelastname: lastname, existingrow: selectIDres.rows[0]} );
                               else {
                                   console.log("read1IDfunc: rowcount = " + selectIDres.rows.length);
                                   console.log("rows = " + JSON.stringify(selectIDres.rows));

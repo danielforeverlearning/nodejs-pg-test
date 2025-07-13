@@ -5,6 +5,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
+<script>
+const openModalBtn = document.getElementById('deleteconfirmID');
+openModalBtn.addEventListener('click', () => {
+  deleteconfirmID.showModal(); // Opens the dialog as a modal
+});
+</script>
+
 <style>
 th, td {
   border: 1px solid black;
@@ -12,6 +19,12 @@ th, td {
 </style>
 </head>
 <body>
+
+<dialog id="deleteconfirmID">
+  <h2>DELETE CONFIRM</h2>
+  <p>Are you sure you want to delete this student ?</p>
+  <button id="closeModalBtn">Close</button>
+</dialog>
 
 <div class="container">
 <h2>TABLE student</h2>
@@ -35,7 +48,7 @@ th, td {
         <td><%= r.email %></td>
         <td><%= r.phoneareacode %></td>
         <td><%= r.phonenumber %></td>
-        <td><input type="button" onclick="window.location.href='./studentdelete/<%= r.id %>'" value="DELETE"></td>
+        <td><input type="button" onclick="document.getElementById('deleteconfirmID').showModal();"   value="DELETE"></td>
         <td><input type="button" onclick="window.location.href='./studentupdate/<%= r.id %>'" value="UPDATE"></td>
         <td><input type="button" onclick="window.location.href='./studentmonthlysubscription/<%= r.id %>/<%= r.firstname %>/<%= r.lastname %>'" value="MONTHLY SUBSCRIPTION"></td>
         </tr>

@@ -141,7 +141,7 @@ module.exports = {
                         const client       = new Client(connectobj);
                         try {
                           await client.connect();
-                          const deleteRes = await client.query("DELETE FROM subscription WHERE STUDENTID = " + studentID + ";" + DELETE FROM student WHERE ID = " + studentID + ";");
+                          const deleteRes = await client.query("DELETE FROM subscription WHERE STUDENTID = " + studentID + "; DELETE FROM student WHERE ID = " + studentID + ";");
                           var resultstr = 'student subscription deletefunc = ' + JSON.stringify(deleteRes);
                           res.render('pages/result', {myresults: resultstr} );
                         } catch (err) {

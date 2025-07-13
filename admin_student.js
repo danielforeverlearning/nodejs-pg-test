@@ -1,7 +1,23 @@
 
+const express      = require('express')
+const path         = require('path')
+var   https        = require('https');
+const formidable   = require('formidable')
+
+const PORT         = process.env.PORT || 5000
+
+const { Client }   = require('pg');
+
+const connectobj   = {
+                                    user: 'garagedb_i5vo_user', // e.g., 'postgres'
+                                    host: 'dpg-d1p3n83ipnbc73fk1qk0-a',
+                                    database: 'garagedb_i5vo', // The database you created
+                                    password: 'TTMNPyqcxBv2Gf3WwmBhAlnsLx3M40ek',
+                                    port: 5432,
+                     };
 
 
-
+module.exports = {
 
   studenttablecreatefunc: function(req, res) {
           async function connectAndCreate() {
@@ -49,4 +65,6 @@
                       }
           }
           connectAndDrop();
-  },
+  }
+}; //module.exports
+

@@ -120,7 +120,7 @@ module.exports = {
       myasyncfunc();
   },
 
-  updatepostfunc: function(req, res, studentID) {
+  updatepostfunc: function(req, res, studentID, firstname, lastname) {
 
        var activeSQLok;
        var lastpaidmonthSQLok;
@@ -135,10 +135,10 @@ module.exports = {
                           console.log(stmt);
                           
                           const selectIDres = await client.query(stmt);
-                          console.log("subscriptiontable updatefuncpost = " + JSON.stringify(selectIDres));
-                          res.render('pages/result', {myresults: "STUDENTID " + studentID + " successfully updated"} );
+                          console.log("subscriptiontable updatepostfunc = " + JSON.stringify(selectIDres));
+                          res.render('pages/result', {myresults: "STUDENTID " + studentID + " " + firstname + " " + lastname + " successfully updated"} );
                         } catch (err) {
-                              var badstr = 'subscriptiontable updatefunc ID = ' + studentID + ', ERROR = ' + err;
+                              var badstr = "subscriptiontable updatepostfunc ID = " + studentID +  " " + firstname + " " + lastname + ", ERROR = " + err;
                               res.render('pages/result', {myresults: badstr} );
                         } finally {
                               await client.end();

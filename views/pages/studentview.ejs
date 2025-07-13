@@ -7,10 +7,10 @@
 
 <script>
 function openDeleteConfirm(studentID) {
-    document.getElementById('deleteconfirmmsgID').innerHTML += studentID + "?"; 
+    document.getElementById('deleteconfirmmsgID').innerHTML = "asdfasdf" + studentID + "?"; 
     document.getElementById('deleteYESbuttonID').addEventListener("click", {
                         document.getElementById('deleteconfirmID').close();
-                        window.location.href='./studentdelete/studentID';
+                        window.location.href='/studentdelete/studentID';
     });
 
     document.getElementById('deleteconfirmID').showModal();

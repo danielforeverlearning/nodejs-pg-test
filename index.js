@@ -17,6 +17,7 @@ const PORT         = process.env.PORT || 5000
 
 var studenttable = require('./studenttable');
 var subscriptiontable = require('./subscriptiontable');
+var admin_student = require('./admin_student');
 var admin_subscription = require('./admin_subscription');
 
 express()
@@ -54,8 +55,8 @@ express()
                                               const studentID = req.params.id;
                                               studenttable.deletefunc(req,res,studentID);
                                            })
-  .get('/studenttabledelete', (req, res) => res.render('pages/studenttabledelete'))
-  .post('/studenttabledeletesubmit', (req, res) => { studenttable.studenttabledeletefunc(req,res); })
+
+  
 
   .get('/subscripinsert/:id/:firstname/:lastname', (req, res) => res.render('pages/subscriptiontableinsert', {studentID: req.params.id, firstname: req.params.firstname, lastname: req.params.lastname }))
   .post('/subscriptiontableinsertsubmit', (req, res) => { subscriptiontable.subscriptiontableinsertsubmitfunc(req,res); })

@@ -8,10 +8,11 @@
 
 <body>
   <div class="container">
-  <h2>SUBSCRIPTION TABLE INSERT</h2>
+  <h2>MONTHLY SUBSCRIPTION INSERT</h2>
+  <h2><%= firstname %> <%= lastname %>
   <form action="/subscriptiontableinsertsubmit" method="post" enctype="multipart/form-data">
      <label for="studentid_id">STUDENTID: </label>
-     <input type="number" name="studentid_name" id="studentid_id" value="<%= studentID %>" >
+     <input type="number" name="studentid_name" id="studentid_id" value="<%= studentID %>" readonly >
      <br />
      <label>ACTIVE: </label>
      <input type="radio" name="active_name" id="active_yes_id" value="YES" checked /><label for="active_yes">YES</label>

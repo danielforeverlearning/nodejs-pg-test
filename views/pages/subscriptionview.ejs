@@ -28,7 +28,7 @@ th, td {
     <% } %>
 
     <% if (rowcount == 1) { %>
-    <input type="button" onclick="window.location.href='/subscripupdate/<%= existingrow.studentid %>'" value="UPDATE">
+    <input type="button" onclick="window.location.href='/subscripupdate/<%= existingrow.studentid %>/<%= foreigntablefirstname %>/<%= foreigntablelastname %>'" value="UPDATE">
     <% } else if (rowcount == 0) { %>
     <input type="button" onclick="window.location.href='/subscripinsert/<%= norowyetstudentID %>/<%= norowyetfirstname %>/<%= norowyetlastname %>'" value="INSERT">
     <% } %>

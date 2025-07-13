@@ -70,8 +70,8 @@ express()
                                                     subscriptiontable.updatepostfunc(req,res,studentID);
                                                 })
   
-  .get('/dbcreatestudenttable', (req, res) => { admin_subscription.studenttablecreatefunc(req, res); })
-  .get('/dbdropstudenttable', (req, res) => { admin_subscription.studenttabledropfunc(req, res); })
+  .get('/dbcreatestudenttable', (req, res) => { admin_student.studenttablecreatefunc(req, res); })
+  .get('/dbdropstudenttable', (req, res) => { admin_student.studenttabledropfunc(req, res); })
   
 
   .get('/dbcreatesubscriptiontable', (req, res) => { admin_subscription.subscriptiontablecreatefunc(req, res); })

@@ -18,6 +18,7 @@ th, td {
     <% if (rowcount == 0) { %>
         <p>No monthly subscription data has been created yet for <%= norowyetfirstname %> <%= norowyetlastname %>, please click the INSERT button below</p>
     <% } else if (rowcount == 1) { %>
+        <h2><%= foreigntablefirstname %> <%= foreigntablelastname %></h2>
         <p>STUDENTID = <%= existingrow.studentid %></p>
         <p>ACTIVE = <%= existingrow.active %></p>
         <p>LASTPAIDMONTH = <%= existingrow.lastpaidmonth %></p>

@@ -48,7 +48,7 @@ express()
   .get('/studenttableinsert', (req, res) => res.render('pages/studenttableinsert'))
   .post('/studenttableinsertsubmit', (req, res) => { studenttable.studenttableinsertfunc(req,res); })
  
-  .get('/studentdeleteconfirm/:id', (req,res) => res.render('pages/delete_confirm_diag', req.params.id))
+  .get('/studentdeleteconfirm/:id', (req,res) => res.render('pages/delete_confirm_diag', {studentID: req.params.id}))
   .get('/studentdelete/:id', (req, res) => {  
                                               const studentID = req.params.id;
                                               studenttable.deletefunc(req,res,studentID);

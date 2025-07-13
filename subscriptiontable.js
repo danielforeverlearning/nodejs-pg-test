@@ -81,7 +81,7 @@ module.exports = {
                               {
                                   //var badstr = 'Sorry there is no row in table student with ID = ' + studentID + ', if you want to update a row the ID must be good.';
                                   //res.render('pages/result', {myresults: badstr} );
-                                  res.render('pages/subscriptionview', {rowcount:0, studentID: studentID} );
+                                  res.render('pages/subscriptionview', {rowcount:0, norowyetstudentID: studentID} );
                               }
                               else if (selectIDres.rows.length == 1)
                                   res.render('pages/subscriptionview', {rowcount:1, existingrow: selectIDres.rows[0]} );

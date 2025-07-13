@@ -5,37 +5,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
-<script>
-function openDeleteConfirm(studentID) {
-    console.log("openDeleteConfirm " + studentID);
-
-    document.getElementById('deleteconfirmmsgID').innerHTML = "asdfasdf" + studentID + "?"; 
-    document.getElementById('deleteYESbuttonID').addEventListener("click", {
-                        document.getElementById('deleteconfirmID').close();
-                        window.location.href='/studentdelete/studentID';
-    });
-
-    document.getElementById('deleteconfirmID').showModal();
-}
-
-</script>
-
-
 <style>
 th, td {
   border: 1px solid black;
 }
 </style>
 </head>
+
 <body>
-
-<dialog id="deleteconfirmID">
-  <h2>DELETE CONFIRM</h2>
-  <p id="deleteconfirmmsgID">Are you sure you want to delete student </p>
-  <input type="button" id="deleteYESbuttonID" value="YES">
-  <input type="button" onclick="document.getElementById('deleteconfirmID').close(); window.location.href='/'"  value="NO">
-</dialog>
-
 <div class="container">
 <h2>TABLE student</h2>
 <table>
@@ -58,7 +35,7 @@ th, td {
         <td><%= r.email %></td>
         <td><%= r.phoneareacode %></td>
         <td><%= r.phonenumber %></td>
-        <td><input type="button" onclick=" openDeleteConfirm(<%= r.id %>) "   value="DELETE"></td>
+        <td><input type="button" onclick="<% res.render('pages/delete_confirm_diag',<%= r.id %>) %>"   value="DELETE"></td>
         <td><input type="button" onclick="window.location.href='./studentupdate/<%= r.id %>'" value="UPDATE"></td>
         <td><input type="button" onclick="window.location.href='./studentmonthlysubscription/<%= r.id %>/<%= r.firstname %>/<%= r.lastname %>'" value="MONTHLY SUBSCRIPTION"></td>
         </tr>

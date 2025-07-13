@@ -6,11 +6,12 @@
 <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 <script>
-const openModalBtn = document.getElementById('deleteconfirmID');
-openModalBtn.addEventListener('click', () => {
-  deleteconfirmID.showModal(); // Opens the dialog as a modal
-});
+function openDeleteConfirm(studentID) {
+    document.getElementById('deleteconfirmmsgID').innerHTML += studentID + "?"; 
+    document.getElementById('deleteconfirmID').showModal();
+}
 </script>
+
 
 <style>
 th, td {
@@ -22,8 +23,10 @@ th, td {
 
 <dialog id="deleteconfirmID">
   <h2>DELETE CONFIRM</h2>
-  <p>Are you sure you want to delete this student ?</p>
+  <p id="deleteconfirmmsgID">Are you sure you want to delete student </p>
   <button id="closeModalBtn">Close</button>
+  <input type="button" onclick="document.getElementById('deleteconfirmID').close(); window.location.href='./studentdelete/<%= r.id %>'"    value="YES">
+  <input type="button" onclick="document.getElementById('deleteconfirmID').close(); window.location.href='/'"                              value="NO">
 </dialog>
 
 <div class="container">
@@ -48,7 +51,7 @@ th, td {
         <td><%= r.email %></td>
         <td><%= r.phoneareacode %></td>
         <td><%= r.phonenumber %></td>
-        <td><input type="button" onclick="document.getElementById('deleteconfirmID').showModal();"   value="DELETE"></td>
+        <td><input type="button" onclick=" openDeleteConfirm(<%= r.id %>); "   value="DELETE"></td>
         <td><input type="button" onclick="window.location.href='./studentupdate/<%= r.id %>'" value="UPDATE"></td>
         <td><input type="button" onclick="window.location.href='./studentmonthlysubscription/<%= r.id %>/<%= r.firstname %>/<%= r.lastname %>'" value="MONTHLY SUBSCRIPTION"></td>
         </tr>

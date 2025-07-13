@@ -8,8 +8,14 @@
 <script>
 function openDeleteConfirm(studentID) {
     document.getElementById('deleteconfirmmsgID').innerHTML += studentID + "?"; 
+    document.getElementById('deleteYESbuttonID').addEventListener("click", {
+                        document.getElementById('deleteconfirmID').close();
+                        window.location.href='./studentdelete/studentID';
+    });
+
     document.getElementById('deleteconfirmID').showModal();
 }
+
 </script>
 
 
@@ -24,9 +30,8 @@ th, td {
 <dialog id="deleteconfirmID">
   <h2>DELETE CONFIRM</h2>
   <p id="deleteconfirmmsgID">Are you sure you want to delete student </p>
-  <button id="closeModalBtn">Close</button>
-  <input type="button" onclick="document.getElementById('deleteconfirmID').close(); window.location.href='./studentdelete/<%= r.id %>'"    value="YES">
-  <input type="button" onclick="document.getElementById('deleteconfirmID').close(); window.location.href='/'"                              value="NO">
+  <input type="button" id="deleteYESbuttonID" value="YES">
+  <input type="button" onclick="document.getElementById('deleteconfirmID').close(); window.location.href='/'"  value="NO">
 </dialog>
 
 <div class="container">

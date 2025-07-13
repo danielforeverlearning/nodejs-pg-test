@@ -68,7 +68,7 @@ module.exports = {
     
 
 
-  read1IDfunc: function(req, res, studentID) {
+  read1IDfunc: function(req, res, studentID, firstname, lastname) {
     
       async function connectAndSelectByID() {  
                         const client       = new Client(connectobj);
@@ -81,7 +81,7 @@ module.exports = {
                               {
                                   //var badstr = 'Sorry there is no row in table student with ID = ' + studentID + ', if you want to update a row the ID must be good.';
                                   //res.render('pages/result', {myresults: badstr} );
-                                  res.render('pages/subscriptionview', {rowcount:0, norowyetstudentID: studentID} );
+                                  res.render('pages/subscriptionview', {rowcount:0, norowyetstudentID: studentID, norowyetfirstname: firstname, norowyetlastname: lastname} );
                               }
                               else if (selectIDres.rows.length == 1)
                                   res.render('pages/subscriptionview', {rowcount:1, existingrow: selectIDres.rows[0]} );

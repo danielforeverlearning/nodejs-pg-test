@@ -39,9 +39,11 @@ express()
   .get('/studenttableread', (req,res) => { studenttable.studenttablereadfunc(req,res); })
   .get('/subscriptiontableread', (req,res) => { subscriptiontable.subscriptiontablereadfunc(req,res); })
 
-  .get('/studentmonthlysubscription/:id', (req,res) => {  
-                                                            const studentID = req.params.id; 
-                                                            subscriptiontable.read1IDfunc(req,res,studentID);
+  .get('/studentmonthlysubscription/:id/:firstname/:lastname', (req,res) => {  
+                                                            const studentID = req.params.id;
+                                                            const firstname = req.params.firstname;
+                                                            const lastname  = req.params.lastname;
+                                                            subscriptiontable.read1IDfunc(req,res,studentID,firstname,lastname);
                                                        })
 
   .get('/studenttableinsert', (req, res) => res.render('pages/studenttableinsert'))

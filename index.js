@@ -34,22 +34,15 @@ express()
                                               const studentID = req.params.id;
                                               studenttable.updatefunc(req,res,studentID);
                                            })
-
   .get('/student', (req,res) => { studenttable.studentviewfunc(req,res); })
-  
-  .get('/studenttableread', (req,res) => { studenttable.studenttablereadfunc(req,res); })
-  
-
   .get('/studentmonthlysubscription/:id/:firstname/:lastname', (req,res) => {  
                                                             const studentID = req.params.id;
                                                             const firstname = req.params.firstname;
                                                             const lastname  = req.params.lastname;
                                                             subscriptiontable.read1IDfunc(req,res,studentID,firstname,lastname);
                                                        })
-
   .get('/studenttableinsert', (req, res) => res.render('pages/studenttableinsert'))
   .post('/studenttableinsertsubmit', (req, res) => { studenttable.studenttableinsertfunc(req,res); })
- 
   .get('/studentdeleteconfirm/:id/:firstname/:lastname', (req,res) => res.render('pages/delete_confirm', {studentID: req.params.id, firstname: req.params.firstname, lastname: req.params.lastname}))
   .get('/studentdelete/:id', (req, res) => {  
                                               const studentID = req.params.id;
@@ -72,18 +65,18 @@ express()
                                                     const lastname  = req.params.lastname;
                                                     subscriptiontable.updatepostfunc(req,res,studentID,firstname,lastname);
                                                 })
+
   
   .get('/dbcreatestudenttable', (req, res) => { admin_student.studenttablecreatefunc(req, res); })
   .get('/dbdropstudenttable', (req, res) => { admin_student.studenttabledropfunc(req, res); })
   
-
   .get('/dbcreatesubscriptiontable', (req, res) => { admin_subscription.subscriptiontablecreatefunc(req, res); })
   .get('/dbdropsubscriptiontable', (req, res) => { admin_subscription.subscriptiontabledropfunc(req,res); }) 
   .get('/subscriptiontabledelete', (req, res) => res.render('admin_pages/subscriptiontabledelete'))
   .post('/subscriptiontabledeletesubmit', (req, res) => { admin_subscription.subscriptiontabledeletesubmitfunc(req,res); })
   .get('/subscriptiontableread', (req,res) => { admin_subscription.subscriptiontablereadfunc(req,res); })
 
-  .get('/dbcreatestudenttable', (req, res) => { admin_student.reservationtablecreatefunc(req, res); })
-  .get('/dbdropstudenttable', (req, res) => { admin_student.reservationtabledropfunc(req, res); })
+  .get('/dbcreatereservationtable', (req, res) => { admin_student.reservationtablecreatefunc(req, res); })
+  .get('/dbdropreservationtable', (req, res) => { admin_student.reservationtabledropfunc(req, res); })
     
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))

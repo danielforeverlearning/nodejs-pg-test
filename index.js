@@ -76,7 +76,7 @@ express()
   .post('/subscriptiontabledeletesubmit', (req, res) => { admin_subscription.subscriptiontabledeletesubmitfunc(req,res); })
   .get('/subscriptiontableread', (req,res) => { admin_subscription.subscriptiontablereadfunc(req,res); })
 
-  .get('/dbcreatereservationtable', (req, res) => { admin_student.reservationtablecreatefunc(req, res); })
-  .get('/dbdropreservationtable', (req, res) => { admin_student.reservationtabledropfunc(req, res); })
+  .get('/dbcreatereservationtable', (req, res) => { admin_reservation.reservationtablecreatefunc(req, res); })
+  .get('/dbdropreservationtable', (req, res) => { admin_reservation.reservationtabledropfunc(req, res); })
     
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))

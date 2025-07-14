@@ -19,6 +19,8 @@ var studenttable = require('./studenttable');
 var subscriptiontable = require('./subscriptiontable');
 var admin_student = require('./admin_student');
 var admin_subscription = require('./admin_subscription');
+var admin_reservation = require('./admin_reservation');
+
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
@@ -80,5 +82,8 @@ express()
   .get('/subscriptiontabledelete', (req, res) => res.render('admin_pages/subscriptiontabledelete'))
   .post('/subscriptiontabledeletesubmit', (req, res) => { admin_subscription.subscriptiontabledeletesubmitfunc(req,res); })
   .get('/subscriptiontableread', (req,res) => { admin_subscription.subscriptiontablereadfunc(req,res); })
+
+  .get('/dbcreatestudenttable', (req, res) => { admin_student.reservationtablecreatefunc(req, res); })
+  .get('/dbdropstudenttable', (req, res) => { admin_student.reservationtabledropfunc(req, res); })
     
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))

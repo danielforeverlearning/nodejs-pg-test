@@ -9,7 +9,7 @@ const PORT         = process.env.PORT || 5000
 const { Client }   = require('pg');
 
 const db_credential = require('db_credential');
-const connectobj    = db_credential.connectobj;
+const connectobj    = db_credential.myconnectobj();
 
 module.exports = {
 

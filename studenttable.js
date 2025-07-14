@@ -29,29 +29,6 @@ module.exports = {
             }
             connectAndRead(); 
   },
-  
-  studenttablereadfunc: function(req,res)  {
-            async function connectAndRead() {  
-                        const client       = new Client(connectobj);
-                        try {
-                          await client.connect();
-                          console.log('studenttablereadfunc Connected to PostgreSQL!');
-                          const result = await client.query('SELECT * FROM student');
-                          console.log("studenttablereadfunc result = " + JSON.stringify(result));
-                          res.render('pages/studenttableread', {results: result.rows} );
-                        } catch (err) {
-                            var errormsg = "studenttablereadfunc err = " + err;
-                            console.log(errormsg);
-                            console.log("typeof err = " + typeof err);
-                            console.log("err = " + JSON.stringify(err));
-                            res.render('pages/result', {myresults: errormsg} );
-                        } finally {
-                            await client.end();
-                            console.log('studenttablereadfunc Disconnected from PostgreSQL.');
-                        }
-            }
-            connectAndRead(); 
-  },
 
   studenttableinsertfunc: function(req, res)  {
       var firstname;

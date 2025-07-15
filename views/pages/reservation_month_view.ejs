@@ -1,8 +1,7 @@
-const birthday = new Date("August 19, 1975 23:15:30");
-const day1 = birthday.getDay();
+// const birthday = new Date("August 19, 1975 23:15:30");
+// const day1 = birthday.getDay();
 // Sunday - Saturday : 0 - 6
-
-console.log(day1);
+//console.log(day1);
 // Expected output: 2
 
 
@@ -22,34 +21,113 @@ th, td {
 
 <body>
 <div class="container">
-<h2><%= month =><</h2>
+<h2><%= month =><%= year =></h2>
 <table>
 <tr>
-    <th>ID</th>
-    <th>FIRST NAME</th>
-    <th>LAST NAME</th>
-    <th>EMAIL</th>
-    <th>PHONE AREA CODE</th>
-    <th>PHONE NUMBER</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>SUNDAY</th>
+    <th>MONDAY</th>
+    <th>TUESDAY</th>
+    <th>WEDNESDAY</th>
+    <th>THURSDAY</th>
+    <th>FRIDAY</th>
+    <th>SATURDAY</th>
 </tr>
-    <% results.forEach(function(r) { %>
-        <tr>
-        <td><%= r.id %></td>
-        <td><%= r.firstname %></td>
-        <td><%= r.lastname %></td>
-        <td><%= r.email %></td>
-        <td><%= r.phoneareacode %></td>
-        <td><%= r.phonenumber %></td>
-        <td><input type="button" onclick="window.location.href='/studentdeleteconfirm/<%= r.id %>/<%= r.firstname %>/<%= r.lastname %>'"   value="DELETE"></td>
-        <td><input type="button" onclick="window.location.href='/studentupdate/<%= r.id %>'"          value="UPDATE"></td>
-        <td><input type="button" onclick="window.location.href='/studentmonthlysubscription/<%= r.id %>/<%= r.firstname %>/<%= r.lastname %>'" value="MONTHLY SUBSCRIPTION"></td>
-        </tr>
-    <% }); %>
+<tr>
+    <% if (firstday == 0) { //sunday %>
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
+    <td>4</td>
+    <td>5</td>
+    <td>6</td>
+    <td>7</td>
+    <% else if (firstday == 1) { //monday %>
+    <td></td>    
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
+    <td>4</td>
+    <td>5</td>
+    <td>6</td>
+    <% else if (firstday == 2) { //tuesday %>
+    <td></td>
+    <td></td>
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
+    <td>4</td>
+    <td>5</td>
+    <% else if (firstday == 3) { //wednesday %>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
+    <td>4</td>
+    <% else if (firstday == 4) { //thursday %>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
+    <% else if (firstday == 5) { //friday %>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>1</td>
+    <td>2</td>
+    <% else { //saturday %>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>1</td>
+    <% } &>
+</tr>
+<tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
 </table>
-<input type="button" onclick="window.location.href='./studenttableinsert'" value="INSERT">
 <input type="button" onclick="window.location.href='/'" value="HOME">
 </div>
 </body>

@@ -125,13 +125,13 @@ th, td {
     <td>10</td>
     <td>11</td>
     <% else if (firstday == 4) { //thursday %>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
+    <td>4</td>
+    <td>5</td>
+    <td>6</td>
+    <td>7</td>
+    <td>8</td>
+    <td>9</td>
+    <td>10</td>
     <% else if (firstday == 5) { //friday %>
     <td>3</td>
     <td>4</td>
@@ -148,6 +148,65 @@ th, td {
     <td>6</td>
     <td>7</td>
     <td>8</td>
+    <% } &>
+</tr>
+<tr><!-- week3 -->
+    <% if (firstday == 0) { //sunday %>
+    <td>15</td>
+    <td>16</td>
+    <td>17</td>
+    <td>18</td>
+    <td>19</td>
+    <td>20</td>
+    <td>21</td>
+    <% else if (firstday == 1) { //monday %>
+    <td>14</td>    
+    <td>15</td>
+    <td>16</td>
+    <td>17</td>
+    <td>18</td>
+    <td>19</td>
+    <td>20</td>
+    <% else if (firstday == 2) { //tuesday %>
+    <td>13</td>
+    <td>14</td>
+    <td>15</td>
+    <td>16</td>
+    <td>17</td>
+    <td>18</td>
+    <td>19</td>
+    <% else if (firstday == 3) { //wednesday %>
+    <td>12</td>
+    <td>13</td>
+    <td>14</td>
+    <td>15</td>
+    <td>16</td>
+    <td>17</td>
+    <td>18</td>
+    <% else if (firstday == 4) { //thursday %>
+    <td>11</td>
+    <td>12</td>
+    <td>13</td>
+    <td>14</td>
+    <td>15</td>
+    <td>16</td>
+    <td>17</td>
+    <% else if (firstday == 5) { //friday %>
+    <td>10</td>
+    <td>11</td>
+    <td>12</td>
+    <td>13</td>
+    <td>14</td>
+    <td>15</td>
+    <td>16</td>
+    <% else { //saturday %>
+    <td>9</td>
+    <td>10</td>
+    <td>11</td>
+    <td>12</td>
+    <td>13</td>
+    <td>14</td>
+    <td>15</td>
     <% } &>
 </tr>
 </table>

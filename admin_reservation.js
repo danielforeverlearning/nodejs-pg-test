@@ -96,7 +96,7 @@ module.exports = {
                {
                       const myDate = new Date(year + "-" + month + "-01");
                       const dayIndex = myDate.getDay(); //0=sunday, 1=monday, 2=tuesday, 3=wednesday, 4=thursday, 5=friday, 6=saturday
-                      res.render('admin_pages/reservation_month_view', {month: 8, year: 2025, firstday: dayIndex});
+                      res.render('admin_pages/reservation_month_view', {month: month, year: year, firstday: dayIndex});
                }
           }//good
       })//form.parse

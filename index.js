@@ -78,8 +78,11 @@ express()
 
   .get('/dbcreatereservationtable', (req, res) => { admin_reservation.reservationtablecreatefunc(req, res); })
   .get('/dbdropreservationtable', (req, res) => { admin_reservation.reservationtabledropfunc(req, res); })
-  .get('/reservation_month_view', (req, res) => {
-                                                     const myDate = new Date("2025-08-01"); // Creates a Date object for July 1, 2025
+  .get('/reservation_month_year_chooser', (req, res) => res.render('admin_reservation/reservation_month_year_chooser'))
+  .post('/reservation_month_year_chooser_post/:month/:year', (req, res) => {
+                                                     const month = req.params.month;
+                                                     const year  = req.params.year;
+                                                     const myDate = new Date(year + "-" + month + "-01");
                                                      const dayIndex = myDate.getDay(); //0=sunday, 1=monday, 2=tuesday, 3=wednesday, 4=thursday, 5=friday, 6=saturday
                                                      res.render('pages/reservation_month_view', {month: 8, year: 2025, firstday: dayIndex});
                                                 })

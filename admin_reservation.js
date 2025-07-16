@@ -78,7 +78,7 @@ module.exports = {
           }
           else //good
           {
-               console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
+               console.log("month_year_validate_func fields = " + JSON.stringify(fields) + " files = " + JSON.stringify(files));
                var month = fields.month_name;
                var year = fields.year_name;
                //validation checking

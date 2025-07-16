@@ -69,10 +69,35 @@ module.exports = {
   }, //subscriptiontabledropfunc
   
   month_year_validate_func: function(req,res) {
-          const month = req.params.month;
-                                                     const year  = req.params.year;
-                                                     const myDate = new Date(year + "-" + month + "-01");
-                                                     const dayIndex = myDate.getDay(); //0=sunday, 1=monday, 2=tuesday, 3=wednesday, 4=thursday, 5=friday, 6=saturday
-                                                     res.render('admin_pages/reservation_month_view', {month: 8, year: 2025, firstday: dayIndex});
-  }
+      var form = new formidable.IncomingForm();
+      form.parse(req, function (err, fields, files) {
+          if (err)
+          {
+               var badstr = "month_year_validate_func err = " + err;
+               res.render('pages/result', {myresults: badstr} );
+          }
+          else //good
+          {
+               console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
+               month = fields.month_name;
+               year = fields.year_name;
+               //validation checking
+               if (month <= 0 || month > 12)
+               {
+                      var badstr = 'Sorry month must be between 1 and 12';
+                      res.render('pages/result', {myresults: badstr} );
+               }
+               else if (year < 2025)
+               {
+                      var badstr = 'Sorry year must be 2025 or greater';
+                      res.render('pages/result', {myresults: badstr} );
+               }
+               else
+               {
+                      const myDate = new Date(year + "-" + month + "-01");
+                      const dayIndex = myDate.getDay(); //0=sunday, 1=monday, 2=tuesday, 3=wednesday, 4=thursday, 5=friday, 6=saturday
+                      res.render('admin_pages/reservation_month_view', {month: 8, year: 2025, firstday: dayIndex});
+               }
+          }//good
+      })//form.parse
 }; //module.exports

@@ -45,7 +45,7 @@ express()
                                                             const studentID = req.params.id;
                                                             const firstname = req.params.firstname;
                                                             const lastname  = req.params.lastname;
-                                                            admin_reservation.make_reservation(req,res,studentID,firstname,lastname);
+                                                            admin_reservation.reservation_check_date(req,res,studentID,firstname,lastname);
                                                        })
   .get('/studentmonthlysubscription/:id/:firstname/:lastname', (req,res) => {  
                                                             const studentID = req.params.id;

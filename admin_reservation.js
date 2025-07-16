@@ -241,7 +241,9 @@ module.exports = {
                            }
                       }
 
-                      res.render('admin_pages/reservation_chose_location_time', {studentID:studentID, firstname:firstname, lastname:lastname, month:month, day:day, year:year} );
+                      const myDate = new Date(year + "-" + month + "-" + day);
+                      const dayIndex = myDate.getDay(); //0=sunday, 1=monday, 2=tuesday, 3=wednesday, 4=thursday, 5=friday, 6=saturday
+                      res.render('admin_pages/reservation_chose_location_time', {studentID:studentID, firstname:firstname, lastname:lastname, month:month, day:day, year:year, dayIndex:dayIndex} );
                }
           }//good
       })//form.parse

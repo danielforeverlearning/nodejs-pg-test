@@ -251,6 +251,8 @@ module.exports = {
 
   reservation_check_location_time: function(req,res,studentID,firstname,lastname,month,day,year) {
           var form = new formidable.IncomingForm();
+          var classlocation;
+          var classtime;
           form.parse(req, function (err, fields, files) {
           if (err)
           {
@@ -260,6 +262,8 @@ module.exports = {
           else //good
           {
                console.log("reservation_check_location_time fields = " + JSON.stringify(fields) + " files = " + JSON.stringify(files));
+               classlocation = fields.location_name;
+               classtime     = fields.time_name;
           }//good
   }//reservation_check_location_time
 }; //module.exports

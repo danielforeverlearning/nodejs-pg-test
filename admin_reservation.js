@@ -250,9 +250,30 @@ module.exports = {
   }, //reservation_check_date
 
   reservation_check_location_time: function(req,res,studentID,firstname,lastname,month,day,year) {
-          var form = new formidable.IncomingForm();
           var classlocation;
           var classtime;
+    
+          async function connectAndInsert() {    
+                        const client       = new Client(connectobj);
+                        try {
+                          await client.connect();
+                          console.log('reservation_check_location_time, Connected to PostgreSQL!');
+                          var insertstmt = "INSERT INTO reservation (STUDENTID, LOCATION, MONTH, DAY, YEAR, CLASSTIME) VALUES (" + studentID + ", '" + classlocation + "', " + month + ", " + day + ", " + year ", " + classtime + ");";
+                          console.log(insertstmt);
+                          const insertRes = await client.query(insertstmt);
+                          var resultstr = 'insertRes = ' + JSON.stringify(insertRes);
+                          res.render('pages/result', {myresults: resultstr} );
+                        } catch (err) {
+                            var badstr = 'reservation_check_location_time, ERROR = ' + err;
+                            res.render('pages/result', {myresults: badstr} );
+                        } finally {
+                            await client.end();
+                            console.log('reservation_check_location_time, Disconnected from PostgreSQL.');
+                        }
+          }
+
+    
+          var form = new formidable.IncomingForm();
           form.parse(req, function (err, fields, files) {
           if (err)
           {
@@ -264,6 +285,7 @@ module.exports = {
                console.log("reservation_check_location_time fields = " + JSON.stringify(fields) + " files = " + JSON.stringify(files));
                classlocation = fields.location_name;
                classtime     = fields.time_name;
+               connectAndInsert();
           }//good
   }//reservation_check_location_time
 }; //module.exports

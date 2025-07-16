@@ -102,7 +102,7 @@ module.exports = {
       })//form.parse
   }, //month_year_validate_func
 
-  make_reservation: function(req,res,studentID,firstname,lastname) {
+  reservation_check_date: function(req,res,studentID,firstname,lastname) {
           var month;
           var day;
           var year;
@@ -240,7 +240,8 @@ module.exports = {
                                res.render('pages/result', {myresults: badstr} );
                            }
                       }
-                      //my_async_insert_reservation_table_func();
+
+                      res.render('admin_pages/reservation_chose_location_time', {studentID:studentID, firstname:firstname, lastname:lastname, month:month, day:day, year:year} );
                }
           }//good
       })//form.parse

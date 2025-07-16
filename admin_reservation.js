@@ -100,5 +100,8 @@ module.exports = {
                }
           }//good
       })//form.parse
-  }//month_year_validate_func
+  }, //month_year_validate_func
+
+  make_reservation: function(req,res,studentID,firstname,lastname) {
+  }
 }; //module.exports

@@ -254,11 +254,12 @@ module.exports = {
           form.parse(req, function (err, fields, files) {
           if (err)
           {
-               var badstr = "reservation_check_date err = " + err;
+               var badstr = "reservation_check_location_time err = " + err;
                res.render('pages/result', {myresults: badstr} );
           }
           else //good
           {
-               console.log("reservation_check_date fields = " + JSON.stringify(fields) + " files = " + JSON.stringify(files));
-  }
+               console.log("reservation_check_location_time fields = " + JSON.stringify(fields) + " files = " + JSON.stringify(files));
+          }//good
+  }//reservation_check_location_time
 }; //module.exports

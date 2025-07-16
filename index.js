@@ -79,12 +79,6 @@ express()
   .get('/dbcreatereservationtable', (req, res) => { admin_reservation.reservationtablecreatefunc(req, res); })
   .get('/dbdropreservationtable', (req, res) => { admin_reservation.reservationtabledropfunc(req, res); })
   .get('/reservation_month_year_chooser', (req, res) => res.render('admin_pages/reservation_month_year_chooser'))
-  .post('/reservation_month_year_chooser_post/:month/:year', (req, res) => {
-                                                     const month = req.params.month;
-                                                     const year  = req.params.year;
-                                                     const myDate = new Date(year + "-" + month + "-01");
-                                                     const dayIndex = myDate.getDay(); //0=sunday, 1=monday, 2=tuesday, 3=wednesday, 4=thursday, 5=friday, 6=saturday
-                                                     res.render('admin_pages/reservation_month_view', {month: 8, year: 2025, firstday: dayIndex});
-                                                })
+  .post('/reservation_month_year_chooser_post', (req, res) => { admin_reservation.month_year_validate_func(req, res); })
     
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))

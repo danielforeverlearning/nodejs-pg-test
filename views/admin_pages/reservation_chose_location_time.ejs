@@ -10,7 +10,23 @@
   <div class="container">
   <h2>MAKE CLASS RESERVATION</h2>
   <h2>STUDENTID <%= studentID %> <%= firstname %> <%= lastname %></h2>
-  <h2>MONTH=<%= month %> DAY=<%= day %> YEAR=<%= year %>
+  <h2>MONTH=<%= month %> DAY=<%= day %> YEAR=<%= year %></h2>
+  <h2>
+     <% if (dayIndex == 0) { %>
+SUNDAY 
+     <% } else if (dayIndex == 1) { %>
+MONDAY 
+     <% } else if (dayIndex == 2) { %>
+TUESDAY
+     <% } else if (dayIndex == 3) { %>
+WEDNESDAY 
+     <% } else if (dayIndex == 4) { %>
+THURSDAY 
+     <% } else if (dayIndex == 5) { %>
+FRIDAY 
+     <% } else if (dayIndex == 6) { %>
+SATURDAY 
+     <% } %>
   <form action="/reservation_insert_post_2/<%= studentID %>/<%= firstname %>/<%= lastname %>/<%= month %>/<%= day %>/<%= year %>" method="post" enctype="multipart/form-data">
      <label for="month_id">MONTH: </label>
      <input type="number" name="month_name" id="month_id">

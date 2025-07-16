@@ -41,6 +41,12 @@ express()
                                                             const lastname  = req.params.lastname;
                                                             res.render('admin_pages/reservation_insert', { studentID:studentID, firstname:firstname, lastname,lastname });
                                                        })
+  .post('/reservation_insert_post/:id/:firstname/:lastname', (req,res) => {  
+                                                            const studentID = req.params.id;
+                                                            const firstname = req.params.firstname;
+                                                            const lastname  = req.params.lastname;
+                                                            admin_reservation.make_reservation(req,res,studentID,firstname,lastname);
+                                                       })
   .get('/studentmonthlysubscription/:id/:firstname/:lastname', (req,res) => {  
                                                             const studentID = req.params.id;
                                                             const firstname = req.params.firstname;

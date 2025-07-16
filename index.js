@@ -78,7 +78,7 @@ express()
 
   .get('/dbcreatereservationtable', (req, res) => { admin_reservation.reservationtablecreatefunc(req, res); })
   .get('/dbdropreservationtable', (req, res) => { admin_reservation.reservationtabledropfunc(req, res); })
-  .get('/reservation_month_year_chooser', (req, res) => res.render('admin_pages/reservation_month_year_chooser'))
-  .post('/reservation_month_year_chooser_post', (req, res) => { admin_reservation.month_year_validate_func(req, res); })
+  .get('/reservationmonthyearchooser', (req, res) => res.render('admin_pages/reservation_month_year_chooser'))
+  .post('/reservationmonthyearchooserpost', (req, res) => { admin_reservation.month_year_validate_func(req, res); })
     
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))

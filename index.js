@@ -35,6 +35,12 @@ express()
                                               studenttable.updatefunc(req,res,studentID);
                                            })
   .get('/student', (req,res) => { studenttable.studentviewfunc(req,res); })
+  .get('/studentmakereservation/:id/:firstname/:lastname', (req,res) => {  
+                                                            const studentID = req.params.id;
+                                                            const firstname = req.params.firstname;
+                                                            const lastname  = req.params.lastname;
+                                                            admin_reservation.make_reservation(req,res,studentID,firstname,lastname);
+                                                       })
   .get('/studentmonthlysubscription/:id/:firstname/:lastname', (req,res) => {  
                                                             const studentID = req.params.id;
                                                             const firstname = req.params.firstname;

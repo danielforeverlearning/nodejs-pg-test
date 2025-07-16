@@ -51,8 +51,7 @@ module.exports = {
                       try {
                           await client.connect();
                           console.log('Connected to PostgreSQL!');
-              
-                          // Example: drop table
+                        
                           const dropRes = await client.query(
                               'DROP TABLE reservation;'
                           );
@@ -67,6 +66,13 @@ module.exports = {
                       }
           }
           connectAndDrop();
-  }//subscriptiontabledropfunc
+  }, //subscriptiontabledropfunc
   
+  month_year_validate_func: function(req,res) {
+          const month = req.params.month;
+                                                     const year  = req.params.year;
+                                                     const myDate = new Date(year + "-" + month + "-01");
+                                                     const dayIndex = myDate.getDay(); //0=sunday, 1=monday, 2=tuesday, 3=wednesday, 4=thursday, 5=friday, 6=saturday
+                                                     res.render('admin_pages/reservation_month_view', {month: 8, year: 2025, firstday: dayIndex});
+  }
 }; //module.exports

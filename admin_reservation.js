@@ -258,7 +258,7 @@ module.exports = {
                         try {
                           await client.connect();
                           console.log('reservation_check_location_time, Connected to PostgreSQL!');
-                          var insertstmt = "INSERT INTO reservation (STUDENTID, LOCATION, MONTH, DAY, YEAR, CLASSTIME) VALUES (" + studentID + ", '" + classlocation + "', " + month + ", " + day + ", " + year ", " + classtime + ");";
+                          var insertstmt = "INSERT INTO reservation (STUDENTID, LOCATION, MONTH, DAY, YEAR, CLASSTIME) VALUES (" + studentID + ", '" + classlocation + "', " + month + ", " + day + ", " + year + ", " + classtime + ");";
                           console.log(insertstmt);
                           const insertRes = await client.query(insertstmt);
                           var resultstr = 'insertRes = ' + JSON.stringify(insertRes);

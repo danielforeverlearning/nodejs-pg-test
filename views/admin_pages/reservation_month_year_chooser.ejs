@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+  <h2>CLASS RESERVATIONS</h2>
+  <form action="/reservation_month_year_post" method="post" enctype="multipart/form-data">
+     <label for="month_id">MONTH: </label>
+     <input type="number" name="month_name" id="month_id">
+     <br />
+     <label for="year_id">YEAR: </label>
+     <input type="number" name="year_name" id="year_id">
+     <br />
+     <label for="phonenumber_id">PHONE NUMBER: </label>
+     <input type="submit" value="SEE RESERVATIONS">
+     <input type="button" onclick="window.location.href='/'" value="CANCEL">
+  </form>
+  </div>
+</body>
+</html>

@@ -84,7 +84,7 @@ express()
                                                             const studentID = req.params.id;
                                                             const firstname = req.params.firstname;
                                                             const lastname  = req.params.lastname;
-                                                            res.render('admin_pages/reservation_insert', { studentID:studentID, firstname:firstname, lastname,lastname });
+                                                            res.render('admin_pages/reservation_insert', { studentID:studentID, firstname:firstname, lastname:lastname });
                                                        })
   .post('/reservation_insert_post/:id/:firstname/:lastname', (req,res) => {  
                                                             const studentID = req.params.id;

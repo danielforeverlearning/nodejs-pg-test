@@ -245,5 +245,5 @@ module.exports = {
                }
           }//good
       })//form.parse
-  }//make_reservation
+  }//reservation_check_date
 }; //module.exports

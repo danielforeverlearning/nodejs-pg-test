@@ -275,17 +275,18 @@ module.exports = {
     
           var form = new formidable.IncomingForm();
           form.parse(req, function (err, fields, files) {
-          if (err)
-          {
-               var badstr = "reservation_check_location_time err = " + err;
-               res.render('pages/result', {myresults: badstr} );
-          }
-          else //good
-          {
-               console.log("reservation_check_location_time fields = " + JSON.stringify(fields) + " files = " + JSON.stringify(files));
-               classlocation = fields.location_name;
-               classtime     = fields.time_name;
-               connectAndInsert();
-          }//good
+              if (err)
+              {
+                   var badstr = "reservation_check_location_time err = " + err;
+                   res.render('pages/result', {myresults: badstr} );
+              }
+              else //good
+              {
+                   console.log("reservation_check_location_time fields = " + JSON.stringify(fields) + " files = " + JSON.stringify(files));
+                   classlocation = fields.location_name;
+                   classtime     = fields.time_name;
+                   connectAndInsert();
+              }//good
+          })//form.parse
   }//reservation_check_location_time
 }; //module.exports

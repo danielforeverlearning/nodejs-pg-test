@@ -27,15 +27,15 @@ FRIDAY
      <% } else if (dayIndex == 6) { %>
 SATURDAY 
      <% } %>
+  </h2>
   <form action="/reservation_insert_post_2/<%= studentID %>/<%= firstname %>/<%= lastname %>/<%= month %>/<%= day %>/<%= year %>" method="post" enctype="multipart/form-data">
-     <label for="month_id">MONTH: </label>
-     <input type="number" name="month_name" id="month_id">
+     <label>LOCATION: </label>
+     <input type="radio" name="location_name" id="location_papakolea_id" value="PAPAKOLEA" checked /><label>PAPAKOLEA</label>
+     <input type="radio" name="location_name" id="location_kakaako_id" value="KAKAAKO" /><label>KAKAAKO</label>
      <br />
-     <label for="day_id">DAY: </label>
-     <input type="number" name="day_name" id="day_id">
-     <br />
-     <label for="year_id">YEAR: </label>
-     <input type="number" name="year_name" id="year_id">
+     <label>TIME: </label>
+     <input type="radio" name="time_name" id="time_1_id" value="1000" checked /><label for="time_1">PAPAKOLEA</label>
+     <input type="radio" name="location_name" id="location_kakaako_id" value="KAKAAKO" /><label for="location_kakaako">kakaako</label>
      <br />
      <input type="submit" value="MAKE CLASS RESERVATION">
      <input type="button" onclick="window.location.href='/'" value="CANCEL">

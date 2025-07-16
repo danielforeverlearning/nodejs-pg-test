@@ -79,8 +79,8 @@ module.exports = {
           else //good
           {
                console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
-               month = fields.month_name;
-               year = fields.year_name;
+               var month = fields.month_name;
+               var year = fields.year_name;
                //validation checking
                if (month <= 0 || month > 12)
                {
@@ -103,5 +103,66 @@ module.exports = {
   }, //month_year_validate_func
 
   make_reservation: function(req,res,studentID,firstname,lastname) {
-  }
+          var month;
+          var day;
+          var year;
+    
+          var form = new formidable.IncomingForm();
+          form.parse(req, function (err, fields, files) {
+          if (err)
+          {
+               var badstr = "make_reservation err = " + err;
+               res.render('pages/result', {myresults: badstr} );
+          }
+          else //good
+          {
+               console.log("fields = " + JSON.stringify(fields) + " files = " + JSON.stringify(files));
+               month = fields.month_name;
+               day   = fields.day_name;
+               year  = fields.year_name;
+               //validation checking
+               if (month <= 0 || month > 12)
+               {
+                      var badstr = 'Sorry month must be between 1 and 12';
+                      res.render('pages/result', {myresults: badstr} );
+               }
+               else if (year < 2025)
+               {
+                      var badstr = 'Sorry year must be 2025 or greater';
+                      res.render('pages/result', {myresults: badstr} );
+               }
+               else
+               {
+                      if (month == 1)
+                      {
+                           if (day < 0 || day > 31)
+                           {
+                               var badstr = 'Sorry, since the month is January please enter a day between 1 and 31';
+                               res.render('pages/result', {myresults: badstr} );
+                           }
+                      }
+                      else if (month == 2)
+                      {
+                           if ((year % 4) == 0)
+                           {
+                               if (day < 0 || day > 29)
+                               {
+                                   var badstr = 'Sorry, since the year ' + year + ' is a leap year and the month is February, please enter a day between 1 and 29';
+                                   res.render('pages/result', {myresults: badstr} );
+                               }   
+                           }
+                           else
+                           {
+                               if (day < 0 || day > 28)
+                               {
+                                   var badstr = 'Sorry, since the year ' + year + ' is NOT a leap year and the month is February, please enter a day between 1 and 28';
+                                   res.render('pages/result', {myresults: badstr} );
+                               }  
+                           }
+                      }
+                      my_async_insert_reservation_table_func();
+               }
+          }//good
+      })//form.parse
+  }//make_reservation
 }; //module.exports

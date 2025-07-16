@@ -192,7 +192,55 @@ module.exports = {
                                res.render('pages/result', {myresults: badstr} );
                            }
                       }
-                      my_async_insert_reservation_table_func();
+                      else if (month == 7)
+                      {
+                           if (day < 0 || day > 31)
+                           {
+                               var badstr = 'Sorry, since the month is July please enter a day between 1 and 31';
+                               res.render('pages/result', {myresults: badstr} );
+                           }
+                      }
+                      else if (month == 8)
+                      {
+                           if (day < 0 || day > 31)
+                           {
+                               var badstr = 'Sorry, since the month is August please enter a day between 1 and 31';
+                               res.render('pages/result', {myresults: badstr} );
+                           }
+                      }
+                      else if (month == 9)
+                      {
+                           if (day < 0 || day > 30)
+                           {
+                               var badstr = 'Sorry, since the month is September please enter a day between 1 and 30';
+                               res.render('pages/result', {myresults: badstr} );
+                           }
+                      }
+                      else if (month == 10)
+                      {
+                           if (day < 0 || day > 31)
+                           {
+                               var badstr = 'Sorry, since the month is October please enter a day between 1 and 31';
+                               res.render('pages/result', {myresults: badstr} );
+                           }
+                      }
+                      else if (month == 11)
+                      {
+                           if (day < 0 || day > 30)
+                           {
+                               var badstr = 'Sorry, since the month is November please enter a day between 1 and 30';
+                               res.render('pages/result', {myresults: badstr} );
+                           }
+                      }
+                      else
+                      {
+                           if (day < 0 || day > 31)
+                           {
+                               var badstr = 'Sorry, since the month is December please enter a day between 1 and 31';
+                               res.render('pages/result', {myresults: badstr} );
+                           }
+                      }
+                      //my_async_insert_reservation_table_func();
                }
           }//good
       })//form.parse

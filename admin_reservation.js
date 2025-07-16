@@ -168,6 +168,22 @@ module.exports = {
                                res.render('pages/result', {myresults: badstr} );
                            }
                       }
+                      else if (month == 4)
+                      {
+                           if (day < 0 || day > 30)
+                           {
+                               var badstr = 'Sorry, since the month is April please enter a day between 1 and 30';
+                               res.render('pages/result', {myresults: badstr} );
+                           }
+                      }
+                      else if (month == 5)
+                      {
+                           if (day < 0 || day > 31)
+                           {
+                               var badstr = 'Sorry, since the month is May please enter a day between 1 and 31';
+                               res.render('pages/result', {myresults: badstr} );
+                           }
+                      }
                       my_async_insert_reservation_table_func();
                }
           }//good

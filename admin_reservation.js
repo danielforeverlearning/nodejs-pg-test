@@ -160,6 +160,14 @@ module.exports = {
                                }  
                            }
                       }
+                      else if (month == 3)
+                      {
+                           if (day < 0 || day > 31)
+                           {
+                               var badstr = 'Sorry, since the month is March please enter a day between 1 and 31';
+                               res.render('pages/result', {myresults: badstr} );
+                           }
+                      }
                       my_async_insert_reservation_table_func();
                }
           }//good

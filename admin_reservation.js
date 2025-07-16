@@ -111,12 +111,12 @@ module.exports = {
           form.parse(req, function (err, fields, files) {
           if (err)
           {
-               var badstr = "make_reservation err = " + err;
+               var badstr = "reservation_check_date err = " + err;
                res.render('pages/result', {myresults: badstr} );
           }
           else //good
           {
-               console.log("fields = " + JSON.stringify(fields) + " files = " + JSON.stringify(files));
+               console.log("reservation_check_date fields = " + JSON.stringify(fields) + " files = " + JSON.stringify(files));
                month = fields.month_name;
                day   = fields.day_name;
                year  = fields.year_name;
@@ -247,5 +247,18 @@ module.exports = {
                }
           }//good
       })//form.parse
-  }//reservation_check_date
+  }, //reservation_check_date
+
+  reservation_check_location_time: function(req,res,studentID,firstname,lastname,month,day,year) {
+          var form = new formidable.IncomingForm();
+          form.parse(req, function (err, fields, files) {
+          if (err)
+          {
+               var badstr = "reservation_check_date err = " + err;
+               res.render('pages/result', {myresults: badstr} );
+          }
+          else //good
+          {
+               console.log("reservation_check_date fields = " + JSON.stringify(fields) + " files = " + JSON.stringify(files));
+  }
 }; //module.exports

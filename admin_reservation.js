@@ -69,6 +69,27 @@ module.exports = {
   }, //subscriptiontabledropfunc
   
   month_year_validate_func: function(req,res) {
+      var month;
+      var year;
+
+      async function connectAndRead() {  
+                        const client       = new Client(connectobj);
+                        try {
+                          await client.connect();
+                          const result = await client.query('SELECT * FROM reservation WHERE MONTH = ' + month + ' AND YEAR = ' + year);
+                          //console.log(" result = " + JSON.stringify(result));
+                          const myDate = new Date(year + "-" + month + "-01");
+                          const dayIndex = myDate.getDay(); //0=sunday, 1=monday, 2=tuesday, 3=wednesday, 4=thursday, 5=friday, 6=saturday
+                          res.render('admin_pages/reservation_month_view', {month: month, year: year, firstday: dayIndex, results: result.rows});
+                        } catch (err) {
+                            var errormsg = " err = " + err;
+                            //console.log(errormsg);
+                            res.render('pages/result', {myresults: errormsg} );
+                        } finally {
+                            await client.end();
+                        }
+      }
+    
       var form = new formidable.IncomingForm();
       form.parse(req, function (err, fields, files) {
           if (err)
@@ -79,25 +100,20 @@ module.exports = {
           else //good
           {
                console.log("month_year_validate_func fields = " + JSON.stringify(fields) + " files = " + JSON.stringify(files));
-               var month = fields.month_name;
-               var year = fields.year_name;
+               month = fields.month_name;
+               year = fields.year_name;
                //validation checking
                if (month <= 0 || month > 12)
                {
                       var badstr = 'Sorry month must be between 1 and 12';
                       res.render('pages/result', {myresults: badstr} );
                }
-               else if (year < 2025)
+               if (year < 2025)
                {
                       var badstr = 'Sorry year must be 2025 or greater';
                       res.render('pages/result', {myresults: badstr} );
                }
-               else
-               {
-                      const myDate = new Date(year + "-" + month + "-01");
-                      const dayIndex = myDate.getDay(); //0=sunday, 1=monday, 2=tuesday, 3=wednesday, 4=thursday, 5=friday, 6=saturday
-                      res.render('admin_pages/reservation_month_view', {month: month, year: year, firstday: dayIndex});
-               }
+               connectAndRead();
           }//good
       })//form.parse
   }, //month_year_validate_func
@@ -126,13 +142,12 @@ module.exports = {
                       var badstr = 'Sorry month must be between 1 and 12';
                       res.render('pages/result', {myresults: badstr} );
                }
-               else if (year < 2025)
+               if (year < 2025)
                {
                       var badstr = 'Sorry year must be 2025 or greater';
                       res.render('pages/result', {myresults: badstr} );
                }
-               else
-               {
+               
                       if (month == 1)
                       {
                            if (day < 0 || day > 31)
@@ -244,7 +259,6 @@ module.exports = {
                       const myDate = new Date(year + "-" + month + "-" + day);
                       const dayIndex = myDate.getDay(); //0=sunday, 1=monday, 2=tuesday, 3=wednesday, 4=thursday, 5=friday, 6=saturday
                       res.render('admin_pages/reservation_chose_location_time', {studentID:studentID, firstname:firstname, lastname:lastname, month:month, day:day, year:year, dayIndex:dayIndex} );
-               }
           }//good
       })//form.parse
   }, //reservation_check_date

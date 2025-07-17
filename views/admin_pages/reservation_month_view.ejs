@@ -54,13 +54,34 @@ DECEMBER
 </tr>
 <tr><!-- week1 -->
     <% if (firstday == 0) { %>
-    <td>1</td>
-    <td>2</td>
-    <td>3</td>
-    <td>4</td>
-    <td>5</td>
-    <td>6</td>
-    <td>7</td>
+    <td>1<% results.forEach(function(row) { if (row.day == 1) { %>
+<br/><%= row.firstname %> <%= row.lastname %> <%= row.location %> 
+<% if (row.hour >= 13) { %><%= row.hour - 12 %>:<% if (row.minute == 0) { %>00PM<% } else { %><%= row.minute %>PM<% }} else { %><%= row.hour %>:<% if (row.minute == 0) { %>00AM<% } else { %><%= row.minute %>AM<% }}}}); %>
+    </td>
+    <td>2<% results.forEach(function(row) { if (row.day == 2) { %>
+<br/><%= row.firstname %> <%= row.lastname %> <%= row.location %> 
+<% if (row.hour >= 13) { %><%= row.hour - 12 %>:<% if (row.minute == 0) { %>00PM<% } else { %><%= row.minute %>PM<% }} else { %><%= row.hour %>:<% if (row.minute == 0) { %>00AM<% } else { %><%= row.minute %>AM<% }}}}); %>
+    </td>
+    <td>3<% results.forEach(function(row) { if (row.day == 3) { %>
+<br/><%= row.firstname %> <%= row.lastname %> <%= row.location %> 
+<% if (row.hour >= 13) { %><%= row.hour - 12 %>:<% if (row.minute == 0) { %>00PM<% } else { %><%= row.minute %>PM<% }} else { %><%= row.hour %>:<% if (row.minute == 0) { %>00AM<% } else { %><%= row.minute %>AM<% }}}}); %>
+    </td>
+    <td>4<% results.forEach(function(row) { if (row.day == 4) { %>
+<br/><%= row.firstname %> <%= row.lastname %> <%= row.location %> 
+<% if (row.hour >= 13) { %><%= row.hour - 12 %>:<% if (row.minute == 0) { %>00PM<% } else { %><%= row.minute %>PM<% }} else { %><%= row.hour %>:<% if (row.minute == 0) { %>00AM<% } else { %><%= row.minute %>AM<% }}}}); %>
+    </td>
+    <td>5<% results.forEach(function(row) { if (row.day == 5) { %>
+<br/><%= row.firstname %> <%= row.lastname %> <%= row.location %> 
+<% if (row.hour >= 13) { %><%= row.hour - 12 %>:<% if (row.minute == 0) { %>00PM<% } else { %><%= row.minute %>PM<% }} else { %><%= row.hour %>:<% if (row.minute == 0) { %>00AM<% } else { %><%= row.minute %>AM<% }}}}); %>
+    </td>
+    <td>6<% results.forEach(function(row) { if (row.day == 6) { %>
+<br/><%= row.firstname %> <%= row.lastname %> <%= row.location %> 
+<% if (row.hour >= 13) { %><%= row.hour - 12 %>:<% if (row.minute == 0) { %>00PM<% } else { %><%= row.minute %>PM<% }} else { %><%= row.hour %>:<% if (row.minute == 0) { %>00AM<% } else { %><%= row.minute %>AM<% }}}}); %>
+    </td>
+    <td>7<% results.forEach(function(row) { if (row.day == 7) { %>
+<br/><%= row.firstname %> <%= row.lastname %> <%= row.location %> 
+<% if (row.hour >= 13) { %><%= row.hour - 12 %>:<% if (row.minute == 0) { %>00PM<% } else { %><%= row.minute %>PM<% }} else { %><%= row.hour %>:<% if (row.minute == 0) { %>00AM<% } else { %><%= row.minute %>AM<% }}}}); %>
+    </td>
     <% } else if (firstday == 1) { %>
     <td></td>    
     <td>1</td>

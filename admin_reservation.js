@@ -77,7 +77,7 @@ module.exports = {
                         try {
                           await client.connect();
                           const result = await client.query('SELECT * FROM reservation WHERE MONTH = ' + month + ' AND YEAR = ' + year);
-                          //console.log(" result = " + JSON.stringify(result));
+                          console.log("month_year_validate_func result = " + JSON.stringify(result));
                           const myDate = new Date(year + "-" + month + "-01");
                           const dayIndex = myDate.getDay(); //0=sunday, 1=monday, 2=tuesday, 3=wednesday, 4=thursday, 5=friday, 6=saturday
                           res.render('admin_pages/reservation_month_view', {month: month, year: year, firstday: dayIndex, results: result.rows});

@@ -99,7 +99,12 @@ DECEMBER
     <td></td>
     <td></td>
     <td></td>
-    <td>1</td>
+    <td>1<br/><% results.forEach(function(row) { %>
+<% if (row.day == 1) { %>
+<%= row.LOCATION %> <%= row.CLASSTIME %> <%= row.STUDENTID %>
+<% } %>
+<% }); %>
+    </td>
     <td>2</td>
     <% } else { %>
     <td></td>

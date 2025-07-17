@@ -299,8 +299,28 @@ module.exports = {
               {
                    console.log("reservation_check_location_time fields = " + JSON.stringify(fields) + " files = " + JSON.stringify(files));
                    classlocation = fields.location_name;
-                   classhour     = fields.hour_name;
-                   classminute   = fields.minute_name;
+                   var timeint   = fields.time_name;
+                   if (timeint == 1000)
+                   {
+                        classhour     = 10;
+                        classminute   = 0;
+                   }
+                   else if (timeint == 1100)
+                   {
+                        classhour     = 11;
+                        classminute   = 0;
+                   }
+                   else if (timeint == 1730)
+                   {
+                        classhour     = 17;
+                        classminute   = 30;
+                   }
+                   else
+                   {
+                        classhour     = 18;
+                        classminute   = 45;
+                   }
+                
                    connectAndInsert();
               }//good
           })//form.parse

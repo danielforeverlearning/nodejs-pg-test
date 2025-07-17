@@ -30,7 +30,7 @@ module.exports = {
               
                           // Example: create table
                           const createRes = await client.query(
-                              'CREATE TABLE reservation (ID SERIAL PRIMARY KEY, STUDENTID INTEGER, LOCATION VARCHAR(255), MONTH INTEGER, DAY INTEGER, YEAR INTEGER, CLASSTIME INTEGER, CONSTRAINT myreservationtablefkconstraint FOREIGN KEY (STUDENTID) REFERENCES student(ID));'
+                              'CREATE TABLE reservation (ID SERIAL PRIMARY KEY, STUDENTID INTEGER, FIRSTNAME VARCHAR(255), LASTNAME VARCHAR(255), LOCATION VARCHAR(255), MONTH INTEGER, DAY INTEGER, YEAR INTEGER, HOUR INTEGER, MINUTE INTEGER. CONSTRAINT myreservationtablefkconstraint FOREIGN KEY (STUDENTID) REFERENCES student(ID));'
                           );
                           var result = 'createRes = ' + JSON.stringify(createRes);
                           res.send(result);
@@ -265,14 +265,15 @@ module.exports = {
 
   reservation_check_location_time: function(req,res,studentID,firstname,lastname,month,day,year) {
           var classlocation;
-          var classtime;
+          var classhour;
+          var classminute;
     
           async function connectAndInsert() {    
                         const client       = new Client(connectobj);
                         try {
                           await client.connect();
                           console.log('reservation_check_location_time, Connected to PostgreSQL!');
-                          var insertstmt = "INSERT INTO reservation (STUDENTID, LOCATION, MONTH, DAY, YEAR, CLASSTIME) VALUES (" + studentID + ", '" + classlocation + "', " + month + ", " + day + ", " + year + ", " + classtime + ");";
+                          var insertstmt = "INSERT INTO reservation (STUDENTID, FIRSTNAME, LASTNAME, LOCATION, MONTH, DAY, YEAR, HOUR, MINUTE) VALUES (" + studentID + ", '" + firstname + "', '" + lastname + "', '" + classlocation + "', " + month + ", " + day + ", " + year + ", " + classhour + ", " + classminute + ");";
                           console.log(insertstmt);
                           const insertRes = await client.query(insertstmt);
                           var resultstr = 'insertRes = ' + JSON.stringify(insertRes);
@@ -298,7 +299,8 @@ module.exports = {
               {
                    console.log("reservation_check_location_time fields = " + JSON.stringify(fields) + " files = " + JSON.stringify(files));
                    classlocation = fields.location_name;
-                   classtime     = fields.time_name;
+                   classhour     = fields.hour_name;
+                   classminute   = fields.minute_name;
                    connectAndInsert();
               }//good
           })//form.parse

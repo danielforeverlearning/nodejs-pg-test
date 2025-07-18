@@ -859,14 +859,28 @@ DECEMBER
     <td style="background-color:#000000;"></td>
     <td style="background-color:#000000;"></td>
     <td style="background-color:#000000;"></td>
+
     <% } else if (firstday == 1) {  %>
-    <td>28</td>    
-    <td>29</td>
-    <td>30</td>
-    <td>31</td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td>28<% results.forEach(function(row) { if (row.day == 28) { %>
+<br/><%= row.firstname %> <%= row.lastname %> <%= row.location %> 
+<% if (row.hour >= 13) { %><%= row.hour - 12 %>:<% if (row.minute == 0) { %>00PM<% } else { %><%= row.minute %>PM<% }} else { %><%= row.hour %>:<% if (row.minute == 0) { %>00AM<% } else { %><%= row.minute %>AM<% }}}}); %>
+    </td>   
+    <td>29<% results.forEach(function(row) { if (row.day == 29) { %>
+<br/><%= row.firstname %> <%= row.lastname %> <%= row.location %> 
+<% if (row.hour >= 13) { %><%= row.hour - 12 %>:<% if (row.minute == 0) { %>00PM<% } else { %><%= row.minute %>PM<% }} else { %><%= row.hour %>:<% if (row.minute == 0) { %>00AM<% } else { %><%= row.minute %>AM<% }}}}); %>
+    </td>
+    <td>30<% results.forEach(function(row) { if (row.day == 30) { %>
+<br/><%= row.firstname %> <%= row.lastname %> <%= row.location %> 
+<% if (row.hour >= 13) { %><%= row.hour - 12 %>:<% if (row.minute == 0) { %>00PM<% } else { %><%= row.minute %>PM<% }} else { %><%= row.hour %>:<% if (row.minute == 0) { %>00AM<% } else { %><%= row.minute %>AM<% }}}}); %>
+    </td>
+    <td>31<% results.forEach(function(row) { if (row.day == 31) { %>
+<br/><%= row.firstname %> <%= row.lastname %> <%= row.location %> 
+<% if (row.hour >= 13) { %><%= row.hour - 12 %>:<% if (row.minute == 0) { %>00PM<% } else { %><%= row.minute %>PM<% }} else { %><%= row.hour %>:<% if (row.minute == 0) { %>00AM<% } else { %><%= row.minute %>AM<% }}}}); %>
+    </td>
+    <td style="background-color:#000000;"></td>
+    <td style="background-color:#000000;"></td>
+    <td style="background-color:#000000;"></td>
+
     <% } else if (firstday == 2) {  %>
     <td>27</td>
     <td>28</td>

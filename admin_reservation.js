@@ -80,7 +80,38 @@ module.exports = {
                           console.log("month_year_validate_func result = " + JSON.stringify(result));
                           const myDate = new Date(year + "-" + month + "-01");
                           const dayIndex = myDate.getDay(); //0=sunday, 1=monday, 2=tuesday, 3=wednesday, 4=thursday, 5=friday, 6=saturday
-                          res.render('admin_pages/reservation_month_view', {month: month, year: year, firstday: dayIndex, results: result.rows});
+                          var lastday=0;
+                          if (month == 1)
+                               lastday = 31;
+                          else if (month == 2)
+                          {
+                               if ((year % 4)==0) //leap year
+                                   lastday = 29;
+                               else
+                                   lastday = 28;
+                          }
+                          else if (month == 3)
+                               lastday = 31;
+                          else if (month == 4)
+                               lastday = 30;
+                          else if (month == 5)
+                               lastday = 31;
+                          else if (month == 6)
+                               lastday = 30;
+                          else if (month == 7)
+                               lastday = 31;
+                          else if (month == 8)
+                               lastday = 31;
+                          else if (month == 9)
+                               lastday = 30;
+                          else if (month == 10)
+                               lastday = 31;
+                          else if (month == 11)
+                               lastday = 30;
+                          else if (month == 12)
+                               lastday = 31;
+                          
+                          res.render('admin_pages/reservation_month_view', {month: month, year: year, firstday: dayIndex, lastday: lastday, results: result.rows});
                         } catch (err) {
                             var errormsg = " err = " + err;
                             //console.log(errormsg);

@@ -139,12 +139,13 @@ module.exports = {
                       var badstr = 'Sorry month must be between 1 and 12';
                       res.render('pages/result', {myresults: badstr} );
                }
-               if (year < 2025)
+               else if (year < 2025)
                {
                       var badstr = 'Sorry year must be 2025 or greater';
                       res.render('pages/result', {myresults: badstr} );
                }
-               connectAndRead();
+               else
+                      connectAndRead();
           }//good
       })//form.parse
   }, //month_year_validate_func

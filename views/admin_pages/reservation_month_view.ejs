@@ -1014,18 +1014,33 @@ DECEMBER
 <br/><%= row.firstname %> <%= row.lastname %> <%= row.location %> 
 <% if (row.hour >= 13) { %><%= row.hour - 12 %>:<% if (row.minute == 0) { %>00PM<% } else { %><%= row.minute %>PM<% }} else { %><%= row.hour %>:<% if (row.minute == 0) { %>00AM<% } else { %><%= row.minute %>AM<% }}}}); %>
     </td>
+
+    <% if (29 <= lastday) { %>
     <td>29<% results.forEach(function(row) { if (row.day == 29) { %>
 <br/><%= row.firstname %> <%= row.lastname %> <%= row.location %> 
 <% if (row.hour >= 13) { %><%= row.hour - 12 %>:<% if (row.minute == 0) { %>00PM<% } else { %><%= row.minute %>PM<% }} else { %><%= row.hour %>:<% if (row.minute == 0) { %>00AM<% } else { %><%= row.minute %>AM<% }}}}); %>
     </td>
+    <% } else { %>
+    <td style="background-color:#000000;"></td>
+    <% } %>
+
+    <% if (30 <= lastday) { %>
     <td>30<% results.forEach(function(row) { if (row.day == 30) { %>
 <br/><%= row.firstname %> <%= row.lastname %> <%= row.location %> 
 <% if (row.hour >= 13) { %><%= row.hour - 12 %>:<% if (row.minute == 0) { %>00PM<% } else { %><%= row.minute %>PM<% }} else { %><%= row.hour %>:<% if (row.minute == 0) { %>00AM<% } else { %><%= row.minute %>AM<% }}}}); %>
     </td>
+    <% } else { %>
+    <td style="background-color:#000000;"></td>
+    <% } %>
+
+    <% if (31 <= lastday) { %>
     <td>31<% results.forEach(function(row) { if (row.day == 31) { %>
 <br/><%= row.firstname %> <%= row.lastname %> <%= row.location %> 
 <% if (row.hour >= 13) { %><%= row.hour - 12 %>:<% if (row.minute == 0) { %>00PM<% } else { %><%= row.minute %>PM<% }} else { %><%= row.hour %>:<% if (row.minute == 0) { %>00AM<% } else { %><%= row.minute %>AM<% }}}}); %>
     </td>
+    <% } else { %>
+    <td style="background-color:#000000;"></td>
+    <% } %>
 
     <% } else if (firstday == 5) {  %>
     <td>24<% results.forEach(function(row) { if (row.day == 24) { %>
@@ -1048,14 +1063,24 @@ DECEMBER
 <br/><%= row.firstname %> <%= row.lastname %> <%= row.location %> 
 <% if (row.hour >= 13) { %><%= row.hour - 12 %>:<% if (row.minute == 0) { %>00PM<% } else { %><%= row.minute %>PM<% }} else { %><%= row.hour %>:<% if (row.minute == 0) { %>00AM<% } else { %><%= row.minute %>AM<% }}}}); %>
     </td>
+
+    <% if (29 <= lastday) { %>
     <td>29<% results.forEach(function(row) { if (row.day == 29) { %>
 <br/><%= row.firstname %> <%= row.lastname %> <%= row.location %> 
 <% if (row.hour >= 13) { %><%= row.hour - 12 %>:<% if (row.minute == 0) { %>00PM<% } else { %><%= row.minute %>PM<% }} else { %><%= row.hour %>:<% if (row.minute == 0) { %>00AM<% } else { %><%= row.minute %>AM<% }}}}); %>
     </td>
+    <% } else { %>
+    <td style="background-color:#000000;"></td>
+    <% } %>
+
+    <% if (30 <= lastday) { %>
     <td>30<% results.forEach(function(row) { if (row.day == 30) { %>
 <br/><%= row.firstname %> <%= row.lastname %> <%= row.location %> 
 <% if (row.hour >= 13) { %><%= row.hour - 12 %>:<% if (row.minute == 0) { %>00PM<% } else { %><%= row.minute %>PM<% }} else { %><%= row.hour %>:<% if (row.minute == 0) { %>00AM<% } else { %><%= row.minute %>AM<% }}}}); %>
     </td>
+    <% } else { %>
+    <td style="background-color:#000000;"></td>
+    <% } %>
 
     <% } else {  %>
     <td>23<% results.forEach(function(row) { if (row.day == 23) { %>
@@ -1082,10 +1107,15 @@ DECEMBER
 <br/><%= row.firstname %> <%= row.lastname %> <%= row.location %> 
 <% if (row.hour >= 13) { %><%= row.hour - 12 %>:<% if (row.minute == 0) { %>00PM<% } else { %><%= row.minute %>PM<% }} else { %><%= row.hour %>:<% if (row.minute == 0) { %>00AM<% } else { %><%= row.minute %>AM<% }}}}); %>
     </td>
+
+    <% if (29 <= lastday) { %>
     <td>29<% results.forEach(function(row) { if (row.day == 29) { %>
 <br/><%= row.firstname %> <%= row.lastname %> <%= row.location %> 
 <% if (row.hour >= 13) { %><%= row.hour - 12 %>:<% if (row.minute == 0) { %>00PM<% } else { %><%= row.minute %>PM<% }} else { %><%= row.hour %>:<% if (row.minute == 0) { %>00AM<% } else { %><%= row.minute %>AM<% }}}}); %>
     </td>
+    <% } else { %>
+    <td style="background-color:#000000;"></td>
+    <% } %>
     <% } %>
 </tr>
 
@@ -1096,10 +1126,14 @@ DECEMBER
     <% } else if (firstday == 3) {  %>
     <% } else if (firstday == 4) {  %>
     <% } else if (firstday == 5) {  %>
+    <% if (31 <= lastday) { %>
     <td>31<% results.forEach(function(row) { if (row.day == 31) { %>
 <br/><%= row.firstname %> <%= row.lastname %> <%= row.location %> 
 <% if (row.hour >= 13) { %><%= row.hour - 12 %>:<% if (row.minute == 0) { %>00PM<% } else { %><%= row.minute %>PM<% }} else { %><%= row.hour %>:<% if (row.minute == 0) { %>00AM<% } else { %><%= row.minute %>AM<% }}}}); %>
     </td>
+    <% } else { %>
+    <td style="background-color:#000000;"></td>
+    <% } %>
     <td style="background-color:#000000;"></td>
     <td style="background-color:#000000;"></td>
     <td style="background-color:#000000;"></td>
@@ -1108,14 +1142,25 @@ DECEMBER
     <td style="background-color:#000000;"></td>
 
     <% } else {  %>
+
+    <% if (30 <= lastday) { %>
     <td>30<% results.forEach(function(row) { if (row.day == 30) { %>
 <br/><%= row.firstname %> <%= row.lastname %> <%= row.location %> 
 <% if (row.hour >= 13) { %><%= row.hour - 12 %>:<% if (row.minute == 0) { %>00PM<% } else { %><%= row.minute %>PM<% }} else { %><%= row.hour %>:<% if (row.minute == 0) { %>00AM<% } else { %><%= row.minute %>AM<% }}}}); %>
     </td>
+    <% } else { %>
+    <td style="background-color:#000000;"></td>
+    <% } %>
+
+    <% if (31 <= lastday) { %>
     <td>31<% results.forEach(function(row) { if (row.day == 31) { %>
 <br/><%= row.firstname %> <%= row.lastname %> <%= row.location %> 
 <% if (row.hour >= 13) { %><%= row.hour - 12 %>:<% if (row.minute == 0) { %>00PM<% } else { %><%= row.minute %>PM<% }} else { %><%= row.hour %>:<% if (row.minute == 0) { %>00AM<% } else { %><%= row.minute %>AM<% }}}}); %>
     </td>
+    <% } else { %>
+    <td style="background-color:#000000;"></td>
+    <% } %>
+
     <td style="background-color:#000000;"></td>
     <td style="background-color:#000000;"></td>
     <td style="background-color:#000000;"></td>

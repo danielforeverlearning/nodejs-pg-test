@@ -18,32 +18,49 @@ th, td {
 <table>
 <tr>
 
+<% if (sortorder == 100) { %>
+<th onclick="window.location.href='/student/200'" >
+<% } else { %>
+<th onclick="window.location.href='/student/100'" >
+<% } %>
+ID<% if (sortorder == 100) { %>
+<img src="arrow-up.png" width="50" height="50">
+<% } else if (sortorder == 200) { %>
+<img src="arrow-down.png" width="50" height="50">
+<% } else { %>
+<img src="sort-alt.png" width="50" height="50">
+<% } %>
+</th>
+
+<% if (sortorder == 10) { %>
+<th onclick="window.location.href='/student/20'" >
+<% } else { %>
+<th onclick="window.location.href='/student/10'" >
+<% } %>
+FIRST NAME<% if (sortorder == 10) { %>
+<img src="arrow-up.png" width="50" height="50">
+<% } else if (sortorder == 20) { %>
+<img src="arrow-down.png" width="50" height="50">
+<% } else { %>
+<img src="sort-alt.png" width="50" height="50">
+<% } %>
+</th>
 
 
-ID<% if (sortID == "none") { %>
-<img src="sort-alt.png" width="50" height="50">
-<% } else if (sortID == "up") { %>
-<img src="arrow-up.png" width="50" height="50">
-<% } else if (sortID == "down") { %>
-<img src="arrow-down.png" width="50" height="50">
+<% if (sortorder == 1) { %>
+<th onclick="window.location.href='/student/2'" >
+<% } else { %>
+<th onclick="window.location.href='/student/1'" >
 <% } %>
-    </th>
-    <th>FIRST NAME<% if (sortfirstname == "none") { %>
-<img src="sort-alt.png" width="50" height="50">
-<% } else if (sortfirstname == "up") { %>
+LAST NAME<% if (sortorder == 1) { %>
 <img src="arrow-up.png" width="50" height="50">
-<% } else if (sortfirstname == "down") { %>
+<% } else if (sortorder == 2) { %>
 <img src="arrow-down.png" width="50" height="50">
-<% } %>
-    </th>
-    <th>LAST NAME<% if (sortlastname == "none") { %>
+<% } else { %>
 <img src="sort-alt.png" width="50" height="50">
-<% } else if (sortlastname == "up") { %>
-<img src="arrow-up.png" width="50" height="50">
-<% } else if (sortlastname == "down") { %>
-<img src="arrow-down.png" width="50" height="50">
 <% } %>
-    </th>
+</th>
+
     <th>EMAIL</th>
     <th>PHONE AREA CODE</th>
     <th>PHONE NUMBER</th>

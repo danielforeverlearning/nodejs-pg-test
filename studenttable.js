@@ -11,14 +11,29 @@ var db_credential = require('./db_credential');
 const connectobj    = db_credential.myconnectobj();
 
 module.exports = {
-  studentviewfunc: function(req,res)  {
+  studentviewfunc: function(req,res,sortID,sortfirstname,sortlastname)  {
             async function connectAndRead() {  
                         const client       = new Client(connectobj);
                         try {
                           await client.connect();
-                          const result = await client.query('SELECT * FROM student');
+
+                          var selectstmt = 'SELECT * FROM student';
+                          if (sortID=="up")
+                               selectstmt += ' ORDER BY ID ASC';
+                          else if (sortID=="down")
+                               selectstmt += ' ORDER BY ID DESC';
+                          else if (sortfirstname=="up")
+                               selectstmt += ' ORDER BY FIRSTNAME ASC';
+                          else if (sortfirstname=="down")
+                               selectstmt += ' ORDER BY FIRSTNAME DESC';
+                          else if (sortlastname=="up")
+                               selectstmt += ' ORDER BY LASTNAME ASC';
+                          else if (sortlastname=="down")
+                               selectstmt += ' ORDER BY LASTNAME DESC';
+                          
+                          const result = await client.query(selectstmt);
                           //console.log(" result = " + JSON.stringify(result));
-                          res.render('pages/studentview', {results: result.rows, sortID: "none"} );
+                          res.render('pages/studentview', {results: result.rows, sortID: sortID, sortfirstname: sortfirstname, sortlastname:sortlastname} );
                         } catch (err) {
                             var errormsg = " err = " + err;
                             //console.log(errormsg);

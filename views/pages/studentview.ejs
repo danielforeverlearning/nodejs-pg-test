@@ -25,8 +25,22 @@ th, td {
 <img src="arrow-down.png" width="50" height="50">
 <% } %>
     </th>
-    <th>FIRST NAME</th>
-    <th>LAST NAME</th>
+    <th>FIRST NAME<% if (sortfirstname == "none") { %>
+<img src="sort-alt.png" width="50" height="50">
+<% } else if (sortfirstname == "up") { %>
+<img src="arrow-up.png" width="50" height="50">
+<% } else if (sortfirstname == "down") { %>
+<img src="arrow-down.png" width="50" height="50">
+<% } %>
+    </th>
+    <th>LAST NAME<% if (sortlastname == "none") { %>
+<img src="sort-alt.png" width="50" height="50">
+<% } else if (sortlastname == "up") { %>
+<img src="arrow-up.png" width="50" height="50">
+<% } else if (sortlastname == "down") { %>
+<img src="arrow-down.png" width="50" height="50">
+<% } %>
+    </th>
     <th>EMAIL</th>
     <th>PHONE AREA CODE</th>
     <th>PHONE NUMBER</th>

@@ -28,6 +28,10 @@ express()
   .set('view engine', 'ejs')
   
   .get('/', (req, res) => res.render('pages/home'))
+  .get('/emailblast', (req, res) => {
+                                       var badstr = 'Emailblast not done yet, will probably use gmail rest-API with a free gmail account';
+                                       res.render('pages/result', {myresults: badstr} );
+  })
 
   .post('/studenttableupdatesubmit', (req,res) => { studenttable.studenttableupdate3func(req,res); })
   .get('/studentupdate/:id', (req, res) => {  

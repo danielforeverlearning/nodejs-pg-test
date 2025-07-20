@@ -11,29 +11,29 @@ var db_credential = require('./db_credential');
 const connectobj    = db_credential.myconnectobj();
 
 module.exports = {
-  studentviewfunc: function(req,res,sortID,sortfirstname,sortlastname)  {
+  studentviewfunc: function(req,res,sortorder)  {
             async function connectAndRead() {  
                         const client       = new Client(connectobj);
                         try {
                           await client.connect();
 
                           var selectstmt = 'SELECT * FROM student';
-                          if (sortID=="up")
+                          if (sortorder == 100)
                                selectstmt += ' ORDER BY ID ASC';
-                          else if (sortID=="down")
+                          else if (sortorder == 200)
                                selectstmt += ' ORDER BY ID DESC';
-                          else if (sortfirstname=="up")
+                          else if (sortorder == 10)
                                selectstmt += ' ORDER BY FIRSTNAME ASC';
-                          else if (sortfirstname=="down")
+                          else if (sortorder == 20)
                                selectstmt += ' ORDER BY FIRSTNAME DESC';
-                          else if (sortlastname=="up")
+                          else if (sortorder == 1)
                                selectstmt += ' ORDER BY LASTNAME ASC';
-                          else if (sortlastname=="down")
+                          else if (sortorder == 2)
                                selectstmt += ' ORDER BY LASTNAME DESC';
                           
                           const result = await client.query(selectstmt);
                           //console.log(" result = " + JSON.stringify(result));
-                          res.render('pages/studentview', {results: result.rows, sortID: sortID, sortfirstname: sortfirstname, sortlastname:sortlastname} );
+                          res.render('pages/studentview', {results: result.rows, sortorder: sortorder} );
                         } catch (err) {
                             var errormsg = " err = " + err;
                             //console.log(errormsg);

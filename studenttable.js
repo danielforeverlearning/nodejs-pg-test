@@ -18,7 +18,7 @@ module.exports = {
                           await client.connect();
                           const result = await client.query('SELECT * FROM student');
                           //console.log(" result = " + JSON.stringify(result));
-                          res.render('pages/studentview', {results: result.rows} );
+                          res.render('pages/studentview', {results: result.rows, sortID: "none"} );
                         } catch (err) {
                             var errormsg = " err = " + err;
                             //console.log(errormsg);

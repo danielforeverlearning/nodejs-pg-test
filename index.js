@@ -38,12 +38,11 @@ express()
                                               const studentID = req.params.id;
                                               studenttable.updatefunc(req,res,studentID);
                                            })
-  .get('/student/:sortid/:sortfirstname/:sortlastname', (req,res) => {  
-                                                                        const sortID = req.params.sortid;
-                                                                        const sortfirstname = req.params.sortfirstname;
-                                                                        const sortlastname  = req.params.sortlastname;
-                                                                        studenttable.studentviewfunc(req,res,sortID,sortfirstname,sortlastname);
-                                                                     })
+  .get('/student/:sortorder', (req,res) => {  
+        const sortorder = req.params.sortorder;
+        studenttable.studentviewfunc(req,res,sortorder);
+  })
+  
   .get('/studentmonthlysubscription/:id/:firstname/:lastname', (req,res) => {  
                                                             const studentID = req.params.id;
                                                             const firstname = req.params.firstname;

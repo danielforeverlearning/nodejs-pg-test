@@ -30,38 +30,6 @@ express()
   .set('view engine', 'ejs')
   
   .get('/', (req, res) => res.render('pages/home'))
-
-  .get('/testdownload', (req,res) => {
-        const filePath = path.join(__dirname, 'public/mydumbass.txt'); // Path to your text file
-        try {
-            fs.writeFileSync(filePath, 'header line');
-        } catch (err) {
-            var badstr = 'Error writeFileSync:' + err;
-            console.log(badstr);
-            res.render('pages/result', {myresults: badstr} );
-        }
-
-        try {
-            fs.appendFileSync(filePath, 'second line');
-        } catch (err) {
-            var badstr = 'Error appendFileSync:' + err;
-            console.log(badstr);
-            res.render('pages/result', {myresults: badstr} );
-        }
-
-        console.log("made file synchronously");
-
-        const fileName = 'downloaded_text.txt'; // Name for the downloaded file
-        res.download(filePath, fileName, (err) => {
-            if (err) {
-              console.error('Error downloading the file:', err);
-              res.status(500).send('Error downloading the file:' + err);
-            } else {
-              var goodstr = 'download good';
-              res.render('pages/result', {myresults: goodstr} );
-            } 
-        });
-  })
   
   .get('/ghettoadmintools', (req,res) => res.render('admin_pages/ghetto_admin_tools'))
   .get('/emailblast', (req, res) => {

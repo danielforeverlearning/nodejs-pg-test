@@ -28,6 +28,22 @@ express()
   .set('view engine', 'ejs')
   
   .get('/', (req, res) => res.render('pages/home'))
+
+  .get('/testdownload', (req,res) => {
+        //const filePath = path.join(__dirname, 'myTextFile.txt'); // Path to your text file
+        const fileName = 'downloaded_text.txt'; // Name for the downloaded file
+
+        res.download('myTextFile.txt', fileName, (err) => {
+            if (err) {
+                console.error('File download failed:', err);
+                // Handle error, e.g., send an error response to the client
+                res.status(500).send('Error downloading file.');
+            } else {
+                console.log('File downloaded successfully.');
+            }
+        });
+  })
+  
   .get('/ghettoadmintools', (req,res) => res.render('admin_pages/ghetto_admin_tools'))
   .get('/emailblast', (req, res) => {
         var badstr = 'Emailblast not done yet, will probably use gmail rest-API with a free gmail account';

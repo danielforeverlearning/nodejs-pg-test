@@ -32,9 +32,17 @@ express()
   .get('/', (req, res) => res.render('pages/home'))
 
   .get('/testdownload', (req,res) => {
-        const filePath = path.join(__dirname, 'public/myTextFile.txt'); // Path to your text file
-        const fileName = 'downloaded_text.txt'; // Name for the downloaded file
 
+        const filePath = path.join(__dirname, 'public/mydumbass.txt'); // Path to your text file
+        const content = 'Some content!';
+        fs.writeFile(filePath, content, err => {
+            if (err) {
+              console.error(err);
+            } else {
+              // file written successfully
+            }
+        });
+        const fileName = 'downloaded_text.txt'; // Name for the downloaded file
         res.download(filePath, fileName, (err) => {
             if (err) {
                 console.error('File download failed:', err);

@@ -37,7 +37,7 @@ express()
         const content = 'Some content!';
 
         //use async write because maybe database tables get real big and writes will block webserver
-        fs.writeFile(filePath, dataToWrite, (err) => {
+        fs.writeFile(filePath, content, (err) => {
               if (err) {
                   var badstr = 'Error writing file:' + err;
                   res.render('pages/result', {myresults: badstr} );

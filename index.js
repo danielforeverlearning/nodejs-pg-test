@@ -35,13 +35,12 @@ express()
 
         const filePath = path.join(__dirname, 'public/mydumbass.txt'); // Path to your text file
         const content = 'Some content!';
-        fs.writeFile(filePath, content, err => {
-            if (err) {
+        try {
+              fs.writeFileSync(filePath, content);
+              console.log('writeFileSync done');
+        } catch (err) {
               console.error(err);
-            } else {
-              console.log('file written successfully');
-            }
-        });
+        }
         const fileName = 'downloaded_text.txt'; // Name for the downloaded file
         res.download(filePath, fileName, (err) => {
             if (err) {

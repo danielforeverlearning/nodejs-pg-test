@@ -1,7 +1,8 @@
 const express      = require('express')
 const path         = require('path')
-var   https        = require('https');
+const https        = require('https');
 const formidable   = require('formidable')
+const fs           = require('fs')
 
 const PORT         = process.env.PORT || 5000
 
@@ -19,9 +20,11 @@ const connectobj   = {
                      };
 *****/
 
+const filePath = path.join(__dirname, 'public/student_table.txt'); // Path to your text file
+
 module.exports = {  
 
-  download_student_table_func: function(req,res) {
+  make_student_table_func: function(req,res) {
           async function connectAndRead() {
                       const client       = new Client(connectobj);
                       try {
@@ -43,8 +46,38 @@ module.exports = {
                       }
           }
 
+          try {
+              fs.writeFileSync(filePath, 'header line\n');
+          } catch (err) {
+              var badstr = 'Error writeFileSync:' + err;
+              console.log(badstr);
+              res.render('pages/result', {myresults: badstr} );
+          }
+  
+          try {
+              fs.appendFileSync(filePath, 'second line');
+          } catch (err) {
+              var badstr = 'Error appendFileSync:' + err;
+              console.log(badstr);
+              res.render('pages/result', {myresults: badstr} );
+          }
           
           //connectAndRead();
-  }//download_student_table_func
+
+          res.render('admin_pages/download_student_table');
+  }, //make_student_table_func
+
+  download_student_table_func: function(req,res) {
+        const fileName = 'downloaded_text.txt'; // Name for the downloaded file
+        res.download(filePath, fileName, (err) => {
+            if (err) {
+              console.error('Error downloading the file:', err);
+              res.status(500).send('Error downloading the file:' + err);
+            } else {
+              var goodstr = 'download good';
+              res.render('pages/result', {myresults: goodstr} );
+            } 
+        });
+  }
 
 }; //module.exports

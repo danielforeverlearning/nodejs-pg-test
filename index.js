@@ -22,7 +22,7 @@ var subscriptiontable = require('./subscriptiontable');
 var admin_student = require('./admin_student');
 var admin_subscription = require('./admin_subscription');
 var admin_reservation = require('./admin_reservation');
-var admin_db_tools = require('/admin_db_tools');
+var admin_db_tools = require('./admin_db_tools');
 
 
 express()

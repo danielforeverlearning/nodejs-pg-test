@@ -37,6 +37,7 @@ express()
             fs.writeFileSync(filePath, 'header line');
         } catch (err) {
             var badstr = 'Error writeFileSync:' + err;
+            console.log(badstr);
             res.render('pages/result', {myresults: badstr} );
         }
 
@@ -44,6 +45,7 @@ express()
             fs.appendFileSync(filePath, 'second line');
         } catch (err) {
             var badstr = 'Error appendFileSync:' + err;
+            console.log(badstr);
             res.render('pages/result', {myresults: badstr} );
         }
 
@@ -51,11 +53,13 @@ express()
         res.download(filePath, fileName, (err) => {
             if (err) {
               var badstr = 'Error downloading file:' + err;
+              console.log(badstr);
               res.render('pages/result', {myresults: badstr} );
             }
         });
     
         var goodstr = 'File download should be successful, look at your web-browser download status at the top right side of your web-browser.';
+        console.log(goodstr);
         res.render('pages/result', {myresults: goodstr} );
   })
   

@@ -30,10 +30,10 @@ express()
   .get('/', (req, res) => res.render('pages/home'))
 
   .get('/testdownload', (req,res) => {
-        //const filePath = path.join(__dirname, 'myTextFile.txt'); // Path to your text file
+        const filePath = path.join(__dirname, 'public/myTextFile.txt'); // Path to your text file
         const fileName = 'downloaded_text.txt'; // Name for the downloaded file
 
-        res.download('/myTextFile.txt', fileName, (err) => {
+        res.download(filePath, fileName, (err) => {
             if (err) {
                 console.error('File download failed:', err);
                 // Handle error, e.g., send an error response to the client

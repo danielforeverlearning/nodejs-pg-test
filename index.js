@@ -34,6 +34,7 @@ express()
   
   .get('/ghettoadmintools', (req,res) => res.render('admin_pages/ghetto_admin_tools'))
   .get('/makestudenttablefile', (req,res) => { admin_db_tools.make_student_table_func(req,res); })
+  .get('/downloadstudenttablefile', (req,res) => { admin_db_tools.download_student_table_func(req,res); })
   .get('/emailblast', (req, res) => {
         var badstr = 'Emailblast not done yet, will probably use gmail rest-API with a free gmail account';
         res.render('pages/result', {myresults: badstr} );

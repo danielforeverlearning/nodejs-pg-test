@@ -47,13 +47,14 @@ express()
             res.render('pages/result', {myresults: badstr} );
         }
 
-        try {
-            const fileName = 'downloaded_text.txt'; // Name for the downloaded file
-            res.download(filePath, fileName);
-        } catch (err) {
-            var badstr = 'File download failed:' + err;
-            res.render('pages/result', {myresults: badstr} );
-        } 
+        const fileName = 'downloaded_text.txt'; // Name for the downloaded file
+        res.download(filePath, fileName, (err) => {
+            if (err) {
+              var badstr = 'Error downloading file:' + err;
+              res.render('pages/result', {myresults: badstr} );
+            }
+        });
+    
         var goodstr = 'File download should be successful, look at your web-browser download status at the top right side of your web-browser.';
         res.render('pages/result', {myresults: goodstr} );
   })

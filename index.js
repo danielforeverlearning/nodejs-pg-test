@@ -36,33 +36,30 @@ express()
         const filePath = path.join(__dirname, 'public/mydumbass.txt'); // Path to your text file
         const content = 'Some content!';
 
-        //use async write because maybe database tables get real big and writes will block webserver
-        fs.writeFile(filePath, content, (err) => {
-              if (err) {
-                  var badstr = 'Error writing file:' + err;
-                  res.render('pages/result', {myresults: badstr} );
-              }
-              else {
-                  //append file is also async
-                  fs.appendFile(filePath, 'appending more stuff', (err) => {
-                      if (err) {
-                          var badstr = 'Error appending file:' + err;
-                          res.render('pages/result', {myresults: badstr} );
-                      } else {
-                          const fileName = 'downloaded_text.txt'; // Name for the downloaded file
-                          res.download(filePath, fileName, (err) => {
-                              if (err) {
-                                  var badstr = 'File download failed:' + err;
-                                  res.render('pages/result', {myresults: badstr} );
-                              } else {
-                                  var goodstr = 'File download should be successful, look at your web-browser download status at the top right side of your web-browser.';
-                                  res.render('pages/result', {myresults: goodstr} );
-                              }
-                          });
-                      }
-                  }) //appendFile
-              }
-        }) //writeFile
+        try {
+          fs.writeFileSync(filePath, content);
+        } catch (err) {
+          var badstr = 'Error writeFileSync:' + err;
+          res.render('pages/result', {myresults: badstr} );
+        }
+
+        try {
+          fs.appendFileSync(filePath, content);
+        } catch (err) {
+          var badstr = 'Error appendFileSync:' + err;
+          res.render('pages/result', {myresults: badstr} );
+        }
+
+        const fileName = 'downloaded_text.txt'; // Name for the downloaded file
+        res.download(filePath, fileName, (err) => {
+            if (err) {
+                var badstr = 'File download failed:' + err;
+                res.render('pages/result', {myresults: badstr} );
+            } else {
+                var goodstr = 'File download should be successful, look at your web-browser download status at the top right side of your web-browser.';
+                res.render('pages/result', {myresults: goodstr} );
+            }
+        });       
   })
   
   .get('/ghettoadmintools', (req,res) => res.render('admin_pages/ghetto_admin_tools'))

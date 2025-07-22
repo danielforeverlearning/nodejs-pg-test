@@ -55,7 +55,7 @@ express()
                                   var badstr = 'File download failed:' + err;
                                   res.render('pages/result', {myresults: badstr} );
                               } else {
-                                  var goodstr = 'File download should be successful, look at your web-browser download status at the top right side of your web-browser.";
+                                  var goodstr = 'File download should be successful, look at your web-browser download status at the top right side of your web-browser.';
                                   res.render('pages/result', {myresults: goodstr} );
                               }
                           });

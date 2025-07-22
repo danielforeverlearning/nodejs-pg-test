@@ -49,21 +49,15 @@ express()
             res.render('pages/result', {myresults: badstr} );
         }
 
-        /***
+        console.log("made file synchronously");
+
         const fileName = 'downloaded_text.txt'; // Name for the downloaded file
         res.download(filePath, fileName, (err) => {
             if (err) {
-              var badstr = 'Error downloading file:' + err;
-              console.log(badstr);
-              res.render('pages/result', {myresults: badstr} );
+              console.error('Error downloading the file:', err);
+              res.status(500).send('Error downloading the file:' + err);
             }
         });
-        *****/
-
-        var goodstr = "made file";
-        //var goodstr = 'File download should be successful, look at your web-browser download status at the top right side of your web-browser.';
-        console.log(goodstr);
-        res.render('pages/result', {myresults: goodstr} );
   })
   
   .get('/ghettoadmintools', (req,res) => res.render('admin_pages/ghetto_admin_tools'))

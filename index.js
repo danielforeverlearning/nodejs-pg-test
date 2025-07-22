@@ -35,22 +35,34 @@ express()
 
         const filePath = path.join(__dirname, 'public/mydumbass.txt'); // Path to your text file
         const content = 'Some content!';
-        try {
-              fs.writeFileSync(filePath, content);
-              console.log('writeFileSync done');
-        } catch (err) {
-              console.error(err);
-        }
-        const fileName = 'downloaded_text.txt'; // Name for the downloaded file
-        res.download(filePath, fileName, (err) => {
-            if (err) {
-                console.error('File download failed:', err);
-                // Handle error, e.g., send an error response to the client
-                res.status(500).send('Error downloading file.');
-            } else {
-                console.log('File downloaded successfully.');
-            }
-        });
+
+        //use async write because maybe database tables get real big and writes will block webserver
+        fs.writeFile(filePath, dataToWrite, (err) => {
+              if (err) {
+                  var badstr = 'Error writing file:' + err;
+                  res.render('pages/result', {myresults: badstr} );
+              }
+              else {
+                  //append file is also async
+                  fs.appendFile(filePath, 'appending more stuff', (err) => {
+                      if (err) {
+                          var badstr = 'Error appending file:' + err;
+                          res.render('pages/result', {myresults: badstr} );
+                      } else {
+                          const fileName = 'downloaded_text.txt'; // Name for the downloaded file
+                          res.download(filePath, fileName, (err) => {
+                              if (err) {
+                                  var badstr = 'File download failed:' + err;
+                                  res.render('pages/result', {myresults: badstr} );
+                              } else {
+                                  var goodstr = 'File download should be successful, look at your web-browser download status at the top right side of your web-browser.";
+                                  res.render('pages/result', {myresults: goodstr} );
+                              }
+                          });
+                      }
+                  }) //appendFile
+              }
+        }) //writeFile
   })
   
   .get('/ghettoadmintools', (req,res) => res.render('admin_pages/ghetto_admin_tools'))

@@ -56,11 +56,11 @@ express()
             if (err) {
               console.error('Error downloading the file:', err);
               res.status(500).send('Error downloading the file:' + err);
-            }
+            } else {
+              var goodstr = 'download good';
+              res.render('pages/result', {myresults: goodstr} );
+            } 
         });
-
-        var goodstr = 'download good';
-        res.render('pages/result', {myresults: goodstr} );
   })
   
   .get('/ghettoadmintools', (req,res) => res.render('admin_pages/ghetto_admin_tools'))

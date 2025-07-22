@@ -49,6 +49,7 @@ express()
             res.render('pages/result', {myresults: badstr} );
         }
 
+        /***
         const fileName = 'downloaded_text.txt'; // Name for the downloaded file
         res.download(filePath, fileName, (err) => {
             if (err) {
@@ -57,8 +58,10 @@ express()
               res.render('pages/result', {myresults: badstr} );
             }
         });
-    
-        var goodstr = 'File download should be successful, look at your web-browser download status at the top right side of your web-browser.';
+        *****/
+
+        var goodstr = "made file";
+        //var goodstr = 'File download should be successful, look at your web-browser download status at the top right side of your web-browser.';
         console.log(goodstr);
         res.render('pages/result', {myresults: goodstr} );
   })

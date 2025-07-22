@@ -28,7 +28,7 @@ express()
   .set('view engine', 'ejs')
   
   .get('/', (req, res) => res.render('pages/home'))
-  .get('/ghettoadmintools', (req,res) => res.render('pages/ghetto_admin_tools'))
+  .get('/ghettoadmintools', (req,res) => res.render('admin_pages/ghetto_admin_tools'))
   .get('/emailblast', (req, res) => {
         var badstr = 'Emailblast not done yet, will probably use gmail rest-API with a free gmail account';
         res.render('pages/result', {myresults: badstr} );

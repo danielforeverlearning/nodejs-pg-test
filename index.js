@@ -33,7 +33,7 @@ express()
         //const filePath = path.join(__dirname, 'myTextFile.txt'); // Path to your text file
         const fileName = 'downloaded_text.txt'; // Name for the downloaded file
 
-        res.download('myTextFile.txt', fileName, (err) => {
+        res.download('/myTextFile.txt', fileName, (err) => {
             if (err) {
                 console.error('File download failed:', err);
                 // Handle error, e.g., send an error response to the client

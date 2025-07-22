@@ -39,7 +39,7 @@ express()
             if (err) {
               console.error(err);
             } else {
-              // file written successfully
+              console.log('file written successfully');
             }
         });
         const fileName = 'downloaded_text.txt'; // Name for the downloaded file

@@ -58,6 +58,9 @@ express()
               res.status(500).send('Error downloading the file:' + err);
             }
         });
+
+        var goodstr = 'download good';
+        res.render('pages/result', {myresults: goodstr} );
   })
   
   .get('/ghettoadmintools', (req,res) => res.render('admin_pages/ghetto_admin_tools'))

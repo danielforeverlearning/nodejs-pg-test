@@ -28,16 +28,17 @@ express()
   .set('view engine', 'ejs')
   
   .get('/', (req, res) => res.render('pages/home'))
+  .get('/ghettoadmintools', (req,res) => res.render('pages/ghetto_admin_tools'))
   .get('/emailblast', (req, res) => {
-                                       var badstr = 'Emailblast not done yet, will probably use gmail rest-API with a free gmail account';
-                                       res.render('pages/result', {myresults: badstr} );
+        var badstr = 'Emailblast not done yet, will probably use gmail rest-API with a free gmail account';
+        res.render('pages/result', {myresults: badstr} );
   })
 
   .post('/studenttableupdatesubmit', (req,res) => { studenttable.studenttableupdate3func(req,res); })
   .get('/studentupdate/:id', (req, res) => {  
-                                              const studentID = req.params.id;
-                                              studenttable.updatefunc(req,res,studentID);
-                                           })
+        const studentID = req.params.id;
+        studenttable.updatefunc(req,res,studentID);
+  })
   .get('/student/:sortorder', (req,res) => {  
         const sortorder = req.params.sortorder;
         studenttable.studentviewfunc(req,res,sortorder);

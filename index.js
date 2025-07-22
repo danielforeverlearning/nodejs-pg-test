@@ -32,34 +32,30 @@ express()
   .get('/', (req, res) => res.render('pages/home'))
 
   .get('/testdownload', (req,res) => {
-
         const filePath = path.join(__dirname, 'public/mydumbass.txt'); // Path to your text file
-        const content = 'Some content!';
-
         try {
-          fs.writeFileSync(filePath, content);
+            fs.writeFileSync(filePath, 'header line');
         } catch (err) {
-          var badstr = 'Error writeFileSync:' + err;
-          res.render('pages/result', {myresults: badstr} );
+            var badstr = 'Error writeFileSync:' + err;
+            res.render('pages/result', {myresults: badstr} );
         }
 
         try {
-          fs.appendFileSync(filePath, content);
+            fs.appendFileSync(filePath, 'second line');
         } catch (err) {
-          var badstr = 'Error appendFileSync:' + err;
-          res.render('pages/result', {myresults: badstr} );
+            var badstr = 'Error appendFileSync:' + err;
+            res.render('pages/result', {myresults: badstr} );
         }
 
-        const fileName = 'downloaded_text.txt'; // Name for the downloaded file
-        res.download(filePath, fileName, (err) => {
-            if (err) {
-                var badstr = 'File download failed:' + err;
-                res.render('pages/result', {myresults: badstr} );
-            } else {
-                var goodstr = 'File download should be successful, look at your web-browser download status at the top right side of your web-browser.';
-                res.render('pages/result', {myresults: goodstr} );
-            }
-        });       
+        try {
+            const fileName = 'downloaded_text.txt'; // Name for the downloaded file
+            res.download(filePath, fileName);
+        } catch (err) {
+            var badstr = 'File download failed:' + err;
+            res.render('pages/result', {myresults: badstr} );
+        } 
+        var goodstr = 'File download should be successful, look at your web-browser download status at the top right side of your web-browser.';
+        res.render('pages/result', {myresults: goodstr} );
   })
   
   .get('/ghettoadmintools', (req,res) => res.render('admin_pages/ghetto_admin_tools'))

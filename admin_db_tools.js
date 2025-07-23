@@ -24,6 +24,7 @@ var fileName;
 var filePath;
 
 function make_student_table_func() {
+          var returnobj;
           async function connectAndRead() {
                       const client       = new Client(connectobj);
                       try {
@@ -35,16 +36,18 @@ function make_student_table_func() {
                                     fs.appendFileSync(filePath, line);
                                 } catch (err) {
                                     var badstr = 'Error student table appendFileSync:' + err;
-                                    console.log(badstr);
-                                    return {status: -1, myresults: badstr};
+                                    returnobj = {status: -1, myresults: badstr};
+                                    return returnobj;
                                 }
                           })
                       } catch (err) {
                           var badstr = 'Error reading student table = ' + err;
-                          return {status: -1, myresults: badstr};
+                          returnobj = {status: -1, myresults: badstr};
+                          return returnobj;
                       } finally {
                           await client.end();
-                          return {status: 0, myresults: ""};
+                          returnobj = {status: 0, myresults: ""};
+                          return returnobj;
                       }
           }
 
@@ -55,7 +58,8 @@ function make_student_table_func() {
               fs.writeFileSync(filePath, 'ID, FIRSTNAME, LASTNAME, EMAIL, PHONEAREACODE, PHONENUMBER\n');
           } catch (err) {
               var badstr = 'Error student table writeFileSync:' + err;
-              return {status: -1, myresults: badstr};
+              returnobj = {status: -1, myresults: badstr};
+              return returnobj;
           }
     
           connectAndRead();

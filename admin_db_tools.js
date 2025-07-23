@@ -122,6 +122,22 @@ module.exports = {
         });
   },
 
+  download_subscription_table_func: function(req,res) {
+        res.download(filePathTableSubscription, fileNameTableSubscription, (err) => {
+            if (err) {
+              console.error('Error downloading table subscription file:', err);
+              res.status(500).send('Error downloading table subscription file:' + err);
+            } else {
+              fs.unlink(filePathTableSubscription, (err) => {
+                  if (err)
+                      console.error('Error deleting table subscription file:', err);
+                  else
+                      console.log(fileNameTableSubscription + ' deleted successfully');
+              });
+            }
+        });
+  },
+
 
   make_all_db_table_files: function(req,res) {
     

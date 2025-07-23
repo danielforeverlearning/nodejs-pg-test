@@ -20,7 +20,7 @@ const connectobj   = {
                      };
 *****/
 
-const filePath = path.join(__dirname, 'public/student_table.txt'); // Path to your text file
+const filePath = path.join(__dirname, 'public/student_table.csv'); // Path to your text file
 
 module.exports = {  
 
@@ -32,7 +32,7 @@ module.exports = {
                           const result = await client.query('SELECT * FROM student ORDER BY ID ASC');
                           result.rows.forEach(function(row) {
                                 try {
-                                    var line = '' + row.ID + ', "' + row.firstname + '", "' + row.lastname + '", "' + row.email + '", ' + row.phoneareacode + ', ' + row.phonenumber + '\n';
+                                    var line = '' + row.id + ', "' + row.firstname + '", "' + row.lastname + '", "' + row.email + '", ' + row.phoneareacode + ', ' + row.phonenumber + '\n';
                                     fs.appendFileSync(filePath, line);
                                 } catch (err) {
                                     var badstr = 'Error appendFileSync:' + err;

@@ -76,6 +76,7 @@ module.exports = {
                   else
                       console.log(fileName + ' deleted ssuccessfully');
               });
+              res.redirect('/');
             }
         });
   }

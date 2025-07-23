@@ -25,7 +25,7 @@ var filePath;
 
 module.exports = {  
 
-  make_student_table_func: function() {
+  function make_student_table_func() {
           async function connectAndRead() {
                       const client       = new Client(connectobj);
                       try {

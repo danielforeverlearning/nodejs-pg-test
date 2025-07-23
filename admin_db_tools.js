@@ -36,15 +36,15 @@ function make_student_table_func() {
                                 } catch (err) {
                                     var badstr = 'Error student table appendFileSync:' + err;
                                     console.log(badstr);
-                                    return {status: "bad", myresults: badstr};
+                                    return {status: -1, myresults: badstr};
                                 }
                           })
                       } catch (err) {
                           var badstr = 'Error reading student table = ' + err;
-                          return {status: "bad", myresults: badstr};
+                          return {status: -1, myresults: badstr};
                       } finally {
                           await client.end();
-                          return {status: "good", myresults: ""};
+                          return {status: 0, myresults: ""};
                       }
           }
 
@@ -55,7 +55,7 @@ function make_student_table_func() {
               fs.writeFileSync(filePath, 'ID, FIRSTNAME, LASTNAME, EMAIL, PHONEAREACODE, PHONENUMBER\n');
           } catch (err) {
               var badstr = 'Error student table writeFileSync:' + err;
-              return {status: "bad", myresults: badstr};
+              return {status: -1, myresults: badstr};
           }
     
           connectAndRead();
@@ -81,7 +81,7 @@ module.exports = {
 
   make_all_db_table_files: function(req,res) {
           var table_student = make_student_table_func();
-          if (table_student.status != "good")
+          if (table_student.status == -1)
               res.render('pages/result', {myresults: table_student.myresults} );
 
     

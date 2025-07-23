@@ -135,7 +135,7 @@ module.exports = {
 
 
     
-          res.render('admin_pages/download_all_db_table_files', { student_table: true, subscription_table: true});
+          res.render('admin_pages/download_all_db_table_files');
   }
 
 }; //module.exports

@@ -71,6 +71,12 @@ module.exports = {
               res.status(500).send('Error downloading the file:' + err);
             }
         });
+
+        fs.unlink(filePath, (err) => {
+            if (err) {
+                console.error('Error deleting file:', err);
+            }
+        });
   }
 
 }; //module.exports

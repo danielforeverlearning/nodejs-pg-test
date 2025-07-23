@@ -23,9 +23,7 @@ const connectobj   = {
 var fileName;
 var filePath;
 
-module.exports = {  
-
-  function make_student_table_func() {
+function make_student_table_func() {
           async function connectAndRead() {
                       const client       = new Client(connectobj);
                       try {
@@ -61,7 +59,9 @@ module.exports = {
           }
     
           connectAndRead();
-  }, //make_student_table_func
+} //make_student_table_func
+
+module.exports = {  
 
   download_student_table_func: function(req,res) {
         res.download(filePath, fileName, (err) => {

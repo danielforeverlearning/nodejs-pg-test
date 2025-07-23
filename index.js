@@ -36,6 +36,7 @@ express()
   .get('/makealldbtablefiles', (req,res) => { admin_db_tools.make_all_db_table_files(req,res); })
   .get('/downloadstudenttablefile', (req,res) => { admin_db_tools.download_student_table_func(req,res); })
   .get('/downloadsubscriptiontablefile', (req,res) => { admin_db_tools.download_subscription_table_func(req,res); })
+  .get('/downloadreservationtablefile', (req,res) => { admin_db_tools.download_reservation_table_func(req,res); })
   .get('/emailblast', (req, res) => {
         var badstr = 'Emailblast not done yet, will probably use gmail rest-API with a free gmail account';
         res.render('pages/result', {myresults: badstr} );

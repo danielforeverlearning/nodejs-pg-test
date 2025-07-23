@@ -61,15 +61,12 @@ module.exports = {
   }, //make_student_table_func
 
   download_student_table_func: function(req,res) {
-        const fileName = 'downloaded_text.txt'; // Name for the downloaded file
+        const fileName = 'student_table.csv'; // Name for the downloaded file
         res.download(filePath, fileName, (err) => {
             if (err) {
               console.error('Error downloading the file:', err);
               res.status(500).send('Error downloading the file:' + err);
-            } else {
-              var goodstr = 'download good';
-              res.render('pages/result', {myresults: goodstr} );
-            } 
+            }
         });
   }
 

@@ -23,6 +23,9 @@ const connectobj   = {
 var fileNameTableStudent;
 var filePathTableStudent;
 
+var fileNameTableSubscription;
+var filePathTableSubscription;
+
 async function connectAndReadTableStudent() {
                       var returnobj;
                       try {
@@ -62,6 +65,45 @@ async function connectAndReadTableStudent() {
                       }
 }  //connectAndReadTableStudent
 
+async function connectAndReadTableSubscription() {
+                      var returnobj;
+                      try {
+                          var dd = new Date();
+                          fileNameTableSubscription =  'subscription_table_' + dd.getFullYear() + '_' + (dd.getMonth() + 1) + '_' + dd.getDate() + '_' + dd.getHours() + '_' + dd.getMinutes() + '_' + dd.getSeconds() + '_' + dd.getMilliseconds() + '.csv';
+                          filePathTableSubscription = path.join(__dirname, 'public/' + fileNameTableSubscription); // Path to your text file
+                          fs.writeFileSync(filePathTableSubscription, 'STUDENTID, ACTIVE, LASTPAIDMONTH, LASTPAIDYEAR\n');
+                      } catch (err) {
+                          var badstr = 'Error subscription table writeFileSync:' + err;
+                          returnobj = {status: -1, myresults: badstr};
+                          return returnobj;
+                      }
+    
+                      const client       = new Client(connectobj);
+                      try {
+                          await client.connect();
+                          const result = await client.query('SELECT * FROM subscription ORDER BY STUDENTID ASC');
+                          
+                          result.rows.forEach(function(row) {
+                                try {
+                                    var line = '' + row.studentid + ', ' + row.active + ', ' + row.lastpaidmonth + ', ' + row.lastpaidyear + '\n';
+                                    fs.appendFileSync(filePathTableSubscription, line);
+                                } catch (err) {
+                                    var badstr = 'Error subscription table appendFileSync:' + err;
+                                    returnobj = {status: -1, myresults: badstr};
+                                    return returnobj;
+                                }
+                          })
+                      } catch (err) {
+                          var badstr = 'Error reading subscription table = ' + err;
+                          returnobj = {status: -1, myresults: badstr};
+                          return returnobj;
+                      } finally {
+                          await client.end();
+                          returnobj = {status: 0, myresults: ""};
+                          return returnobj;
+                      }
+}  //connectAndReadTableSubscription
+
 module.exports = {  
 
   download_student_table_func: function(req,res) {
@@ -87,8 +129,13 @@ module.exports = {
           if (table_student.status == -1)
               res.render('pages/result', {myresults: table_student.myresults} );
 
+          var table_subscription = connectAndReadTableSubscription();
+          if (table_subscription.status == -1)
+              res.render('pages/result', {myresults: table_subscription.myresults} );
+
+
     
-          res.render('admin_pages/download_all_db_table_files');
+          res.render('admin_pages/download_all_db_table_files', { student_table: true, subscription_table: true});
   }
 
 }; //module.exports

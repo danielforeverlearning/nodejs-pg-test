@@ -25,7 +25,10 @@ var filePath;
 
 module.exports = {  
 
-  make_student_table_func: function(req,res) {
+  make_all_db_table_files: function(req,res) {
+  },
+
+  make_student_table_func: function() {
           async function connectAndRead() {
                       const client       = new Client(connectobj);
                       try {
@@ -36,17 +39,17 @@ module.exports = {
                                     var line = '' + row.id + ', "' + row.firstname + '", "' + row.lastname + '", "' + row.email + '", ' + row.phoneareacode + ', ' + row.phonenumber + '\n';
                                     fs.appendFileSync(filePath, line);
                                 } catch (err) {
-                                    var badstr = 'Error appendFileSync:' + err;
+                                    var badstr = 'Error student table appendFileSync:' + err;
                                     console.log(badstr);
-                                    res.render('pages/result', {myresults: badstr} );
+                                    return {status: "bad", myresults: badstr};
                                 }
                           })
                       } catch (err) {
-                          var result = 'Error reading student table = ' + err;
-                          res.send(result);
+                          var badstr = 'Error reading student table = ' + err;
+                          return {status: "bad", myresults: badstr};
                       } finally {
                           await client.end();
-                          res.render('admin_pages/download_student_table');
+                          return {status: "good", myresults: ""};
                       }
           }
 
@@ -56,9 +59,8 @@ module.exports = {
               filePath = path.join(__dirname, 'public/' + fileName); // Path to your text file
               fs.writeFileSync(filePath, 'ID, FIRSTNAME, LASTNAME, EMAIL, PHONEAREACODE, PHONENUMBER\n');
           } catch (err) {
-              var badstr = 'Error writeFileSync:' + err;
-              console.log(badstr);
-              res.render('pages/result', {myresults: badstr} );
+              var badstr = 'Error student table writeFileSync:' + err;
+              return {status: "bad", myresults: badstr};
           }
     
           connectAndRead();

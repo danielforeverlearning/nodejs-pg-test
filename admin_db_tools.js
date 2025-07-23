@@ -26,6 +26,12 @@ var filePath;
 module.exports = {  
 
   make_all_db_table_files: function(req,res) {
+          var table_student_status = make_student_table_func();
+          if (table_student_status != "good")
+              res.render('pages/result', {myresults: table_student_status.myresults} );
+
+    
+          res.render('admin_pages/download_all_db_table_files');
   },
 
   make_student_table_func: function() {

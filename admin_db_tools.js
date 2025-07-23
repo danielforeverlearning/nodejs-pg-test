@@ -127,7 +127,7 @@ async function connectAndReadTableReservation() {
                           
                           result.rows.forEach(function(row) {
                                 try {
-                                    var line = '' + row.id + ', ' + row.studentid + ', "' + row.firstname + '", "' + row.lastname + '", "' + row.location + '", ' + row.month + ', ' + row.day + ', ' + row.year + ', ' + row.hour + ', ' row.minute + '\n';
+                                    var line = '' + row.id + ', ' + row.studentid + ', "' + row.firstname + '", "' + row.lastname + '", "' + row.location + '", ' + row.month + ', ' + row.day + ', ' + row.year + ', ' + row.hour + ', ' + row.minute + '\n';
                                     fs.appendFileSync(filePathTableReservation, line);
                                 } catch (err) {
                                     var badstr = 'Error reservation table appendFileSync:' + err;

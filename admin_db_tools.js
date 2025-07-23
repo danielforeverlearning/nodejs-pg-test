@@ -23,25 +23,7 @@ const connectobj   = {
 var fileName;
 var filePath;
 
-module.exports = {  
-
-  download_student_table_func: function(req,res) {
-        res.download(filePath, fileName, (err) => {
-            if (err) {
-              console.error('Error downloading the file:', err);
-              res.status(500).send('Error downloading the file:' + err);
-            } else {
-              fs.unlink(filePath, (err) => {
-                  if (err)
-                      console.error('Error deleting file:', err);
-                  else
-                      console.log(fileName + ' deleted ssuccessfully');
-              });
-            }
-        });
-  },
-
-  async function connectAndRead() {
+async function connectAndRead() {
                       var returnobj;
                       try {
                           var dd = new Date();
@@ -78,7 +60,26 @@ module.exports = {
                           returnobj = {status: 0, myresults: ""};
                           return returnobj;
                       }
-  },  //connectAndRead
+}  //connectAndRead
+
+module.exports = {  
+
+  download_student_table_func: function(req,res) {
+        res.download(filePath, fileName, (err) => {
+            if (err) {
+              console.error('Error downloading the file:', err);
+              res.status(500).send('Error downloading the file:' + err);
+            } else {
+              fs.unlink(filePath, (err) => {
+                  if (err)
+                      console.error('Error deleting file:', err);
+                  else
+                      console.log(fileName + ' deleted ssuccessfully');
+              });
+            }
+        });
+  },
+
 
   make_all_db_table_files: function(req,res) {
     

@@ -20,16 +20,16 @@ const connectobj   = {
                      };
 *****/
 
-var fileName;
-var filePath;
+var fileNameTableStudent;
+var filePathTableStudent;
 
-async function connectAndRead() {
+async function connectAndReadTableStudent() {
                       var returnobj;
                       try {
                           var dd = new Date();
-                          fileName =  'student_table_' + dd.getFullYear() + '_' + (dd.getMonth() + 1) + '_' + dd.getDate() + '_' + dd.getHours() + '_' + dd.getMinutes() + '_' + dd.getSeconds() + '_' + dd.getMilliseconds() + '.csv';
-                          filePath = path.join(__dirname, 'public/' + fileName); // Path to your text file
-                          fs.writeFileSync(filePath, 'ID, FIRSTNAME, LASTNAME, EMAIL, PHONEAREACODE, PHONENUMBER\n');
+                          fileNameTableStudent =  'student_table_' + dd.getFullYear() + '_' + (dd.getMonth() + 1) + '_' + dd.getDate() + '_' + dd.getHours() + '_' + dd.getMinutes() + '_' + dd.getSeconds() + '_' + dd.getMilliseconds() + '.csv';
+                          filePathTableStudent = path.join(__dirname, 'public/' + fileNameTableStudent); // Path to your text file
+                          fs.writeFileSync(filePathTableStudent, 'ID, FIRSTNAME, LASTNAME, EMAIL, PHONEAREACODE, PHONENUMBER\n');
                       } catch (err) {
                           var badstr = 'Error student table writeFileSync:' + err;
                           returnobj = {status: -1, myresults: badstr};
@@ -44,7 +44,7 @@ async function connectAndRead() {
                           result.rows.forEach(function(row) {
                                 try {
                                     var line = '' + row.id + ', "' + row.firstname + '", "' + row.lastname + '", "' + row.email + '", ' + row.phoneareacode + ', ' + row.phonenumber + '\n';
-                                    fs.appendFileSync(filePath, line);
+                                    fs.appendFileSync(filePathTableStudent, line);
                                 } catch (err) {
                                     var badstr = 'Error student table appendFileSync:' + err;
                                     returnobj = {status: -1, myresults: badstr};
@@ -60,21 +60,21 @@ async function connectAndRead() {
                           returnobj = {status: 0, myresults: ""};
                           return returnobj;
                       }
-}  //connectAndRead
+}  //connectAndReadTableStudent
 
 module.exports = {  
 
   download_student_table_func: function(req,res) {
-        res.download(filePath, fileName, (err) => {
+        res.download(filePathTableStudent, fileNameTableStudent, (err) => {
             if (err) {
-              console.error('Error downloading the file:', err);
-              res.status(500).send('Error downloading the file:' + err);
+              console.error('Error downloading table student file:', err);
+              res.status(500).send('Error downloading table student file:' + err);
             } else {
-              fs.unlink(filePath, (err) => {
+              fs.unlink(filePathTableStudent, (err) => {
                   if (err)
-                      console.error('Error deleting file:', err);
+                      console.error('Error deleting table student file:', err);
                   else
-                      console.log(fileName + ' deleted ssuccessfully');
+                      console.log(fileNameTableStudent + ' deleted successfully');
               });
             }
         });
@@ -83,8 +83,7 @@ module.exports = {
 
   make_all_db_table_files: function(req,res) {
     
-          var table_student = connectAndRead();
-          console.log("table_student = " + table_student);
+          var table_student = connectAndReadTableStudent();
           if (table_student.status == -1)
               res.render('pages/result', {myresults: table_student.myresults} );
 

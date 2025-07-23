@@ -84,7 +84,7 @@ module.exports = {
   make_all_db_table_files: function(req,res) {
     
           var table_student = connectAndRead();
-          console.log("table_student = " + JSON.stringify(table_student));
+          console.log("table_student = " + table_student);
           if (table_student.status == -1)
               res.render('pages/result', {myresults: table_student.myresults} );
 

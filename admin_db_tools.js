@@ -39,7 +39,7 @@ module.exports = {
                                     console.log(badstr);
                                     res.render('pages/result', {myresults: badstr} );
                                 }
-                          }
+                          })
                       } catch (err) {
                           var result = 'Error reading student table = ' + err;
                           res.send(result);

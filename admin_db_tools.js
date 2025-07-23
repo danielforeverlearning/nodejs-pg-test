@@ -29,42 +29,35 @@ module.exports = {
                       const client       = new Client(connectobj);
                       try {
                           await client.connect();
-                          console.log('Connected to PostgreSQL!');
-              
-                          // Example: create table
-                          const createRes = await client.query(
-                              'CREATE TABLE reservation (ID SERIAL PRIMARY KEY, STUDENTID INTEGER, FIRSTNAME VARCHAR(255), LASTNAME VARCHAR(255), LOCATION VARCHAR(255), MONTH INTEGER, DAY INTEGER, YEAR INTEGER, HOUR INTEGER, MINUTE INTEGER, CONSTRAINT myreservationtablefkconstraint FOREIGN KEY (STUDENTID) REFERENCES student(ID));'
-                          );
-                          var result = 'createRes = ' + JSON.stringify(createRes);
-                          res.send(result);
+                          const result = await client.query('SELECT * FROM student ORDER BY ID ASC');
+                          result.rows.forEach(function(row) {
+                                try {
+                                    var line = '' + row.ID + ', "' + row.firstname + '", "' + row.lastname + '", "' + row.email + '", ' + row.phoneareacode + ', ' + row.phonenumber + '\n';
+                                    fs.appendFileSync(filePath, line);
+                                } catch (err) {
+                                    var badstr = 'Error appendFileSync:' + err;
+                                    console.log(badstr);
+                                    res.render('pages/result', {myresults: badstr} );
+                                }
+                          }
                       } catch (err) {
-                          var result = 'Error connecting or creating table = ' + err;
+                          var result = 'Error reading student table = ' + err;
                           res.send(result);
                       } finally {
                           await client.end();
-                          console.log('Disconnected from PostgreSQL.');
+                          res.render('admin_pages/download_student_table');
                       }
           }
 
           try {
-              fs.writeFileSync(filePath, 'header line\n');
+              fs.writeFileSync(filePath, 'ID, FIRSTNAME, LASTNAME, EMAIL, PHONEAREACODE, PHONENUMBER\n');
           } catch (err) {
               var badstr = 'Error writeFileSync:' + err;
               console.log(badstr);
               res.render('pages/result', {myresults: badstr} );
           }
-  
-          try {
-              fs.appendFileSync(filePath, 'second line');
-          } catch (err) {
-              var badstr = 'Error appendFileSync:' + err;
-              console.log(badstr);
-              res.render('pages/result', {myresults: badstr} );
-          }
           
-          //connectAndRead();
-
-          res.render('admin_pages/download_student_table');
+          connectAndRead();
   }, //make_student_table_func
 
   download_student_table_func: function(req,res) {

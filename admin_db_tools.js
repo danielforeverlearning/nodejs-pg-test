@@ -69,12 +69,13 @@ module.exports = {
             if (err) {
               console.error('Error downloading the file:', err);
               res.status(500).send('Error downloading the file:' + err);
-            }
-        });
-
-        fs.unlink(filePath, (err) => {
-            if (err) {
-                console.error('Error deleting file:', err);
+            } else {
+              fs.unlink(filePath, (err) => {
+                  if (err)
+                      console.error('Error deleting file:', err);
+                  else
+                      console.log(fileName + ' deleted ssuccessfully');
+              });
             }
         });
   }

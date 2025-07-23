@@ -20,7 +20,8 @@ const connectobj   = {
                      };
 *****/
 
-const filePath = path.join(__dirname, 'public/student_table.csv'); // Path to your text file
+var fileName;
+var filePath;
 
 module.exports = {  
 
@@ -50,18 +51,20 @@ module.exports = {
           }
 
           try {
+              var dd = new Date();
+              fileName =  'student_table_' + dd.getFullYear() + '_' + (dd.getMonth() + 1) + '_' + dd.getDate() + '_' + dd.getHours() + '_' + dd.getMinutes() + '_' + dd.getSeconds() + '_' + dd.getMilliseconds() + '.csv';
+              filePath = path.join(__dirname, 'public/' + fileName); // Path to your text file
               fs.writeFileSync(filePath, 'ID, FIRSTNAME, LASTNAME, EMAIL, PHONEAREACODE, PHONENUMBER\n');
           } catch (err) {
               var badstr = 'Error writeFileSync:' + err;
               console.log(badstr);
               res.render('pages/result', {myresults: badstr} );
           }
-          
+    
           connectAndRead();
   }, //make_student_table_func
 
   download_student_table_func: function(req,res) {
-        const fileName = 'student_table.csv'; // Name for the downloaded file
         res.download(filePath, fileName, (err) => {
             if (err) {
               console.error('Error downloading the file:', err);

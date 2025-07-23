@@ -26,6 +26,9 @@ var filePathTableStudent;
 var fileNameTableSubscription;
 var filePathTableSubscription;
 
+var fileNameTableReservation;
+var filePathTableReservation;
+
 async function connectAndReadTableStudent() {
                       var returnobj;
                       try {
@@ -104,6 +107,45 @@ async function connectAndReadTableSubscription() {
                       }
 }  //connectAndReadTableSubscription
 
+async function connectAndReadTableReservation() {
+                      var returnobj;
+                      try {
+                          var dd = new Date();
+                          fileNameTableReservation =  'reservation_table_' + dd.getFullYear() + '_' + (dd.getMonth() + 1) + '_' + dd.getDate() + '_' + dd.getHours() + '_' + dd.getMinutes() + '_' + dd.getSeconds() + '_' + dd.getMilliseconds() + '.csv';
+                          filePathTableReservation = path.join(__dirname, 'public/' + fileNameTableReservation); // Path to your text file
+                          fs.writeFileSync(filePathTableReservation, 'ID, STUDENTID, FIRSTNAME, LASTNAME, LOCATION, MONTH, DAY, YEAR, HOUR, MINUTE\n');
+                      } catch (err) {
+                          var badstr = 'Error reservation table writeFileSync:' + err;
+                          returnobj = {status: -1, myresults: badstr};
+                          return returnobj;
+                      }
+    
+                      const client       = new Client(connectobj);
+                      try {
+                          await client.connect();
+                          const result = await client.query('SELECT * FROM reservation ORDER BY ID ASC');
+                          
+                          result.rows.forEach(function(row) {
+                                try {
+                                    var line = '' + row.id + ', ' + row.studentid + ', "' + row.firstname + '", "' + row.lastname + '", "' + row.location + '", ' + row.month + ', ' + row.day + ', ' + row.year + ', ' + row.hour + ', ' row.minute + '\n';
+                                    fs.appendFileSync(filePathTableReservation, line);
+                                } catch (err) {
+                                    var badstr = 'Error reservation table appendFileSync:' + err;
+                                    returnobj = {status: -1, myresults: badstr};
+                                    return returnobj;
+                                }
+                          })
+                      } catch (err) {
+                          var badstr = 'Error reading reservation table = ' + err;
+                          returnobj = {status: -1, myresults: badstr};
+                          return returnobj;
+                      } finally {
+                          await client.end();
+                          returnobj = {status: 0, myresults: ""};
+                          return returnobj;
+                      }
+}  //connectAndReadTableReservation
+
 module.exports = {  
 
   download_student_table_func: function(req,res) {
@@ -138,6 +180,22 @@ module.exports = {
         });
   },
 
+  download_reservation_table_func: function(req,res) {
+        res.download(filePathTableReservation, fileNameTableReservation, (err) => {
+            if (err) {
+              console.error('Error downloading table reservation file:', err);
+              res.status(500).send('Error downloading table reservation file:' + err);
+            } else {
+              fs.unlink(filePathTableReservation, (err) => {
+                  if (err)
+                      console.error('Error deleting table reservation file:', err);
+                  else
+                      console.log(fileNameTableReservation + ' deleted successfully');
+              });
+            }
+        });
+  },
+
 
   make_all_db_table_files: function(req,res) {
     
@@ -148,6 +206,11 @@ module.exports = {
           var table_subscription = connectAndReadTableSubscription();
           if (table_subscription.status == -1)
               res.render('pages/result', {myresults: table_subscription.myresults} );
+
+          var table_reservation = connectAndReadTableReservation();
+          if (table_reservation.status == -1)
+              res.render('pages/result', {myresults: table_reservation.myresults} );
+
 
 
     

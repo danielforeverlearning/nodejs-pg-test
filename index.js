@@ -35,7 +35,6 @@ express()
   
   .get('/', (req, res) => res.render('pages/home'))
 
-  .get('/securityinsert', (req, res) => res.render('pages/securitytableinsert'))
   .post('/securityinsertsubmit', (req, res) => { securitytable.securitytableinsertfunc(req,res); })
   
   .get('/ghettoadmintools', (req,res) => res.render('admin_pages/ghetto_admin_tools'))

@@ -19,7 +19,10 @@ const PORT         = process.env.PORT || 5000
 
 var studenttable = require('./studenttable');
 var subscriptiontable = require('./subscriptiontable');
+var securitytable = require('./securitytable');
+
 var admin_student = require('./admin_student');
+var admin_security = require('./admin_security');
 var admin_subscription = require('./admin_subscription');
 var admin_reservation = require('./admin_reservation');
 var admin_db_tools = require('./admin_db_tools');
@@ -31,6 +34,9 @@ express()
   .set('view engine', 'ejs')
   
   .get('/', (req, res) => res.render('pages/home'))
+
+  .get('/securityinsert', (req, res) => res.render('pages/securitytableinsert'))
+  .post('/securityinsertsubmit', (req, res) => { securitytable.securitytableinsertfunc(req,res); })
   
   .get('/ghettoadmintools', (req,res) => res.render('admin_pages/ghetto_admin_tools'))
   .get('/makealldbtablefiles', (req,res) => { admin_db_tools.make_all_db_table_files(req,res); })

@@ -7,6 +7,8 @@ const PORT         = process.env.PORT || 5000;
 
 const { Client }   = require('pg');
 
+var securitytable = require('./securitytable');
+
 var db_credential = require('./db_credential');
 const connectobj    = db_credential.myconnectobj();
 
@@ -175,22 +177,29 @@ module.exports = {
       var email;
       var phoneareacode;
       var phonenumber;
+      var dbgoodresult;
+      var badstr;
       async function connectAndUpdate() {    
                         const client       = new Client(connectobj);
                         try {
                           await client.connect();
-                          console.log('studenttableupdate3func Connected to PostgreSQL!');
+                          //console.log('studenttableupdate3func Connected to PostgreSQL!');
                           var stmt = "UPDATE student SET FIRSTNAME = '" + firstname + "', LASTNAME = '" + lastname + "', EMAIL = '" + email + "', PHONEAREACODE = " + phoneareacode + ", PHONENUMBER = " + phonenumber + " WHERE ID = " + primarykeyID + ";";
                           console.log(stmt);
                           const updateRes = await client.query(stmt);
-                          var resultstr = 'updateRes = ' + JSON.stringify(updateRes);
-                          res.render('pages/result', {myresults: resultstr} );
+                          //var resultstr = 'updateRes = ' + JSON.stringify(updateRes);
+                          //res.render('pages/result', {myresults: resultstr} );
+                          dbgoodresult = true;
                         } catch (err) {
-                            var badstr = 'UPDATE student ID = ' + primarykeyID + ', err = ' + err;
-                            res.render('pages/result', {myresults: badstr} );
+                            badstr = 'UPDATE student ID = ' + primarykeyID + ', err = ' + err;
+                            dbgoodresult = false;
                         } finally {
                             await client.end();
-                            console.log('studenttableupdate3func Disconnected from PostgreSQL.');
+                            //console.log('studenttableupdate3func Disconnected from PostgreSQL.');
+                            if (dbgoodresult) {
+                            }
+                            else
+                                 res.render('pages/result', {myresults: badstr} );
                         }
       }
     

@@ -7,10 +7,32 @@ const PORT         = process.env.PORT || 5000;
 
 const { Client }   = require('pg');
 
-var securitytable = require('./securitytable');
-
 var db_credential = require('./db_credential');
 const connectobj    = db_credential.myconnectobj();
+
+async function securityReadByStudentID(studentID) {  
+                        var dbgoodresult;
+                        var badstr;
+                        var result;
+                        const client       = new Client(connectobj);
+                        try {
+                          await client.connect();
+
+                          var selectstmt = 'SELECT * FROM security WHERE STUDENTID = ' + studentID;
+                          result = await client.query(selectstmt);
+                          console.log(" result = " + JSON.stringify(result));
+                          dbgoodresult = true;
+                        } catch (err) {
+                            dbgoodresult = false;
+                            badstr = "securityReadByStudentID err = " + err;
+                        } finally {
+                            await client.end();
+                            if (dbgoodresult)
+                              res.render('pages/securitytableinsert', {results: result.rows} );
+                            else
+                              res.render('pages/result', {myresults: badstr} );
+                        }
+  } //securityReadByStudentID
 
 module.exports = {
   studentviewfunc: function(req,res,sortorder)  {
@@ -197,7 +219,7 @@ module.exports = {
                             await client.end();
                             //console.log('studenttableupdate3func Disconnected from PostgreSQL.');
                             if (dbgoodresult)
-                                 await securitytable.securityReadByStudentID(primarykeyID);
+                                 securityReadByStudentID(primarykeyID);
                             else
                                  res.render('pages/result', {myresults: badstr} );
                         }

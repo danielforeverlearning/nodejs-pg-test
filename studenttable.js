@@ -201,6 +201,7 @@ module.exports = {
       var phonenumber;
       var dbgoodresult;
       var badstr;
+      var updateRes;
       async function connectAndUpdate() {    
                         const client       = new Client(connectobj);
                         try {
@@ -208,9 +209,7 @@ module.exports = {
                           //console.log('studenttableupdate3func Connected to PostgreSQL!');
                           var stmt = "UPDATE student SET FIRSTNAME = '" + firstname + "', LASTNAME = '" + lastname + "', EMAIL = '" + email + "', PHONEAREACODE = " + phoneareacode + ", PHONENUMBER = " + phonenumber + " WHERE ID = " + primarykeyID + ";";
                           console.log(stmt);
-                          const updateRes = await client.query(stmt);
-                          //var resultstr = 'updateRes = ' + JSON.stringify(updateRes);
-                          //res.render('pages/result', {myresults: resultstr} );
+                          updateRes = await client.query(stmt);
                           dbgoodresult = true;
                         } catch (err) {
                             badstr = 'UPDATE student ID = ' + primarykeyID + ', err = ' + err;
@@ -218,8 +217,11 @@ module.exports = {
                         } finally {
                             await client.end();
                             //console.log('studenttableupdate3func Disconnected from PostgreSQL.');
-                            if (dbgoodresult)
-                                 securityReadByStudentID(res, primarykeyID);
+                            if (dbgoodresult) {
+                                 var resultstr = 'updateRes = ' + JSON.stringify(updateRes);
+                                 res.render('pages/result', {myresults: resultstr} );
+                                 //securityReadByStudentID(res, primarykeyID);
+                            }
                             else
                                  res.render('pages/result', {myresults: badstr} );
                         }

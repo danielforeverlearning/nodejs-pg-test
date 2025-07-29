@@ -196,8 +196,8 @@ module.exports = {
                         } finally {
                             await client.end();
                             //console.log('studenttableupdate3func Disconnected from PostgreSQL.');
-                            if (dbgoodresult) {
-                            }
+                            if (dbgoodresult)
+                                 securitytable.securityReadByStudentID(primarykeyID);
                             else
                                  res.render('pages/result', {myresults: badstr} );
                         }

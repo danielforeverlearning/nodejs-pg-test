@@ -92,8 +92,8 @@ express()
   .get('/dbcreatestudenttable', (req, res) => { admin_student.studenttablecreatefunc(req, res); })
   .get('/dbdropstudenttable', (req, res) => { admin_student.studenttabledropfunc(req, res); })
 
-  .get('/dbcreatesecuritytable', (req, res) => { admin_student.securitytablecreatefunc(req, res); })
-  .get('/dbdropsecuritytable', (req, res) => { admin_student.securitytabledropfunc(req, res); })
+  .get('/dbcreatesecuritytable', (req, res) => { admin_security.securitytablecreatefunc(req, res); })
+  .get('/dbdropsecuritytable', (req, res) => { admin_security.securitytabledropfunc(req, res); })
   
   .get('/dbcreatesubscriptiontable', (req, res) => { admin_subscription.subscriptiontablecreatefunc(req, res); })
   .get('/dbdropsubscriptiontable', (req, res) => { admin_subscription.subscriptiontabledropfunc(req,res); }) 

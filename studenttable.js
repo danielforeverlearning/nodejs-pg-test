@@ -55,7 +55,7 @@ module.exports = {
                         const client       = new Client(connectobj);
                         try {
                           await client.connect();
-                          console.log('INSERT INTO student Connected to PostgreSQL!');
+                          //console.log('INSERT INTO student Connected to PostgreSQL!');
                           var insertstmt = "INSERT INTO student (FIRSTNAME, LASTNAME, EMAIL, PHONEAREACODE, PHONENUMBER) VALUES ('" + firstname + "', '" + lastname + "', '" + email + "', " + phoneareacode + ", " + phonenumber + ");";
                           console.log(insertstmt);
                           const insertRes = await client.query(insertstmt);
@@ -66,7 +66,7 @@ module.exports = {
                             res.render('pages/result', {myresults: badstr} );
                         } finally {
                             await client.end();
-                            console.log('INSERT INTO student Disconnected from PostgreSQL.');
+                            //console.log('INSERT INTO student Disconnected from PostgreSQL.');
                         }
       }
     

@@ -10,7 +10,7 @@ const { Client }   = require('pg');
 var db_credential = require('./db_credential');
 const connectobj    = db_credential.myconnectobj();
 
-async function securityReadByStudentID(studentID) {  
+async function securityReadByStudentID(res, studentID) {  
                         var dbgoodresult;
                         var badstr;
                         var result;
@@ -219,7 +219,7 @@ module.exports = {
                             await client.end();
                             //console.log('studenttableupdate3func Disconnected from PostgreSQL.');
                             if (dbgoodresult)
-                                 securityReadByStudentID(primarykeyID);
+                                 securityReadByStudentID(res, primarykeyID);
                             else
                                  res.render('pages/result', {myresults: badstr} );
                         }

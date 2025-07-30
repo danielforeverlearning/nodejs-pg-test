@@ -48,7 +48,55 @@ securityReadByStudentID: async function(res, studentID, firstname, lastname) {
   }, //securityReadByStudentID
   
   securitytableinsertfunc: function(req, res)  {
-      res.render('pages/result', {myresults: "no code yet for securitytableinsertfunc"});
+      var password;
+      var confirm;
+      var studentID;
+      var passwordhash;
+      var resultstr;
+      async function connectAndInsert() {    
+                        const client       = new Client(connectobj);
+                        try {
+                          await client.connect();
+                          var insertstmt = "INSERT INTO security (STUDENTID, PASSWORDHASH) VALUES (" + studentID + ", '" + passwordhash + "');";
+                          console.log(insertstmt);
+                          const insertRes = await client.query(insertstmt);
+                          resultstr = 'insertRes = ' + JSON.stringify(insertRes);
+                        } catch (err) {
+                            resultstr = 'INSERT INTO security ERROR = ' + err;
+                        } finally {
+                            await client.end();
+                            res.render('pages/result', {myresults: resultstr} );
+                        }
+      }
+    
+      var form = new formidable.IncomingForm();
+      form.parse(req, function (err, fields, files) {
+  
+          if (err)
+          {
+             res.send("securitytableinsertfunc err = " + err);
+          }
+          else
+          { //good
+             console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
+             password = fields.password_name;
+             confirm = fields.confirm_name;
+             studentID = fields.studentID_name;
+             
+             //validation checking
+             if (password != confirm)
+             {
+                  var badstr = 'Sorry password and confirm must be exactly the same.';
+                  res.render('pages/result', {myresults: badstr} );
+             }
+             else
+             {
+                  passwordhash = hashHmacJs('sha256', password, 'nodejs-pg-test');
+                  console.log("passwordhash = " + passwordhash);
+                  connectAndInsert();
+             }
+          }//good
+      })//form.parse
   } //securitytableinsertfunc
 
   

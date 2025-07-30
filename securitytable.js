@@ -40,7 +40,7 @@ securityReadByStudentID: async function(res, studentID, firstname, lastname) {
   }, //securityReadByStudentID
   
   securitytableinsertfunc: function(req, res)  {
-      
+      res.render('pages/result', {myresults: "no code yet for securitytableinsertfunc"});
   } //securitytableinsertfunc
 
   

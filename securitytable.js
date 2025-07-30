@@ -81,7 +81,10 @@ securityReadByStudentID: async function(res, studentID, firstname, lastname) {
              console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
              password = JSON.stringify(fields.password_name);
              confirm = JSON.stringify(fields.confirm_name);
-             studentID = JSON.stringify(fields.studentID_name);
+             studentID = fields.studentID_name;
+             console.log("typeof password = " + typeof password);
+             console.log("typeof confirm = " + typeof confirm);
+             console.log('password="' + password + '" confirm="' + confirm + '"');
              
              //validation checking
              if (password === confirm)
@@ -92,8 +95,6 @@ securityReadByStudentID: async function(res, studentID, firstname, lastname) {
              }
              else
              {
-                  console.log("typeof password = " + typeof password);
-                  console.log("typeof confirm = " + typeof confirm);
                   var badstr = 'Sorry password and confirm must be exactly the same: ' + 'password="' + password + '" confirm="' + confirm + '"';
                   res.render('pages/result', {myresults: badstr} );
              }

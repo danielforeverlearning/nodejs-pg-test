@@ -2,6 +2,7 @@ const express      = require('express')
 const path         = require('path')
 var   https        = require('https');
 const formidable   = require('formidable');
+const crypto       = require('crypto');
 
 const PORT         = process.env.PORT || 5000;
 
@@ -9,6 +10,13 @@ const { Client }   = require('pg');
 
 var db_credential = require('./db_credential');
 const connectobj    = db_credential.myconnectobj();
+
+function hashHmacJs(algo, data, key, raw_output = false) {
+    const hmac = crypto.createHmac(algo, key);
+    hmac.update(data);
+    const digest = hmac.digest(raw_output ? 'binary' : 'hex');
+    return digest;
+}//hashHmacJs
 
 module.exports = {
 

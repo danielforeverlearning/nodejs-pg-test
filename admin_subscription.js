@@ -21,7 +21,7 @@ module.exports = {
                           console.log('subscriptiontablereadfunc Connected to PostgreSQL!');
                           const result = await client.query('SELECT * FROM subscription');
                           console.log("result = " + JSON.stringify(result));
-                          res.render('pages/subscriptiontableread', {results: result.rows} );
+                          res.render('admin_pages/subscriptiontableread', {results: result.rows} );
                         } catch (err) {
                             var result = 'subscriptiontablereadfunc ERROR = ' + err;
                             res.send(result);
@@ -41,10 +41,10 @@ module.exports = {
                           await client.connect();
                           const deleteRes = await client.query("DELETE FROM subscription WHERE STUDENTID = " + primarykeyID + ";");
                           var resultstr = 'deleteRes = ' + JSON.stringify(deleteRes);
-                          res.render('pages/result', {myresults: resultstr} );
+                          res.render('admin_pages/adminresult', {myresults: resultstr} );
                         } catch (err) {
                             var badstr = 'DELETE FROM subscription ERROR = ' + err;
-                            res.render('pages/result', {myresults: badstr} );
+                            res.render('admin_pages/adminresult', {myresults: badstr} );
                         } finally {
                             await client.end();
                             console.log('DELETE FROM subscription Disconnected from PostgreSQL.');
@@ -57,7 +57,7 @@ module.exports = {
           if (err)
           {
              var badstr = "subscriptiontabledeletesubmitfunc err = " + err;
-             res.render('pages/result', {myresults: badstr} );
+             res.render('admin_pages/adminresult', {myresults: badstr} );
           }
           else
           {
@@ -83,10 +83,10 @@ module.exports = {
                           console.log(insertstmt);
                           const insertRes = await client.query(insertstmt);
                           var resultstr = 'insertRes = ' + JSON.stringify(insertRes);
-                          res.render('pages/result', {myresults: resultstr} );
+                          res.render('admin_pages/adminresult', {myresults: resultstr} );
                         } catch (err) {
                             var badstr = 'INSERT INTO subscription ERROR = ' + err;
-                            res.render('pages/result', {myresults: badstr} );
+                            res.render('admin_pages/adminresult', {myresults: badstr} );
                         } finally {
                             await client.end();
                             console.log('INSERT INTO subscription Disconnected from PostgreSQL.');
@@ -133,18 +133,18 @@ module.exports = {
                               {
                                   //var badstr = 'Sorry there is no row in table student with ID = ' + studentID + ', if you want to update a row the ID must be good.';
                                   //res.render('pages/result', {myresults: badstr} );
-                                  res.render('pages/subscriptionview', {rowcount:0, norowyetstudentID: studentID, norowyetfirstname: firstname, norowyetlastname: lastname} );
+                                  res.render('admin_pages/subscriptionview', {rowcount:0, norowyetstudentID: studentID, norowyetfirstname: firstname, norowyetlastname: lastname} );
                               }
                               else if (selectIDres.rows.length == 1)
-                                  res.render('pages/subscriptionview', {rowcount:1, foreigntablefirstname: firstname, foreigntablelastname: lastname, existingrow: selectIDres.rows[0]} );
+                                  res.render('admin_pages/subscriptionview', {rowcount:1, foreigntablefirstname: firstname, foreigntablelastname: lastname, existingrow: selectIDres.rows[0]} );
                               else {
                                   console.log("read1IDfunc: rowcount = " + selectIDres.rows.length);
                                   console.log("rows = " + JSON.stringify(selectIDres.rows));
-                                  res.render('pages/subscriptionview', {rowcount:selectIDres.rows.length, rows: selectIDres.rows} );
+                                  res.render('admin_pages/subscriptionview', {rowcount:selectIDres.rows.length, rows: selectIDres.rows} );
                               }
                         } catch (err) {
                               var badstr = 'read1IDfunc ID = ' + studentID + ', ERROR = ' + err;
-                              res.render('pages/result', {myresults: badstr} );
+                              res.render('admin_pages/result', {myresults: badstr} );
                         } finally {
                               await client.end();
                         }
@@ -160,10 +160,10 @@ module.exports = {
                           await client.connect();
                           const selectIDres = await client.query("SELECT * FROM subscription WHERE STUDENTID = " + studentID + ";");
                           console.log("subscriptiontable updatefunc = " + JSON.stringify(selectIDres));
-                          res.render('pages/subscriptionviewupdate', { myfirstname: firstname, mylastname: lastname, existingrow: selectIDres.rows[0] } );
+                          res.render('admin_pages/subscriptionviewupdate', { myfirstname: firstname, mylastname: lastname, existingrow: selectIDres.rows[0] } );
                         } catch (err) {
                               var badstr = 'subscriptiontable updatefunc ID = ' + studentID + ', ERROR = ' + err;
-                              res.render('pages/result', {myresults: badstr} );
+                              res.render('admin_pages/adminresult', {myresults: badstr} );
                         } finally {
                               await client.end();
                         }

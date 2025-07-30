@@ -218,9 +218,9 @@ module.exports = {
                             await client.end();
                             //console.log('studenttableupdate3func Disconnected from PostgreSQL.');
                             if (dbgoodresult) {
-                                 var resultstr = 'updateRes = ' + JSON.stringify(updateRes);
-                                 res.render('pages/result', {myresults: resultstr} );
-                                 //securityReadByStudentID(res, primarykeyID);
+                                 //var resultstr = 'updateRes = ' + JSON.stringify(updateRes);
+                                 //res.render('pages/result', {myresults: resultstr} );
+                                 securityReadByStudentID(res, primarykeyID);
                             }
                             else
                                  res.render('pages/result', {myresults: badstr} );

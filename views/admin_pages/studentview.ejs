@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+<style>
+th, td {
+  border: 1px solid black;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+<h2>TABLE student</h2>
+<table>
+<tr>
+
+<% if (sortorder == 100) { %>
+<th onclick="window.location.href='/student/200'" >
+<% } else { %>
+<th onclick="window.location.href='/student/100'" >
+<% } %>
+ID<% if (sortorder == 100) { %>
+<img src="/arrow-up.png" width="50" height="50">
+<% } else if (sortorder == 200) { %>
+<img src="/arrow-down.png" width="50" height="50">
+<% } else { %>
+<img src="/sort-alt.png" width="50" height="50">
+<% } %>
+</th>
+
+<% if (sortorder == 10) { %>
+<th onclick="window.location.href='/student/20'" >
+<% } else { %>
+<th onclick="window.location.href='/student/10'" >
+<% } %>
+FIRST NAME<% if (sortorder == 10) { %>
+<img src="/arrow-up.png" width="50" height="50">
+<% } else if (sortorder == 20) { %>
+<img src="/arrow-down.png" width="50" height="50">
+<% } else { %>
+<img src="/sort-alt.png" width="50" height="50">
+<% } %>
+</th>
+
+
+<% if (sortorder == 1) { %>
+<th onclick="window.location.href='/student/2'" >
+<% } else { %>
+<th onclick="window.location.href='/student/1'" >
+<% } %>
+LAST NAME<% if (sortorder == 1) { %>
+<img src="/arrow-up.png" width="50" height="50">
+<% } else if (sortorder == 2) { %>
+<img src="/arrow-down.png" width="50" height="50">
+<% } else { %>
+<img src="/sort-alt.png" width="50" height="50">
+<% } %>
+</th>
+
+    <th>EMAIL</th>
+    <th>PHONE AREA CODE</th>
+    <th>PHONE NUMBER</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+</tr>
+    <% results.forEach(function(r) { %>
+        <tr>
+        <td><%= r.id %></td>
+        <td><%= r.firstname %></td>
+        <td><%= r.lastname %></td>
+        <td><%= r.email %></td>
+        <td><%= r.phoneareacode %></td>
+        <td><%= r.phonenumber %></td>
+        <td><input type="button" onclick="window.location.href='/studentdeleteconfirm/<%= r.id %>/<%= r.firstname %>/<%= r.lastname %>'"   value="DELETE"></td>
+        <td><input type="button" onclick="window.location.href='/studentupdate/<%= r.id %>'"          value="UPDATE"></td>
+        <td><input type="button" onclick="window.location.href='/studentmonthlysubscription/<%= r.id %>/<%= r.firstname %>/<%= r.lastname %>'" value="MONTHLY SUBSCRIPTION"></td>
+        <td><input type="button" onclick="window.location.href='/studentmakereservation/<%= r.id %>/<%= r.firstname %>/<%= r.lastname %>'" value="MAKE RESERVATION"></td>
+        </tr>
+    <% }); %>
+</table>
+<input type="button" onclick="window.location.href='/studenttableinsert'" value="INSERT">
+<input type="button" onclick="window.location.href='/adminhome'" value="ADMIN HOME">
+</div>
+</body>
+</html>

@@ -37,10 +37,11 @@ express()
   .get('/', (req, res) => res.send("please come back a couple hours from now under construction, time starting construction 12:26AM 7/30/2025 HST"))
   
   .get('/adminhome', (req, res) => res.render('admin_pages/adminhome'))
-   .get('/student/:sortorder', (req,res) => {  
+  .get('/student/:sortorder', (req,res) => {  
         const sortorder = req.params.sortorder;
         studenttable.studentviewfunc(req,res,sortorder);
   })
+  .get('/studentdeleteconfirm/:id/:firstname/:lastname', (req,res) => res.render('pages/delete_confirm', {studentID: req.params.id, firstname: req.params.firstname, lastname: req.params.lastname}))
 
   .post('/securityinsertsubmit', (req, res) => { securitytable.securitytableinsertfunc(req,res); })
   
@@ -72,7 +73,6 @@ express()
                                                        })
   .get('/studenttableinsert', (req, res) => res.render('pages/studenttableinsert'))
   .post('/studenttableinsertsubmit', (req, res) => { studenttable.studenttableinsertfunc(req,res); })
-  .get('/studentdeleteconfirm/:id/:firstname/:lastname', (req,res) => res.render('pages/delete_confirm', {studentID: req.params.id, firstname: req.params.firstname, lastname: req.params.lastname}))
   .get('/studentdelete/:id', (req, res) => {  
                                               const studentID = req.params.id;
                                               studenttable.deletefunc(req,res,studentID);

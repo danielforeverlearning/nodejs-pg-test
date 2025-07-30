@@ -171,9 +171,9 @@ module.exports = {
               else //good
               {
                    console.log("reservation_check_date fields = " + JSON.stringify(fields) + " files = " + JSON.stringify(files));
-                   month = fields.month_name;
-                   day   = fields.day_name;
-                   year  = fields.year_name;
+                   month = fields.month_name[0];
+                   day   = fields.day_name[0];
+                   year  = fields.year_name[0];
     
                    const currentYear  = new Date().getFullYear();
                    var currentMonth = new Date().getMonth(); // Returns 0 for January, 1 for February, etc.
@@ -193,7 +193,7 @@ module.exports = {
                           res.render('admin_pages/adminresult', {myresults: badstr} );
                           return;
                    }
-                   else if ((year === currentYear && month < currentMonth) || (year === currentYear && month === currentMonth && day < currentDay))
+                   else if ((year == currentYear && month < currentMonth) || (year == currentYear && month == currentMonth && day < currentDay))
                    {
                           var badstr = 'Sorry, reservation must be made for today or later, today is year=' + currentYear + ' month=' + currentMonth + ' day=' + currentDay;
                           res.render('admin_pages/adminresult', {myresults: badstr} );

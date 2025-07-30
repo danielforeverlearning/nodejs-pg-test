@@ -24,7 +24,7 @@ module.exports = {
               
                           // Example: create table
                           const createRes = await client.query(
-                              'CREATE TABLE security (STUDENTID INTEGER PRIMARY KEY, PASSWORDHASH VARCHAR(255), CONSTRAINT myaccounttablefkconstraint FOREIGN KEY (STUDENTID) REFERENCES student(ID));'
+                              'CREATE TABLE security (STUDENTID INTEGER PRIMARY KEY, PASSWORDHASH VARCHAR(255), CONSTRAINT mysecuritytablefkconstraint FOREIGN KEY (STUDENTID) REFERENCES student(ID));'
                           );
                           var result = 'createRes = ' + JSON.stringify(createRes);
                           res.send(result);

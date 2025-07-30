@@ -19,7 +19,6 @@ const fs           = require('fs')
 const PORT         = process.env.PORT || 5000
 
 var studenttable = require('./studenttable');
-var subscriptiontable = require('./subscriptiontable');
 var securitytable = require('./securitytable');
 
 var admin_student = require('./admin_student');
@@ -55,18 +54,18 @@ express()
                                                             admin_subscription.read1IDfunc(req,res,studentID,firstname,lastname);
                                                        })
   .get('/subscripinsert/:id/:firstname/:lastname', (req, res) => res.render('admin_pages/subscriptiontableinsert', {studentID: req.params.id, firstname: req.params.firstname, lastname: req.params.lastname }))
-  .post('/subscriptiontableinsertsubmit', (req, res) => { subscriptiontable.subscriptiontableinsertsubmitfunc(req,res); })
+  .post('/subscriptiontableinsertsubmit', (req, res) => { admin_subscription.subscriptiontableinsertsubmitfunc(req,res); })
   .get('/subscripupdate/:id/:firstname/:lastname', (req, res) => {  
                                               const studentID = req.params.id;
                                               const firstname = req.params.firstname;
                                               const lastname  = req.params.lastname;
-                                              subscriptiontable.updatefunc(req,res,studentID,firstname,lastname);
+                                              admin_subscription.updatefunc(req,res,studentID,firstname,lastname);
                                             })
   .post('/subscripupdatepost/:id/:firstname/:lastname', (req,res) => { 
                                                     const studentID = req.params.id;
                                                     const firstname = req.params.firstname;
                                                     const lastname  = req.params.lastname;
-                                                    subscriptiontable.updatepostfunc(req,res,studentID,firstname,lastname);
+                                                    admin_subscription.updatepostfunc(req,res,studentID,firstname,lastname);
                                                 })
   
   .get('/ghettoadmintools', (req,res) => res.render('admin_pages/ghetto_admin_tools'))

@@ -111,7 +111,7 @@ module.exports = {
 
   
   
-securityReadByStudentID: async function(res, studentID, firstname, lastname) {  
+checkExistingStudentID: async function(res, studentID, firstname, lastname) {  
                         var dbgoodresult;
                         var badstr;
                         var result;
@@ -129,13 +129,13 @@ securityReadByStudentID: async function(res, studentID, firstname, lastname) {
                         } finally {
                             await client.end();
                             if (dbgoodresult) {
-                                console.log("securityReadByStudentID result.rows.length = " + result.rows.length);
+                                console.log("checkExistingStudentID result.rows.length = " + result.rows.length);
                                 res.render('admin_pages/studentacctinsert', {rows: result.rows, rowslength: result.rows.length, studentID: studentID, firstname: firstname, lastname: lastname});
                             }
                             else
                               res.render('admin_pages/adminresult', {myresults: badstr} );
                         }
-  }, //securityReadByStudentID
+  }, //checkExistingStudentID
   
   createstudentacctfunc: function(req, res)  {
       var password;
@@ -155,7 +155,7 @@ securityReadByStudentID: async function(res, studentID, firstname, lastname) {
                             resultstr = 'INSERT INTO security ERROR = ' + err;
                         } finally {
                             await client.end();
-                            res.render('pages/result', {myresults: resultstr} );
+                            res.render('admin_pages/adminresult', {myresults: resultstr} );
                         }
       }
     
@@ -190,12 +190,12 @@ securityReadByStudentID: async function(res, studentID, firstname, lastname) {
              else
              {
                   var badstr = 'Sorry password and confirm must be exactly the same: ' + 'password="' + password + '" confirm="' + confirm + '"';
-                  res.render('pages/result', {myresults: badstr} );
+                  res.render('admin_pages/adminresult', {myresults: badstr} );
                   return;
              }
           }//good
       })//form.parse
-  } //securitytableinsertfunc
+  } //createstudentacctfunc
   
   
 }; //module.exports

@@ -87,6 +87,7 @@ securityReadByStudentID: async function(res, studentID, firstname, lastname) {
              if (password != confirm)
              {
                   var badstr = 'Sorry password and confirm must be exactly the same.';
+                  badstr += 'password="' + password + '" confirm="' + confirm + '"';
                   res.render('pages/result', {myresults: badstr} );
              }
              else

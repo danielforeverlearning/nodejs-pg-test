@@ -39,7 +39,7 @@ module.exports = {
                         } catch (err) {
                             var errormsg = " err = " + err;
                             //console.log(errormsg);
-                            res.render('pages/result', {myresults: errormsg} );
+                            res.render('admin_pages/adminresult', {myresults: errormsg} );
                         } finally {
                             await client.end();
                         }
@@ -52,12 +52,15 @@ module.exports = {
                         const client       = new Client(connectobj);
                         try {
                           await client.connect();
-                          const deleteRes = await client.query("DELETE FROM subscription WHERE STUDENTID = " + studentID + "; DELETE FROM student WHERE ID = " + studentID + ";");
-                          var resultstr = 'student subscription deletefunc = ' + JSON.stringify(deleteRes);
-                          res.render('pages/result', {myresults: resultstr} );
+                          var deletestmt  = "DELETE FROM reservation WHERE STUDENTID = " + studentID + ";";
+                              deletestmt += "DELETE FROM subscription WHERE STUDENTID = " + studentID + ";";
+                              deletestmt += "DELETE FROM student WHERE ID = " + studentID + ";";
+                          const deleteRes = await client.query(deletestmt);
+                          var resultstr = 'student subscription reservation deletefunc = ' + JSON.stringify(deleteRes);
+                          res.render('admin_pages/adminresult', {myresults: resultstr} );
                         } catch (err) {
-                            var badstr = 'student subscription deletefunc, ERROR = ' + err;
-                            res.render('pages/result', {myresults: badstr} );
+                            var badstr = 'student subscription reservation deletefunc, ERROR = ' + err;
+                            res.render('admin_pages/adminresult', {myresults: badstr} );
                         } finally {
                             await client.end();
                         }

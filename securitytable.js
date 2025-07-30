@@ -92,8 +92,9 @@ securityReadByStudentID: async function(res, studentID, firstname, lastname) {
              }
              else
              {
-                  var badstr = 'Sorry password and confirm must be exactly the same.';
-                  badstr += 'password="' + password + '" confirm="' + confirm + '"';
+                  console.log("typeof password = " + typeof password);
+                  console.log("typeof confirm = " + typeof confirm);
+                  var badstr = 'Sorry password and confirm must be exactly the same: ' + 'password="' + password + '" confirm="' + confirm + '"';
                   res.render('pages/result', {myresults: badstr} );
              }
           }//good

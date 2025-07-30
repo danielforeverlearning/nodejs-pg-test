@@ -10,29 +10,7 @@ const { Client }   = require('pg');
 var db_credential = require('./db_credential');
 const connectobj    = db_credential.myconnectobj();
 
-async function securityReadByStudentID(res, studentID) {  
-                        var dbgoodresult;
-                        var badstr;
-                        var result;
-                        const client       = new Client(connectobj);
-                        try {
-                          await client.connect();
-
-                          var selectstmt = 'SELECT * FROM security WHERE STUDENTID = ' + studentID;
-                          result = await client.query(selectstmt);
-                          console.log(" result = " + JSON.stringify(result));
-                          dbgoodresult = true;
-                        } catch (err) {
-                            dbgoodresult = false;
-                            badstr = "securityReadByStudentID err = " + err;
-                        } finally {
-                            await client.end();
-                            if (dbgoodresult)
-                              res.render('pages/securitytableinsert', {results: result.rows} );
-                            else
-                              res.render('pages/result', {myresults: badstr} );
-                        }
-  } //securityReadByStudentID
+var securitytable = require('./securitytable');
 
 module.exports = {
   studentviewfunc: function(req,res,sortorder)  {
@@ -220,7 +198,7 @@ module.exports = {
                             if (dbgoodresult) {
                                  //var resultstr = 'updateRes = ' + JSON.stringify(updateRes);
                                  //res.render('pages/result', {myresults: resultstr} );
-                                 securityReadByStudentID(res, primarykeyID);
+                                 securitytable.securityReadByStudentID(res, primarykeyID);
                             }
                             else
                                  res.render('pages/result', {myresults: badstr} );

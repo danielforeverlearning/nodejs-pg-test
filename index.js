@@ -37,6 +37,10 @@ express()
   .get('/', (req, res) => res.send("please come back a couple hours from now under construction, time starting construction 12:26AM 7/30/2025 HST"))
   
   .get('/adminhome', (req, res) => res.render('admin_pages/adminhome'))
+   .get('/student/:sortorder', (req,res) => {  
+        const sortorder = req.params.sortorder;
+        studenttable.studentviewfunc(req,res,sortorder);
+  })
 
   .post('/securityinsertsubmit', (req, res) => { securitytable.securitytableinsertfunc(req,res); })
   

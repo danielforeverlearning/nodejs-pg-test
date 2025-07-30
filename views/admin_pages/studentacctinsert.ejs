@@ -10,7 +10,7 @@
   <div class="container">
   <h2>STUDENT ACCOUNT</h2>
   <h2>STUDENTID=<%= studentID %> <%= firstname %> <%= lastname %></h2>
-  <form action="/createstudentacct" method="post" enctype="multipart/form-data">
+  <form action="/insertstudentacct" method="post" enctype="multipart/form-data">
      <input type="hidden" name="studentID_name" value="<%= studentID %>">
      <label for="password_id">PASSWORD: </label>
      <% if (rowslength == 0) { %>

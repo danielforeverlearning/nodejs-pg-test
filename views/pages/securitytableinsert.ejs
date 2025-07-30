@@ -18,7 +18,7 @@
      <% if (rowslength == 0) { %>
           <input type="text" name="password_name" id="password_id">
      <% } else if (rowslength == 1) { %>
-          <input type="text" name="password_name" id="password_id" value="<%= rows.passwordhash %>">
+          <input type="text" name="password_name" id="password_id" value="<%= rows[0].passwordhash %>">
      <% } %>
      <br />
      <label for="confirm_id">CONFIRM: </label>

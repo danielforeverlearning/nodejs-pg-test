@@ -35,7 +35,7 @@ module.exports = {
                           
                           const result = await client.query(selectstmt);
                           //console.log(" result = " + JSON.stringify(result));
-                          res.render('pages/studentview', {results: result.rows, sortorder: sortorder} );
+                          res.render('admin_pages/studentview', {results: result.rows, sortorder: sortorder} );
                         } catch (err) {
                             var errormsg = " err = " + err;
                             //console.log(errormsg);

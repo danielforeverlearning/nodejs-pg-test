@@ -111,33 +111,9 @@ module.exports = {
 
   
   
-checkExistingStudentID: async function(res, studentID, firstname, lastname) {  
-                        var dbgoodresult;
-                        var badstr;
-                        var result;
-                        const client       = new Client(connectobj);
-                        try {
-                          await client.connect();
 
-                          var selectstmt = 'SELECT * FROM security WHERE STUDENTID = ' + studentID;
-                          result = await client.query(selectstmt);
-                          console.log(" result = " + JSON.stringify(result));
-                          dbgoodresult = true;
-                        } catch (err) {
-                            dbgoodresult = false;
-                            badstr = "securityReadByStudentID err = " + err;
-                        } finally {
-                            await client.end();
-                            if (dbgoodresult) {
-                                console.log("checkExistingStudentID result.rows.length = " + result.rows.length);
-                                res.render('admin_pages/studentacctinsert', {rows: result.rows, rowslength: result.rows.length, studentID: studentID, firstname: firstname, lastname: lastname});
-                            }
-                            else
-                              res.render('admin_pages/adminresult', {myresults: badstr} );
-                        }
-  }, //checkExistingStudentID
   
-  createstudentacctfunc: function(req, res)  {
+  insertaccount_studenttablefunc: function(req, res)  {
       var password;
       var confirm;
       var studentID;
@@ -152,7 +128,7 @@ checkExistingStudentID: async function(res, studentID, firstname, lastname) {
                           const insertRes = await client.query(insertstmt);
                           resultstr = 'insertRes = ' + JSON.stringify(insertRes);
                         } catch (err) {
-                            resultstr = 'INSERT INTO security ERROR = ' + err;
+                            resultstr = 'INSERT INTO account_student ERROR = ' + err;
                         } finally {
                             await client.end();
                             res.render('admin_pages/adminresult', {myresults: resultstr} );
@@ -164,7 +140,7 @@ checkExistingStudentID: async function(res, studentID, firstname, lastname) {
   
           if (err)
           {
-             res.send("createstudentacctfunc err = " + err);
+             res.send("insertaccount_studenttablefunc err = " + err);
              return;
           }
           else
@@ -195,7 +171,7 @@ checkExistingStudentID: async function(res, studentID, firstname, lastname) {
              }
           }//good
       })//form.parse
-  } //createstudentacctfunc
+  } //insertaccount_studenttablefunc
   
   
 }; //module.exports

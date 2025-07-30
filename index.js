@@ -41,7 +41,7 @@ express()
         const sortorder = req.params.sortorder;
         studenttable.studentviewfunc(req,res,sortorder);
   })
-  .get('/studentdeleteconfirm/:id/:firstname/:lastname', (req,res) => res.render('pages/delete_confirm', {studentID: req.params.id, firstname: req.params.firstname, lastname: req.params.lastname}))
+  .get('/studentdeleteconfirm/:id/:firstname/:lastname', (req,res) => res.render('admin_pages/delete_confirm', {studentID: req.params.id, firstname: req.params.firstname, lastname: req.params.lastname}))
 
   .post('/securityinsertsubmit', (req, res) => { securitytable.securitytableinsertfunc(req,res); })
   

@@ -113,7 +113,7 @@ module.exports = {
   
 
   
-  insertaccount_studenttablefunc: function(req, res)  {
+  adminchangestudacctsecurity: function(req, res)  {
       var password;
       var confirm;
       var studentID;
@@ -171,7 +171,7 @@ module.exports = {
              }
           }//good
       })//form.parse
-  } //insertaccount_studenttablefunc
+  } //adminchangestudacctsecurity
   
   
 }; //module.exports

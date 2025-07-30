@@ -130,14 +130,14 @@ securityReadByStudentID: async function(res, studentID, firstname, lastname) {
                             await client.end();
                             if (dbgoodresult) {
                                 console.log("securityReadByStudentID result.rows.length = " + result.rows.length);
-                                res.render('pages/securitytableinsert', {rows: result.rows, rowslength: result.rows.length, studentID: studentID, firstname: firstname, lastname: lastname});
+                                res.render('admin_pages/studentacctinsert', {rows: result.rows, rowslength: result.rows.length, studentID: studentID, firstname: firstname, lastname: lastname});
                             }
                             else
-                              res.render('pages/result', {myresults: badstr} );
+                              res.render('admin_pages/adminresult', {myresults: badstr} );
                         }
   }, //securityReadByStudentID
   
-  securitytableinsertfunc: function(req, res)  {
+  createstudentacctfunc: function(req, res)  {
       var password;
       var confirm;
       var studentID;
@@ -147,7 +147,7 @@ securityReadByStudentID: async function(res, studentID, firstname, lastname) {
                         const client       = new Client(connectobj);
                         try {
                           await client.connect();
-                          var insertstmt = "INSERT INTO security (STUDENTID, PASSWORDHASH) VALUES (" + studentID + ", '" + passwordhash + "');";
+                          var insertstmt = "INSERT INTO account_student (STUDENTID, PASSWORDHASH) VALUES (" + studentID + ", '" + passwordhash + "');";
                           console.log(insertstmt);
                           const insertRes = await client.query(insertstmt);
                           resultstr = 'insertRes = ' + JSON.stringify(insertRes);
@@ -164,7 +164,8 @@ securityReadByStudentID: async function(res, studentID, firstname, lastname) {
   
           if (err)
           {
-             res.send("securitytableinsertfunc err = " + err);
+             res.send("createstudentacctfunc err = " + err);
+             return;
           }
           else
           { //good
@@ -190,6 +191,7 @@ securityReadByStudentID: async function(res, studentID, firstname, lastname) {
              {
                   var badstr = 'Sorry password and confirm must be exactly the same: ' + 'password="' + password + '" confirm="' + confirm + '"';
                   res.render('pages/result', {myresults: badstr} );
+                  return;
              }
           }//good
       })//form.parse

@@ -78,11 +78,12 @@ securityReadByStudentID: async function(res, studentID, firstname, lastname) {
           }
           else
           { //good
-             console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
+             console.log("fields = " + JSON.stringify(fields));
+             console.log("files = " + JSON.stringify(files));
               
-             password = JSON.parse(fields.password_name)[0];
-             confirm = JSON.parse(fields.confirm_name)[0];
-             studentID = JSON.parse(fields.studentID_name)[0];
+             password = fields.password_name[0];
+             confirm = fields.confirm_name[0];
+             studentID = fields.studentID_name[0];
              console.log("typeof password = " + typeof password);
              console.log("typeof confirm = " + typeof confirm);
              console.log("typeof studentID = " + typeof studentID);

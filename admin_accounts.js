@@ -113,7 +113,7 @@ module.exports = {
   
 
   
-  admininsertstudacctsubmit: function(req, res)  {
+  admininsertstudacctsubmitfunc: function(req, res)  {
       var password;
       var confirm;
       var studentID;

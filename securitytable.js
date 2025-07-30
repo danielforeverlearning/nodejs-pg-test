@@ -13,7 +13,7 @@ const connectobj    = db_credential.myconnectobj();
 module.exports = {
 
   
-securityReadByStudentID: async function(res, studentID) {  
+securityReadByStudentID: async function(res, studentID, firstname, lastname) {  
                         var dbgoodresult;
                         var badstr;
                         var result;
@@ -30,8 +30,10 @@ securityReadByStudentID: async function(res, studentID) {
                             badstr = "securityReadByStudentID err = " + err;
                         } finally {
                             await client.end();
-                            if (dbgoodresult)
-                              res.render('pages/securitytableinsert', {results: result.rows} );
+                            if (dbgoodresult) {
+                                console.log("securityReadByStudentID result.rows.length = " + result.rows.length);
+                                res.render('pages/securitytableinsert', {rows: result.rows, rowslength: result.rows.length, studentID: studentID, firstname: firstname, lastname: lastname});
+                            }
                             else
                               res.render('pages/result', {myresults: badstr} );
                         }

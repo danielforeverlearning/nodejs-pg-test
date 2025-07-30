@@ -10,8 +10,6 @@ const { Client }   = require('pg');
 var db_credential = require('./db_credential');
 const connectobj    = db_credential.myconnectobj();
 
-var securitytable = require('./securitytable');
-
 module.exports = {
   
 

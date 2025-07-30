@@ -48,6 +48,26 @@ express()
                                               const studentID = req.params.id;
                                               admin_student.deletefunc(req,res,studentID);
                                            })
+  .get('/studentmonthlysubscription/:id/:firstname/:lastname', (req,res) => {  
+                                                            const studentID = req.params.id;
+                                                            const firstname = req.params.firstname;
+                                                            const lastname  = req.params.lastname;
+                                                            admin_subscription.read1IDfunc(req,res,studentID,firstname,lastname);
+                                                       })
+  .get('/subscripinsert/:id/:firstname/:lastname', (req, res) => res.render('admin_pages/subscriptiontableinsert', {studentID: req.params.id, firstname: req.params.firstname, lastname: req.params.lastname }))
+  .post('/subscriptiontableinsertsubmit', (req, res) => { subscriptiontable.subscriptiontableinsertsubmitfunc(req,res); })
+  .get('/subscripupdate/:id/:firstname/:lastname', (req, res) => {  
+                                              const studentID = req.params.id;
+                                              const firstname = req.params.firstname;
+                                              const lastname  = req.params.lastname;
+                                              subscriptiontable.updatefunc(req,res,studentID,firstname,lastname);
+                                            })
+  .post('/subscripupdatepost/:id/:firstname/:lastname', (req,res) => { 
+                                                    const studentID = req.params.id;
+                                                    const firstname = req.params.firstname;
+                                                    const lastname  = req.params.lastname;
+                                                    subscriptiontable.updatepostfunc(req,res,studentID,firstname,lastname);
+                                                })
   
   .get('/ghettoadmintools', (req,res) => res.render('admin_pages/ghetto_admin_tools'))
   .get('/makealldbtablefiles', (req,res) => { admin_db_tools.make_all_db_table_files(req,res); })
@@ -69,31 +89,12 @@ express()
         studenttable.studentviewfunc(req,res,sortorder);
   })
   
-  .get('/studentmonthlysubscription/:id/:firstname/:lastname', (req,res) => {  
-                                                            const studentID = req.params.id;
-                                                            const firstname = req.params.firstname;
-                                                            const lastname  = req.params.lastname;
-                                                            subscriptiontable.read1IDfunc(req,res,studentID,firstname,lastname);
-                                                       })
   .get('/studenttableinsert', (req, res) => res.render('pages/studenttableinsert'))
   .post('/studenttableinsertsubmit', (req, res) => { studenttable.studenttableinsertfunc(req,res); })
 
   
 
-  .get('/subscripinsert/:id/:firstname/:lastname', (req, res) => res.render('pages/subscriptiontableinsert', {studentID: req.params.id, firstname: req.params.firstname, lastname: req.params.lastname }))
-  .post('/subscriptiontableinsertsubmit', (req, res) => { subscriptiontable.subscriptiontableinsertsubmitfunc(req,res); })
-  .get('/subscripupdate/:id/:firstname/:lastname', (req, res) => {  
-                                              const studentID = req.params.id;
-                                              const firstname = req.params.firstname;
-                                              const lastname  = req.params.lastname;
-                                              subscriptiontable.updatefunc(req,res,studentID,firstname,lastname);
-                                            })
-  .post('/subscripupdatepost/:id/:firstname/:lastname', (req,res) => { 
-                                                    const studentID = req.params.id;
-                                                    const firstname = req.params.firstname;
-                                                    const lastname  = req.params.lastname;
-                                                    subscriptiontable.updatepostfunc(req,res,studentID,firstname,lastname);
-                                                })
+  
 
   
   .get('/dbcreatestudenttable', (req, res) => { admin_student.studenttablecreatefunc(req, res); })

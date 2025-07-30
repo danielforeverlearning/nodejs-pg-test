@@ -35,18 +35,19 @@ express()
   .set('view engine', 'ejs')
 
   .get('/', (req, res) => res.send("please come back a couple hours from now under construction, time starting construction 12:26AM 7/30/2025 HST"))
+
+  .post('/securityinsertsubmit', (req, res) => { securitytable.securitytableinsertfunc(req,res); })
   
   .get('/adminhome', (req, res) => res.render('admin_pages/adminhome'))
   .get('/student/:sortorder', (req,res) => {  
         const sortorder = req.params.sortorder;
-        studenttable.studentviewfunc(req,res,sortorder);
+        admin_student.studentviewfunc(req,res,sortorder);
   })
   .get('/studentdeleteconfirm/:id/:firstname/:lastname', (req,res) => res.render('admin_pages/delete_confirm', {studentID: req.params.id, firstname: req.params.firstname, lastname: req.params.lastname}))
   .get('/studentdelete/:id', (req, res) => {  
                                               const studentID = req.params.id;
-                                              studenttable.deletefunc(req,res,studentID);
+                                              admin_student.deletefunc(req,res,studentID);
                                            })
-  .post('/securityinsertsubmit', (req, res) => { securitytable.securitytableinsertfunc(req,res); })
   
   .get('/ghettoadmintools', (req,res) => res.render('admin_pages/ghetto_admin_tools'))
   .get('/makealldbtablefiles', (req,res) => { admin_db_tools.make_all_db_table_files(req,res); })

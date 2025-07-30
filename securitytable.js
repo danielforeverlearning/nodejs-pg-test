@@ -79,9 +79,9 @@ securityReadByStudentID: async function(res, studentID, firstname, lastname) {
           else
           { //good
              console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
-             password = fields.password_name;
-             confirm = fields.confirm_name;
-             studentID = fields.studentID_name;
+             password = JSON.stringify(fields.password_name);
+             confirm = JSON.stringify(fields.confirm_name);
+             studentID = JSON.stringify(fields.studentID_name);
              
              //validation checking
              if (password === confirm)

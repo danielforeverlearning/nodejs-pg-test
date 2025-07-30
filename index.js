@@ -8,6 +8,7 @@
 //npm install ejs
 //npm install formidable
 //npm install fs
+//npm install crypto
 
 const express      = require('express')
 const path         = require('path')

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<style>
+th, td {
+  border: 1px solid black;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h2>TABLE subscription</h2>
+
+<table>
+    <tr>
+    <th>STUDENTID</th>
+    <th>ACTIVE</th>
+    <th>LAST PAID MONTH</th>
+    <th>LAST PAID YEAR</th>
+    </tr>
+    <% results.forEach(function(r) { %>
+        <tr>
+        <td><%= r.studentid %></td>
+        <td><%= r.active %></td>
+        <td><%= r.lastpaidmonth %></td>
+        <td><%= r.lastpaidyear %></td>
+        </tr>
+    <% }); %>
+</table>
+<input type="button" onclick="window.location.href='/'" value="HOME">
+</div>
+</body>
+</html>

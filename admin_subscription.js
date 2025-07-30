@@ -144,7 +144,7 @@ module.exports = {
                               }
                         } catch (err) {
                               var badstr = 'read1IDfunc ID = ' + studentID + ', ERROR = ' + err;
-                              res.render('admin_pages/result', {myresults: badstr} );
+                              res.render('admin_pages/adminresult', {myresults: badstr} );
                         } finally {
                               await client.end();
                         }
@@ -188,10 +188,10 @@ module.exports = {
                           
                           const selectIDres = await client.query(stmt);
                           console.log("subscriptiontable updatepostfunc = " + JSON.stringify(selectIDres));
-                          res.render('pages/result', {myresults: "STUDENTID " + studentID + " " + firstname + " " + lastname + " successfully updated"} );
+                          res.render('admin_pages/adminresult', {myresults: "STUDENTID " + studentID + " " + firstname + " " + lastname + " successfully updated"} );
                         } catch (err) {
                               var badstr = "subscriptiontable updatepostfunc ID = " + studentID +  " " + firstname + " " + lastname + ", ERROR = " + err;
-                              res.render('pages/result', {myresults: badstr} );
+                              res.render('admin_pages/adminresult', {myresults: badstr} );
                         } finally {
                               await client.end();
                         }
@@ -203,11 +203,11 @@ module.exports = {
           if (err)
           {
              var badstr = "subscriptiontable updatefuncpost err = " + err;
-             res.render('pages/result', {myresults: badstr} );
+             res.render('admin_pages/adminresult', {myresults: badstr} );
           }
           else
           {
-             console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
+             console.log("fields = " + JSON.stringify(fields) + "  files = " + JSON.stringify(files));
              
              if (fields.active_name == "NO")
                  activeSQLok = false;
@@ -219,7 +219,7 @@ module.exports = {
              else
              {
                  var badstr = "subscriptiontable updatefuncpost: Suspected SQL-injection attack in LAST PAID MONTH, not doing anything";
-                 res.render('pages/result', {myresults: badstr} );
+                 res.render('admin_pages/adminresult', {myresults: badstr} );
              }
             
              if (fields.lastpaidyear_name.indexOf(";") == -1)
@@ -227,7 +227,7 @@ module.exports = {
              else
              {
                  var badstr = "subscriptiontable updatefuncpost: Suspected SQL-injection attack in LAST PAID YEAR, not doing anything";
-                 res.render('pages/result', {myresults: badstr} );
+                 res.render('admin_pages/adminresult', {myresults: badstr} );
              }
             
              myasyncfunc(); 

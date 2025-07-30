@@ -126,9 +126,9 @@ module.exports = {
                           var insertstmt = "INSERT INTO account_student (STUDENTID, PASSWORDHASH) VALUES (" + studentID + ", '" + passwordhash + "');";
                           console.log(insertstmt);
                           const insertRes = await client.query(insertstmt);
-                          resultstr = 'admininsertstudacctsubmit insertRes = ' + JSON.stringify(insertRes);
+                          resultstr = 'admininsertstudacctsubmitfunc insertRes = ' + JSON.stringify(insertRes);
                         } catch (err) {
-                            resultstr = 'admininsertstudacctsubmit INSERT INTO account_student ERROR = ' + err;
+                            resultstr = 'admininsertstudacctsubmitfunc INSERT INTO account_student ERROR = ' + err;
                         } finally {
                             await client.end();
                             res.render('admin_pages/adminresult', {myresults: resultstr} );
@@ -140,7 +140,7 @@ module.exports = {
   
           if (err)
           {
-             res.send("admininsertstudacctsubmit form.parse ERROR = " + err);
+             res.send("admininsertstudacctsubmitfunc form.parse ERROR = " + err);
              return;
           }
           else
@@ -171,7 +171,7 @@ module.exports = {
              }
           }//good
       })//form.parse
-  } //admininsertstudacctsubmit
+  } //admininsertstudacctsubmitfunc
   
   
 }; //module.exports

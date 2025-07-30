@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+<style>
+th, td {
+  border: 1px solid black;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h2>MONTHLY SUBSCRIPTION</h2>
+    <% if (rowcount == 0) { %>
+        <p>No monthly subscription data has been created yet for <%= norowyetfirstname %> <%= norowyetlastname %>, please click the INSERT button below</p>
+    <% } else if (rowcount == 1) { %>
+        <h2><%= foreigntablefirstname %> <%= foreigntablelastname %></h2>
+        <p>STUDENTID = <%= existingrow.studentid %></p>
+        <p>ACTIVE = <%= existingrow.active %></p>
+        <p>LASTPAIDMONTH = <%= existingrow.lastpaidmonth %></p>
+        <p>LASTPAIDYEAR = <%= existingrow.lastpaidyear %></p>
+    <% } else { %>
+        <p>multiple rows, rowcount is <% rowcount %>, this should be impossible due to foreign key rule, you should never see this</p>
+    <% } %>
+
+    <% if (rowcount == 1) { %>
+    <input type="button" onclick="window.location.href='/subscripupdate/<%= existingrow.studentid %>/<%= foreigntablefirstname %>/<%= foreigntablelastname %>'" value="UPDATE">
+    <% } else if (rowcount == 0) { %>
+    <input type="button" onclick="window.location.href='/subscripinsert/<%= norowyetstudentID %>/<%= norowyetfirstname %>/<%= norowyetlastname %>'" value="INSERT">
+    <% } %>
+    <input type="button" onclick="window.location.href='/'" value="HOME">
+</div>
+</body>
+</html>

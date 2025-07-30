@@ -42,7 +42,10 @@ express()
         studenttable.studentviewfunc(req,res,sortorder);
   })
   .get('/studentdeleteconfirm/:id/:firstname/:lastname', (req,res) => res.render('admin_pages/delete_confirm', {studentID: req.params.id, firstname: req.params.firstname, lastname: req.params.lastname}))
-
+  .get('/studentdelete/:id', (req, res) => {  
+                                              const studentID = req.params.id;
+                                              studenttable.deletefunc(req,res,studentID);
+                                           })
   .post('/securityinsertsubmit', (req, res) => { securitytable.securitytableinsertfunc(req,res); })
   
   .get('/ghettoadmintools', (req,res) => res.render('admin_pages/ghetto_admin_tools'))
@@ -73,10 +76,6 @@ express()
                                                        })
   .get('/studenttableinsert', (req, res) => res.render('pages/studenttableinsert'))
   .post('/studenttableinsertsubmit', (req, res) => { studenttable.studenttableinsertfunc(req,res); })
-  .get('/studentdelete/:id', (req, res) => {  
-                                              const studentID = req.params.id;
-                                              studenttable.deletefunc(req,res,studentID);
-                                           })
 
   
 

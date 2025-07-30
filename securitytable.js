@@ -84,17 +84,17 @@ securityReadByStudentID: async function(res, studentID, firstname, lastname) {
              studentID = fields.studentID_name;
              
              //validation checking
-             if (password != confirm)
-             {
-                  var badstr = 'Sorry password and confirm must be exactly the same.';
-                  badstr += 'password="' + password + '" confirm="' + confirm + '"';
-                  res.render('pages/result', {myresults: badstr} );
-             }
-             else
+             if (password === confirm)
              {
                   passwordhash = hashHmacJs('sha256', password, 'nodejs-pg-test');
                   console.log("passwordhash = " + passwordhash);
                   connectAndInsert();
+             }
+             else
+             {
+                  var badstr = 'Sorry password and confirm must be exactly the same.';
+                  badstr += 'password="' + password + '" confirm="' + confirm + '"';
+                  res.render('pages/result', {myresults: badstr} );
              }
           }//good
       })//form.parse

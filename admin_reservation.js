@@ -133,19 +133,25 @@ module.exports = {
                console.log("month_year_validate_func fields = " + JSON.stringify(fields) + " files = " + JSON.stringify(files));
                month = fields.month_name;
                year = fields.year_name;
+               const currentYear  = new Date().getFullYear();
+               const currentMonth = new Date().getMonth(); // Returns 0 for January, 1 for February, etc.
+               currentMonth++;
+               
                //validation checking
                if (month <= 0 || month > 12)
                {
                       var badstr = 'Sorry month must be between 1 and 12';
                       res.render('admin_pages/adminresult', {myresults: badstr} );
                }
-               else if (year < 2025)
+               else if (year < currentYear)
                {
-                      var badstr = 'Sorry year must be 2025 or greater';
+                      var badstr = 'Sorry year must be ' + currentYear + ' or greater';
                       res.render('admin_pages/adminresult', {myresults: badstr} );
                }
                else
+               {
                       connectAndRead();
+               }
           }//good
       })//form.parse
   }, //month_year_validate_func
@@ -168,15 +174,26 @@ module.exports = {
                month = fields.month_name;
                day   = fields.day_name;
                year  = fields.year_name;
+
+               const currentYear  = new Date().getFullYear();
+               const currentMonth = new Date().getMonth(); // Returns 0 for January, 1 for February, etc.
+               currentMonth++;
+               const currentDay  = new Date().getDate();
+            
                //validation checking
                if (month <= 0 || month > 12)
                {
                       var badstr = 'Sorry month must be between 1 and 12';
                       res.render('admin_pages/adminresult', {myresults: badstr} );
                }
-               if (year < 2025)
+               if (year < currentYear)
                {
-                      var badstr = 'Sorry year must be 2025 or greater';
+                      var badstr = 'Sorry year must be ' + currentYear + ' or greater';
+                      res.render('admin_pages/adminresult', {myresults: badstr} );
+               }
+               if ((year === currentYear && month < currentMonth) || (year === currentYear && month === currentMonth && day < currentDay))
+               {
+                      var badstr = 'Sorry, reservation must be made for today or later, today is year=' + currentYear + ' month=' + currentMonth + ' day=' + currentDay;
                       res.render('admin_pages/adminresult', {myresults: badstr} );
                }
                

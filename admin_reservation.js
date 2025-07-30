@@ -134,7 +134,7 @@ module.exports = {
                month = fields.month_name;
                year = fields.year_name;
                const currentYear  = new Date().getFullYear();
-               const currentMonth = new Date().getMonth(); // Returns 0 for January, 1 for February, etc.
+               var currentMonth = new Date().getMonth(); // Returns 0 for January, 1 for February, etc.
                currentMonth++;
                
                //validation checking
@@ -176,7 +176,7 @@ module.exports = {
                year  = fields.year_name;
 
                const currentYear  = new Date().getFullYear();
-               const currentMonth = new Date().getMonth(); // Returns 0 for January, 1 for February, etc.
+               var currentMonth = new Date().getMonth(); // Returns 0 for January, 1 for February, etc.
                currentMonth++;
                const currentDay  = new Date().getDate();
             

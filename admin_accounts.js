@@ -35,30 +35,28 @@ module.exports = {
                       }
           }
           connectAndCreate();
-  },
+  }, //studentacctcreatefunc
 
-  securitytabledropfunc: function(req,res) {
+  studentacctdropfunc: function(req,res) {
+          var result;
           const client       = new Client(connectobj);
           async function connectAndDrop() {
                       try {
                           await client.connect();
-                          console.log('Connected to PostgreSQL!');
               
                           // Example: drop table
                           const dropRes = await client.query(
-                              'DROP TABLE security;'
+                              'DROP TABLE account_student;'
                           );
-                          var result = 'dropRes = ' + JSON.stringify(dropRes);
-                          res.send(result);
+                          result = 'dropRes = ' + JSON.stringify(dropRes);
                       } catch (err) {
-                          var result = 'Error connecting or dropping table security = ' + err;
-                          res.send(result);
+                          result = 'Error connecting or dropping table security = ' + err;
                       } finally {
                           await client.end();
-                          console.log('Disconnected from PostgreSQL.');
+                          res.send(result);
                       }
           }
           connectAndDrop();
-  }//securitytabledropfunc
+  }//studentacctdropfunc
   
 }; //module.exports

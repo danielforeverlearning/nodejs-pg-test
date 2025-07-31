@@ -18,8 +18,6 @@ const fs           = require('fs')
 
 const PORT         = process.env.PORT || 5000
 
-var studenttable = require('./studenttable');
-
 var admin_accounts = require('./admin_accounts');
 var admin_student = require('./admin_student');
 var admin_subscription = require('./admin_subscription');
@@ -35,6 +33,8 @@ express()
   .get('/', (req, res) => res.send("please come back a couple hours from now under construction, time starting construction 12:26AM 7/30/2025 HST"))
 
   .post('/admininsertstudacctsubmit', (req, res) => { admin_accounts.admininsertstudacctsubmitfunc(req,res); })
+
+
   
   .get('/adminhome', (req, res) => res.render('admin_pages/adminhome'))
   .get('/student/:sortorder', (req,res) => {  
@@ -52,6 +52,24 @@ express()
                                                             const lastname  = req.params.lastname;
                                                             admin_subscription.read1IDfunc(req,res,studentID,firstname,lastname);
                                                        })
+  .post('/studenttableupdatesubmit', (req,res) => { admin_student.studenttableupdate3func(req,res); })
+  .get('/studentupdate/:id', (req, res) => {  
+        const studentID = req.params.id;
+        admin_student.updatefunc(req,res,studentID);
+  })
+  .get('/student/:sortorder', (req,res) => {  
+        const sortorder = req.params.sortorder;
+        admin_student.studentviewfunc(req,res,sortorder);
+  })
+  .get('/studenttableinsert', (req, res) => res.render('admin_pages/studenttableinsert'))
+  .post('/studenttableinsertsubmit', (req, res) => { admin_student.studenttableinsertfunc(req,res); })
+
+
+
+
+
+
+  
   .get('/subscripinsert/:id/:firstname/:lastname', (req, res) => res.render('admin_pages/subscriptiontableinsert', {studentID: req.params.id, firstname: req.params.firstname, lastname: req.params.lastname }))
   .post('/subscriptiontableinsertsubmit', (req, res) => { admin_subscription.subscriptiontableinsertsubmitfunc(req,res); })
   .get('/subscripupdate/:id/:firstname/:lastname', (req, res) => {  
@@ -76,24 +94,7 @@ express()
         var badstr = 'Emailblast not done yet, will probably use gmail rest-API with a free gmail account';
         res.render('admin_pages/adminresult', {myresults: badstr} );
   })
-
-  .post('/studenttableupdatesubmit', (req,res) => { studenttable.studenttableupdate3func(req,res); })
-  .get('/studentupdate/:id', (req, res) => {  
-        const studentID = req.params.id;
-        studenttable.updatefunc(req,res,studentID);
-  })
-  .get('/student/:sortorder', (req,res) => {  
-        const sortorder = req.params.sortorder;
-        studenttable.studentviewfunc(req,res,sortorder);
-  })
   
-  .get('/studenttableinsert', (req, res) => res.render('pages/studenttableinsert'))
-  .post('/studenttableinsertsubmit', (req, res) => { studenttable.studenttableinsertfunc(req,res); })
-
-  
-
-  
-
   
   .get('/dbcreatestudenttable', (req, res) => { admin_student.studenttablecreatefunc(req, res); })
   .get('/dbdropstudenttable', (req, res) => { admin_student.studenttabledropfunc(req, res); })

@@ -233,7 +233,6 @@ module.exports = {
                         const client       = new Client(connectobj);
                         try {
                           await client.connect();
-                          //console.log('studenttableupdate3func Connected to PostgreSQL!');
                           var stmt = "UPDATE student SET FIRSTNAME = '" + firstname + "', LASTNAME = '" + lastname + "', EMAIL = '" + email + "', PHONEAREACODE = " + phoneareacode + ", PHONENUMBER = " + phonenumber + " WHERE ID = " + primarykeyID + ";";
                           console.log(stmt);
                           updateRes = await client.query(stmt);
@@ -243,13 +242,12 @@ module.exports = {
                             dbgoodresult = false;
                         } finally {
                             await client.end();
-                            //console.log('studenttableupdate3func Disconnected from PostgreSQL.');
                             if (dbgoodresult) {
                                  var resultstr = 'updateRes = ' + JSON.stringify(updateRes);
-                                 res.render('pages/result', {myresults: resultstr} );
+                                 res.render('admin_pages/adminresult', {myresults: resultstr} );
                             }
                             else
-                                 res.render('pages/result', {myresults: badstr} );
+                                 res.render('admin_pages/adminresult', {myresults: badstr} );
                         }
       }
     
@@ -259,6 +257,7 @@ module.exports = {
           if (err)
           {
              res.send("studenttableupdate3func err = " + err);
+             return;
           }
           else
           { //good
@@ -274,7 +273,8 @@ module.exports = {
              if (phoneareacode < 0 || phoneareacode > 999)
              {
                   var badstr = 'Sorry phone area code must be between 000 and 999';
-                  res.render('pages/result', {myresults: badstr} );
+                  res.render('admin_pages/adminresult', {myresults: badstr} );
+                  return;
              }
              else 
              {
@@ -291,15 +291,17 @@ module.exports = {
                  if (first_at == -1)
                  {
                       var badstr = 'Sorry email must have 1 @ character, for example darthvader@gmail.com';
-                      res.render('pages/result', {myresults: badstr} );
+                      res.render('admin_pages/adminresult', {myresults: badstr} );
+                      return;
                  }
                  else if (first_at != last_at)
                  {
                       var badstr = 'Sorry email must have only 1 @ character, for example darthvader@gmail.com but you put more than 1 @ character';
-                      res.render('pages/result', {myresults: badstr} );
+                      res.render('admin_pages/adminresult', {myresults: badstr} );
+                      return;
                  }
-                 else
-                      connectAndUpdate(); 
+               
+                 connectAndUpdate(); 
              }
           }//good
       })//form.parse

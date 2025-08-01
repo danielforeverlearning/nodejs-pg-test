@@ -183,6 +183,12 @@ module.exports = {
                   res.render('admin_pages/adminresult', {myresults: badstr} );
                   return;
              }
+             else if (password !== confirm)
+             {
+                  var badstr = 'Sorry password and confirm must be exactly the same: ' + 'password="' + password + '" confirm="' + confirm + '"';
+                  res.render('admin_pages/adminresult', {myresults: badstr} );
+                  return;
+             }
              else 
              {
                  console.log("typeof email = " + typeof email);

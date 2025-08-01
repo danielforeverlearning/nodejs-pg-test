@@ -118,11 +118,29 @@ module.exports = {
       var email;
       var phoneareacode;
       var phonenumber;
+      var badstr;
       var resultstr;
-      async function connectAndInsert() {    
+      async function connectAndMaybeInsert() {    
                         const client       = new Client(connectobj);
+                        //check duplicate email
                         try {
-                          await client.connect();
+                             await client.connect();
+                             var query = "SELECT student WHERE EMAIL=" + email;
+                             const queryRes = await client.query(query);
+                             if (queryRes.rows.length > 0)
+                             {
+                                 await client.end();
+                                 badstr = "Sorry, there is at least 1 other student with the same email address, i will not create a new student account, email=" + email;
+                                 res.render('admin_pages/adminresult', {myresults: badstr} );
+                             }
+                        } catch (err) {
+                            await client.end();
+                            badstr = 'studenttableinsertfunc, query for duplicate email ERROR = ' + err;
+                            res.render('admin_pages/adminresult', {myresults: badstr} );
+                        }
+        
+                        //insert
+                        try {
                           var insertstmt = "INSERT INTO student (FIRSTNAME, LASTNAME, EMAIL, PHONEAREACODE, PHONENUMBER) VALUES ('" + firstname + "', '" + lastname + "', '" + email + "', " + phoneareacode + ", " + phonenumber + ");";
                           console.log(insertstmt);
                           const insertRes = await client.query(insertstmt);
@@ -148,7 +166,7 @@ module.exports = {
              console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
              firstname = fields.firstname_name;
              lastname = fields.lastname_name;
-             email = fields.email_name;
+             email = fields.email_name.toLowerCase();
              phoneareacode = fields.phoneareacode_name;
              phonenumber = fields.phonenumber_name;
 
@@ -184,7 +202,7 @@ module.exports = {
                       return;
                  }
                  else
-                      connectAndInsert(); 
+                      connectAndMaybeInsert();
              }
           }//good
       })//form.parse

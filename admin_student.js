@@ -125,7 +125,7 @@ module.exports = {
                         //check duplicate email
                         try {
                              await client.connect();
-                             var query = "SELECT * FROM student WHERE EMAIL='" + email + "' AND ID <> " + primarykeyID + ";";
+                             var query = "SELECT * FROM student WHERE EMAIL='" + email + "';";
                              const queryRes = await client.query(query);
                              if (queryRes.rows.length > 0)
                              {

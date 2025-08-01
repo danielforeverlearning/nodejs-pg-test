@@ -113,7 +113,7 @@ module.exports = {
   
 
   
-  admininsertstudacctsubmitfunc: function(req, res)  {
+  adminoverwritestudacctsubmitfunc: function(req, res, studentID)  {
       var password;
       var confirm;
       var studentID;
@@ -123,12 +123,13 @@ module.exports = {
                         const client       = new Client(connectobj);
                         try {
                           await client.connect();
-                          var insertstmt = "INSERT INTO account_student (STUDENTID, PASSWORDHASH) VALUES (" + studentID + ", '" + passwordhash + "');";
-                          console.log(insertstmt);
-                          const insertRes = await client.query(insertstmt);
-                          resultstr = 'admininsertstudacctsubmitfunc insertRes = ' + JSON.stringify(insertRes);
+                          var stmts  = "DELETE FROM account_student WHERE STUDENTID=" + studentID + ";";
+                              stmts += "INSERT INTO account_student (STUDENTID, PASSWORDHASH) VALUES (" + studentID + ", '" + passwordhash + "');";
+                          console.log(stmts);
+                          const Res = await client.query(stmts);
+                          resultstr = 'adminoverwritestudacctsubmitfunc Res = ' + JSON.stringify(Res);
                         } catch (err) {
-                            resultstr = 'admininsertstudacctsubmitfunc INSERT INTO account_student ERROR = ' + err;
+                            resultstr = 'adminoverwritestudacctsubmitfunc ERROR = ' + err;
                         } finally {
                             await client.end();
                             res.render('admin_pages/adminresult', {myresults: resultstr} );
@@ -140,7 +141,7 @@ module.exports = {
   
           if (err)
           {
-             res.send("admininsertstudacctsubmitfunc form.parse ERROR = " + err);
+             res.send("adminoverwritestudacctsubmitfunc form.parse ERROR = " + err);
              return;
           }
           else
@@ -171,7 +172,7 @@ module.exports = {
              }
           }//good
       })//form.parse
-  } //admininsertstudacctsubmitfunc
+  } //adminoverwritestudacctsubmitfunc
   
   
 }; //module.exports

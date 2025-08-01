@@ -11,7 +11,7 @@ const { Client }   = require('pg');
 var db_credential  = require('./db_credential');
 const connectobj   = db_credential.myconnectobj();
 
-async function update_lockout_failcount_studacct(mynewfailcount, studentID) {
+async function update_lockout_failcount_studacct(mynewfailcount, studentID, res) {
     var updatestmt;
     if (mynewfailcount==0)
          updatestmt = "UPDATE account_student SET FAILCOUNT = 0, LOCKOUT = FALSE WHERE STUDENTID = " + studentID + ";";
@@ -113,10 +113,10 @@ module.exports = {
                                  console.log("query_result.rows[0].passwordhash = " + query_result.rows[0].passwordhash);
                                  console.log("typeof query_result.rows[0].passwordhash = " + typeof query_result.rows[0].passwordhash);
                                  if (checkpasswordhash === query_result.rows[0].passwordhash)
-                                      update_lockout_failcount_studacct(0, studentID);
+                                      update_lockout_failcount_studacct(0, studentID, res);
                                  else {
                                       var mynewfailcount = query_result.rows[0].failcount + 1;
-                                      update_lockout_failcount_studacct(mynewfailcount, studentID);
+                                      update_lockout_failcount_studacct(mynewfailcount, studentID, res);
                                  }
                             }
                             else

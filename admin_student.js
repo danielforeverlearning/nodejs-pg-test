@@ -166,7 +166,7 @@ module.exports = {
              console.log("fields = " + JSON.stringify(fields) + "<br/>files = " + JSON.stringify(files));
              firstname = fields.firstname_name;
              lastname = fields.lastname_name;
-             email = fields.email_name.toLowerCase();
+             email = fields.email_name[0].toLowerCase();
              phoneareacode = fields.phoneareacode_name;
              phonenumber = fields.phonenumber_name;
 
@@ -301,7 +301,7 @@ module.exports = {
              lastname = fields.lastname_name;
 
              console.log("typeof fields.email_name = " + typeof fields.email_name);
-             email = fields.email_name;
+             email = fields.email_name[0];
              console.log("typeof email = " + typeof email);
              email = email.toLowerCase();
             

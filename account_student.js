@@ -42,11 +42,13 @@ module.exports = {
                                    await client.end();
                                    badstr = 'Sorry there is no student with email = ' + email;
                                    res.render('pages/result', {myresults: badstr} );
+                                   return;
                               } 
                               else if (query_result.rows.length > 1) {
                                    await client.end();
                                    badstr = 'wow ok, more than 1 student found with email = ' + email + ', that means i need to add validation code when creating student accounts on insert and update, need to repair code.';
                                    res.render('pages/result', {myresults: badstr} );
+                                   return;
                               }
                               else
                                    studentID = query_result.rows[0].id;
@@ -54,6 +56,7 @@ module.exports = {
                             await client.end();
                             badstr = 'loginstudentsubmitfunc ERROR = ' + err;
                             res.render('pages/result', {myresults: badstr} );
+                            return;
                         }
 
                         //query account_student

@@ -8,8 +8,8 @@ const PORT         = process.env.PORT || 5000
 
 const { Client }   = require('pg');
 
-var db_credential   = require('./db_credential');
-const connectobj    = db_credential.myconnectobj();
+var db_credential  = require('./db_credential');
+const connectobj   = db_credential.myconnectobj();
 
 
 module.exports = {
@@ -66,6 +66,10 @@ module.exports = {
                                    badstr = 'wow ok, more than 1 student found with email = ' + email + ', that means i need to add validation code when creating student accounts on insert and update, need to repair code.';
                                    goodquery = false;
                               }
+                              else if (query_result.rows[0].lockout) {
+                                   badstr = 'Sorry, account for student with email=' + email + ' is locked-out due to too many failed password attempts. Please contact a sensei/professor/admin for help.';
+                                   goodquery = false;
+                              }
                               else
                                    goodquery = true;
                         } catch (err) {
@@ -73,17 +77,18 @@ module.exports = {
                             badstr = 'loginstudentsubmitfunc ERROR = ' + err;
                         } finally {
                             await client.end();
-                            if (goodquery)
-                            {
+                            if (goodquery) {
                                  var checkpasswordhash = db_credential.hashHmacJs('sha256', password, 'nodejs-pg-test');
                                  console.log("checkpasswordhash = " + checkpasswordhash);
                                  console.log("typeof checkpasswordhash = " + typeof checkpasswordhash);
                                  console.log("query_result.rows[0].passwordhash = " + query_result.rows[0].passwordhash);
                                  console.log("typeof query_result.rows[0].passwordhash = " + typeof query_result.rows[0].passwordhash);
                                  if (checkpasswordhash === query_result.rows[0].passwordhash)
-                                      res.render('pages/result', {myresults: 'good password'} );
-                                 else
-                                      res.render('pages/result', {myresults: 'bad password'} );
+                                      update_lockout_failcount_studacct(0);
+                                 else {
+                                      var mynewfailcount = query_result.rows[0].failcount + 1;
+                                      update_lockout_failcount_studacct(mynewfailcount);
+                                 }
                             }
                             else
                                  res.render('pages/result', {myresults: badstr} );

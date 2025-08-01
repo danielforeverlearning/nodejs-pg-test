@@ -118,6 +118,8 @@ module.exports = {
       var email;
       var phoneareacode;
       var phonenumber;
+      var password;
+      var confirm;
       var badstr;
       var resultstr;
       async function connectAndMaybeInsert() {    
@@ -171,6 +173,8 @@ module.exports = {
              email = fields.email_name[0].toLowerCase();
              phoneareacode = fields.phoneareacode_name;
              phonenumber = fields.phonenumber_name;
+             password = fields.password_name[0];
+             confirm = fields.confirm_name[0];
 
              //validation checking
              if (phoneareacode < 0 || phoneareacode > 999)

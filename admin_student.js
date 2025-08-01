@@ -13,14 +13,6 @@ var db_credential   = require('./db_credential');
 const connectobj    = db_credential.myconnectobj();
 
 
-function hashHmacJs(algo, data, key, raw_output = false) {
-    const hmac = crypto.createHmac(algo, key);
-    hmac.update(data);
-    const digest = hmac.digest(raw_output ? 'binary' : 'hex');
-    return digest;
-}//hashHmacJs
-
-
 module.exports = {
 
   studentviewfunc: function(req,res,sortorder)  {
@@ -188,8 +180,8 @@ module.exports = {
                         }
 
                         //insert account_student
-                        const client4       = new Client(connectobj);
-                        var passwordhash = hashHmacJs('sha256', password, 'nodejs-pg-test');
+                        const client4 = new Client(connectobj);
+                        var passwordhash = db_credential.hashHmacJs('sha256', password, 'nodejs-pg-test');
                         var stmtres;
                         try {
                             await client4.connect();

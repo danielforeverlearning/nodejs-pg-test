@@ -79,7 +79,7 @@ module.exports = {
                             await client.end();
                             if (goodquery)
                             {
-                                 var checkpasswordhash = hashHmacJs('sha256', email, 'nodejs-pg-test');
+                                 var checkpasswordhash = hashHmacJs('sha256', password, 'nodejs-pg-test');
                                  console.log("checkpasswordhash = " + checkpasswordhash);
                                  console.log("typeof checkpasswordhash = " + typeof checkpasswordhash);
                                  console.log("query_result.rows[0].passwordhash = " + query_result.rows[0].passwordhash);

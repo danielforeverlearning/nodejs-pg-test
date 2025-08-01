@@ -9,8 +9,10 @@
 <body>
 <div class="container">
   <h2>Do you also want to change the password or security of the online account belonging to student STUDENTID=<%= studentID %> <%= firstname %> <%= lastname %> ?</h2>
-  <input type="button" onclick="window.location.href='/adminoverwritestudacctsubmit/<%= studentID %>'" value="YES">
-  <input type="button" onclick="window.location.href='/adminhome'"                      value="NO">
+  <form action="/adminoverwritestudacctsubmit/<%= studentID %>" method="post" enctype="multipart/form-data">
+    <input type="submit" value="YES">
+    <input type="button" onclick="window.location.href='/adminhome'" value="NO">
+  </form>
 </div>
 </body>
 </html>

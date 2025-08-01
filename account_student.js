@@ -32,7 +32,7 @@ module.exports = {
                         const client       = new Client(connectobj);
                         try {
                               await client.connect();
-                              var stmt  = "SELECT account_student WHERE EMAIL=" + email + ";";
+                              var stmt  = "SELECT * FROM account_student WHERE EMAIL='" + email + "';";
                               console.log(stmt);
                               query_result = await client.query(stmt);
                               console.log("query_result = " + JSON.stringify(query_result));

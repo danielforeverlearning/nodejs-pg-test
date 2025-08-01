@@ -32,10 +32,12 @@ express()
 
   .get('/', (req, res) => res.send("please come back a couple hours from now under construction, time starting construction 12:26AM 7/30/2025 HST"))
 
-  .post('/adminoverwritestudacctsubmit', (req, res) => { admin_accounts.adminoverwritestudacctsubmitfunc(req,res); })
+  .post('/adminoverwritestudacctsubmit/:id', (req, res) => { 
+        const studentID = req.params.id;
+        admin_accounts.adminoverwritestudacctsubmitfunc(req,res,studentID);
+  })
 
 
-  
   .get('/adminhome', (req, res) => res.render('admin_pages/adminhome'))
   .get('/student/:sortorder', (req,res) => {  
         const sortorder = req.params.sortorder;

@@ -1,3 +1,5 @@
+const crypto       = require('crypto');
+
 const connectobj   = {
                                     user: 'garagedb_i5vo_user', // e.g., 'postgres'
                                     host: 'dpg-d1p3n83ipnbc73fk1qk0-a',

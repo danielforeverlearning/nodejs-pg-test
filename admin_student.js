@@ -299,7 +299,12 @@ module.exports = {
              primarykeyID = fields.primarykey_name;
              firstname = fields.firstname_name;
              lastname = fields.lastname_name;
-             email = fields.email_name.toLowerCase();
+
+             console.log("typeof fields.email_name = " + typeof fields.email_name);
+             email = fields.email_name;
+             console.log("typeof email = " + typeof email);
+             email = email.toLowerCase();
+            
              phoneareacode = fields.phoneareacode_name;
              phonenumber = fields.phonenumber_name;
 

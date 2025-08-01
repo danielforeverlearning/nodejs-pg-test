@@ -8,6 +8,10 @@ const connectobj   = {
 
 
 module.exports = {
+
+  myconnectobj: function() {
+      return connectobj;
+  }, //myconnectobj
   
   hashHmacJs: function(algo, data, key, raw_output = false) {
       const hmac = crypto.createHmac(algo, key);

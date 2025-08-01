@@ -32,6 +32,7 @@ express()
 
   .get('/', (req, res) => res.render('pages/home'))
   .get('/studentlogin', (req, res) => res.render('pages/student_login'))
+  .post('/loginstudentsubmit', (req, res) => { admin_accounts.loginstudentsubmitfunc(req,res); })
 
   .get('/adminhome', (req, res) => res.render('admin_pages/adminhome'))
   .get('/student/:sortorder', (req,res) => {  

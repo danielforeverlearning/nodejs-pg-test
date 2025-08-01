@@ -26,14 +26,39 @@ module.exports = {
       var password;
       var email;
       var badstr;
-      var goodquery;
       var query_result;
+      var studentID;
+      var goodquery;
       async function querydb() {    
                         const client       = new Client(connectobj);
+                        //query student
                         try {
                               await client.connect();
                               var stmt  = "SELECT * FROM student WHERE EMAIL='" + email + "';";
-                              console.log(stmt);
+                              query_result = await client.query(stmt);
+                              console.log("query_result = " + JSON.stringify(query_result));
+                              console.log("query_result.rows.length = " + query_result.rows.length);
+                              if (query_result.rows.length == 0) {
+                                   await client.end();
+                                   badstr = 'Sorry there is no student with email = ' + email;
+                                   res.render('pages/result', {myresults: badstr} );
+                              } 
+                              else if (query_result.rows.length > 1) {
+                                   await client.end();
+                                   badstr = 'wow ok, more than 1 student found with email = ' + email + ', that means i need to add validation code when creating student accounts on insert and update, need to repair code.';
+                                   res.render('pages/result', {myresults: badstr} );
+                              }
+                              else
+                                   studentID = query_result.rows[0].id;
+                        } catch (err) {
+                            await client.end();
+                            badstr = 'loginstudentsubmitfunc ERROR = ' + err;
+                            res.render('pages/result', {myresults: badstr} );
+                        }
+
+                        //query account_student
+                        try {
+                              var stmt  = "SELECT * FROM account_student WHERE STUDENTID=" + studentID + ";";
                               query_result = await client.query(stmt);
                               console.log("query_result = " + JSON.stringify(query_result));
                               console.log("query_result.rows.length = " + query_result.rows.length);
@@ -67,7 +92,7 @@ module.exports = {
                             else
                                  res.render('pages/result', {myresults: badstr} );
                         }
-      }
+      }//querydb
     
       var form = new formidable.IncomingForm();
       form.parse(req, function (err, fields, files) {

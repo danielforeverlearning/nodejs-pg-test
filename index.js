@@ -31,7 +31,7 @@ express()
   .set('view engine', 'ejs')
 
   .get('/', (req, res) => res.render('pages/home'))
-
+  .get('/studentlogin', (req, res) => res.render('pages/student_login'))
 
   .get('/adminhome', (req, res) => res.render('admin_pages/adminhome'))
   .get('/student/:sortorder', (req,res) => {  

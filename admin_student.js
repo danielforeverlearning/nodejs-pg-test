@@ -157,47 +157,50 @@ module.exports = {
                         }
         
                         //insert student
+                        const client2 = new Client(connectobj);
                         try {
-                            await client.connect();
+                            await client2.connect();
                             var insertstmt = "INSERT INTO student (FIRSTNAME, LASTNAME, EMAIL, PHONEAREACODE, PHONENUMBER) VALUES ('" + firstname + "', '" + lastname + "', '" + email + "', " + phoneareacode + ", " + phonenumber + ");";
                             console.log(insertstmt);
-                            const insertRes = await client.query(insertstmt);
+                            const insertRes = await client2.query(insertstmt);
                             var resultstr = 'insertRes = ' + JSON.stringify(insertRes);
                         } catch (err) {
-                            await client.end();
+                            await client2.end();
                             badstr = 'INSERT INTO student ERROR = ' + err;
                             res.render('admin_pages/adminresult', {myresults: badstr} );
                         } finally {
-                            await client.end();
+                            await client2.end();
                         }
 
                         //query student
+                        const client3 = new Client(connectobj);
                         var queryres;
                         try {
-                            await client.connect();
+                            await client3.connect();
                             var query = "SELECT * FROM student WHERE EMAIL='" + email + "';";
-                            queryres = await client.query(query);
+                            queryres = await client3.query(query);
                         } catch (err) {
-                            await client.end();
+                            await client3.end();
                             badstr = 'studenttableinsertfunc, query student by email ERROR = ' + err;
                             res.render('admin_pages/adminresult', {myresults: badstr} );
                         } finally {
-                            await client.end();
+                            await client3.end();
                         }
 
                         //insert account_student
+                        const client4       = new Client(connectobj);
                         var passwordhash = hashHmacJs('sha256', password, 'nodejs-pg-test');
                         var stmtres;
                         try {
-                            await client.connect();
+                            await client4.connect();
                             var stmt = "INSERT INTO account_student (STUDENTID, PASSWORDHASH) VALUES (" + queryres.rows[0].id + ",'" + passwordhash + "');";
-                            stmtres = await client.query(stmt);
+                            stmtres = await client4.query(stmt);
                         } catch (err) {
-                            await client.end();
+                            await client4.end();
                             badstr = 'studenttableinsertfunc, insert account_student by STUDENTID=' + queryres.rows[0].id + ' ERROR = ' + err;
                             res.render('admin_pages/adminresult', {myresults: badstr} );
                         } finally {
-                            await client.end();
+                            await client4.end();
                             var goodstr = "" + firstname + " " + lastname + " successfully inserted into database.";
                             res.render('admin_pages/adminresult', {myresults: goodstr} );
                         }

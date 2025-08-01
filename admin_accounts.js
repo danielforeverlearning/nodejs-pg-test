@@ -30,7 +30,7 @@ module.exports = {
               
                           // Example: create table
                           const createRes = await client.query(
-                              'CREATE TABLE account_student (STUDENTID INTEGER PRIMARY KEY, PASSWORDHASH VARCHAR(255), CONSTRAINT myaccountstudentfkconstraint FOREIGN KEY (STUDENTID) REFERENCES student(ID));'
+                              'CREATE TABLE account_student (STUDENTID INTEGER PRIMARY KEY, PASSWORDHASH VARCHAR(255), FAILCOUNT INTEGER, LOCKOUT BOOLEAN, CONSTRAINT myaccountstudentfkconstraint FOREIGN KEY (STUDENTID) REFERENCES student(ID));'
                           );
                           result = 'createRes = ' + JSON.stringify(createRes);
                       } catch (err) {
@@ -66,50 +66,6 @@ module.exports = {
   }, //studentacctdropfunc
 
   
-  adminacctcreatefunc: function(req,res) {
-          async function connectAndCreate() {
-                      var result;
-                      const client       = new Client(connectobj);
-                      try {
-                          await client.connect();
-              
-                          // Example: create table
-                          const createRes = await client.query(
-                              'CREATE TABLE account_admin (ID SERIAL PRIMARY KEY, PASSWORDHASH VARCHAR(255), LOGIN VARCHAR(255));'
-                          );
-                          result = 'createRes = ' + JSON.stringify(createRes);
-                      } catch (err) {
-                          result = 'Error connecting or creating account_admin table = ' + err;
-                      } finally {
-                          await client.end();
-                          res.send(result);
-                      }
-          }
-          connectAndCreate();
-  }, //adminacctcreatefunc
-
-  adminacctdropfunc: function(req,res) {
-          var result;
-          const client       = new Client(connectobj);
-          async function connectAndDrop() {
-                      try {
-                          await client.connect();
-              
-                          // Example: drop table
-                          const dropRes = await client.query(
-                              'DROP TABLE account_admin;'
-                          );
-                          result = 'dropRes = ' + JSON.stringify(dropRes);
-                      } catch (err) {
-                          result = 'Error connecting or dropping account_admin table = ' + err;
-                      } finally {
-                          await client.end();
-                          res.send(result);
-                      }
-          }
-          connectAndDrop();
-  }, //adminacctdropfunc
-
   
   
   adminoverwritestudacctsubmitfunc: function(req, res)  {
@@ -143,7 +99,7 @@ module.exports = {
                         try {
                           await client.connect();
                           var stmts  = "DELETE FROM account_student WHERE STUDENTID=" + studentID + ";";
-                              stmts += "INSERT INTO account_student (STUDENTID, PASSWORDHASH) VALUES (" + studentID + ", '" + passwordhash + "');";
+                              stmts += "INSERT INTO account_student (STUDENTID, PASSWORDHASH, FAILCOUNT, LOCKOUT) VALUES (" + studentID + ", '" + passwordhash + "', 0, FALSE);";
                           console.log(stmts);
                           const Res = await client.query(stmts);
                           resultstr = 'admininsertstudacctsubmitfunc Res = ' + JSON.stringify(Res);

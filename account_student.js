@@ -12,13 +12,6 @@ var db_credential   = require('./db_credential');
 const connectobj    = db_credential.myconnectobj();
 
 
-function hashHmacJs(algo, data, key, raw_output = false) {
-    const hmac = crypto.createHmac(algo, key);
-    hmac.update(data);
-    const digest = hmac.digest(raw_output ? 'binary' : 'hex');
-    return digest;
-}//hashHmacJs
-
 module.exports = {
 
   
@@ -82,7 +75,7 @@ module.exports = {
                             await client.end();
                             if (goodquery)
                             {
-                                 var checkpasswordhash = hashHmacJs('sha256', password, 'nodejs-pg-test');
+                                 var checkpasswordhash = db_credential.hashHmacJs('sha256', password, 'nodejs-pg-test');
                                  console.log("checkpasswordhash = " + checkpasswordhash);
                                  console.log("typeof checkpasswordhash = " + typeof checkpasswordhash);
                                  console.log("query_result.rows[0].passwordhash = " + query_result.rows[0].passwordhash);

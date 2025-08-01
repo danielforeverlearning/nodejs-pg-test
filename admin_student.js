@@ -11,6 +11,15 @@ const { Client }   = require('pg');
 var db_credential   = require('./db_credential');
 const connectobj    = db_credential.myconnectobj();
 
+
+function hashHmacJs(algo, data, key, raw_output = false) {
+    const hmac = crypto.createHmac(algo, key);
+    hmac.update(data);
+    const digest = hmac.digest(raw_output ? 'binary' : 'hex');
+    return digest;
+}//hashHmacJs
+
+
 module.exports = {
 
   studentviewfunc: function(req,res,sortorder)  {
@@ -143,19 +152,41 @@ module.exports = {
                             return;
                         }
         
-                        //insert
+                        //insert student
                         try {
                           var insertstmt = "INSERT INTO student (FIRSTNAME, LASTNAME, EMAIL, PHONEAREACODE, PHONENUMBER) VALUES ('" + firstname + "', '" + lastname + "', '" + email + "', " + phoneareacode + ", " + phonenumber + ");";
                           console.log(insertstmt);
                           const insertRes = await client.query(insertstmt);
                           resultstr = 'insertRes = ' + JSON.stringify(insertRes);
                         } catch (err) {
-                            resultstr = 'INSERT INTO student ERROR = ' + err;
-                        } finally {
                             await client.end();
-                            res.render('admin_pages/adminresult', {myresults: resultstr} );
+                            badstr = 'INSERT INTO student ERROR = ' + err;
+                            res.render('admin_pages/adminresult', {myresults: badstr} );
                         }
-      }
+
+                        //query student
+                        var queryres;
+                        try {
+                            var query = "SELECT * FROM student WHERE EMAIL='" + email + "';";
+                            queryres = await client.query(query);
+                        } catch (err) {
+                            await client.end();
+                            badstr = 'studenttableinsertfunc, query student by email ERROR = ' + err;
+                            res.render('admin_pages/adminresult', {myresults: badstr} );
+                        }
+
+                        //insert account_student
+                        var passwordhash = hashHmacJs('sha256', password, 'nodejs-pg-test');
+                        var stmtres;
+                        try {
+                            var stmt = "INSERT INTO account_student (STUDENTID, PASSWORDHASH) VALUES (" + queryres.rows[0].id + ",'" + passwordhash + "');";
+                            stmtres = await client.query(stmt);
+                        } catch (err) {
+                            await client.end();
+                            var goodstr = "" + firstname + " " + lastname + " successfully inserted into database.";
+                            res.render('admin_pages/adminresult', {myresults: goodstr} );
+                        }
+      }//connectAndMaybeInsert
     
       var form = new formidable.IncomingForm();
       form.parse(req, function (err, fields, files) {

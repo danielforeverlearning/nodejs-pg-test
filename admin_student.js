@@ -125,18 +125,20 @@ module.exports = {
                         //check duplicate email
                         try {
                              await client.connect();
-                             var query = "SELECT * FROM student WHERE EMAIL=" + email;
+                             var query = "SELECT * FROM student WHERE EMAIL='" + email + "';";
                              const queryRes = await client.query(query);
                              if (queryRes.rows.length > 0)
                              {
                                  await client.end();
                                  badstr = "Sorry, there is at least 1 other student with the same email address, i will not create a new student account, email=" + email;
                                  res.render('admin_pages/adminresult', {myresults: badstr} );
+                                 return;
                              }
                         } catch (err) {
                             await client.end();
                             badstr = 'studenttableinsertfunc, query for duplicate email ERROR = ' + err;
                             res.render('admin_pages/adminresult', {myresults: badstr} );
+                            return;
                         }
         
                         //insert
@@ -251,18 +253,20 @@ module.exports = {
                         //check duplicate email
                         try {
                              await client.connect();
-                             var query = "SELECT * FROM student WHERE EMAIL=" + email;
+                             var query = "SELECT * FROM student WHERE EMAIL='" + email + "';";
                              const queryRes = await client.query(query);
                              if (queryRes.rows.length > 0)
                              {
                                  await client.end();
                                  badstr = "Sorry, there is at least 1 other student with the same email address, i will not create a new student account, email=" + email;
                                  res.render('admin_pages/adminresult', {myresults: badstr} );
+                                 return;
                              }
                         } catch (err) {
                             await client.end();
                             badstr = 'studenttableupdate3func, query for duplicate email ERROR = ' + err;
                             res.render('admin_pages/adminresult', {myresults: badstr} );
+                            return;
                         }
                         //update
                         try {

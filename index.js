@@ -54,9 +54,8 @@ express()
         const studentID = req.params.id;
         admin_student.updatefunc(req,res,studentID);
   })
-  .post('/adminoverwritestudacctsubmit/:id', (req, res) => { 
-        const studentID = req.params.id;
-        admin_accounts.adminoverwritestudacctsubmitfunc(req,res,studentID);
+  .post('/adminoverwritestudacctsubmit', (req, res) => { 
+        admin_accounts.adminoverwritestudacctsubmitfunc(req,res);
   })
   .get('/student/:sortorder', (req,res) => {  
         const sortorder = req.params.sortorder;

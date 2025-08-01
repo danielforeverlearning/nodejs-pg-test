@@ -57,6 +57,9 @@ express()
   .post('/adminoverwritestudacctsubmit', (req, res) => { 
         admin_accounts.adminoverwritestudacctsubmitfunc(req,res);
   })
+  .post('/admininsertstudacctsubmit', (req, res) => {
+        admin_accounts.admininsertstudacctsubmitfunc(req,res);
+  })
   .get('/student/:sortorder', (req,res) => {  
         const sortorder = req.params.sortorder;
         admin_student.studentviewfunc(req,res,sortorder);

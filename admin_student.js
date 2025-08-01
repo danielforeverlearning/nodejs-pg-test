@@ -248,14 +248,30 @@ module.exports = {
       var updateRes;
       async function connectAndUpdate() {    
                         const client       = new Client(connectobj);
+                        //check duplicate email
                         try {
-                          await client.connect();
+                             await client.connect();
+                             var query = "SELECT student WHERE EMAIL=" + email;
+                             const queryRes = await client.query(query);
+                             if (queryRes.rows.length > 0)
+                             {
+                                 await client.end();
+                                 badstr = "Sorry, there is at least 1 other student with the same email address, i will not create a new student account, email=" + email;
+                                 res.render('admin_pages/adminresult', {myresults: badstr} );
+                             }
+                        } catch (err) {
+                            await client.end();
+                            badstr = 'studenttableupdate3func, query for duplicate email ERROR = ' + err;
+                            res.render('admin_pages/adminresult', {myresults: badstr} );
+                        }
+                        //update
+                        try {
                           var stmt = "UPDATE student SET FIRSTNAME = '" + firstname + "', LASTNAME = '" + lastname + "', EMAIL = '" + email + "', PHONEAREACODE = " + phoneareacode + ", PHONENUMBER = " + phonenumber + " WHERE ID = " + primarykeyID + ";";
                           console.log(stmt);
                           updateRes = await client.query(stmt);
                           dbgoodresult = true;
                         } catch (err) {
-                            badstr = 'UPDATE student ID = ' + primarykeyID + ', err = ' + err;
+                            badstr = 'studenttableupdate3func, UPDATE student ID = ' + primarykeyID + ', err = ' + err;
                             dbgoodresult = false;
                         } finally {
                             await client.end();
@@ -283,7 +299,7 @@ module.exports = {
              primarykeyID = fields.primarykey_name;
              firstname = fields.firstname_name;
              lastname = fields.lastname_name;
-             email = fields.email_name;
+             email = fields.email_name.toLowerCase();
              phoneareacode = fields.phoneareacode_name;
              phonenumber = fields.phonenumber_name;
 

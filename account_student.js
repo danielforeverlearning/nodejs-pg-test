@@ -11,10 +11,13 @@ const { Client }   = require('pg');
 var db_credential  = require('./db_credential');
 const connectobj   = db_credential.myconnectobj();
 
+function update_lockout_failcount_studacct(mynewfailcount) {
+    var updatestmt = 
+}//update_lockout_failcount_studacct
+
 
 module.exports = {
 
-  
   loginstudentsubmitfunc: function(req, res)  {
       var password;
       var email;

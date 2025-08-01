@@ -24,6 +24,8 @@ var admin_subscription = require('./admin_subscription');
 var admin_reservation = require('./admin_reservation');
 var admin_db_tools = require('./admin_db_tools');
 
+var acctstud = require('./account_student');
+
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
@@ -32,7 +34,7 @@ express()
 
   .get('/', (req, res) => res.render('pages/home'))
   .get('/studentlogin', (req, res) => res.render('pages/student_login'))
-  .post('/loginstudentsubmit', (req, res) => { admin_accounts.loginstudentsubmitfunc(req,res); })
+  .post('/loginstudentsubmit', (req, res) => { acctstud.loginstudentsubmitfunc(req,res); })
 
   .get('/adminhome', (req, res) => res.render('admin_pages/adminhome'))
   .get('/student/:sortorder', (req,res) => {  

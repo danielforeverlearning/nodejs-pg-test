@@ -12,13 +12,6 @@ var db_credential   = require('./db_credential');
 const connectobj    = db_credential.myconnectobj();
 
 
-function hashHmacJs(algo, data, key, raw_output = false) {
-    const hmac = crypto.createHmac(algo, key);
-    hmac.update(data);
-    const digest = hmac.digest(raw_output ? 'binary' : 'hex');
-    return digest;
-}//hashHmacJs
-
 module.exports = {
 
   studentacctcreatefunc: function(req,res) {
@@ -135,7 +128,7 @@ module.exports = {
              //validation checking
              if (password === confirm)
              {
-                  passwordhash = hashHmacJs('sha256', password, 'nodejs-pg-test');
+                  passwordhash = db_credential.hashHmacJs('sha256', password, 'nodejs-pg-test');
                   console.log("passwordhash = " + passwordhash);
                   connectAndInsert();
              }

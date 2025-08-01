@@ -30,7 +30,7 @@ express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
 
-  .get('/', (req, res) => res.send("please come back a couple hours from now under construction, time starting construction 12:26AM 7/30/2025 HST"))
+  .get('/', (req, res) => res.render('pages/home'))
 
 
   .get('/adminhome', (req, res) => res.render('admin_pages/adminhome'))

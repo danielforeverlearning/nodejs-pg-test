@@ -63,7 +63,9 @@ module.exports = {
                           await client.connect();
                           var deletestmt  = "DELETE FROM reservation WHERE STUDENTID = " + studentID + ";";
                               deletestmt += "DELETE FROM subscription WHERE STUDENTID = " + studentID + ";";
+                              deletestmt += "DELETE FROM account_student WHERE ID = " + studentID + ";";
                               deletestmt += "DELETE FROM student WHERE ID = " + studentID + ";";
+                              
                           const deleteRes = await client.query(deletestmt);
                           var resultstr = 'student subscription reservation deletefunc = ' + JSON.stringify(deleteRes);
                           res.render('admin_pages/adminresult', {myresults: resultstr} );

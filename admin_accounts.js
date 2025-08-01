@@ -111,9 +111,27 @@ module.exports = {
 
   
   
-
+  adminoverwritestudacctsubmitfunc: function(req, res)  {
+      var form = new formidable.IncomingForm();
+      form.parse(req, function (err, fields, files) {
+          if (err)
+          {
+              res.render('admin_pages/adminresult', {myresults: "adminoverwritestudacctsubmitfunc form.parse ERROR = " + err} );
+              return;
+          }
+          else
+          { //good
+             console.log("fields = " + JSON.stringify(fields));
+             console.log("files = " + JSON.stringify(files));
+             var studentID = fields.studentID_name[0];
+             var firstname = fields.firstname_name[0];
+             var lastname  = fields.lastname_name[0];
+             res.render('admin_pages/studentacctinsert',{ studentID:studentID, firstname:firstname, lastname:lastname });
+          }//good
+      })//form.parse
+  },
   
-  adminoverwritestudacctsubmitfunc: function(req, res, studentID)  {
+  xxxxxxxx: function(req, res, studentID)  {
       var password;
       var confirm;
       var studentID;
@@ -172,7 +190,7 @@ module.exports = {
              }
           }//good
       })//form.parse
-  } //adminoverwritestudacctsubmitfunc
+  } //
   
   
 }; //module.exports

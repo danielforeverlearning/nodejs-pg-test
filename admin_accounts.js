@@ -131,7 +131,7 @@ module.exports = {
       })//form.parse
   },
   
-  xxxxxxxx: function(req, res, studentID)  {
+  admininsertstudacctsubmitfunc: function(req, res)  {
       var password;
       var confirm;
       var studentID;
@@ -145,9 +145,9 @@ module.exports = {
                               stmts += "INSERT INTO account_student (STUDENTID, PASSWORDHASH) VALUES (" + studentID + ", '" + passwordhash + "');";
                           console.log(stmts);
                           const Res = await client.query(stmts);
-                          resultstr = 'adminoverwritestudacctsubmitfunc Res = ' + JSON.stringify(Res);
+                          resultstr = 'admininsertstudacctsubmitfunc Res = ' + JSON.stringify(Res);
                         } catch (err) {
-                            resultstr = 'adminoverwritestudacctsubmitfunc ERROR = ' + err;
+                            resultstr = 'admininsertstudacctsubmitfunc ERROR = ' + err;
                         } finally {
                             await client.end();
                             res.render('admin_pages/adminresult', {myresults: resultstr} );
@@ -159,7 +159,7 @@ module.exports = {
   
           if (err)
           {
-             res.send("adminoverwritestudacctsubmitfunc form.parse ERROR = " + err);
+             res.send("admininsertstudacctsubmitfunc form.parse ERROR = " + err);
              return;
           }
           else
@@ -190,7 +190,7 @@ module.exports = {
              }
           }//good
       })//form.parse
-  } //
+  } //admininsertstudacctsubmitfunc
   
   
 }; //module.exports

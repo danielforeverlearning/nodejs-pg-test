@@ -38,7 +38,6 @@ module.exports = {
                           res.render('admin_pages/studentview', {results: result.rows, sortorder: sortorder} );
                         } catch (err) {
                             var errormsg = " err = " + err;
-                            //console.log(errormsg);
                             res.render('admin_pages/adminresult', {myresults: errormsg} );
                         } finally {
                             await client.end();
@@ -124,7 +123,6 @@ module.exports = {
                         const client       = new Client(connectobj);
                         try {
                           await client.connect();
-                          //console.log('INSERT INTO student Connected to PostgreSQL!');
                           var insertstmt = "INSERT INTO student (FIRSTNAME, LASTNAME, EMAIL, PHONEAREACODE, PHONENUMBER) VALUES ('" + firstname + "', '" + lastname + "', '" + email + "', " + phoneareacode + ", " + phonenumber + ");";
                           console.log(insertstmt);
                           const insertRes = await client.query(insertstmt);
@@ -243,8 +241,9 @@ module.exports = {
                         } finally {
                             await client.end();
                             if (dbgoodresult) {
-                                 var resultstr = 'updateRes = ' + JSON.stringify(updateRes);
-                                 res.render('admin_pages/adminresult', {myresults: resultstr} );
+                                 //var resultstr = 'updateRes = ' + JSON.stringify(updateRes);
+                                 //res.render('admin_pages/adminresult', {myresults: resultstr} );
+                                 res.render('admin_pages/askupdatestudacct', {studentID:primarykeyID, firstname:firstname, lastname:lastname} );
                             }
                             else
                                  res.render('admin_pages/adminresult', {myresults: badstr} );

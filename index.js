@@ -32,7 +32,7 @@ express()
 
   .get('/', (req, res) => res.send("please come back a couple hours from now under construction, time starting construction 12:26AM 7/30/2025 HST"))
 
-  .post('/admininsertstudacctsubmit', (req, res) => { admin_accounts.admininsertstudacctsubmitfunc(req,res); })
+  .post('/adminoverwritestudacctsubmit', (req, res) => { admin_accounts.adminoverwritestudacctsubmitfunc(req,res); })
 
 
   

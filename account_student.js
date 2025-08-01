@@ -55,6 +55,10 @@ module.exports = {
                             if (goodquery)
                             {
                                  var checkpasswordhash = hashHmacJs('sha256', email, 'nodejs-pg-test');
+                                 console.log("checkpasswordhash = " + checkpasswordhash);
+                                 console.log("typeof checkpasswordhash = " + typeof checkpasswordhash);
+                                 console.log("query_result.rows[0].passwordhash = " + query_result.rows[0].passwordhash);
+                                 console.log("typeof query_result.rows[0].passwordhash = " + typeof query_result.rows[0].passwordhash);
                                  if (checkpasswordhash === query_result.rows[0].passwordhash)
                                       res.render('pages/result', {myresults: 'good password'} );
                                  else

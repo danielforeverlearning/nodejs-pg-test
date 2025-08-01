@@ -32,17 +32,17 @@ module.exports = {
                         const client       = new Client(connectobj);
                         try {
                               await client.connect();
-                              var stmt  = "SELECT * FROM account_student WHERE EMAIL='" + email + "';";
+                              var stmt  = "SELECT * FROM student WHERE EMAIL='" + email + "';";
                               console.log(stmt);
                               query_result = await client.query(stmt);
                               console.log("query_result = " + JSON.stringify(query_result));
                               console.log("query_result.rows.length = " + query_result.rows.length);
                               if (query_result.rows.length == 0) {
-                                   badstr = 'Sorry there is no student account with email = ' + email;
+                                   badstr = 'Sorry there is no student with email = ' + email;
                                    goodquery = false;
                               } 
                               else if (query_result.rows.length > 1) {
-                                   badstr = 'wow ok, more than 1 student account found with email = ' + email + ', that means i need to add validation code when creating student accounts on insert and update, need to repair code.';
+                                   badstr = 'wow ok, more than 1 student found with email = ' + email + ', that means i need to add validation code when creating student accounts on insert and update, need to repair code.';
                                    goodquery = false;
                               }
                               else

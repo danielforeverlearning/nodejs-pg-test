@@ -10,7 +10,12 @@
 <div class="container">
   <h2>STUDENT LOGIN</h2>
   <form action="/loginstudentsubmit" method="post" enctype="multipart/form-data">
-    <input type="text" name="email_name" value="">
+    <label for="email_id">EMAIL: </label>
+    <input type="text" name="email_name" id="email_id">
+    <br/>
+    <label for="password_id">PASSWORD: </label>
+    <input type="text" name="password_name" id="password_id">
+    <br/>
     <input type="submit" value="LOGIN">
     <input type="button" onclick="window.location.href='/'" value="CANCEL">
   </form>

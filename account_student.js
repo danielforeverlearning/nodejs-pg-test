@@ -63,7 +63,7 @@ module.exports = {
                               console.log("query_result = " + JSON.stringify(query_result));
                               console.log("query_result.rows.length = " + query_result.rows.length);
                               if (query_result.rows.length == 0) {
-                                   badstr = 'Sorry there is no student with email = ' + email;
+                                   badstr = 'Sorry there is no student account with STUDENTID=' + studentID;
                                    goodquery = false;
                               } 
                               else if (query_result.rows.length > 1) {

@@ -11,6 +11,8 @@
   <h2>Do you also want to change the password or security of the online account belonging to student STUDENTID=<%= studentID %> <%= firstname %> <%= lastname %> ?</h2>
   <form action="/adminoverwritestudacctsubmit" method="post" enctype="multipart/form-data">
     <input type="hidden" name="studentID_name" value="<%= studentID %>">
+    <input type="hidden" name="firstname_name" value="<%= firstname %>">
+    <input type="hidden" name="lastname_name" value="<%= lastname %>">
     <input type="submit" value="YES">
     <input type="button" onclick="window.location.href='/adminhome'" value="NO">
   </form>

@@ -195,10 +195,11 @@ module.exports = {
     
       async function connectAndSelectByID() {  
                         const client       = new Client(connectobj);
+                        var selectIDres;
                         var badstr = "";
                         try {
                               await client.connect();
-                              const selectIDres = await client.query("SELECT * FROM student WHERE ID = " + studentID + ";");
+                              selectIDres = await client.query("SELECT * FROM student WHERE ID = " + studentID + ";");
                               console.log("selectIDres = " + JSON.stringify(selectIDres));
                               console.log("selectIDres.rows.length = " + selectIDres.rows.length);
                               if (selectIDres.rows.length  != 1)

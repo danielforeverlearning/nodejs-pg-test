@@ -130,24 +130,48 @@ express()
              console.log("fields = " + JSON.stringify(fields));
              console.log("files = " + JSON.stringify(files));
               
-             var studentID = fields.studentID_name[0];
+             var studentID = fields.studentID[0];
              var firstname = fields.firstname[0];
              var lastname  = fields.lastname[0];
              var adminbool = fields.adminbool[0];
+             
              res.render('pages/reservation_insert', { studentID:studentID, firstname:firstname, lastname:lastname, adminbool:adminbool });
           }//good
       })//form.parse
   })  //makereservation
     
   .post('/reservation_insert_post', (req,res) => {  
+      var form = new formidable.IncomingForm();
+      form.parse(req, function (err, fields, files) {
+          if (err)
+          {
+             res.send("route post reservation_insert_post form.parse ERROR = " + err);
+             return;
+          }
+          else
+          { //good
+             console.log("fields = " + JSON.stringify(fields));
+             console.log("files = " + JSON.stringify(files));
+              
+             var studentID = fields.studentID[0];
+             var firstname = fields.firstname[0];
+             var lastname  = fields.lastname[0];
+             var adminbool = fields.adminbool[0];
+             var submit    = fields.submit[0];
 
-    /*****
-    const studentID = req.params.id;
-    const firstname = req.params.firstname;
-    const lastname  = req.params.lastname;
-    admin_reservation.reservation_check_date(req,res,studentID,firstname,lastname);
-    *****/
-                                                       })
+             if (submit === "CANCEL")
+             {
+                 if (adminbool)
+                      res.render('admin_pages/adminhome');
+                 else
+                      res.render('pages/student_home', {studentID: studentID, firstname: firstname, lastname: lastname} );
+             }
+             else
+                 admin_reservation.reservation_check_date(req,res,studentID,firstname,lastname,adminbool);
+          }//good
+      })//form.parse
+  }) //reservation_insert_post
+  
   .post('/reservation_insert_post_2/:id/:firstname/:lastname/:month/:day/:year', (req,res) => {  
                                                             const studentID = req.params.id;
                                                             const firstname = req.params.firstname;
@@ -161,6 +185,7 @@ express()
 
   
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
 
 
 

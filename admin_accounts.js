@@ -100,6 +100,8 @@ module.exports = {
       var passwordhash;
 
       var adminbool;
+      var submit;
+    
       var resultstr;
       async function connectAndInsert() {    
                         const client       = new Client(connectobj);
@@ -143,12 +145,21 @@ module.exports = {
              console.log("typeof studentID = " + typeof studentID);
              console.log('password="' + password + '" confirm="' + confirm + '" studentID=' + studentID);
 
+             submit = fields.submit_name[0];
              var adminbool = false;
              if (fields.adminbool_name[0] === "true")
                   adminbool = true;
              
              //validation checking
-             if (password === confirm)
+             if (submit === "CANCEL")
+             {
+                  if (adminbool)
+                      res.render('admin_pages/adminhome');
+                  else
+                      res.render('pages/student_home', {studentID: studentID, firstname: firstname, lastname: lastname} );
+                  return;
+             }
+             else if (password === confirm)
              {
                   passwordhash = db_credential.hashHmacJs('sha256', password, 'nodejs-pg-test');
                   console.log("passwordhash = " + passwordhash);

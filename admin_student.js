@@ -301,6 +301,7 @@ module.exports = {
       var phoneareacode;
       var phonenumber;
       var adminbool;
+      var submit;
     
       var dbgoodresult;
       var badstr;
@@ -345,7 +346,14 @@ module.exports = {
                             if (dbgoodresult) {
                                  //var resultstr = 'updateRes = ' + JSON.stringify(updateRes);
                                  //res.render('admin_pages/adminresult', {myresults: resultstr} );
-                                 res.render('admin_pages/askupdatestudacct', {studentID:primarykeyID, firstname:firstname, lastname:lastname, adminbool:adminbool} );
+                                 if (submit==="YES")
+                                      res.render('admin_pages/askupdatestudacct', {studentID:primarykeyID, firstname:firstname, lastname:lastname, adminbool:adminbool} );
+                                 else {
+                                      if (adminbool)
+                                           res.render('admin_pages/adminhome');
+                                      else
+                                           res.render('pages/student_home', {studentID: primarykeyID, firstname: firstname, lastname: lastname} );
+                                 } 
                             }
                             else {
                                  if (adminbool)
@@ -379,7 +387,8 @@ module.exports = {
              phoneareacode = fields.phoneareacode_name;
              phonenumber = fields.phonenumber_name;
 
-             var adminbool = false;
+             submit = fields.submit_name[0];
+             adminbool = false;
              if (fields.adminbool_name[0] === "true")
                   adminbool = true;
 

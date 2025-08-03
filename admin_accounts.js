@@ -76,10 +76,22 @@ module.exports = {
              var studentID = fields.studentID_name[0];
              var firstname = fields.firstname_name[0];
              var lastname  = fields.lastname_name[0];
-             res.render('admin_pages/studentacctinsert',{ studentID:studentID, firstname:firstname, lastname:lastname });
+             var submit    = fields.submit_name[0];
+             var adminbool = false;
+             if (fields.adminbool_name[0] === "true")
+                  adminbool = true;
+
+             if (submit === "YES")
+                  res.render('admin_pages/studentacctinsert', { studentID:studentID, firstname:firstname, lastname:lastname, adminbool:adminbool });
+             else {
+                  if (adminbool)
+                      res.render('admin_pages/adminhome');
+                  else
+                      res.render('pages/student_home', {studentID: studentID, firstname: firstname, lastname: lastname} );
+             }
           }//good
       })//form.parse
-  },
+  }, //adminoverwritestudacctsubmitfunc
   
   admininsertstudacctsubmitfunc: function(req, res)  {
       var password;

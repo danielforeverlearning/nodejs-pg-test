@@ -356,8 +356,7 @@ module.exports = {
                    res.render('admin_pages/reservation_chose_location_time', {studentID:studentID, firstname:firstname, lastname:lastname, month:month, day:day, year:year, dayIndex:dayIndex, adminbool:adminbool} );
   }, //reservation_check_date
 
-  reservation_check_location_time: function(req,res,studentID,firstname,lastname,month,day,year,adminbool) {
-          var classlocation;
+  reservation_check_location_time: function(req,res,studentID,firstname,lastname,month,day,year,adminbool,classlocation,timeint) {
           var classhour;
           var classminute;
     
@@ -385,22 +384,6 @@ module.exports = {
           }
 
     
-          var form = new formidable.IncomingForm();
-          form.parse(req, function (err, fields, files) {
-              if (err)
-              {
-                   var badstr = "reservation_check_location_time err = " + err;
-                   if (adminbool)
-                        res.render('admin_pages/adminresult', {myresults: badstr} );
-                   else
-                        res.render('pages/result', {myresults: badstr} );
-                   return;
-              }
-              else //good
-              {
-                   console.log("reservation_check_location_time fields = " + JSON.stringify(fields) + " files = " + JSON.stringify(files));
-                   classlocation = fields.location_name;
-                   var timeint   = fields.time_name;
                    if (timeint == 1000)
                    {
                         classhour     = 10;
@@ -423,7 +406,5 @@ module.exports = {
                    }
                 
                    connectAndInsert();
-              }//good
-          })//form.parse
   }//reservation_check_location_time
 }; //module.exports

@@ -111,7 +111,18 @@ express()
   .get('/dbdropreservationtable', (req, res) => { admin_reservation.reservationtabledropfunc(req, res); })
   .get('/reservationmonthyearchooser', (req, res) => res.render('admin_pages/reservation_month_year_chooser'))
   .post('/reservationmonthyearchooserpost', (req, res) => { admin_reservation.month_year_validate_func(req, res); })
+
+
+
+
   
+  .get('/studentmakereservation/:id/:firstname/:lastname', (req,res) => {  
+                                                            const studentID = req.params.id;
+                                                            const firstname = req.params.firstname;
+                                                            const lastname  = req.params.lastname;
+                                                            res.render('pages/reservation_insert', { studentID:studentID, firstname:firstname, lastname:lastname });
+                                                       })
+    
   .post('/reservation_insert_post/:id/:firstname/:lastname', (req,res) => {  
                                                             const studentID = req.params.id;
                                                             const firstname = req.params.firstname;
@@ -129,16 +140,7 @@ express()
                                                        }) 
 
 
-
-
-  
-  .get('/studentmakereservation/:id/:firstname/:lastname', (req,res) => {  
-                                                            const studentID = req.params.id;
-                                                            const firstname = req.params.firstname;
-                                                            const lastname  = req.params.lastname;
-                                                            res.render('pages/reservation_insert', { studentID:studentID, firstname:firstname, lastname:lastname });
-                                                       })
-
   
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
 

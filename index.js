@@ -69,12 +69,6 @@ express()
   })
   .get('/studenttableinsert', (req, res) => res.render('admin_pages/studenttableinsert'))
   .post('/studenttableinsertsubmit', (req, res) => { admin_student.studenttableinsertfunc(req,res); })
-
-
-
-
-
-
   
   .get('/subscripinsert/:id/:firstname/:lastname', (req, res) => res.render('admin_pages/subscriptiontableinsert', {studentID: req.params.id, firstname: req.params.firstname, lastname: req.params.lastname }))
   .post('/subscriptiontableinsertsubmit', (req, res) => { admin_subscription.subscriptiontableinsertsubmitfunc(req,res); })
@@ -101,7 +95,6 @@ express()
         res.render('admin_pages/adminresult', {myresults: badstr} );
   })
   
-  
   .get('/dbcreatestudenttable', (req, res) => { admin_student.studenttablecreatefunc(req, res); })
   .get('/dbdropstudenttable', (req, res) => { admin_student.studenttabledropfunc(req, res); })
 
@@ -118,12 +111,7 @@ express()
   .get('/dbdropreservationtable', (req, res) => { admin_reservation.reservationtabledropfunc(req, res); })
   .get('/reservationmonthyearchooser', (req, res) => res.render('admin_pages/reservation_month_year_chooser'))
   .post('/reservationmonthyearchooserpost', (req, res) => { admin_reservation.month_year_validate_func(req, res); })
-  .get('/studentmakereservation/:id/:firstname/:lastname', (req,res) => {  
-                                                            const studentID = req.params.id;
-                                                            const firstname = req.params.firstname;
-                                                            const lastname  = req.params.lastname;
-                                                            res.render('admin_pages/reservation_insert', { studentID:studentID, firstname:firstname, lastname:lastname });
-                                                       })
+  
   .post('/reservation_insert_post/:id/:firstname/:lastname', (req,res) => {  
                                                             const studentID = req.params.id;
                                                             const firstname = req.params.firstname;
@@ -138,8 +126,19 @@ express()
                                                             const day       = req.params.day;
                                                             const year      = req.params.year;
                                                             admin_reservation.reservation_check_location_time(req,res,studentID,firstname,lastname,month,day,year);
-                                                       })
+                                                       }) 
+
+
 
 
   
+  .get('/studentmakereservation/:id/:firstname/:lastname', (req,res) => {  
+                                                            const studentID = req.params.id;
+                                                            const firstname = req.params.firstname;
+                                                            const lastname  = req.params.lastname;
+                                                            res.render('pages/reservation_insert', { studentID:studentID, firstname:firstname, lastname:lastname });
+                                                       })
+
+  
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+

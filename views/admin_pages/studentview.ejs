@@ -78,8 +78,16 @@ LAST NAME<% if (sortorder == 1) { %>
         <td><%= r.phoneareacode %></td>
         <td><%= r.phonenumber %></td>
         <td><input type="button" onclick="window.location.href='/studentdeleteconfirm/<%= r.id %>/<%= r.firstname %>/<%= r.lastname %>'"   value="DELETE"></td>
-        <td><input type="button" onclick="window.location.href='/studentupdate/<%= r.id %>'"          value="UPDATE"></td>
-        <td><input type="button" onclick="window.location.href='/studentmonthlysubscription/<%= r.id %>/<%= r.firstname %>/<%= r.lastname %>'" value="MONTHLY SUBSCRIPTION"></td>
+        <td>
+              <form action="/studentupdate" method="post" enctype="multipart/form-data">
+              <input type="hidden" name="studentID_name" value="<%= r.id %>">
+              <input type="hidden" name="adminbool_name"  value="true">
+              <input type="submit" value="UPDATE">
+              </form>
+        </td>
+        <td>
+              <input type="button" onclick="window.location.href='/studentmonthlysubscription/<%= r.id %>/<%= r.firstname %>/<%= r.lastname %>'" value="MONTHLY SUBSCRIPTION">
+        </td>
         <td>
               <form action="/makereservation" method="post" enctype="multipart/form-data">
               <input type="hidden" name="studentID_name" value="<%= r.id %>">

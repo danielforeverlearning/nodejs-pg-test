@@ -170,7 +170,7 @@ module.exports = {
                           if (adminbool)
                                res.render('admin_pages/adminresult', {myresults: badstr} );
                           else
-                               res.render('pages/result', {myresults: badstr} );
+                               res.render('pages/result', {myresults: badstr} )
                           return;
                    }
                    else if (year < currentYear)

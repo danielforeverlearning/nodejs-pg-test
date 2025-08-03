@@ -99,7 +99,6 @@ module.exports = {
       var studentID;
       var passwordhash;
 
-      var submit;
       var adminbool;
       var resultstr;
       async function connectAndInsert() {    
@@ -115,9 +114,12 @@ module.exports = {
                             resultstr = 'admininsertstudacctsubmitfunc ERROR = ' + err;
                         } finally {
                             await client.end();
-                            res.render('admin_pages/adminresult', {myresults: resultstr} );
+                            if (adminbool)
+                                 res.render('admin_pages/adminresult', {myresults: resultstr} );
+                            else
+                                 res.render('pages/result', {myresults: resultstr} );
                         }
-      }
+      }//connectAndInsert
     
       var form = new formidable.IncomingForm();
       form.parse(req, function (err, fields, files) {
@@ -141,21 +143,12 @@ module.exports = {
              console.log("typeof studentID = " + typeof studentID);
              console.log('password="' + password + '" confirm="' + confirm + '" studentID=' + studentID);
 
-             var submit    = fields.submit_name[0];
              var adminbool = false;
              if (fields.adminbool_name[0] === "true")
                   adminbool = true;
              
              //validation checking
-             if (submit === "NO")
-             {
-                  if (adminbool)
-                      res.render('admin_pages/adminhome');
-                  else
-                      res.render('pages/student_home', {studentID: studentID, firstname: firstname, lastname: lastname} );
-                  return;
-             }
-             else if (password === confirm)
+             if (password === confirm)
              {
                   passwordhash = db_credential.hashHmacJs('sha256', password, 'nodejs-pg-test');
                   console.log("passwordhash = " + passwordhash);

@@ -132,7 +132,9 @@ express()
              var studentID = fields.studentID_name[0];
              var firstname = fields.firstname_name[0];
              var lastname  = fields.lastname_name[0];
-             var adminbool = fields.adminbool_name[0];
+             var adminbool = false;
+             if (fields.adminbool_name[0] === "true")
+                  adminbool = true;
              
              res.render('pages/reservation_insert', { studentID:studentID, firstname:firstname, lastname:lastname, adminbool:adminbool });
           }//good
@@ -155,11 +157,13 @@ express()
              var studentID = fields.studentID_name[0];
              var firstname = fields.firstname_name[0];
              var lastname  = fields.lastname_name[0];
-             var adminbool = fields.adminbool_name[0];
              var month     = fields.month_name[0];
              var day       = fields.day_name[0];
              var year      = fields.year_name[0];
              var submit    = fields.submit_name[0];
+             var adminbool = false;
+             if (fields.adminbool_name[0] === "true")
+                  adminbool = true;
 
              if (submit === "CANCEL")
              {
@@ -190,13 +194,15 @@ express()
              var studentID = fields.studentID_name[0];
              var firstname = fields.firstname_name[0];
              var lastname  = fields.lastname_name[0];
-             var adminbool = fields.adminbool_name[0];
              var month     = fields.month_name[0];
              var day       = fields.day_name[0];
              var year      = fields.year_name[0];
              var submit    = fields.submit_name[0];
              var classlocation = fields.location_name[0];
              var timeint   = fields.time_name[0];
+             var adminbool = false;
+             if (fields.adminbool_name[0] === "true")
+                  adminbool = true;
 
              if (submit === "CANCEL")
              {
@@ -213,6 +219,7 @@ express()
 
   
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
 
 
 

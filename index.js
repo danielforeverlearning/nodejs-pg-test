@@ -130,20 +130,14 @@ express()
              console.log("fields = " + JSON.stringify(fields));
              console.log("files = " + JSON.stringify(files));
               
-             password = fields.password_name[0];
-             email = fields.email_name[0].toLowerCase();
-             
-             querydb();
+             var studentID = fields.studentID_name[0];
+             var firstname = fields.firstname[0];
+             var lastname  = fields.lastname[0];
+             var adminbool = fields.adminbool[0];
+             res.render('pages/reservation_insert', { studentID:studentID, firstname:firstname, lastname:lastname, adminbool:adminbool });
           }//good
       })//form.parse
-    /*****
-    const studentID = req.params.id;
-    const firstname = req.params.firstname;
-    const lastname  = req.params.lastname;
-    const adminbool = req.params.adminbool;
-    res.render('pages/reservation_insert', { studentID:studentID, firstname:firstname, lastname:lastname, adminbool:adminbool });
-    *****/
-  })
+  })  //makereservation
     
   .post('/reservation_insert_post/:id/:firstname/:lastname', (req,res) => {  
                                                             const studentID = req.params.id;
@@ -164,6 +158,7 @@ express()
 
   
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
 
 
 

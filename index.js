@@ -118,6 +118,24 @@ express()
   
   .post('/makereservation', (req,res) => {  
 
+      var form = new formidable.IncomingForm();
+      form.parse(req, function (err, fields, files) {
+          if (err)
+          {
+             res.send("route post makereservation form.parse ERROR = " + err);
+             return;
+          }
+          else
+          { //good
+             console.log("fields = " + JSON.stringify(fields));
+             console.log("files = " + JSON.stringify(files));
+              
+             password = fields.password_name[0];
+             email = fields.email_name[0].toLowerCase();
+             
+             querydb();
+          }//good
+      })//form.parse
     /*****
     const studentID = req.params.id;
     const firstname = req.params.firstname;
@@ -146,6 +164,7 @@ express()
 
   
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
 
 
 

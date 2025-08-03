@@ -10,7 +10,12 @@
   <div class="container">
   <h2>MAKE CLASS RESERVATION</h2>
   <h2>STUDENTID=<%= studentID %> <%= firstname %> <%= lastname %></h2>
-  <form action="/reservation_insert_post/<%= studentID %>/<%= firstname %>/<%= lastname %>" method="post" enctype="multipart/form-data">
+  <form action="/reservation_insert_post" method="post" enctype="multipart/form-data">
+     <input type="hidden" name="studentID_name" value="<%= studentID %>">
+     <input type="hidden" name="firstname_name" value="<%= firstname %>">
+     <input type="hidden" name="lastname_name"  value="<%= lastname %>">
+     <input type="hidden" name="adminbool_name"  value="<%= adminbool %>">
+
      <label for="month_id">MONTH: </label>
      <input type="number" name="month_name" id="month_id">
      <br />
@@ -20,8 +25,8 @@
      <label for="year_id">YEAR: </label>
      <input type="number" name="year_name" id="year_id">
      <br />
-     <input type="submit" value="MAKE CLASS RESERVATION">
-     <input type="button" onclick="window.location.href='/correcthome'" value="CANCEL">
+     <input type="submit" name="submit_name" value="MAKE CLASS RESERVATION">
+     <input type="submit" name="submit_name" value="CANCEL">
   </form>
   </div>
 </body>

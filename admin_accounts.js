@@ -66,7 +66,7 @@ module.exports = {
       form.parse(req, function (err, fields, files) {
           if (err)
           {
-              res.render('admin_pages/adminresult', {myresults: "adminoverwritestudacctsubmitfunc form.parse ERROR = " + err} );
+              res.send("adminoverwritestudacctsubmitfunc form.parse ERROR = " + err);
               return;
           }
           else
@@ -98,6 +98,9 @@ module.exports = {
       var confirm;
       var studentID;
       var passwordhash;
+
+      var submit;
+      var adminbool;
       var resultstr;
       async function connectAndInsert() {    
                         const client       = new Client(connectobj);
@@ -132,13 +135,27 @@ module.exports = {
              password = fields.password_name[0];
              confirm = fields.confirm_name[0];
              studentID = fields.studentID_name[0];
+            
              console.log("typeof password = " + typeof password);
              console.log("typeof confirm = " + typeof confirm);
              console.log("typeof studentID = " + typeof studentID);
              console.log('password="' + password + '" confirm="' + confirm + '" studentID=' + studentID);
+
+             var submit    = fields.submit_name[0];
+             var adminbool = false;
+             if (fields.adminbool_name[0] === "true")
+                  adminbool = true;
              
              //validation checking
-             if (password === confirm)
+             if (submit === "NO")
+             {
+                  if (adminbool)
+                      res.render('admin_pages/adminhome');
+                  else
+                      res.render('pages/student_home', {studentID: studentID, firstname: firstname, lastname: lastname} );
+                  return;
+             }
+             else if (password === confirm)
              {
                   passwordhash = db_credential.hashHmacJs('sha256', password, 'nodejs-pg-test');
                   console.log("passwordhash = " + passwordhash);
@@ -147,7 +164,10 @@ module.exports = {
              else
              {
                   var badstr = 'Sorry password and confirm must be exactly the same: ' + 'password="' + password + '" confirm="' + confirm + '"';
-                  res.render('admin_pages/adminresult', {myresults: badstr} );
+                  if (adminbool)
+                       res.render('admin_pages/adminresult', {myresults: badstr} );
+                  else
+                       res.render('pages/result', {myresults: badstr} );
                   return;
              }
           }//good

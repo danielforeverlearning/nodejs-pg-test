@@ -239,11 +239,30 @@ express()
       })//form.parse
   })  //correct_home
 
+
+  .post('/studentupdate', (req, res) => {
+      var form = new formidable.IncomingForm();
+      form.parse(req, function (err, fields, files) {
+          if (err)
+          {
+             res.send("route post studentupdate form.parse ERROR = " + err);
+             return;
+          }
+          else
+          { //good
+             console.log("fields = " + JSON.stringify(fields));
+             console.log("files = " + JSON.stringify(files));
+              
+             var studentID = fields.studentID_name[0];
+             var adminbool = false;
+             if (fields.adminbool_name[0] === "true")
+                  adminbool = true;
+
+             admin_student.updatefunc(req,res,studentID,adminbool);
+          }//good
+      })//form.parse
+  }) //studentupdate
   .post('/studenttableupdatesubmit', (req,res) => { admin_student.studenttableupdate3func(req,res); })
-  .get('/studentupdate/:id', (req, res) => {  
-        const studentID = req.params.id;
-        admin_student.updatefunc(req,res,studentID);
-  })
   .post('/adminoverwritestudacctsubmit', (req, res) => { 
         admin_accounts.adminoverwritestudacctsubmitfunc(req,res);
   })
@@ -253,5 +272,6 @@ express()
 
   
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
 
 

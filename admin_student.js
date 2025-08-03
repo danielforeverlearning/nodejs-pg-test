@@ -346,14 +346,7 @@ module.exports = {
                             if (dbgoodresult) {
                                  //var resultstr = 'updateRes = ' + JSON.stringify(updateRes);
                                  //res.render('admin_pages/adminresult', {myresults: resultstr} );
-                                 if (submit==="YES")
-                                      res.render('admin_pages/askupdatestudacct', {studentID:primarykeyID, firstname:firstname, lastname:lastname, adminbool:adminbool} );
-                                 else {
-                                      if (adminbool)
-                                           res.render('admin_pages/adminhome');
-                                      else
-                                           res.render('pages/student_home', {studentID: primarykeyID, firstname: firstname, lastname: lastname} );
-                                 } 
+                                 res.render('admin_pages/askupdatestudacct', {studentID:primarykeyID, firstname:firstname, lastname:lastname, adminbool:adminbool} );
                             }
                             else {
                                  if (adminbool)
@@ -393,7 +386,15 @@ module.exports = {
                   adminbool = true;
 
              //validation checking
-             if (phoneareacode < 0 || phoneareacode > 999)
+             if (submit === "CANCEL")
+             {
+                  if (adminbool)
+                       res.render('admin_pages/adminhome');
+                  else
+                       res.render('pages/student_home', {studentID: primarykeyID, firstname: firstname, lastname: lastname} );
+                  return;
+             }
+             else if (phoneareacode < 0 || phoneareacode > 999)
              {
                   var badstr = 'Sorry phone area code must be between 000 and 999';
                   if (adminbool)

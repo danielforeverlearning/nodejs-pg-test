@@ -359,6 +359,9 @@ module.exports = {
   reservation_check_location_time: function(req,res,studentID,firstname,lastname,month,day,year,adminbool,classlocation,timeint) {
           var classhour;
           var classminute;
+
+          console.log("reservation_check_location_time: typeof adminbool = " + typeof adminbool);
+          console.log("reservation_check_location_time: adminbool = " + adminbool);
     
           async function connectAndInsert() {    
                         const client       = new Client(connectobj);

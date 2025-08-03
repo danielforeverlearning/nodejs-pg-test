@@ -32,10 +32,6 @@ express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
 
-  .get('/', (req, res) => res.render('pages/home'))
-  .get('/studentlogin', (req, res) => res.render('pages/student_login'))
-  .post('/loginstudentsubmit', (req, res) => { acctstud.loginstudentsubmitfunc(req,res); })
-
   .get('/adminhome', (req, res) => res.render('admin_pages/adminhome'))
   .get('/student/:sortorder', (req,res) => {  
         const sortorder = req.params.sortorder;
@@ -115,7 +111,10 @@ express()
 
 
 
-  
+
+  .get('/', (req, res) => res.render('pages/home'))
+  .get('/studentlogin', (req, res) => res.render('pages/student_login'))
+  .post('/loginstudentsubmit', (req, res) => { acctstud.loginstudentsubmitfunc(req,res); })
   .post('/makereservation', (req,res) => {  
 
       var form = new formidable.IncomingForm();
@@ -172,19 +171,44 @@ express()
       })//form.parse
   }) //reservation_insert_post
   
-  .post('/reservation_insert_post_2/:id/:firstname/:lastname/:month/:day/:year', (req,res) => {  
-                                                            const studentID = req.params.id;
-                                                            const firstname = req.params.firstname;
-                                                            const lastname  = req.params.lastname;
-                                                            const month     = req.params.month;
-                                                            const day       = req.params.day;
-                                                            const year      = req.params.year;
-                                                            admin_reservation.reservation_check_location_time(req,res,studentID,firstname,lastname,month,day,year);
-                                                       }) 
+  .post('/reservation_insert_post_2', (req,res) => {
+      var form = new formidable.IncomingForm();
+      form.parse(req, function (err, fields, files) {
+          if (err)
+          {
+             res.send("route post reservation_insert_post_2 form.parse ERROR = " + err);
+             return;
+          }
+          else
+          { //good
+             console.log("fields = " + JSON.stringify(fields));
+             console.log("files = " + JSON.stringify(files));
+              
+             var studentID = fields.studentID[0];
+             var firstname = fields.firstname[0];
+             var lastname  = fields.lastname[0];
+             var adminbool = fields.adminbool[0];
+             var month     = fields.month[0];
+             var day       = fields.day[0];
+             var year      = fields.year[0];
+             var submit    = fields.submit[0];
 
+             if (submit === "CANCEL")
+             {
+                 if (adminbool)
+                      res.render('admin_pages/adminhome');
+                 else
+                      res.render('pages/student_home', {studentID: studentID, firstname: firstname, lastname: lastname} );
+             }
+             else
+                 admin_reservation.reservation_check_location_time(req,res,studentID,firstname,lastname,month,day,year,adminbool);
+          }//good
+      })//form.parse
+  }) //reservation_insert_post_2 
 
   
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
 
 
 

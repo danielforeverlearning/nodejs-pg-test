@@ -34,7 +34,7 @@ async function update_lockout_failcount_studacct(mynewfailcount, studentID, firs
     }
 
     if (mynewfailcount==0)
-         res.render('pages/studenthome', {studentID: studentID, firstname: firstname, lastname: lastname} );
+         res.render('pages/student_home', {studentID: studentID, firstname: firstname, lastname: lastname} );
     else if (mynewfailcount >= 3)
          res.render('pages/result', {myresults: "bad login, locked out"} );
     else

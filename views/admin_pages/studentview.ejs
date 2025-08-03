@@ -80,7 +80,7 @@ LAST NAME<% if (sortorder == 1) { %>
         <td><input type="button" onclick="window.location.href='/studentdeleteconfirm/<%= r.id %>/<%= r.firstname %>/<%= r.lastname %>'"   value="DELETE"></td>
         <td><input type="button" onclick="window.location.href='/studentupdate/<%= r.id %>'"          value="UPDATE"></td>
         <td><input type="button" onclick="window.location.href='/studentmonthlysubscription/<%= r.id %>/<%= r.firstname %>/<%= r.lastname %>'" value="MONTHLY SUBSCRIPTION"></td>
-        <td><input type="button" onclick="window.location.href='/studentmakereservation/<%= r.id %>/<%= r.firstname %>/<%= r.lastname %>'" value="MAKE RESERVATION"></td>
+        <td><input type="button" onclick="window.location.href='/makereservation/<%= r.id %>/<%= r.firstname %>/<%= r.lastname %>'" value="MAKE RESERVATION"></td>
         </tr>
     <% }); %>
 </table>

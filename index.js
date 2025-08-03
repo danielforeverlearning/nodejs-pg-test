@@ -156,6 +156,9 @@ express()
              var firstname = fields.firstname_name[0];
              var lastname  = fields.lastname_name[0];
              var adminbool = fields.adminbool_name[0];
+             var month     = fields.month_name[0];
+             var day       = fields.day_name[0];
+             var year      = fields.year_name[0];
              var submit    = fields.submit_name[0];
 
              if (submit === "CANCEL")
@@ -166,7 +169,7 @@ express()
                       res.render('pages/student_home', {studentID: studentID, firstname: firstname, lastname: lastname} );
              }
              else
-                 admin_reservation.reservation_check_date(req,res,studentID,firstname,lastname,adminbool);
+                 admin_reservation.reservation_check_date(req,res,studentID,firstname,lastname,adminbool,month,day,year);
           }//good
       })//form.parse
   }) //reservation_insert_post
@@ -208,6 +211,7 @@ express()
 
   
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
 
 
 

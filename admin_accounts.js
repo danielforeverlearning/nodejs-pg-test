@@ -146,7 +146,7 @@ module.exports = {
              console.log('password="' + password + '" confirm="' + confirm + '" studentID=' + studentID);
 
              submit = fields.submit_name[0];
-             var adminbool = false;
+             adminbool = false;
              if (fields.adminbool_name[0] === "true")
                   adminbool = true;
              

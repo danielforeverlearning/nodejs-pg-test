@@ -116,11 +116,12 @@ express()
 
 
   
-  .get('/makereservation/:id/:firstname/:lastname', (req,res) => {  
+  .get('/makereservation/:id/:firstname/:lastname/:adminbool', (req,res) => {  
                                                             const studentID = req.params.id;
                                                             const firstname = req.params.firstname;
                                                             const lastname  = req.params.lastname;
-                                                            res.render('pages/reservation_insert', { studentID:studentID, firstname:firstname, lastname:lastname });
+                                                            const adminbool = req.params.adminbool;
+                                                            res.render('pages/reservation_insert', { studentID:studentID, firstname:firstname, lastname:lastname, adminbool:adminbool });
                                                        })
     
   .post('/reservation_insert_post/:id/:firstname/:lastname', (req,res) => {  
@@ -142,6 +143,7 @@ express()
 
   
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
 
 
 

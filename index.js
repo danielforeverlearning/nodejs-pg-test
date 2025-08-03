@@ -224,20 +224,36 @@ express()
       })//form.parse
   }) //reservation_insert_post_2 
 
+  .post('/correct_home', (req,res) => {  
+
+      var form = new formidable.IncomingForm();
+      form.parse(req, function (err, fields, files) {
+          if (err)
+          {
+             res.send("route post correct_home form.parse ERROR = " + err);
+             return;
+          }
+          else
+          { //good
+             console.log("fields = " + JSON.stringify(fields));
+             console.log("files = " + JSON.stringify(files));
+              
+             var studentID = fields.studentID_name[0];
+             var firstname = fields.firstname_name[0];
+             var lastname  = fields.lastname_name[0];
+             var adminbool = false;
+             if (fields.adminbool_name[0] === "true")
+                  adminbool = true;
+
+             if (adminbool)
+                      res.render('admin_pages/adminhome');
+             else
+                      res.render('pages/student_home', {studentID: studentID, firstname: firstname, lastname: lastname} );
+             
+          }//good
+      })//form.parse
+  })  //correct_home
+
   
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

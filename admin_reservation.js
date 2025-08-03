@@ -322,7 +322,8 @@ module.exports = {
                           var insertstmt = "INSERT INTO reservation (STUDENTID, FIRSTNAME, LASTNAME, LOCATION, MONTH, DAY, YEAR, HOUR, MINUTE) VALUES (" + studentID + ", '" + firstname + "', '" + lastname + "', '" + classlocation + "', " + month + ", " + day + ", " + year + ", " + classhour + ", " + classminute + ");";
                           console.log(insertstmt);
                           const insertRes = await client.query(insertstmt);
-                          var resultstr = 'reservation_check_location_time insertRes = ' + JSON.stringify(insertRes);
+                          //var resultstr = 'reservation_check_location_time insertRes = ' + JSON.stringify(insertRes);
+                          var resultstr = "MAKE RESERVATION SUCCESS";
                           res.render('admin_pages/admin_makereservation_success', {myresults: resultstr, adminbool: adminbool, studentID: studentID, firstname: firstname, lastname:lastname} );
                         } catch (err) {
                             var badstr = 'reservation_check_location_time, ERROR = ' + err;

@@ -11,6 +11,8 @@
   <h2>STUDENT ACCOUNT</h2>
   <h2>STUDENTID=<%= studentID %> <%= firstname %> <%= lastname %></h2>
   <form action="/admininsertstudacctsubmit" method="post" enctype="multipart/form-data">
+     <input type="hidden" name="adminbool_name" value="<%= adminbool %>">
+
      <input type="hidden" name="studentID_name" value="<%= studentID %>">
      <label for="password_id">PASSWORD: </label>
      <input type="text" name="password_name" id="password_id">
@@ -19,7 +21,7 @@
      <input type="text" name="confirm_name" id="confirm_id">
      <br />
      <input type="submit" value="SAVE">
-     <input type="button" onclick="window.location.href='/'" value="CANCEL">
+     <input type="submit" value="CANCEL">
   </form>
   </div>
   

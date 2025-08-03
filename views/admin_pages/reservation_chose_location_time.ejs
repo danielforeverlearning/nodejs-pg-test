@@ -9,7 +9,7 @@
 <body>
   <div class="container">
   <h2>MAKE CLASS RESERVATION</h2>
-  <h2>STUDENTID <%= studentID %> <%= firstname %> <%= lastname %></h2>
+  <h2>STUDENTID=<%= studentID %> <%= firstname %> <%= lastname %></h2>
   <h2>MONTH=<%= month %> DAY=<%= day %> YEAR=<%= year %></h2>
   <h2>
      <% if (dayIndex == 0) { %>
@@ -28,7 +28,15 @@ FRIDAY
 SATURDAY 
      <% } %>
   </h2>
-  <form action="/reservation_insert_post_2/<%= studentID %>/<%= firstname %>/<%= lastname %>/<%= month %>/<%= day %>/<%= year %>" method="post" enctype="multipart/form-data">
+  <form action="/reservation_insert_post_2" method="post" enctype="multipart/form-data">
+              <input type="hidden" name="studentID_name" value="<%= studentID %>">
+              <input type="hidden" name="firstname_name" value="<%= firstname %>">
+              <input type="hidden" name="lastname_name"  value="<%= lastname %>">
+              <input type="hidden" name="adminbool_name" value="<%= adminbool %>">
+              <input type="hidden" name="month_name"     value="<%= month %>">
+              <input type="hidden" name="day_name"       value="<%= day %>">
+              <input type="hidden" name="year_name"      value="<%= year %>">
+
      <label>LOCATION: </label>
      <input type="radio" name="location_name" id="location_papakolea_id" value="PAPAKOLEA" checked /><label>PAPAKOLEA</label>
      <input type="radio" name="location_name" id="location_kakaako_id" value="KAKAAKO" /><label>KAKAAKO</label>
@@ -39,8 +47,8 @@ SATURDAY
      <input type="radio" name="time_name" id="time_3_id" value="1730" /><label>5:30 PM</label>
      <input type="radio" name="time_name" id="time_4_id" value="1845" /><label>6:45 PM</label>
      <br />
-     <input type="submit" value="MAKE CLASS RESERVATION">
-     <input type="button" onclick="window.location.href='/adminhome'" value="CANCEL">
+     <input type="submit" name="submit_name" value="MAKE CLASS RESERVATION">
+     <input type="button" name="submit_name" value="CANCEL">
   </form>
   </div>
 </body>

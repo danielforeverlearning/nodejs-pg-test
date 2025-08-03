@@ -300,6 +300,8 @@ module.exports = {
       var email;
       var phoneareacode;
       var phonenumber;
+      var adminbool;
+    
       var dbgoodresult;
       var badstr;
       var updateRes;
@@ -314,13 +316,19 @@ module.exports = {
                              {
                                  await client.end();
                                  badstr = "Sorry, there is at least 1 other student with the same email address, i will not create a new student account, email=" + email;
-                                 res.render('admin_pages/adminresult', {myresults: badstr} );
+                                 if (adminbool)
+                                      res.render('admin_pages/adminresult', {myresults: badstr} );
+                                 else
+                                      res.render('pages/result', {myresults: badstr} );
                                  return;
                              }
                         } catch (err) {
                             await client.end();
                             badstr = 'studenttableupdate3func, query for duplicate email ERROR = ' + err;
-                            res.render('admin_pages/adminresult', {myresults: badstr} );
+                            if (adminbool)
+                                      res.render('admin_pages/adminresult', {myresults: badstr} );
+                            else
+                                      res.render('pages/result', {myresults: badstr} );
                             return;
                         }
                         //update
@@ -337,12 +345,16 @@ module.exports = {
                             if (dbgoodresult) {
                                  //var resultstr = 'updateRes = ' + JSON.stringify(updateRes);
                                  //res.render('admin_pages/adminresult', {myresults: resultstr} );
-                                 res.render('admin_pages/askupdatestudacct', {studentID:primarykeyID, firstname:firstname, lastname:lastname} );
+                                 res.render('admin_pages/askupdatestudacct', {studentID:primarykeyID, firstname:firstname, lastname:lastname, adminbool:adminbool} );
                             }
-                            else
-                                 res.render('admin_pages/adminresult', {myresults: badstr} );
+                            else {
+                                 if (adminbool)
+                                      res.render('admin_pages/adminresult', {myresults: badstr} );
+                                 else
+                                      res.render('pages/result', {myresults: badstr} );
+                            }
                         }
-      }
+      }//connectAndUpdate
     
       var form = new formidable.IncomingForm();
       form.parse(req, function (err, fields, files) {
@@ -367,11 +379,18 @@ module.exports = {
              phoneareacode = fields.phoneareacode_name;
              phonenumber = fields.phonenumber_name;
 
+             var adminbool = false;
+             if (fields.adminbool_name[0] === "true")
+                  adminbool = true;
+
              //validation checking
              if (phoneareacode < 0 || phoneareacode > 999)
              {
                   var badstr = 'Sorry phone area code must be between 000 and 999';
-                  res.render('admin_pages/adminresult', {myresults: badstr} );
+                  if (adminbool)
+                       res.render('admin_pages/adminresult', {myresults: badstr} );
+                  else
+                       res.render('pages/result', {myresults: badstr} );
                   return;
              }
              else 
@@ -389,13 +408,19 @@ module.exports = {
                  if (first_at == -1)
                  {
                       var badstr = 'Sorry email must have 1 @ character, for example darthvader@gmail.com';
-                      res.render('admin_pages/adminresult', {myresults: badstr} );
+                      if (adminbool)
+                           res.render('admin_pages/adminresult', {myresults: badstr} );
+                      else
+                           res.render('pages/result', {myresults: badstr} );
                       return;
                  }
                  else if (first_at != last_at)
                  {
                       var badstr = 'Sorry email must have only 1 @ character, for example darthvader@gmail.com but you put more than 1 @ character';
-                      res.render('admin_pages/adminresult', {myresults: badstr} );
+                      if (adminbool)
+                           res.render('admin_pages/adminresult', {myresults: badstr} );
+                      else
+                           res.render('pages/result', {myresults: badstr} );
                       return;
                  }
                
@@ -403,6 +428,7 @@ module.exports = {
              }
           }//good
       })//form.parse
-  }
+  }//studenttableupdate3func
+  
 }; //module.exports
 

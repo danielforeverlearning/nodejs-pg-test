@@ -129,10 +129,10 @@ express()
              console.log("fields = " + JSON.stringify(fields));
              console.log("files = " + JSON.stringify(files));
               
-             var studentID = fields.studentID[0];
-             var firstname = fields.firstname[0];
-             var lastname  = fields.lastname[0];
-             var adminbool = fields.adminbool[0];
+             var studentID = fields.studentID_name[0];
+             var firstname = fields.firstname_name[0];
+             var lastname  = fields.lastname_name[0];
+             var adminbool = fields.adminbool_name[0];
              
              res.render('pages/reservation_insert', { studentID:studentID, firstname:firstname, lastname:lastname, adminbool:adminbool });
           }//good
@@ -152,11 +152,11 @@ express()
              console.log("fields = " + JSON.stringify(fields));
              console.log("files = " + JSON.stringify(files));
               
-             var studentID = fields.studentID[0];
-             var firstname = fields.firstname[0];
-             var lastname  = fields.lastname[0];
-             var adminbool = fields.adminbool[0];
-             var submit    = fields.submit[0];
+             var studentID = fields.studentID_name[0];
+             var firstname = fields.firstname_name[0];
+             var lastname  = fields.lastname_name[0];
+             var adminbool = fields.adminbool_name[0];
+             var submit    = fields.submit_name[0];
 
              if (submit === "CANCEL")
              {
@@ -184,14 +184,14 @@ express()
              console.log("fields = " + JSON.stringify(fields));
              console.log("files = " + JSON.stringify(files));
               
-             var studentID = fields.studentID[0];
-             var firstname = fields.firstname[0];
-             var lastname  = fields.lastname[0];
-             var adminbool = fields.adminbool[0];
-             var month     = fields.month[0];
-             var day       = fields.day[0];
-             var year      = fields.year[0];
-             var submit    = fields.submit[0];
+             var studentID = fields.studentID_name[0];
+             var firstname = fields.firstname_name[0];
+             var lastname  = fields.lastname_name[0];
+             var adminbool = fields.adminbool_name[0];
+             var month     = fields.month_name[0];
+             var day       = fields.day_name[0];
+             var year      = fields.year_name[0];
+             var submit    = fields.submit_name[0];
 
              if (submit === "CANCEL")
              {
@@ -208,6 +208,7 @@ express()
 
   
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
 
 
 

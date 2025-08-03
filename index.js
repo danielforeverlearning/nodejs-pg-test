@@ -116,7 +116,7 @@ express()
 
 
   
-  .get('/studentmakereservation/:id/:firstname/:lastname', (req,res) => {  
+  .get('/makereservation/:id/:firstname/:lastname', (req,res) => {  
                                                             const studentID = req.params.id;
                                                             const firstname = req.params.firstname;
                                                             const lastname  = req.params.lastname;
@@ -142,5 +142,6 @@ express()
 
   
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
 
 

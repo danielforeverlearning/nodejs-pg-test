@@ -156,28 +156,7 @@ module.exports = {
       })//form.parse
   }, //month_year_validate_func
 
-  reservation_check_date: function(req,res,studentID,firstname,lastname,adminbool) {
-          var month;
-          var day;
-          var year;
-    
-          var form = new formidable.IncomingForm();
-          form.parse(req, function (err, fields, files) {
-              if (err)
-              {
-                   var badstr = "reservation_check_date err = " + err;
-                   if (adminbool)
-                        res.render('admin_pages/adminresult', {myresults: badstr} );
-                   else
-                        res.render('pages/result', {myresults: badstr} );
-                   return;
-              }
-              else //good
-              {
-                   console.log("reservation_check_date fields = " + JSON.stringify(fields) + " files = " + JSON.stringify(files));
-                   month = fields.month_name[0];
-                   day   = fields.day_name[0];
-                   year  = fields.year_name[0];
+  reservation_check_date: function(req,res,studentID,firstname,lastname,adminbool,month,day,year) {
     
                    const currentYear  = new Date().getFullYear();
                    var currentMonth = new Date().getMonth(); // Returns 0 for January, 1 for February, etc.
@@ -372,11 +351,9 @@ module.exports = {
                                }
                    }
     
-                    const myDate = new Date(year + "-" + month + "-" + day);
-                    const dayIndex = myDate.getDay(); //0=sunday, 1=monday, 2=tuesday, 3=wednesday, 4=thursday, 5=friday, 6=saturday
-                    res.render('admin_pages/reservation_chose_location_time', {studentID:studentID, firstname:firstname, lastname:lastname, month:month, day:day, year:year, dayIndex:dayIndex, adminbool:adminbool} );
-          }//good
-      })//form.parse
+                   const myDate = new Date(year + "-" + month + "-" + day);
+                   const dayIndex = myDate.getDay(); //0=sunday, 1=monday, 2=tuesday, 3=wednesday, 4=thursday, 5=friday, 6=saturday
+                   res.render('admin_pages/reservation_chose_location_time', {studentID:studentID, firstname:firstname, lastname:lastname, month:month, day:day, year:year, dayIndex:dayIndex, adminbool:adminbool} );
   }, //reservation_check_date
 
   reservation_check_location_time: function(req,res,studentID,firstname,lastname,month,day,year,adminbool) {

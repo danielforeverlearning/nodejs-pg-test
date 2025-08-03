@@ -156,7 +156,7 @@ module.exports = {
       })//form.parse
   }, //month_year_validate_func
 
-  reservation_check_date: function(req,res,studentID,firstname,lastname) {
+  reservation_check_date: function(req,res,studentID,firstname,lastname,adminbool) {
           var month;
           var day;
           var year;
@@ -166,7 +166,11 @@ module.exports = {
               if (err)
               {
                    var badstr = "reservation_check_date err = " + err;
-                   res.render('admin_pages/adminresult', {myresults: badstr} );
+                   if (adminbool)
+                        res.render('admin_pages/adminresult', {myresults: badstr} );
+                   else
+                        res.render('pages/result', {myresults: badstr} );
+                   return;
               }
               else //good
               {
@@ -184,19 +188,28 @@ module.exports = {
                    if (month <= 0 || month > 12)
                    {
                           var badstr = 'Sorry month must be between 1 and 12';
-                          res.render('admin_pages/adminresult', {myresults: badstr} );
+                          if (adminbool)
+                               res.render('admin_pages/adminresult', {myresults: badstr} );
+                          else
+                               res.render('pages/result', {myresults: badstr} );
                           return;
                    }
                    else if (year < currentYear)
                    {
                           var badstr = 'Sorry year must be ' + currentYear + ' or greater';
-                          res.render('admin_pages/adminresult', {myresults: badstr} );
+                          if (adminbool)
+                               res.render('admin_pages/adminresult', {myresults: badstr} );
+                          else
+                               res.render('pages/result', {myresults: badstr} );
                           return;
                    }
                    else if ((year == currentYear && month < currentMonth) || (year == currentYear && month == currentMonth && day < currentDay))
                    {
                           var badstr = 'Sorry, reservation must be made for today or later, today is year=' + currentYear + ' month=' + currentMonth + ' day=' + currentDay;
-                          res.render('admin_pages/adminresult', {myresults: badstr} );
+                          if (adminbool)
+                               res.render('admin_pages/adminresult', {myresults: badstr} );
+                          else
+                               res.render('pages/result', {myresults: badstr} );
                           return;
                    }
                    else if (month == 1)
@@ -204,7 +217,10 @@ module.exports = {
                                if (day < 0 || day > 31)
                                {
                                    var badstr = 'Sorry, since the month is January please enter a day between 1 and 31';
-                                   res.render('admin_pages/adminresult', {myresults: badstr} );
+                                   if (adminbool)
+                                        res.render('admin_pages/adminresult', {myresults: badstr} );
+                                   else
+                                        res.render('pages/result', {myresults: badstr} );
                                    return;
                                }
                    }
@@ -215,7 +231,10 @@ module.exports = {
                                    if (day < 0 || day > 29)
                                    {
                                        var badstr = 'Sorry, since the year ' + year + ' is a leap year and the month is February, please enter a day between 1 and 29';
-                                       res.render('admin_pages/adminresult', {myresults: badstr} );
+                                       if (adminbool)
+                                        res.render('admin_pages/adminresult', {myresults: badstr} );
+                                       else
+                                        res.render('pages/result', {myresults: badstr} );
                                        return;
                                    }   
                                }
@@ -224,7 +243,10 @@ module.exports = {
                                    if (day < 0 || day > 28)
                                    {
                                        var badstr = 'Sorry, since the year ' + year + ' is NOT a leap year and the month is February, please enter a day between 1 and 28';
-                                       res.render('admin_pages/adminresult', {myresults: badstr} );
+                                       if (adminbool)
+                                        res.render('admin_pages/adminresult', {myresults: badstr} );
+                                       else
+                                        res.render('pages/result', {myresults: badstr} );
                                        return;
                                    }  
                                }
@@ -234,7 +256,10 @@ module.exports = {
                                if (day < 0 || day > 31)
                                {
                                    var badstr = 'Sorry, since the month is March please enter a day between 1 and 31';
-                                   res.render('admin_pages/adminresult', {myresults: badstr} );
+                                   if (adminbool)
+                                        res.render('admin_pages/adminresult', {myresults: badstr} );
+                                   else
+                                        res.render('pages/result', {myresults: badstr} );
                                    return;
                                }
                    }
@@ -243,7 +268,10 @@ module.exports = {
                                if (day < 0 || day > 30)
                                {
                                    var badstr = 'Sorry, since the month is April please enter a day between 1 and 30';
-                                   res.render('admin_pages/adminresult', {myresults: badstr} );
+                                   if (adminbool)
+                                        res.render('admin_pages/adminresult', {myresults: badstr} );
+                                   else
+                                        res.render('pages/result', {myresults: badstr} );
                                    return;
                                }
                    }
@@ -252,7 +280,10 @@ module.exports = {
                          if (day < 0 || day > 31)
                          {
                              var badstr = 'Sorry, since the month is May please enter a day between 1 and 31';
-                             res.render('admin_pages/adminresult', {myresults: badstr} );
+                             if (adminbool)
+                                        res.render('admin_pages/adminresult', {myresults: badstr} );
+                             else
+                                        res.render('pages/result', {myresults: badstr} );
                              return;
                          }
                    }
@@ -261,7 +292,10 @@ module.exports = {
                          if (day < 0 || day > 30)
                          {
                              var badstr = 'Sorry, since the month is June please enter a day between 1 and 30';
-                             res.render('admin_pages/adminresult', {myresults: badstr} );
+                             if (adminbool)
+                                        res.render('admin_pages/adminresult', {myresults: badstr} );
+                             else
+                                        res.render('pages/result', {myresults: badstr} );
                              return;
                          }
                    }
@@ -270,7 +304,10 @@ module.exports = {
                                if (day < 0 || day > 31)
                                {
                                    var badstr = 'Sorry, since the month is July please enter a day between 1 and 31';
-                                   res.render('admin_pages/adminresult', {myresults: badstr} );
+                                   if (adminbool)
+                                        res.render('admin_pages/adminresult', {myresults: badstr} );
+                                   else
+                                        res.render('pages/result', {myresults: badstr} );
                                    return;
                                }
                    }
@@ -279,7 +316,10 @@ module.exports = {
                                if (day < 0 || day > 31)
                                {
                                    var badstr = 'Sorry, since the month is August please enter a day between 1 and 31';
-                                   res.render('admin_pages/adminresult', {myresults: badstr} );
+                                   if (adminbool)
+                                        res.render('admin_pages/adminresult', {myresults: badstr} );
+                                   else
+                                        res.render('pages/result', {myresults: badstr} );
                                    return;
                                }
                    }
@@ -288,7 +328,10 @@ module.exports = {
                                if (day < 0 || day > 30)
                                {
                                    var badstr = 'Sorry, since the month is September please enter a day between 1 and 30';
-                                   res.render('admin_pages/adminresult', {myresults: badstr} );
+                                   if (adminbool)
+                                        res.render('admin_pages/adminresult', {myresults: badstr} );
+                                   else
+                                        res.render('pages/result', {myresults: badstr} );
                                    return;
                                }
                    }
@@ -297,7 +340,10 @@ module.exports = {
                                if (day < 0 || day > 31)
                                {
                                    var badstr = 'Sorry, since the month is October please enter a day between 1 and 31';
-                                   res.render('admin_pages/adminresult', {myresults: badstr} );
+                                   if (adminbool)
+                                        res.render('admin_pages/adminresult', {myresults: badstr} );
+                                   else
+                                        res.render('pages/result', {myresults: badstr} );
                                    return;
                                }
                    }
@@ -306,7 +352,10 @@ module.exports = {
                                if (day < 0 || day > 30)
                                {
                                    var badstr = 'Sorry, since the month is November please enter a day between 1 and 30';
-                                   res.render('admin_pages/adminresult', {myresults: badstr} );
+                                   if (adminbool)
+                                        res.render('admin_pages/adminresult', {myresults: badstr} );
+                                   else
+                                        res.render('pages/result', {myresults: badstr} );
                                    return;
                                }
                    }
@@ -315,14 +364,17 @@ module.exports = {
                                if (day < 0 || day > 31)
                                {
                                    var badstr = 'Sorry, since the month is December please enter a day between 1 and 31';
-                                   res.render('admin_pages/adminresult', {myresults: badstr} );
+                                   if (adminbool)
+                                        res.render('admin_pages/adminresult', {myresults: badstr} );
+                                   else
+                                        res.render('pages/result', {myresults: badstr} );
                                    return;
                                }
                    }
     
                     const myDate = new Date(year + "-" + month + "-" + day);
                     const dayIndex = myDate.getDay(); //0=sunday, 1=monday, 2=tuesday, 3=wednesday, 4=thursday, 5=friday, 6=saturday
-                    res.render('admin_pages/reservation_chose_location_time', {studentID:studentID, firstname:firstname, lastname:lastname, month:month, day:day, year:year, dayIndex:dayIndex} );
+                    res.render('admin_pages/reservation_chose_location_time', {studentID:studentID, firstname:firstname, lastname:lastname, month:month, day:day, year:year, dayIndex:dayIndex, adminbool:adminbool} );
           }//good
       })//form.parse
   }, //reservation_check_date

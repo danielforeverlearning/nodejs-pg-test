@@ -379,7 +379,7 @@ module.exports = {
       })//form.parse
   }, //reservation_check_date
 
-  reservation_check_location_time: function(req,res,studentID,firstname,lastname,month,day,year) {
+  reservation_check_location_time: function(req,res,studentID,firstname,lastname,month,day,year,adminbool) {
           var classlocation;
           var classhour;
           var classminute;
@@ -388,18 +388,22 @@ module.exports = {
                         const client       = new Client(connectobj);
                         try {
                           await client.connect();
-                          console.log('reservation_check_location_time, Connected to PostgreSQL!');
                           var insertstmt = "INSERT INTO reservation (STUDENTID, FIRSTNAME, LASTNAME, LOCATION, MONTH, DAY, YEAR, HOUR, MINUTE) VALUES (" + studentID + ", '" + firstname + "', '" + lastname + "', '" + classlocation + "', " + month + ", " + day + ", " + year + ", " + classhour + ", " + classminute + ");";
                           console.log(insertstmt);
                           const insertRes = await client.query(insertstmt);
-                          var resultstr = 'insertRes = ' + JSON.stringify(insertRes);
-                          res.render('admin_pages/adminresult', {myresults: resultstr} );
+                          var resultstr = 'reservation_check_location_time insertRes = ' + JSON.stringify(insertRes);
+                          if (adminbool)
+                               res.render('admin_pages/adminresult', {myresults: resultstr} );
+                          else
+                               res.render('pages/result', {myresults: resultstr} );
                         } catch (err) {
                             var badstr = 'reservation_check_location_time, ERROR = ' + err;
-                            res.render('admin_pages/adminresult', {myresults: badstr} );
+                            if (adminbool)
+                                 res.render('admin_pages/adminresult', {myresults: badstr} );
+                            else
+                                 res.render('pages/result', {myresults: badstr} );
                         } finally {
                             await client.end();
-                            console.log('reservation_check_location_time, Disconnected from PostgreSQL.');
                         }
           }
 
@@ -409,7 +413,11 @@ module.exports = {
               if (err)
               {
                    var badstr = "reservation_check_location_time err = " + err;
-                   res.render('admin_pages/adminresult', {myresults: badstr} );
+                   if (adminbool)
+                        res.render('admin_pages/adminresult', {myresults: badstr} );
+                   else
+                        res.render('pages/result', {myresults: badstr} );
+                   return;
               }
               else //good
               {

@@ -139,11 +139,14 @@ express()
       })//form.parse
   })  //makereservation
     
-  .post('/reservation_insert_post/:id/:firstname/:lastname', (req,res) => {  
-                                                            const studentID = req.params.id;
-                                                            const firstname = req.params.firstname;
-                                                            const lastname  = req.params.lastname;
-                                                            admin_reservation.reservation_check_date(req,res,studentID,firstname,lastname);
+  .post('/reservation_insert_post', (req,res) => {  
+
+    /*****
+    const studentID = req.params.id;
+    const firstname = req.params.firstname;
+    const lastname  = req.params.lastname;
+    admin_reservation.reservation_check_date(req,res,studentID,firstname,lastname);
+    *****/
                                                        })
   .post('/reservation_insert_post_2/:id/:firstname/:lastname/:month/:day/:year', (req,res) => {  
                                                             const studentID = req.params.id;
@@ -158,6 +161,7 @@ express()
 
   
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
 
 
 

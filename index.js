@@ -161,6 +161,10 @@ express()
              var day       = fields.day_name[0];
              var year      = fields.year_name[0];
              var submit    = fields.submit_name[0];
+
+             console.log("typeof submit = " + typeof submit);
+             console.log("submit = " + submit);
+            
              var adminbool = false;
              if (fields.adminbool_name[0] === "true")
                   adminbool = true;
@@ -198,6 +202,9 @@ express()
              var day       = fields.day_name[0];
              var year      = fields.year_name[0];
              var submit    = fields.submit_name[0];
+             console.log("typeof submit = " + typeof submit);
+             console.log("submit = " + submit);
+            
              var classlocation = fields.location_name[0];
              var timeint   = fields.time_name[0];
              var adminbool = false;
@@ -219,6 +226,7 @@ express()
 
   
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
 
 
 

@@ -48,21 +48,6 @@ express()
                                                             const lastname  = req.params.lastname;
                                                             admin_subscription.read1IDfunc(req,res,studentID,firstname,lastname);
                                                        })
-  .post('/studenttableupdatesubmit', (req,res) => { admin_student.studenttableupdate3func(req,res); })
-  .get('/studentupdate/:id', (req, res) => {  
-        const studentID = req.params.id;
-        admin_student.updatefunc(req,res,studentID);
-  })
-  .post('/adminoverwritestudacctsubmit', (req, res) => { 
-        admin_accounts.adminoverwritestudacctsubmitfunc(req,res);
-  })
-  .post('/admininsertstudacctsubmit', (req, res) => {
-        admin_accounts.admininsertstudacctsubmitfunc(req,res);
-  })
-  .get('/student/:sortorder', (req,res) => {  
-        const sortorder = req.params.sortorder;
-        admin_student.studentviewfunc(req,res,sortorder);
-  })
   .get('/studenttableinsert', (req, res) => res.render('admin_pages/studenttableinsert'))
   .post('/studenttableinsertsubmit', (req, res) => { admin_student.studenttableinsertfunc(req,res); })
   
@@ -254,6 +239,19 @@ express()
       })//form.parse
   })  //correct_home
 
+  .post('/studenttableupdatesubmit', (req,res) => { admin_student.studenttableupdate3func(req,res); })
+  .get('/studentupdate/:id', (req, res) => {  
+        const studentID = req.params.id;
+        admin_student.updatefunc(req,res,studentID);
+  })
+  .post('/adminoverwritestudacctsubmit', (req, res) => { 
+        admin_accounts.adminoverwritestudacctsubmitfunc(req,res);
+  })
+  .post('/admininsertstudacctsubmit', (req, res) => {
+        admin_accounts.admininsertstudacctsubmitfunc(req,res);
+  })
+
   
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
 

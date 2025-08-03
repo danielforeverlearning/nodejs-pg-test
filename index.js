@@ -195,6 +195,8 @@ express()
              var day       = fields.day_name[0];
              var year      = fields.year_name[0];
              var submit    = fields.submit_name[0];
+             var classlocation = fields.location_name[0];
+             var timeint   = fields.time_name[0];
 
              if (submit === "CANCEL")
              {
@@ -204,13 +206,14 @@ express()
                       res.render('pages/student_home', {studentID: studentID, firstname: firstname, lastname: lastname} );
              }
              else
-                 admin_reservation.reservation_check_location_time(req,res,studentID,firstname,lastname,month,day,year,adminbool);
+                 admin_reservation.reservation_check_location_time(req,res,studentID,firstname,lastname,month,day,year,adminbool,classlocation,timeint);
           }//good
       })//form.parse
   }) //reservation_insert_post_2 
 
   
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
 
 
 

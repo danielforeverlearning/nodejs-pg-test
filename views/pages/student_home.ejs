@@ -17,6 +17,12 @@
 <input type="hidden" name="adminbool_name"  value="false">
 <input type="submit" value="MAKE RESERVATION">
 </form>
+<br/>
+<form action="/studentupdate" method="post" enctype="multipart/form-data">
+<input type="hidden" name="studentID_name" value="<%= studentID %>">
+<input type="hidden" name="adminbool_name" value="false">
+<input type="submit" value="UPDATE">
+</form>
 </div>
 </body>
 </html>

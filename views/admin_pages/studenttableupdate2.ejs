@@ -10,6 +10,8 @@
   <div class="container">
   <h2>STUDENT TABLE UPDATE</h2>
   <form action="/studenttableupdatesubmit" method="post" enctype="multipart/form-data">
+     <input type="hidden" name="adminbool_name" value=<%= adminbool %> >
+
      <label for="primarykey_id">ID: </label>
      <input type="text" name="primarykey_name" id="primarykey_id" value=<%= existingval.id %> readonly>
      <br />
@@ -29,7 +31,7 @@
      <input type="number" name="phonenumber_name" id="phonenumber_id" value=<%= existingval.phonenumber %> >
      <br />
      <input type="submit" value="SAVE">
-     <input type="button" onclick="window.location.href='/adminhome'" value="CANCEL">
+     <input type="submit" value="CANCEL">
   </form>
   </div>
   

@@ -254,11 +254,13 @@ express()
              console.log("studentupdate files = " + JSON.stringify(files));
               
              var studentID = fields.studentID_name[0];
+             var firstname = fields.firstname_name[0];
+             var lastname  = fields.lastname_name[0];
              var adminbool = false;
              if (fields.adminbool_name[0] === "true")
                   adminbool = true;
 
-             admin_student.updatefunc(req,res,studentID,adminbool);
+             admin_student.updatefunc(req,res,studentID,firstname,lastname,adminbool);
           }//good
       })//form.parse
   }) //studentupdate
@@ -272,6 +274,7 @@ express()
 
   
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
 
 
 

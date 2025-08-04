@@ -98,7 +98,8 @@ module.exports = {
       var confirm;
       var studentID;
       var passwordhash;
-
+      var firstname;
+      var lastname;
       var adminbool;
       var submit;
     
@@ -116,10 +117,7 @@ module.exports = {
                             resultstr = 'admininsertstudacctsubmitfunc ERROR = ' + err;
                         } finally {
                             await client.end();
-                            if (adminbool)
-                                 res.render('admin_pages/adminresult', {myresults: resultstr} );
-                            else
-                                 res.render('pages/result', {myresults: resultstr} );
+                            res.render('admin_pages/admin_updatestudent_fail', {myresults: resultstr, studentID:studentID, firstname:firstname, lastname:lastname, adminbool:adminbool} );
                         }
       }//connectAndInsert
     
@@ -136,9 +134,11 @@ module.exports = {
              console.log("fields = " + JSON.stringify(fields));
              console.log("files = " + JSON.stringify(files));
               
-             password = fields.password_name[0];
-             confirm = fields.confirm_name[0];
+             password  = fields.password_name[0];
+             confirm   = fields.confirm_name[0];
              studentID = fields.studentID_name[0];
+             firstname = fields.firstname_name[0];
+             lastname  = fields.lastname_name[0];
             
              console.log("typeof password = " + typeof password);
              console.log("typeof confirm = " + typeof confirm);
@@ -168,10 +168,7 @@ module.exports = {
              else
              {
                   var badstr = 'Sorry password and confirm must be exactly the same: ' + 'password="' + password + '" confirm="' + confirm + '"';
-                  if (adminbool)
-                       res.render('admin_pages/adminresult', {myresults: badstr} );
-                  else
-                       res.render('pages/result', {myresults: badstr} );
+                  res.render('admin_pages/admin_updatestudent_fail', {myresults: badstr, studentID:studentID, firstname:firstname, lastname:lastname, adminbool:adminbool} );
                   return;
              }
           }//good

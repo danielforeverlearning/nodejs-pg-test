@@ -81,7 +81,9 @@ LAST NAME<% if (sortorder == 1) { %>
         <td>
               <form action="/studentupdate" method="post" enctype="multipart/form-data">
               <input type="hidden" name="studentID_name" value="<%= r.id %>">
-              <input type="hidden" name="adminbool_name"  value="true">
+              <input type="hidden" name="firstname_name" value="<%= r.firstname %>">
+              <input type="hidden" name="lastname_name"  value="<%= r.lastname %>">
+              <input type="hidden" name="adminbool_name" value="true">
               <input type="submit" value="UPDATE">
               </form>
         </td>
@@ -93,7 +95,7 @@ LAST NAME<% if (sortorder == 1) { %>
               <input type="hidden" name="studentID_name" value="<%= r.id %>">
               <input type="hidden" name="firstname_name" value="<%= r.firstname %>">
               <input type="hidden" name="lastname_name"  value="<%= r.lastname %>">
-              <input type="hidden" name="adminbool_name"  value="true">
+              <input type="hidden" name="adminbool_name" value="true">
               <input type="submit" value="MAKE RESERVATION">
               </form>
         </td>

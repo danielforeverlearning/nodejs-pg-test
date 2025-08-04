@@ -250,8 +250,8 @@ express()
           }
           else
           { //good
-             console.log("fields = " + JSON.stringify(fields));
-             console.log("files = " + JSON.stringify(files));
+             console.log("studentupdate fields = " + JSON.stringify(fields));
+             console.log("studentupdate files = " + JSON.stringify(files));
               
              var studentID = fields.studentID_name[0];
              var adminbool = false;
@@ -272,6 +272,7 @@ express()
 
   
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
 
 
 

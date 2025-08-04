@@ -279,12 +279,8 @@ module.exports = {
                               badstr = 'updatefunc ID = ' + studentID + ', ERROR = ' + err;
                         } finally {
                               await client.end();
-                              if (badstr.length > 0) {
-                                   if (adminbool)
-                                        res.render('admin_pages/adminresult', {myresults: badstr} );
-                                   else
-                                        res.render('pages/result', {myresults: badstr} );
-                              }
+                              if (badstr.length > 0)
+                                   res.render('admin_pages/admin_updatestudent_fail', {myresults: badstr, studentID:studentID, adminbool:adminbool, firstname:"UNKNOWN", lastname:"UNKNOWN"} );
                               else
                                    res.render('admin_pages/studenttableupdate2', {existingval: selectIDres.rows[0], adminbool: adminbool} );
                         }

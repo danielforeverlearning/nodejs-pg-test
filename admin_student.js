@@ -313,19 +313,13 @@ module.exports = {
                              {
                                  await client.end();
                                  badstr = "Sorry, there is at least 1 other student with the same email address, i will not create a new student account, email=" + email;
-                                 if (adminbool)
-                                      res.render('admin_pages/adminresult', {myresults: badstr} );
-                                 else
-                                      res.render('pages/result', {myresults: badstr} );
+                                 res.render('admin_pages/admin_updatestudent_fail', {myresults: badstr, studentID:primarykeyID, firstname:firstname, lastname:lastname, adminbool:adminbool} );
                                  return;
                              }
                         } catch (err) {
                             await client.end();
                             badstr = 'studenttableupdate3func, query for duplicate email ERROR = ' + err;
-                            if (adminbool)
-                                      res.render('admin_pages/adminresult', {myresults: badstr} );
-                            else
-                                      res.render('pages/result', {myresults: badstr} );
+                            res.render('admin_pages/admin_updatestudent_fail', {myresults: badstr, studentID:primarykeyID, firstname:firstname, lastname:lastname, adminbool:adminbool} );
                             return;
                         }
                         //update
@@ -344,12 +338,8 @@ module.exports = {
                                  //res.render('admin_pages/adminresult', {myresults: resultstr} );
                                  res.render('admin_pages/askupdatestudacct', {studentID:primarykeyID, firstname:firstname, lastname:lastname, adminbool:adminbool} );
                             }
-                            else {
-                                 if (adminbool)
-                                      res.render('admin_pages/adminresult', {myresults: badstr} );
-                                 else
-                                      res.render('pages/result', {myresults: badstr} );
-                            }
+                            else
+                                 res.render('admin_pages/admin_updatestudent_fail', {myresults: badstr, studentID:primarykeyID, firstname:firstname, lastname:lastname, adminbool:adminbool} );
                         }
       }//connectAndUpdate
     
@@ -393,10 +383,7 @@ module.exports = {
              else if (phoneareacode < 0 || phoneareacode > 999)
              {
                   var badstr = 'Sorry phone area code must be between 000 and 999';
-                  if (adminbool)
-                       res.render('admin_pages/adminresult', {myresults: badstr} );
-                  else
-                       res.render('pages/result', {myresults: badstr} );
+                  res.render('admin_pages/admin_updatestudent_fail', {myresults: badstr, studentID:primarykeyID, firstname:firstname, lastname:lastname, adminbool:adminbool} );
                   return;
              }
              else 
@@ -414,19 +401,13 @@ module.exports = {
                  if (first_at == -1)
                  {
                       var badstr = 'Sorry email must have 1 @ character, for example darthvader@gmail.com';
-                      if (adminbool)
-                           res.render('admin_pages/adminresult', {myresults: badstr} );
-                      else
-                           res.render('pages/result', {myresults: badstr} );
+                      res.render('admin_pages/admin_updatestudent_fail', {myresults: badstr, studentID:primarykeyID, firstname:firstname, lastname:lastname, adminbool:adminbool} );
                       return;
                  }
                  else if (first_at != last_at)
                  {
                       var badstr = 'Sorry email must have only 1 @ character, for example darthvader@gmail.com but you put more than 1 @ character';
-                      if (adminbool)
-                           res.render('admin_pages/adminresult', {myresults: badstr} );
-                      else
-                           res.render('pages/result', {myresults: badstr} );
+                      res.render('admin_pages/admin_updatestudent_fail', {myresults: badstr, studentID:primarykeyID, firstname:firstname, lastname:lastname, adminbool:adminbool} );
                       return;
                  }
                

@@ -12,8 +12,10 @@
   <h2>STUDENTID=<%= studentID %> <%= firstname %> <%= lastname %></h2>
   <form action="/admininsertstudacctsubmit" method="post" enctype="multipart/form-data">
      <input type="hidden" name="adminbool_name" value="<%= adminbool %>">
-
      <input type="hidden" name="studentID_name" value="<%= studentID %>">
+     <input type="hidden" name="firstname_name" value="<%= firstname %>">
+     <input type="hidden" name="lastname_name"  value="<%= lastname %>">
+
      <label for="password_id">PASSWORD: </label>
      <input type="text" name="password_name" id="password_id">
      <br />

@@ -20,6 +20,8 @@
 <br/>
 <form action="/studentupdate" method="post" enctype="multipart/form-data">
 <input type="hidden" name="studentID_name" value="<%= studentID %>">
+<input type="hidden" name="firstname_name" value="<%= firstname %>">
+<input type="hidden" name="lastname_name"  value="<%= lastname %>">
 <input type="hidden" name="adminbool_name" value="false">
 <input type="submit" value="UPDATE">
 </form>

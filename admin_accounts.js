@@ -113,11 +113,12 @@ module.exports = {
                           console.log(stmts);
                           const Res = await client.query(stmts);
                           resultstr = 'admininsertstudacctsubmitfunc Res = ' + JSON.stringify(Res);
+                          res.render('admin_pages/admin_updatestudent_success', {myresults: resultstr, studentID:studentID, firstname:firstname, lastname:lastname, adminbool:adminbool} );
                         } catch (err) {
                             resultstr = 'admininsertstudacctsubmitfunc ERROR = ' + err;
+                            res.render('admin_pages/admin_updatestudent_fail', {myresults: resultstr, studentID:studentID, firstname:firstname, lastname:lastname, adminbool:adminbool} );
                         } finally {
                             await client.end();
-                            res.render('admin_pages/admin_updatestudent_fail', {myresults: resultstr, studentID:studentID, firstname:firstname, lastname:lastname, adminbool:adminbool} );
                         }
       }//connectAndInsert
     

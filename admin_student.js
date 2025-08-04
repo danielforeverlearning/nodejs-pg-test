@@ -262,7 +262,7 @@ module.exports = {
   },
 
 
-  updatefunc: function(req, res, studentID, adminbool) {
+  updatefunc: function(req, res, studentID, firstname, lastname, adminbool) {
     
       async function connectAndSelectByID() {  
                         const client       = new Client(connectobj);
@@ -274,13 +274,13 @@ module.exports = {
                               console.log("selectIDres = " + JSON.stringify(selectIDres));
                               console.log("selectIDres.rows.length = " + selectIDres.rows.length);
                               if (selectIDres.rows.length  != 1)
-                                  badstr = 'Sorry there is no row in table student with ID = ' + studentID + ', if you want to update a row the ID must be good.';
+                                  badstr = 'Sorry there is no row in table student with ID=' + studentID + ' firstname=' + firstname + ' lastname=' + lastname + ', can not find this student in database!';
                         } catch (err) {
                               badstr = 'updatefunc ID = ' + studentID + ', ERROR = ' + err;
                         } finally {
                               await client.end();
                               if (badstr.length > 0)
-                                   res.render('admin_pages/admin_updatestudent_fail', {myresults: badstr, studentID:studentID, adminbool:adminbool, firstname:"UNKNOWN", lastname:"UNKNOWN"} );
+                                   res.render('admin_pages/admin_updatestudent_fail', {myresults: badstr, studentID:studentID, adminbool:adminbool, firstname:firstname, lastname:lastname} );
                               else
                                    res.render('admin_pages/studenttableupdate2', {existingval: selectIDres.rows[0], adminbool: adminbool} );
                         }

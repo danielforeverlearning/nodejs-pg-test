@@ -259,19 +259,31 @@ module.exports = {
     
           var table_student = connectAndReadTableStudent();
           if (table_student.status == -1)
-              res.render('pages/result', {myresults: table_student.myresults} );
+          {
+              res.render('admin_pages/adminresult', {myresults: table_student.myresults} );
+              return;
+          }
 
           var table_subscription = connectAndReadTableSubscription();
           if (table_subscription.status == -1)
-              res.render('pages/result', {myresults: table_subscription.myresults} );
+          {
+              res.render('admin_pages/adminresult', {myresults: table_subscription.myresults} );
+              return;
+          }
 
           var table_reservation = connectAndReadTableReservation();
           if (table_reservation.status == -1)
-              res.render('pages/result', {myresults: table_reservation.myresults} );
+          {
+              res.render('admin_pages/adminresult', {myresults: table_reservation.myresults} );
+              return;
+          }
 
           var table_accountstudent = connectAndReadTableAccountStudent();
           if (table_accountstudent.status == -1)
-              res.render('pages/result', {myresults: table_accountstudent.myresults} );
+          {
+              res.render('admin_pages/adminresult', {myresults: table_accountstudent.myresults} );
+              return;
+          }
 
           res.render('admin_pages/download_all_db_table_files');
   }//make_all_db_table_files

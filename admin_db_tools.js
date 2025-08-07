@@ -29,6 +29,9 @@ var filePathTableSubscription;
 var fileNameTableReservation;
 var filePathTableReservation;
 
+var fileNameTableAccountStudent;
+var filePathTableAccountStudent;
+
 async function connectAndReadTableStudent() {
                       var returnobj;
                       try {
@@ -146,6 +149,45 @@ async function connectAndReadTableReservation() {
                       }
 }  //connectAndReadTableReservation
 
+async function connectAndReadTableAccountStudent() {
+                      var returnobj;
+                      try {
+                          var dd = new Date();
+                          fileNameTableAccountStudent =  'accountstudent_table_' + dd.getFullYear() + '_' + (dd.getMonth() + 1) + '_' + dd.getDate() + '_' + dd.getHours() + '_' + dd.getMinutes() + '_' + dd.getSeconds() + '_' + dd.getMilliseconds() + '.csv';
+                          filePathTableAccountStudent = path.join(__dirname, 'public/' + fileNameTableAccountStudent); // Path to your text file
+                          fs.writeFileSync(filePathTableAccountStudent, 'STUDENTID, PASSWORDHASH, FAILCOUNT, LOCKOUT\n');
+                      } catch (err) {
+                          var badstr = 'Error account_student table writeFileSync:' + err;
+                          returnobj = {status: -1, myresults: badstr};
+                          return returnobj;
+                      }
+    
+                      const client       = new Client(connectobj);
+                      try {
+                          await client.connect();
+                          const result = await client.query('SELECT * FROM account_student ORDER BY STUDENTID ASC');
+                          
+                          result.rows.forEach(function(row) {
+                                try {
+                                    var line = '' + row.studentid + ', "' + row.passwordhash + '", ' + row.failcount + ', ' + row.lockout + '\n';
+                                    fs.appendFileSync(filePathTableAccountStudent, line);
+                                } catch (err) {
+                                    var badstr = 'Error account_student table appendFileSync:' + err;
+                                    returnobj = {status: -1, myresults: badstr};
+                                    return returnobj;
+                                }
+                          })
+                      } catch (err) {
+                          var badstr = 'Error reading account_student table = ' + err;
+                          returnobj = {status: -1, myresults: badstr};
+                          return returnobj;
+                      } finally {
+                          await client.end();
+                          returnobj = {status: 0, myresults: ""};
+                          return returnobj;
+                      }
+}  //connectAndReadTableAccountStudent
+
 module.exports = {  
 
   download_student_table_func: function(req,res) {
@@ -196,6 +238,22 @@ module.exports = {
         });
   },
 
+  download_accountstudent_table_func: function(req,res) {
+        res.download(filePathTableAccountStudent, fileNameTableAccountStudent, (err) => {
+            if (err) {
+              console.error('Error downloading table account_student file:', err);
+              res.status(500).send('Error downloading table account_student file:' + err);
+            } else {
+              fs.unlink(filePathTableAccountStudent, (err) => {
+                  if (err)
+                      console.error('Error deleting table account_student file:', err);
+                  else
+                      console.log(fileNameTableAccountStudent + ' deleted successfully');
+              });
+            }
+        });
+  },
+
 
   make_all_db_table_files: function(req,res) {
     
@@ -211,10 +269,11 @@ module.exports = {
           if (table_reservation.status == -1)
               res.render('pages/result', {myresults: table_reservation.myresults} );
 
+          var table_accountstudent = connectAndReadTableAccountStudent();
+          if (table_accountstudent.status == -1)
+              res.render('pages/result', {myresults: table_accountstudent.myresults} );
 
-
-    
           res.render('admin_pages/download_all_db_table_files');
-  }
+  }//make_all_db_table_files
 
 }; //module.exports

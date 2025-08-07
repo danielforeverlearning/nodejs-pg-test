@@ -71,6 +71,8 @@ express()
   .get('/downloadstudenttablefile', (req,res) => { admin_db_tools.download_student_table_func(req,res); })
   .get('/downloadsubscriptiontablefile', (req,res) => { admin_db_tools.download_subscription_table_func(req,res); })
   .get('/downloadreservationtablefile', (req,res) => { admin_db_tools.download_reservation_table_func(req,res); })
+  .get('/downloadaccountstudenttablefile', (req,res) => { admin_db_tools.download_accountstudent_table_func(req,res); })
+
   .get('/emailblast', (req, res) => {
         var badstr = 'Emailblast not done yet, will probably use gmail rest-API with a free gmail account';
         res.render('admin_pages/adminresult', {myresults: badstr} );
@@ -274,6 +276,7 @@ express()
 
   
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
 
 
 
